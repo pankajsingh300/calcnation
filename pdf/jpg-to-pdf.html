@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JPG to PDF Converter Free Online — Images to PDF | CalcNation</title>
+<meta name="description" content="Convert JPG images to PDF online for free. Combine multiple images into one PDF. No upload required — 100% private browser-based tool. Instant results.">
+<link rel="stylesheet" href="../assets/css/main.css">
+<style>
+.image-preview-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; margin-top: 16px; }
+.img-thumb {
+  position: relative; border-radius: var(--radius-sm); overflow: hidden;
+  border: 1px solid var(--border); background: var(--bg2);
+  cursor: grab; user-select: none;
+}
+.img-thumb img { width: 100%; height: 100px; object-fit: cover; display: block; }
+.img-thumb-info { padding: 6px 8px; font-size: 11px; color: var(--text3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.img-thumb-remove {
+  position: absolute; top: 4px; right: 4px;
+  background: rgba(0,0,0,0.7); border: none; color: white;
+  border-radius: 50%; width: 22px; height: 22px; cursor: pointer;
+  font-size: 12px; display: flex; align-items: center; justify-content: center;
+}
+.img-thumb.drag-over-img { border-color: var(--accent); opacity: 0.7; }
+</style>
+</head>
+<body>
+<nav>
+  <a href="../index.html" class="nav-logo">⚡ CalcNation</a>
+  <div class="nav-links">
+    <a href="compress.html" class="active">PDF Tools</a>
+    <a href="#">Dev Tools</a><a href="#">Finance</a><a href="#">Health</a>
+  </div>
+</nav>
+<div class="breadcrumb">
+  <a href="../index.html">Home</a> ▸ <a href="compress.html">PDF Tools</a> ▸ <span>JPG to PDF</span>
+</div>
+
+<div class="tool-page">
+  <div class="tool-header fade-up">
+    <div class="tool-icon">📷</div>
+    <h1>JPG to PDF Converter</h1>
+    <p>Convert one or multiple images to a PDF document. Supports JPG, PNG, WebP and more. Drag to reorder images before converting. 100% free and private.</p>
+    <div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap">
+      <span class="badge">🔒 100% Private</span>
+      <span class="badge">📷 JPG, PNG, WebP</span>
+      <span class="badge orange">Drag to Reorder</span>
+    </div>
+  </div>
+
+  <div class="tool-box fade-up">
+    <div class="tool-box-header"><h2>Upload Images</h2><span class="badge">Free · Multiple Files</span></div>
+    <div class="tool-box-body">
+      <div class="upload-zone" id="uploadZone">
+        <input type="file" id="fileInput" accept="image/*" multiple />
+        <div class="upload-icon">📷</div>
+        <h3>Drop images here</h3>
+        <p>or <span class="browse">browse to select</span> · JPG, PNG, WebP, GIF supported</p>
+      </div>
+
+      <div id="imgSection" style="display:none">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-top:16px">
+          <div style="font-size:13px;color:var(--text2)" id="imgCount"></div>
+          <button class="btn btn-secondary" onclick="addMore()" style="padding:6px 14px;font-size:13px">+ Add More</button>
+        </div>
+        <div class="image-preview-grid" id="imgGrid"></div>
+        <div style="font-size:12px;color:var(--text3);margin-top:8px;text-align:center">💡 Drag images to reorder — they'll appear in this order in the PDF</div>
+      </div>
+
+      <div id="settings" style="display:none;margin-top:24px">
+        <div style="font-size:13px;font-weight:600;color:var(--text2);margin-bottom:12px;font-family:'Fira Code',monospace;text-transform:uppercase;letter-spacing:1px">// PDF Settings</div>
+        <div class="settings-row">
+          <div>
+            <div class="settings-label">Page Size</div>
+            <div class="settings-desc">Paper size for the output PDF</div>
+          </div>
+          <select id="pageSizeSelect">
+            <option value="fit">Fit to Image</option>
+            <option value="A4">A4 (210×297mm)</option>
+            <option value="letter">Letter (8.5×11in)</option>
+          </select>
+        </div>
+        <div class="settings-row">
+          <div>
+            <div class="settings-label">Margin</div>
+            <div class="settings-desc">Spacing around images</div>
+          </div>
+          <select id="marginSelect">
+            <option value="0">No Margin</option>
+            <option value="20" selected>Small (20px)</option>
+            <option value="40">Medium (40px)</option>
+          </select>
+        </div>
+        <div class="settings-row">
+          <div>
+            <div class="settings-label">One image per page</div>
+            <div class="settings-desc">Each image gets its own PDF page</div>
+          </div>
+          <label class="toggle"><input type="checkbox" id="onePerPage" checked><span class="toggle-slider"></span></label>
+        </div>
+      </div>
+
+      <div class="progress-wrap" id="progressWrap">
+        <div class="progress-label" id="progressLabel">Creating PDF...</div>
+        <div class="progress-bar-bg"><div class="progress-bar" id="progressBar"></div></div>
+      </div>
+
+      <div class="result-box" id="resultBox">
+        <h3>✅ PDF Created Successfully!</h3>
+        <div class="result-stats">
+          <div><div class="result-stat-label">Images Added</div><div class="result-stat-val" id="imgCount2">—</div></div>
+          <div><div class="result-stat-label">PDF Pages</div><div class="result-stat-val" id="pdfPages">—</div></div>
+          <div><div class="result-stat-label">PDF Size</div><div class="result-stat-val" id="pdfSize">—</div></div>
+        </div>
+        <button class="btn btn-success" id="downloadBtn">⬇ Download PDF</button>
+      </div>
+
+      <div class="btn-actions" id="btnActions" style="display:none">
+        <button class="btn btn-primary" id="convertBtn">📄 Convert to PDF</button>
+        <button class="btn btn-secondary" id="resetBtn">Reset</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="info-section">
+    <h2>How to Convert Images to PDF</h2>
+    <div class="steps">
+      <div class="step"><div class="step-num">01</div><h3>Upload Images</h3><p>Select one or multiple images (JPG, PNG, WebP, GIF).</p></div>
+      <div class="step"><div class="step-num">02</div><h3>Arrange Order</h3><p>Drag images to set the exact order they'll appear in the PDF.</p></div>
+      <div class="step"><div class="step-num">03</div><h3>Set Options</h3><p>Choose page size, margin, and layout settings.</p></div>
+      <div class="step"><div class="step-num">04</div><h3>Download PDF</h3><p>Get your PDF instantly. No watermarks, no limits.</p></div>
+    </div>
+  </div>
+
+  <div class="info-section">
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq">
+      <div class="faq-item">
+        <div class="faq-q">What image formats are supported? <span class="faq-arrow">▾</span></div>
+        <div class="faq-a">We support JPG, JPEG, PNG, WebP, GIF, and BMP. Most common image formats from phones, cameras, and computers work perfectly.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Can I combine multiple images into one PDF? <span class="faq-arrow">▾</span></div>
+        <div class="faq-a">Yes! Select multiple images or drop them all at once. Each image becomes a page in the PDF (or you can fit multiple on one page using the settings).</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Will image quality be reduced? <span class="faq-arrow">▾</span></div>
+        <div class="faq-a">Images are embedded at full quality in the PDF. There is no compression or quality loss during the conversion process.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Is there a limit on file size or number of images? <span class="faq-arrow">▾</span></div>
+        <div class="faq-a">No hard limit. However, converting many large images may take time depending on your device. All processing is local — no server limits apply.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="related-tools">
+    <h2>Related PDF Tools</h2>
+    <div class="related-grid">
+      <a href="pdf-to-jpg.html" class="related-card"><span class="related-card-icon">🖼️</span><span class="related-card-name">PDF to JPG</span></a>
+      <a href="compress.html" class="related-card"><span class="related-card-icon">🗜️</span><span class="related-card-name">Compress PDF</span></a>
+      <a href="merge.html" class="related-card"><span class="related-card-icon">📎</span><span class="related-card-name">Merge PDF</span></a>
+      <a href="split.html" class="related-card"><span class="related-card-icon">✂️</span><span class="related-card-name">Split PDF</span></a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div style="margin-bottom:16px"><a href="../index.html" class="nav-logo" style="font-size:18px">⚡ CalcNation</a></div>
+  <div>© 2024 CalcNation · Free tools · No signup · Your files stay private</div>
+</footer>
+
+<script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+<script src="../assets/js/utils.js"></script>
+<script>
+const { PDFDocument, rgb } = PDFLib;
+let images = [], pdfBytes = null, dragSrc = null;
+const fileInput = document.getElementById('fileInput');
+const uploadZone = document.getElementById('uploadZone');
+
+setupDragDrop(uploadZone, f => addImages(f));
+fileInput.addEventListener('change', () => addImages([...fileInput.files]));
+function addMore() { fileInput.click(); }
+
+function addImages(files) {
+  const imgs = files.filter(f => f.type.startsWith('image/'));
+  imgs.forEach(f => {
+    const url = URL.createObjectURL(f);
+    images.push({ file: f, url });
+  });
+  renderGrid();
+}
+
+function renderGrid() {
+  const grid = document.getElementById('imgGrid');
+  const sec = document.getElementById('imgSection');
+  const cnt = document.getElementById('imgCount');
+  if (!images.length) { sec.style.display = 'none'; document.getElementById('settings').style.display='none'; document.getElementById('btnActions').style.display='none'; return; }
+  sec.style.display = 'block';
+  document.getElementById('settings').style.display = 'block';
+  document.getElementById('btnActions').style.display = 'flex';
+  cnt.textContent = `${images.length} image${images.length>1?'s':''} selected`;
+  document.getElementById('resultBox').classList.remove('show');
+
+  grid.innerHTML = images.map((img, i) => `
+    <div class="img-thumb" draggable="true" data-index="${i}">
+      <img src="${img.url}" alt="Image ${i+1}">
+      <div class="img-thumb-info">${img.file.name}</div>
+      <button class="img-thumb-remove" onclick="removeImg(${i})">✕</button>
+    </div>`).join('');
+
+  grid.querySelectorAll('.img-thumb').forEach(el => {
+    el.addEventListener('dragstart', () => { dragSrc = parseInt(el.dataset.index); el.style.opacity='0.5'; });
+    el.addEventListener('dragend', () => { el.style.opacity='1'; grid.querySelectorAll('.img-thumb').forEach(x=>x.classList.remove('drag-over-img')); });
+    el.addEventListener('dragover', e => { e.preventDefault(); el.classList.add('drag-over-img'); });
+    el.addEventListener('dragleave', () => el.classList.remove('drag-over-img'));
+    el.addEventListener('drop', e => {
+      e.preventDefault(); const dest = parseInt(el.dataset.index);
+      if (dragSrc === dest) return;
+      const moved = images.splice(dragSrc,1)[0]; images.splice(dest,0,moved); renderGrid();
+    });
+  });
+}
+
+function removeImg(i) { URL.revokeObjectURL(images[i].url); images.splice(i,1); renderGrid(); }
+
+async function loadImageData(imgObj) {
+  return new Promise((res, rej) => {
+    const img = new Image();
+    img.onload = () => {
+      const canvas = document.createElement('canvas');
+      canvas.width = img.naturalWidth; canvas.height = img.naturalHeight;
+      const ctx = canvas.getContext('2d');
+      ctx.fillStyle = '#ffffff'; ctx.fillRect(0,0,canvas.width,canvas.height);
+      ctx.drawImage(img,0,0);
+      res({ dataUrl: canvas.toDataURL('image/jpeg', 0.95), width: img.naturalWidth, height: img.naturalHeight });
+    };
+    img.onerror = rej;
+    img.src = imgObj.url;
+  });
+}
+
+document.getElementById('convertBtn').addEventListener('click', async () => {
+  if (!images.length) return;
+  const btn = document.getElementById('convertBtn');
+  btn.disabled = true; btn.innerHTML = '<div class="spinner"></div> Creating PDF...';
+  const pw = document.getElementById('progressWrap');
+  const pb = document.getElementById('progressBar');
+  const pl = document.getElementById('progressLabel');
+  pw.classList.add('show');
+
+  const pageSize = document.getElementById('pageSizeSelect').value;
+  const margin = parseInt(document.getElementById('marginSelect').value);
+  const onePerPage = document.getElementById('onePerPage').checked;
+
+  const PAGE_SIZES = {
+    A4: [595.28, 841.89],
+    letter: [612, 792]
+  };
+
+  try {
+    const pdf = await PDFDocument.create();
+    let pages = 0;
+
+    for (let i = 0; i < images.length; i++) {
+      pb.style.width = Math.round((i/images.length)*90)+'%';
+      pl.textContent = `Adding image ${i+1} of ${images.length}...`;
+
+      const { dataUrl, width, height } = await loadImageData(images[i]);
+      const imgData = dataUrl.split(',')[1];
+      const pdfImg = await pdf.embedJpg(Uint8Array.from(atob(imgData), c => c.charCodeAt(0)));
+
+      let pageW, pageH, drawX, drawY, drawW, drawH;
+
+      if (pageSize === 'fit') {
+        pageW = width + margin*2; pageH = height + margin*2;
+        drawX = margin; drawY = margin; drawW = width; drawH = height;
+      } else {
+        [pageW, pageH] = PAGE_SIZES[pageSize];
+        const availW = pageW - margin*2; const availH = pageH - margin*2;
+        const scale = Math.min(availW/width, availH/height);
+        drawW = width*scale; drawH = height*scale;
+        drawX = (pageW-drawW)/2; drawY = (pageH-drawH)/2;
+      }
+
+      const page = pdf.addPage([pageW, pageH]);
+      page.drawImage(pdfImg, { x:drawX, y:drawY, width:drawW, height:drawH });
+      pages++;
+    }
+
+    pdfBytes = await pdf.save({ useObjectStreams: true });
+    pb.style.width = '100%';
+
+    document.getElementById('imgCount2').textContent = images.length + ' images';
+    document.getElementById('pdfPages').textContent = pages + ' pages';
+    document.getElementById('pdfSize').textContent = formatBytes(pdfBytes.length);
+
+    setTimeout(() => { pw.classList.remove('show'); document.getElementById('resultBox').classList.add('show'); }, 400);
+    showToast('PDF created successfully!');
+  } catch(e) {
+    showToast('Error: '+e.message, 'error'); pw.classList.remove('show');
+  }
+  btn.disabled=false; btn.innerHTML='📄 Convert to PDF';
+});
+
+document.getElementById('downloadBtn').addEventListener('click', () => {
+  if (!pdfBytes) return;
+  const blob = new Blob([pdfBytes], {type:'application/pdf'});
+  const a = document.createElement('a'); a.href = URL.createObjectURL(blob);
+  a.download = 'images.pdf'; a.click(); showToast('Download started!');
+});
+
+document.getElementById('resetBtn').addEventListener('click', () => {
+  images.forEach(i => URL.revokeObjectURL(i.url)); images = []; pdfBytes = null;
+  document.getElementById('imgSection').style.display='none';
+  document.getElementById('settings').style.display='none';
+  document.getElementById('btnActions').style.display='none';
+  document.getElementById('resultBox').classList.remove('show');
+  fileInput.value='';
+});
+</script>
+</body>
+</html>

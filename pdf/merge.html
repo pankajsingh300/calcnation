@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Merge PDF Files Online Free — Combine PDFs | CalcNation</title>
+<meta name="description" content="Merge multiple PDF files into one online for free. Combine PDFs in any order. No upload to server — 100% private and instant. No signup required.">
+<link rel="stylesheet" href="../assets/css/main.css">
+<style>
+.sortable-list { display:flex; flex-direction:column; gap:8px; margin-top:20px; }
+.sortable-item {
+  background: var(--bg2); border: 1px solid var(--border);
+  border-radius: var(--radius-sm); padding: 12px 16px;
+  display: flex; align-items: center; gap: 12px;
+  cursor: grab; user-select: none; transition: all 0.2s;
+}
+.sortable-item:active { cursor: grabbing; opacity: 0.8; }
+.sortable-item.drag-over-item { border-color: var(--accent); background: rgba(0,229,255,0.05); }
+.drag-handle { color: var(--text3); font-size: 16px; cursor: grab; }
+.item-num {
+  font-family: 'Fira Code', monospace; font-size: 12px;
+  color: var(--accent); min-width: 24px;
+}
+.reorder-hint { font-size: 12px; color: var(--text3); margin-top: 8px; text-align:center; }
+</style>
+</head>
+<body>
+<nav>
+  <a href="../index.html" class="nav-logo">⚡ CalcNation</a>
+  <div class="nav-links">
+    <a href="compress.html" class="active">PDF Tools</a>
+    <a href="#">Dev Tools</a>
+    <a href="#">Finance</a>
+    <a href="#">Health</a>
+  </div>
+</nav>
+<div class="breadcrumb">
+  <a href="../index.html">Home</a> ▸ <a href="compress.html">PDF Tools</a> ▸ <span>Merge PDF</span>
+</div>
+
+<div class="tool-page">
+  <div class="tool-header fade-up">
+    <div class="tool-icon">📎</div>
+    <h1>Merge PDF Files</h1>
+    <p>Combine multiple PDF files into a single document. Drag to reorder pages. Your files are never uploaded — everything runs in your browser.</p>
+    <div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap">
+      <span class="badge">🔒 100% Private</span>
+      <span class="badge">📂 Multiple Files</span>
+      <span class="badge orange">Drag to Reorder</span>
+    </div>
+  </div>
+
+  <div class="tool-box fade-up">
+    <div class="tool-box-header">
+      <h2>Upload PDFs to Merge</h2>
+      <span class="badge">Free · Unlimited Files</span>
+    </div>
+    <div class="tool-box-body">
+      <div class="upload-zone" id="uploadZone">
+        <input type="file" id="fileInput" accept=".pdf" multiple />
+        <div class="upload-icon">📂</div>
+        <h3>Drop multiple PDFs here</h3>
+        <p>or <span class="browse">browse to select</span> · Select multiple files at once</p>
+      </div>
+
+      <div id="fileListWrap" style="display:none">
+        <div class="sortable-list" id="sortableList"></div>
+        <div class="reorder-hint">💡 Drag files to reorder · They'll be merged in the order shown above</div>
+      </div>
+
+      <div class="progress-wrap" id="progressWrap">
+        <div class="progress-label" id="progressLabel">Merging PDFs...</div>
+        <div class="progress-bar-bg"><div class="progress-bar" id="progressBar"></div></div>
+      </div>
+
+      <div class="result-box" id="resultBox">
+        <h3>✅ PDFs Merged Successfully!</h3>
+        <div class="result-stats">
+          <div><div class="result-stat-label">Files Merged</div><div class="result-stat-val" id="fileCount">—</div></div>
+          <div><div class="result-stat-label">Total Pages</div><div class="result-stat-val" id="pageCount">—</div></div>
+          <div><div class="result-stat-label">Output Size</div><div class="result-stat-val" id="outputSize">—</div></div>
+        </div>
+        <button class="btn btn-success" id="downloadBtn">⬇ Download Merged PDF</button>
+      </div>
+
+      <div class="btn-actions" id="btnActions" style="display:none">
+        <button class="btn btn-primary" id="mergeBtn">📎 Merge PDFs</button>
+        <button class="btn btn-secondary" onclick="addMore()">+ Add More Files</button>
+        <button class="btn btn-secondary" id="resetBtn">Reset</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="info-section">
+    <h2>How to Merge PDFs</h2>
+    <div class="steps">
+      <div class="step"><div class="step-num">01</div><h3>Upload Files</h3><p>Select multiple PDF files at once, or drop them all together.</p></div>
+      <div class="step"><div class="step-num">02</div><h3>Reorder</h3><p>Drag and drop the files to arrange them in your desired order.</p></div>
+      <div class="step"><div class="step-num">03</div><h3>Merge</h3><p>Click merge and we'll combine them into one PDF instantly.</p></div>
+      <div class="step"><div class="step-num">04</div><h3>Download</h3><p>Download your merged PDF. No watermarks added.</p></div>
+    </div>
+  </div>
+
+  <div class="info-section">
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq">
+      <div class="faq-item">
+        <div class="faq-q">How many PDFs can I merge at once? <span class="faq-arrow">▾</span></div>
+        <div class="faq-a">You can merge unlimited PDF files at once. There's no restriction on the number of files. However, very large files may take longer to process depending on your device's capabilities.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Will the merged PDF have watermarks? <span class="faq-arrow">▾</span></div>
+        <div class="faq-a">No watermarks, ever. Your merged PDF will be clean and identical to what you'd get from a paid tool — completely free.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Can I change the page order? <span class="faq-arrow">▾</span></div>
+        <div class="faq-a">Yes! After uploading, you can drag and drop the files to reorder them. The PDFs will be merged in the exact order shown in the list.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Is the merged file uploaded anywhere? <span class="faq-arrow">▾</span></div>
+        <div class="faq-a">No. Everything happens in your browser. Your files never leave your device. This is completely private and secure — no data is ever transmitted.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="related-tools">
+    <h2>Related PDF Tools</h2>
+    <div class="related-grid">
+      <a href="compress.html" class="related-card"><span class="related-card-icon">🗜️</span><span class="related-card-name">Compress PDF</span></a>
+      <a href="split.html" class="related-card"><span class="related-card-icon">✂️</span><span class="related-card-name">Split PDF</span></a>
+      <a href="pdf-to-jpg.html" class="related-card"><span class="related-card-icon">🖼️</span><span class="related-card-name">PDF to JPG</span></a>
+      <a href="jpg-to-pdf.html" class="related-card"><span class="related-card-icon">📷</span><span class="related-card-name">JPG to PDF</span></a>
+      <a href="pdf-to-word.html" class="related-card"><span class="related-card-icon">📝</span><span class="related-card-name">PDF to Word</span></a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div style="margin-bottom:16px"><a href="../index.html" class="nav-logo" style="font-size:18px">⚡ CalcNation</a></div>
+  <div>© 2024 CalcNation · Free tools · No signup · Your files stay private</div>
+</footer>
+
+<script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+<script src="../assets/js/utils.js"></script>
+<script>
+const { PDFDocument } = PDFLib;
+let files = [], mergedBytes = null;
+let dragSrc = null;
+
+const uploadZone = document.getElementById('uploadZone');
+const fileInput = document.getElementById('fileInput');
+
+setupDragDrop(uploadZone, f => addFiles(f));
+fileInput.addEventListener('change', () => addFiles([...fileInput.files]));
+
+function addFiles(newFiles) {
+  const pdfs = newFiles.filter(f => f.name.endsWith('.pdf'));
+  files = [...files, ...pdfs];
+  renderList();
+}
+
+function addMore() { fileInput.click(); }
+
+function renderList() {
+  const wrap = document.getElementById('fileListWrap');
+  const list = document.getElementById('sortableList');
+  if (!files.length) { wrap.style.display = 'none'; document.getElementById('btnActions').style.display = 'none'; return; }
+  wrap.style.display = 'block';
+  document.getElementById('btnActions').style.display = 'flex';
+  document.getElementById('resultBox').classList.remove('show');
+
+  list.innerHTML = files.map((f, i) => `
+    <div class="sortable-item" draggable="true" data-index="${i}">
+      <span class="drag-handle">⠿</span>
+      <span class="item-num">${String(i+1).padStart(2,'0')}</span>
+      <span class="file-item-icon">📄</span>
+      <div class="file-item-info" style="flex:1">
+        <div class="file-item-name">${f.name}</div>
+        <div class="file-item-size">${formatBytes(f.size)}</div>
+      </div>
+      <button class="file-item-remove" onclick="removeFile(${i})">✕</button>
+    </div>`).join('');
+
+  list.querySelectorAll('.sortable-item').forEach(el => {
+    el.addEventListener('dragstart', e => { dragSrc = parseInt(el.dataset.index); el.style.opacity = '0.5'; });
+    el.addEventListener('dragend', () => { el.style.opacity = '1'; list.querySelectorAll('.sortable-item').forEach(x => x.classList.remove('drag-over-item')); });
+    el.addEventListener('dragover', e => { e.preventDefault(); el.classList.add('drag-over-item'); });
+    el.addEventListener('dragleave', () => el.classList.remove('drag-over-item'));
+    el.addEventListener('drop', e => {
+      e.preventDefault(); const dest = parseInt(el.dataset.index);
+      if (dragSrc === dest) return;
+      const moved = files.splice(dragSrc, 1)[0];
+      files.splice(dest, 0, moved);
+      renderList();
+    });
+  });
+}
+
+function removeFile(i) { files.splice(i, 1); renderList(); }
+
+document.getElementById('mergeBtn').addEventListener('click', async () => {
+  if (files.length < 2) { showToast('Add at least 2 PDF files to merge', 'error'); return; }
+  const btn = document.getElementById('mergeBtn');
+  btn.disabled = true; btn.innerHTML = '<div class="spinner"></div> Merging...';
+  const pw = document.getElementById('progressWrap');
+  const pb = document.getElementById('progressBar');
+  const pl = document.getElementById('progressLabel');
+  pw.classList.add('show');
+
+  try {
+    const merged = await PDFDocument.create();
+    let totalPages = 0;
+
+    for (let i = 0; i < files.length; i++) {
+      pb.style.width = Math.round((i / files.length) * 80) + '%';
+      pl.textContent = `Processing file ${i+1} of ${files.length}...`;
+      const bytes = await files[i].arrayBuffer();
+      const doc = await PDFDocument.load(bytes, { ignoreEncryption: true });
+      const pages = await merged.copyPages(doc, doc.getPageIndices());
+      pages.forEach(p => merged.addPage(p));
+      totalPages += doc.getPageCount();
+    }
+
+    pb.style.width = '95%'; pl.textContent = 'Saving merged PDF...';
+    mergedBytes = await merged.save({ useObjectStreams: true });
+    pb.style.width = '100%';
+
+    document.getElementById('fileCount').textContent = files.length + ' files';
+    document.getElementById('pageCount').textContent = totalPages + ' pages';
+    document.getElementById('outputSize').textContent = formatBytes(mergedBytes.length);
+
+    setTimeout(() => { pw.classList.remove('show'); document.getElementById('resultBox').classList.add('show'); }, 400);
+    showToast('PDFs merged successfully!');
+  } catch(e) {
+    showToast('Error: ' + e.message, 'error');
+    pw.classList.remove('show');
+  }
+  btn.disabled = false; btn.innerHTML = '📎 Merge PDFs';
+});
+
+document.getElementById('downloadBtn').addEventListener('click', () => {
+  if (!mergedBytes) return;
+  const blob = new Blob([mergedBytes], { type: 'application/pdf' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob); a.download = 'merged.pdf';
+  a.click(); showToast('Download started!');
+});
+
+document.getElementById('resetBtn').addEventListener('click', () => {
+  files = []; mergedBytes = null;
+  document.getElementById('fileListWrap').style.display = 'none';
+  document.getElementById('btnActions').style.display = 'none';
+  document.getElementById('resultBox').classList.remove('show');
+  fileInput.value = '';
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PDF to JPG Converter Free Online — Convert PDF Pages to Images | CalcNation</title>
+<meta name="description" content="Convert PDF pages to JPG images online for free. High quality conversion, choose DPI and quality. No upload — runs in your browser. Instant and private.">
+<link rel="stylesheet" href="../assets/css/main.css">
+<style>
+.preview-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px; margin-top: 20px; }
+.preview-card {
+  background: var(--bg2); border: 1px solid var(--border);
+  border-radius: var(--radius-sm); overflow: hidden; text-align: center;
+}
+.preview-card canvas { width: 100%; height: 120px; object-fit: cover; display: block; background: #fff; }
+.preview-card-info { padding: 8px 10px; font-size: 12px; color: var(--text3); }
+.preview-card-dl {
+  display: block; padding: 6px; background: var(--bg3);
+  color: var(--accent); font-size: 12px; font-weight: 600;
+  text-decoration: none; border-top: 1px solid var(--border);
+  transition: background 0.2s;
+}
+.preview-card-dl:hover { background: rgba(0,229,255,0.1); }
+</style>
+</head>
+<body>
+<nav>
+  <a href="../index.html" class="nav-logo">⚡ CalcNation</a>
+  <div class="nav-links">
+    <a href="compress.html" class="active">PDF Tools</a>
+    <a href="#">Dev Tools</a><a href="#">Finance</a><a href="#">Health</a>
+  </div>
+</nav>
+<div class="breadcrumb">
+  <a href="../index.html">Home</a> ▸ <a href="compress.html">PDF Tools</a> ▸ <span>PDF to JPG</span>
+</div>
+
+<div class="tool-page">
+  <div class="tool-header fade-up">
+    <div class="tool-icon">🖼️</div>
+    <h1>PDF to JPG Converter</h1>
+    <p>Convert every page of your PDF to high-quality JPG images. Choose resolution and quality. Everything runs in your browser — no upload, no waiting.</p>
+    <div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap">
+      <span class="badge">🔒 100% Private</span>
+      <span class="badge">🖼️ High Quality</span>
+      <span class="badge orange">Choose DPI</span>
+    </div>
+  </div>
+
+  <div class="tool-box fade-up">
+    <div class="tool-box-header"><h2>Upload Your PDF</h2><span class="badge">Free</span></div>
+    <div class="tool-box-body">
+      <div class="upload-zone" id="uploadZone">
+        <input type="file" id="fileInput" accept=".pdf" />
+        <div class="upload-icon">🖼️</div>
+        <h3>Drop your PDF here</h3>
+        <p>or <span class="browse">browse to upload</span> · All pages will be converted</p>
+      </div>
+
+      <div class="file-list" id="fileList"></div>
+
+      <div id="settings" style="display:none;margin-top:24px">
+        <div style="font-size:13px;font-weight:600;color:var(--text2);margin-bottom:12px;font-family:'Fira Code',monospace;text-transform:uppercase;letter-spacing:1px">// Output Settings</div>
+        <div class="settings-row">
+          <div>
+            <div class="settings-label">Image Quality</div>
+            <div class="settings-desc">Higher = better quality, larger file size</div>
+          </div>
+          <div class="range-wrap">
+            <input type="range" id="qualityRange" min="50" max="100" value="90">
+            <span class="range-val" id="qualityVal">90%</span>
+          </div>
+        </div>
+        <div class="settings-row">
+          <div>
+            <div class="settings-label">Resolution (DPI)</div>
+            <div class="settings-desc">Scale factor for rendering</div>
+          </div>
+          <select id="dpiSelect">
+            <option value="1">72 DPI (Screen)</option>
+            <option value="1.5">108 DPI (Good)</option>
+            <option value="2" selected>144 DPI (High)</option>
+            <option value="3">216 DPI (Print)</option>
+          </select>
+        </div>
+        <div class="settings-row">
+          <div>
+            <div class="settings-label">Format</div>
+            <div class="settings-desc">Output image format</div>
+          </div>
+          <select id="formatSelect">
+            <option value="jpeg">JPG</option>
+            <option value="png">PNG (larger, lossless)</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="progress-wrap" id="progressWrap">
+        <div class="progress-label" id="progressLabel">Converting pages...</div>
+        <div class="progress-bar-bg"><div class="progress-bar" id="progressBar"></div></div>
+      </div>
+
+      <div id="previewSection" style="display:none">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-top:20px">
+          <div style="font-size:14px;font-weight:600;color:var(--success)">✅ Conversion Complete!</div>
+          <button class="btn btn-success" id="downloadAllBtn" style="padding:8px 16px;font-size:13px">⬇ Download All as ZIP</button>
+        </div>
+        <div class="preview-grid" id="previewGrid"></div>
+      </div>
+
+      <div class="btn-actions" id="btnActions" style="display:none">
+        <button class="btn btn-primary" id="convertBtn">🖼️ Convert to Images</button>
+        <button class="btn btn-secondary" id="resetBtn">Reset</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="info-section">
+    <h2>How to Convert PDF to JPG</h2>
+    <div class="steps">
+      <div class="step"><div class="step-num">01</div><h3>Upload PDF</h3><p>Select your PDF file. All pages will be converted automatically.</p></div>
+      <div class="step"><div class="step-num">02</div><h3>Set Quality</h3><p>Choose your desired image quality and DPI resolution.</p></div>
+      <div class="step"><div class="step-num">03</div><h3>Convert</h3><p>Each page is rendered as a high-quality image instantly.</p></div>
+      <div class="step"><div class="step-num">04</div><h3>Download</h3><p>Download individual pages or all images at once as a ZIP.</p></div>
+    </div>
+  </div>
+
+  <div class="info-section">
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq">
+      <div class="faq-item">
+        <div class="faq-q">What DPI should I choose? <span class="faq-arrow">▾</span></div>
+        <div class="faq-a">For screen viewing, 72-108 DPI is sufficient. For printing or sharing professionally, choose 144 DPI or higher. Higher DPI creates larger, sharper images but takes more time to process.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">JPG or PNG — which is better? <span class="faq-arrow">▾</span></div>
+        <div class="faq-a">JPG is better for photos and colorful content — smaller file size. PNG is better for documents with text, as it's lossless and preserves sharp edges on letters.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">How many pages can I convert? <span class="faq-arrow">▾</span></div>
+        <div class="faq-a">All pages in your PDF will be converted. For very large PDFs (100+ pages), the process may take a minute or two depending on your device's speed.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="related-tools">
+    <h2>Related PDF Tools</h2>
+    <div class="related-grid">
+      <a href="jpg-to-pdf.html" class="related-card"><span class="related-card-icon">📷</span><span class="related-card-name">JPG to PDF</span></a>
+      <a href="compress.html" class="related-card"><span class="related-card-icon">🗜️</span><span class="related-card-name">Compress PDF</span></a>
+      <a href="merge.html" class="related-card"><span class="related-card-icon">📎</span><span class="related-card-name">Merge PDF</span></a>
+      <a href="split.html" class="related-card"><span class="related-card-icon">✂️</span><span class="related-card-name">Split PDF</span></a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div style="margin-bottom:16px"><a href="../index.html" class="nav-logo" style="font-size:18px">⚡ CalcNation</a></div>
+  <div>© 2024 CalcNation · Free tools · No signup · Your files stay private</div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script src="../assets/js/utils.js"></script>
+<script>
+pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+
+let pdfFile = null;
+let renderedImages = [];
+const uploadZone = document.getElementById('uploadZone');
+const fileInput = document.getElementById('fileInput');
+const qualityRange = document.getElementById('qualityRange');
+const qualityVal = document.getElementById('qualityVal');
+
+qualityRange.addEventListener('input', () => qualityVal.textContent = qualityRange.value + '%');
+setupDragDrop(uploadZone, f => handleFile(f[0]));
+fileInput.addEventListener('change', () => handleFile(fileInput.files[0]));
+
+function handleFile(file) {
+  if (!file || !file.name.endsWith('.pdf')) { showToast('Please upload a PDF', 'error'); return; }
+  pdfFile = file;
+  document.getElementById('fileList').innerHTML = `
+    <div class="file-item">
+      <span class="file-item-icon">📄</span>
+      <div class="file-item-info" style="flex:1">
+        <div class="file-item-name">${file.name}</div>
+        <div class="file-item-size">${formatBytes(file.size)}</div>
+      </div>
+      <button class="file-item-remove" onclick="resetAll()">✕</button>
+    </div>`;
+  document.getElementById('settings').style.display = 'block';
+  document.getElementById('btnActions').style.display = 'flex';
+  document.getElementById('previewSection').style.display = 'none';
+}
+
+document.getElementById('convertBtn').addEventListener('click', async () => {
+  if (!pdfFile) return;
+  const btn = document.getElementById('convertBtn');
+  btn.disabled = true; btn.innerHTML = '<div class="spinner"></div> Converting...';
+  const pw = document.getElementById('progressWrap');
+  const pb = document.getElementById('progressBar');
+  const pl = document.getElementById('progressLabel');
+  pw.classList.add('show');
+  renderedImages = [];
+
+  try {
+    const scale = parseFloat(document.getElementById('dpiSelect').value);
+    const quality = parseInt(qualityRange.value) / 100;
+    const format = document.getElementById('formatSelect').value;
+    const mimeType = 'image/' + format;
+    const ext = format === 'jpeg' ? 'jpg' : 'png';
+
+    const arrayBuffer = await pdfFile.arrayBuffer();
+    const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+    const numPages = pdf.numPages;
+    const grid = document.getElementById('previewGrid');
+    grid.innerHTML = '';
+
+    for (let i = 1; i <= numPages; i++) {
+      pb.style.width = Math.round((i / numPages) * 95) + '%';
+      pl.textContent = `Converting page ${i} of ${numPages}...`;
+      const page = await pdf.getPage(i);
+      const viewport = page.getViewport({ scale });
+      const canvas = document.createElement('canvas');
+      canvas.width = viewport.width; canvas.height = viewport.height;
+      const ctx = canvas.getContext('2d');
+      ctx.fillStyle = '#ffffff'; ctx.fillRect(0, 0, canvas.width, canvas.height);
+      await page.render({ canvasContext: ctx, viewport }).promise;
+      const dataUrl = canvas.toDataURL(mimeType, quality);
+      renderedImages.push({ dataUrl, name: `page_${String(i).padStart(3,'0')}.${ext}` });
+
+      const card = document.createElement('div');
+      card.className = 'preview-card';
+      const img = document.createElement('img');
+      img.src = dataUrl; img.style.cssText = 'width:100%;height:120px;object-fit:cover;display:block;background:#fff';
+      const info = document.createElement('div');
+      info.className = 'preview-card-info';
+      info.textContent = `Page ${i} · ${Math.round(viewport.width)}×${Math.round(viewport.height)}`;
+      const dl = document.createElement('a');
+      dl.className = 'preview-card-dl'; dl.href = dataUrl; dl.download = renderedImages[i-1].name;
+      dl.textContent = '⬇ Download';
+      card.append(img, info, dl);
+      grid.appendChild(card);
+    }
+
+    pb.style.width = '100%';
+    setTimeout(() => {
+      pw.classList.remove('show');
+      document.getElementById('previewSection').style.display = 'block';
+    }, 400);
+    showToast(`Converted ${numPages} pages to ${ext.toUpperCase()}!`);
+  } catch(e) {
+    showToast('Error: ' + e.message, 'error'); pw.classList.remove('show');
+  }
+  btn.disabled = false; btn.innerHTML = '🖼️ Convert to Images';
+});
+
+document.getElementById('downloadAllBtn').addEventListener('click', async () => {
+  if (!renderedImages.length) return;
+  const btn = document.getElementById('downloadAllBtn');
+  btn.textContent = 'Preparing ZIP...'; btn.disabled = true;
+  const zip = new JSZip();
+  renderedImages.forEach(img => {
+    const base64 = img.dataUrl.split(',')[1];
+    zip.file(img.name, base64, { base64: true });
+  });
+  const blob = await zip.generateAsync({ type: 'blob' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = (pdfFile.name.replace('.pdf','') || 'pages') + '_images.zip';
+  a.click();
+  btn.textContent = '⬇ Download All as ZIP'; btn.disabled = false;
+  showToast('ZIP download started!');
+});
+
+document.getElementById('resetBtn').addEventListener('click', resetAll);
+function resetAll() {
+  pdfFile = null; renderedImages = [];
+  document.getElementById('fileList').innerHTML = '';
+  document.getElementById('settings').style.display = 'none';
+  document.getElementById('btnActions').style.display = 'none';
+  document.getElementById('previewSection').style.display = 'none';
+  document.getElementById('previewGrid').innerHTML = '';
+  fileInput.value = '';
+}
+</script>
+</body>
+</html>

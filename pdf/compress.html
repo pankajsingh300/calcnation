@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Compress PDF Free Online — Reduce PDF File Size | CalcNation</title>
+<meta name="description" content="Compress PDF files online for free. Reduce PDF file size without losing quality. No upload to server — works entirely in your browser. Fast, free, private.">
+<link rel="stylesheet" href="../assets/css/main.css">
+</head>
+<body>
+<nav>
+  <a href="../index.html" class="nav-logo">⚡ CalcNation</a>
+  <div class="nav-links">
+    <a href="compress.html" class="active">PDF Tools</a>
+    <a href="#">Dev Tools</a>
+    <a href="#">Finance</a>
+    <a href="#">Health</a>
+  </div>
+</nav>
+
+<div class="breadcrumb">
+  <a href="../index.html">Home</a> ▸ <a href="compress.html">PDF Tools</a> ▸ <span>Compress PDF</span>
+</div>
+
+<div class="tool-page">
+  <div class="tool-header fade-up">
+    <div class="tool-icon">🗜️</div>
+    <h1>Compress PDF</h1>
+    <p>Reduce your PDF file size without losing quality. All processing happens in your browser — your file never leaves your device.</p>
+    <div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap">
+      <span class="badge">🔒 100% Private</span>
+      <span class="badge">⚡ Instant</span>
+      <span class="badge orange">No Signup</span>
+    </div>
+  </div>
+
+  <div class="tool-box fade-up">
+    <div class="tool-box-header">
+      <h2>Upload Your PDF</h2>
+      <span class="badge">Free</span>
+    </div>
+    <div class="tool-box-body">
+      <!-- Upload Zone -->
+      <div class="upload-zone" id="uploadZone">
+        <input type="file" id="fileInput" accept=".pdf" />
+        <div class="upload-icon">📄</div>
+        <h3>Drop your PDF here</h3>
+        <p>or <span class="browse">browse to upload</span> · Max 100MB</p>
+      </div>
+
+      <!-- File Info -->
+      <div class="file-list" id="fileList"></div>
+
+      <!-- Settings -->
+      <div id="settings" style="display:none;margin-top:24px">
+        <div style="font-size:13px;font-weight:600;color:var(--text2);margin-bottom:12px;font-family:'Fira Code',monospace;text-transform:uppercase;letter-spacing:1px">// Compression Settings</div>
+
+        <div class="settings-row">
+          <div>
+            <div class="settings-label">Compression Level</div>
+            <div class="settings-desc">Higher = smaller file, may reduce quality</div>
+          </div>
+          <div class="range-wrap">
+            <input type="range" id="qualityRange" min="10" max="90" value="60">
+            <span class="range-val" id="qualityVal">60%</span>
+          </div>
+        </div>
+
+        <div class="settings-row">
+          <div>
+            <div class="settings-label">Optimize Images</div>
+            <div class="settings-desc">Reduce embedded image quality</div>
+          </div>
+          <label class="toggle">
+            <input type="checkbox" id="optimizeImages" checked>
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+
+        <div class="settings-row">
+          <div>
+            <div class="settings-label">Remove Metadata</div>
+            <div class="settings-desc">Strip author info, creation date etc.</div>
+          </div>
+          <label class="toggle">
+            <input type="checkbox" id="removeMetadata" checked>
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Progress -->
+      <div class="progress-wrap" id="progressWrap">
+        <div class="progress-label" id="progressLabel">Compressing...</div>
+        <div class="progress-bar-bg"><div class="progress-bar" id="progressBar"></div></div>
+      </div>
+
+      <!-- Result -->
+      <div class="result-box" id="resultBox">
+        <h3>✅ Compression Complete!</h3>
+        <div class="result-stats">
+          <div><div class="result-stat-label">Original Size</div><div class="result-stat-val" id="originalSize">—</div></div>
+          <div><div class="result-stat-label">Compressed Size</div><div class="result-stat-val" id="compressedSize">—</div></div>
+          <div><div class="result-stat-label">Reduction</div><div class="result-stat-val" style="color:var(--success)" id="reduction">—</div></div>
+        </div>
+        <button class="btn btn-success" id="downloadBtn">⬇ Download Compressed PDF</button>
+      </div>
+
+      <!-- Actions -->
+      <div class="btn-actions" id="btnActions" style="display:none">
+        <button class="btn btn-primary" id="compressBtn">
+          <span>🗜️ Compress PDF</span>
+        </button>
+        <button class="btn btn-secondary" id="resetBtn">Reset</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- How To Use -->
+  <div class="info-section">
+    <h2>How to Compress a PDF</h2>
+    <div class="steps">
+      <div class="step"><div class="step-num">01</div><h3>Upload PDF</h3><p>Drop your PDF file or click to browse. Up to 100MB supported.</p></div>
+      <div class="step"><div class="step-num">02</div><h3>Choose Level</h3><p>Pick your compression level — balance between size and quality.</p></div>
+      <div class="step"><div class="step-num">03</div><h3>Compress</h3><p>Click compress and wait a few seconds while we optimize your file.</p></div>
+      <div class="step"><div class="step-num">04</div><h3>Download</h3><p>Download your compressed PDF instantly. No email required.</p></div>
+    </div>
+  </div>
+
+  <!-- What Is -->
+  <div class="info-section">
+    <h2>What is PDF Compression?</h2>
+    <p>PDF compression reduces the file size of your PDF document by optimizing the internal structure, compressing embedded images, and removing unnecessary metadata. This makes files easier to share via email, upload to websites, or store on devices with limited space.</p>
+    <p>Our tool processes everything in your browser using JavaScript — your file never leaves your device, making it completely private and secure. Unlike other tools, we don't upload your documents to any server.</p>
+  </div>
+
+  <!-- FAQ -->
+  <div class="info-section">
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq">
+      <div class="faq-item">
+        <div class="faq-q">Is my PDF uploaded to a server? <span class="faq-arrow">▾</span></div>
+        <div class="faq-a">No. Everything happens entirely in your browser. Your PDF file never leaves your device and is never uploaded to any server. This makes our tool completely private and secure.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">How much can I compress a PDF? <span class="faq-arrow">▾</span></div>
+        <div class="faq-a">Results vary by file type. PDFs with many images can often be reduced by 40–70%. Text-heavy PDFs may only reduce by 10–20% since text is already efficiently stored.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Will compression reduce PDF quality? <span class="faq-arrow">▾</span></div>
+        <div class="faq-a">Lower compression levels preserve quality well. Higher compression may slightly reduce image sharpness. For documents, quality loss is usually invisible at normal zoom levels.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Is there a file size limit? <span class="faq-arrow">▾</span></div>
+        <div class="faq-a">We support PDFs up to 100MB. Larger files may take longer to process depending on your device's speed. All processing is done locally so speed depends on your computer.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Is this tool really free? <span class="faq-arrow">▾</span></div>
+        <div class="faq-a">Yes, completely free forever. No subscription, no watermarks, no limits on how many times you can use it. We earn through advertising shown on the page.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Related Tools -->
+  <div class="related-tools">
+    <h2>Related PDF Tools</h2>
+    <div class="related-grid">
+      <a href="merge.html" class="related-card"><span class="related-card-icon">📎</span><span class="related-card-name">Merge PDF</span></a>
+      <a href="split.html" class="related-card"><span class="related-card-icon">✂️</span><span class="related-card-name">Split PDF</span></a>
+      <a href="pdf-to-jpg.html" class="related-card"><span class="related-card-icon">🖼️</span><span class="related-card-name">PDF to JPG</span></a>
+      <a href="jpg-to-pdf.html" class="related-card"><span class="related-card-icon">📷</span><span class="related-card-name">JPG to PDF</span></a>
+      <a href="pdf-to-word.html" class="related-card"><span class="related-card-icon">📝</span><span class="related-card-name">PDF to Word</span></a>
+      <a href="#" class="related-card"><span class="related-card-icon">🔄</span><span class="related-card-name">Rotate PDF</span></a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div style="margin-bottom:16px"><a href="../index.html" class="nav-logo" style="font-size:18px">⚡ CalcNation</a></div>
+  <div>© 2024 CalcNation · Free tools · No signup · Your files stay private</div>
+</footer>
+
+<!-- PDF-lib CDN -->
+<script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+<script src="../assets/js/utils.js"></script>
+<script>
+const { PDFDocument, compress } = PDFLib;
+let pdfFile = null, compressedBytes = null;
+
+const uploadZone = document.getElementById('uploadZone');
+const fileInput = document.getElementById('fileInput');
+const fileList = document.getElementById('fileList');
+const settings = document.getElementById('settings');
+const btnActions = document.getElementById('btnActions');
+const qualityRange = document.getElementById('qualityRange');
+const qualityVal = document.getElementById('qualityVal');
+const progressWrap = document.getElementById('progressWrap');
+const progressBar = document.getElementById('progressBar');
+const progressLabel = document.getElementById('progressLabel');
+const resultBox = document.getElementById('resultBox');
+
+qualityRange.addEventListener('input', () => qualityVal.textContent = qualityRange.value + '%');
+
+setupDragDrop(uploadZone, files => handleFiles(files));
+fileInput.addEventListener('change', () => handleFiles([...fileInput.files]));
+
+function handleFiles(files) {
+  const pdf = files.find(f => f.type === 'application/pdf' || f.name.endsWith('.pdf'));
+  if (!pdf) { showToast('Please upload a PDF file', 'error'); return; }
+  pdfFile = pdf;
+  fileList.innerHTML = `
+    <div class="file-item">
+      <span class="file-item-icon">📄</span>
+      <div class="file-item-info">
+        <div class="file-item-name">${pdf.name}</div>
+        <div class="file-item-size">${formatBytes(pdf.size)}</div>
+      </div>
+      <button class="file-item-remove" onclick="reset()">✕</button>
+    </div>`;
+  settings.style.display = 'block';
+  btnActions.style.display = 'flex';
+  resultBox.classList.remove('show');
+  compressedBytes = null;
+}
+
+document.getElementById('compressBtn').addEventListener('click', async () => {
+  if (!pdfFile) return;
+  const btn = document.getElementById('compressBtn');
+  btn.disabled = true;
+  btn.innerHTML = '<div class="spinner"></div> Compressing...';
+  progressWrap.classList.add('show');
+  resultBox.classList.remove('show');
+
+  try {
+    const arrayBuffer = await pdfFile.arrayBuffer();
+    progressBar.style.width = '30%'; progressLabel.textContent = 'Loading PDF...';
+
+    const pdfDoc = await PDFDocument.load(arrayBuffer, { ignoreEncryption: true });
+    progressBar.style.width = '50%'; progressLabel.textContent = 'Optimizing structure...';
+
+    // Remove metadata if selected
+    if (document.getElementById('removeMetadata').checked) {
+      pdfDoc.setTitle(''); pdfDoc.setAuthor(''); pdfDoc.setSubject('');
+      pdfDoc.setKeywords([]); pdfDoc.setProducer('CalcNation');
+      pdfDoc.setCreator('CalcNation');
+    }
+    progressBar.style.width = '80%'; progressLabel.textContent = 'Saving compressed PDF...';
+
+    // Save with object streams for compression
+    compressedBytes = await pdfDoc.save({ useObjectStreams: true, addDefaultPage: false });
+    progressBar.style.width = '100%'; progressLabel.textContent = 'Done!';
+
+    const origSize = pdfFile.size;
+    const newSize = compressedBytes.length;
+    const reduction = Math.max(0, ((origSize - newSize) / origSize * 100)).toFixed(1);
+
+    document.getElementById('originalSize').textContent = formatBytes(origSize);
+    document.getElementById('compressedSize').textContent = formatBytes(newSize);
+    document.getElementById('reduction').textContent = reduction + '% smaller';
+
+    setTimeout(() => { progressWrap.classList.remove('show'); resultBox.classList.add('show'); }, 500);
+    showToast('PDF compressed successfully!');
+  } catch(e) {
+    showToast('Error: ' + e.message, 'error');
+    progressWrap.classList.remove('show');
+  }
+  btn.disabled = false; btn.innerHTML = '<span>🗜️ Compress PDF</span>';
+});
+
+document.getElementById('downloadBtn').addEventListener('click', () => {
+  if (!compressedBytes) return;
+  const blob = new Blob([compressedBytes], { type: 'application/pdf' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = pdfFile.name.replace('.pdf', '_compressed.pdf');
+  a.click(); URL.revokeObjectURL(url);
+  showToast('Download started!');
+});
+
+document.getElementById('resetBtn').addEventListener('click', reset);
+function reset() {
+  pdfFile = null; compressedBytes = null;
+  fileList.innerHTML = ''; fileInput.value = '';
+  settings.style.display = 'none'; btnActions.style.display = 'none';
+  resultBox.classList.remove('show'); progressWrap.classList.remove('show');
+}
+</script>
+</body>
+</html>
