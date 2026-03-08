@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hash Generator — MD5, SHA1, SHA256 Online Free | CalcNation</title>
+<meta name="description" content="Generate MD5, SHA1, SHA256, SHA512 hashes online for free. Hash any text instantly in your browser.">
+<meta name="keywords" content="hash generator, md5 generator, sha256 generator, sha1 online, checksum generator">
+<link rel="canonical" href="https://calcnation-jade.vercel.app/dev/hash-generator.html">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+<link rel="stylesheet" href="../assets/css/main.css">
+<style>
+.btn-sm{padding:6px 14px;font-size:13px;font-weight:600;border-radius:6px;border:1px solid var(--border);background:var(--bg3);color:var(--text2);cursor:pointer;transition:all 0.2s;}
+.btn-sm:hover{border-color:var(--accent);color:var(--accent);} .btn-sm.active{background:var(--accent);color:#000;border-color:var(--accent);}
+
+</style>
+</head>
+<body>
+<nav>
+  <a href="../index.html" class="nav-logo">⚡ CalcNation</a>
+  <div class="nav-links">
+    <a href="../pdf/compress.html">PDF Tools</a>
+    <a href="json-formatter.html" class="active">Dev Tools</a>
+    <a href="#">Finance</a><a href="#">Health</a>
+  </div>
+</nav>
+<div class="breadcrumb"><a href="../index.html">Home</a> <span>›</span> <a href="json-formatter.html">Dev Tools</a> <span>›</span> <span>Hash Generator</span></div>
+<main class="tool-page">
+  <div class="tool-header">
+    <div class="tool-icon">#</div>
+    <h1>Hash Generator</h1>
+    <p>Generate MD5, SHA1, SHA256, SHA512 hashes online for free. Hash any text instantly in your browser.</p>
+    <div style="display:flex;gap:8px;margin-top:12px"><span class="badge">Free</span><span class="badge orange">Instant</span><span class="badge purple">100% Private</span></div>
+  </div>
+  <div class="tool-box">
+    <div class="tool-box-header"><h2>Hash Generator</h2></div>
+    <div class="tool-box-body">
+      <div class="settings-row"><div><div class="settings-label">Algorithm</div></div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap">
+          <button class="btn-sm active" id="btn-SHA-256" onclick="setAlgo('SHA-256')">SHA-256</button>
+          <button class="btn-sm" id="btn-SHA-1" onclick="setAlgo('SHA-1')">SHA-1</button>
+          <button class="btn-sm" id="btn-SHA-512" onclick="setAlgo('SHA-512')">SHA-512</button>
+        </div>
+      </div>
+      <div style="margin-top:16px;margin-bottom:8px;font-size:13px;color:var(--text2);font-weight:600">Input Text</div>
+      <textarea id="inputText" style="height:140px" placeholder="Type or paste text to hash..." oninput="generateHash()"></textarea>
+      <div style="margin-top:16px;margin-bottom:8px;font-size:13px;color:var(--text2);font-weight:600">Hash Output</div>
+      <input type="text" id="hashOutput" readonly placeholder="Hash will appear here..."
+        style="width:100%;padding:14px 16px;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--accent);font-family:'Fira Code',monospace;font-size:13px;outline:none;">
+      <div class="btn-actions">
+        <button class="btn btn-primary" onclick="copyHash()">📋 Copy Hash</button>
+        <button class="btn btn-secondary" onclick="document.getElementById('inputText').value='';document.getElementById('hashOutput').value=''">🗑️ Clear</button>
+      </div></div>
+  </div>
+  <div class="related-tools"><h2>Related Tools</h2><div class="related-grid">
+    <a href="json-formatter.html" class="related-card"><span class="related-card-icon">{ }</span><span class="related-card-name">JSON Formatter</span></a>
+    <a href="base64.html" class="related-card"><span class="related-card-icon">🔤</span><span class="related-card-name">Base64 Encoder</span></a>
+    <a href="regex-tester.html" class="related-card"><span class="related-card-icon">🔍</span><span class="related-card-name">Regex Tester</span></a>
+    <a href="url-encoder.html" class="related-card"><span class="related-card-icon">🔗</span><span class="related-card-name">URL Encoder</span></a>
+  </div></div>
+</main>
+<footer><div style="margin-bottom:16px"><a href="../index.html" class="nav-logo" style="font-size:18px">⚡ CalcNation</a></div><div>© 2024 CalcNation · Free tools · No signup · Your data stays private</div></footer>
+<div class="toast" id="toast"></div>
+<script src="../assets/js/utils.js"></script>
+<script>
+let algo = 'SHA-256';
+function setAlgo(a) {
+  algo = a;
+  document.querySelectorAll('[id^="btn-"]').forEach(b=>b.classList.remove('active'));
+  document.getElementById('btn-'+a).classList.add('active');
+  generateHash();
+}
+async function generateHash() {
+  const text = document.getElementById('inputText').value;
+  if (!text) { document.getElementById('hashOutput').value = ''; return; }
+  const buf = await crypto.subtle.digest(algo, new TextEncoder().encode(text));
+  const hash = Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');
+  document.getElementById('hashOutput').value = hash;
+}
+function copyHash() {
+  const h = document.getElementById('hashOutput').value;
+  if (!h) return showToast('Nothing to copy','error');
+  navigator.clipboard.writeText(h).then(()=>showToast('Hash copied!','success'));
+}</script>
+</body>
+</html>

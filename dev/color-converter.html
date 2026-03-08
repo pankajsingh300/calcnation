@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Color Converter Online Free — HEX RGB HSL | CalcNation</title>
+<meta name="description" content="Convert colors between HEX, RGB, HSL, HSV and CMYK formats online. Color picker included.">
+<meta name="keywords" content="color converter, hex to rgb, rgb to hex, hsl converter, color picker online">
+<link rel="canonical" href="https://calcnation-jade.vercel.app/dev/color-converter.html">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+<link rel="stylesheet" href="../assets/css/main.css">
+<style>
+.btn-sm{padding:6px 14px;font-size:13px;font-weight:600;border-radius:6px;border:1px solid var(--border);background:var(--bg3);color:var(--text2);cursor:pointer;transition:all 0.2s;}
+.btn-sm:hover{border-color:var(--accent);color:var(--accent);} .btn-sm.active{background:var(--accent);color:#000;border-color:var(--accent);}
+.color-preview{width:100%;height:120px;border-radius:var(--radius);margin-bottom:20px;border:1px solid var(--border);transition:background 0.3s;} .color-input-row{display:grid;grid-template-columns:80px 1fr;gap:8px;align-items:center;margin-bottom:8px;} .color-input-label{font-size:13px;font-weight:600;color:var(--text2);} .color-input{width:100%;padding:10px 14px;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-family:"Fira Code",monospace;font-size:14px;outline:none;transition:border-color 0.2s;} .color-input:focus{border-color:var(--accent);}
+</style>
+</head>
+<body>
+<nav>
+  <a href="../index.html" class="nav-logo">⚡ CalcNation</a>
+  <div class="nav-links">
+    <a href="../pdf/compress.html">PDF Tools</a>
+    <a href="json-formatter.html" class="active">Dev Tools</a>
+    <a href="#">Finance</a><a href="#">Health</a>
+  </div>
+</nav>
+<div class="breadcrumb"><a href="../index.html">Home</a> <span>›</span> <a href="json-formatter.html">Dev Tools</a> <span>›</span> <span>Color Converter</span></div>
+<main class="tool-page">
+  <div class="tool-header">
+    <div class="tool-icon">🎨</div>
+    <h1>Color Converter</h1>
+    <p>Convert colors between HEX, RGB, HSL, HSV and CMYK formats online. Color picker included.</p>
+    <div style="display:flex;gap:8px;margin-top:12px"><span class="badge">Free</span><span class="badge orange">Instant</span><span class="badge purple">100% Private</span></div>
+  </div>
+  <div class="tool-box">
+    <div class="tool-box-header"><h2>Color Converter</h2></div>
+    <div class="tool-box-body">
+      <div style="display:flex;gap:16px;align-items:flex-start;flex-wrap:wrap">
+        <div style="flex:1;min-width:200px">
+          <div class="color-preview" id="colorPreview"></div>
+          <input type="color" id="colorPicker" value="#00e5ff" oninput="fromPicker()" style="width:100%;height:48px;border:1px solid var(--border);border-radius:var(--radius-sm);cursor:pointer;background:none;padding:4px;">
+        </div>
+        <div style="flex:2;min-width:260px">
+          <div class="color-input-row"><span class="color-input-label">HEX</span><input class="color-input" id="hexInput" placeholder="#00e5ff" oninput="fromHex()"></div>
+          <div class="color-input-row"><span class="color-input-label">RGB</span><input class="color-input" id="rgbInput" placeholder="rgb(0, 229, 255)" oninput="fromRGB()"></div>
+          <div class="color-input-row"><span class="color-input-label">HSL</span><input class="color-input" id="hslInput" placeholder="hsl(185, 100%, 50%)" oninput="fromHSL()"></div>
+          <div class="color-input-row"><span class="color-input-label">HSV</span><input class="color-input" id="hsvInput" readonly placeholder="hsv(185, 100%, 100%)"></div>
+          <div class="color-input-row"><span class="color-input-label">CMYK</span><input class="color-input" id="cmykInput" readonly placeholder="cmyk(100%, 10%, 0%, 0%)"></div>
+        </div>
+      </div>
+      <div class="btn-actions"><button class="btn btn-primary" onclick="copyHex()">📋 Copy HEX</button><button class="btn btn-secondary" onclick="copyRGB()">📋 Copy RGB</button></div></div>
+  </div>
+  <div class="related-tools"><h2>Related Tools</h2><div class="related-grid">
+    <a href="json-formatter.html" class="related-card"><span class="related-card-icon">{ }</span><span class="related-card-name">JSON Formatter</span></a>
+    <a href="base64.html" class="related-card"><span class="related-card-icon">🔤</span><span class="related-card-name">Base64 Encoder</span></a>
+    <a href="regex-tester.html" class="related-card"><span class="related-card-icon">🔍</span><span class="related-card-name">Regex Tester</span></a>
+    <a href="url-encoder.html" class="related-card"><span class="related-card-icon">🔗</span><span class="related-card-name">URL Encoder</span></a>
+  </div></div>
+</main>
+<footer><div style="margin-bottom:16px"><a href="../index.html" class="nav-logo" style="font-size:18px">⚡ CalcNation</a></div><div>© 2024 CalcNation · Free tools · No signup · Your data stays private</div></footer>
+<div class="toast" id="toast"></div>
+<script src="../assets/js/utils.js"></script>
+<script>
+function hexToRgb(hex){hex=hex.replace('#','');const r=parseInt(hex.slice(0,2),16),g=parseInt(hex.slice(2,4),16),b=parseInt(hex.slice(4,6),16);return{r,g,b};}
+function rgbToHex(r,g,b){return '#'+[r,g,b].map(x=>x.toString(16).padStart(2,'0')).join('');}
+function rgbToHsl(r,g,b){r/=255;g/=255;b/=255;const max=Math.max(r,g,b),min=Math.min(r,g,b);let h,s,l=(max+min)/2;if(max===min){h=s=0;}else{const d=max-min;s=l>0.5?d/(2-max-min):d/(max+min);switch(max){case r:h=(g-b)/d+(g<b?6:0);break;case g:h=(b-r)/d+2;break;case b:h=(r-g)/d+4;break;}h/=6;}return{h:Math.round(h*360),s:Math.round(s*100),l:Math.round(l*100)};}
+function rgbToHsv(r,g,b){r/=255;g/=255;b/=255;const max=Math.max(r,g,b),min=Math.min(r,g,b),d=max-min;let h=0,s=max===0?0:d/max,v=max;if(max!==min){switch(max){case r:h=(g-b)/d+(g<b?6:0);break;case g:h=(b-r)/d+2;break;case b:h=(r-g)/d+4;break;}h/=6;}return{h:Math.round(h*360),s:Math.round(s*100),v:Math.round(v*100)};}
+function rgbToCmyk(r,g,b){r/=255;g/=255;b/=255;const k=1-Math.max(r,g,b);if(k===1)return{c:0,m:0,y:0,k:100};return{c:Math.round((1-r-k)/(1-k)*100),m:Math.round((1-g-k)/(1-k)*100),y:Math.round((1-b-k)/(1-k)*100),k:Math.round(k*100)};}
+function updateAll(r,g,b){
+  const hex=rgbToHex(r,g,b),{h,s,l}=rgbToHsl(r,g,b),hsv=rgbToHsv(r,g,b),cmyk=rgbToCmyk(r,g,b);
+  document.getElementById('colorPreview').style.background=hex;
+  document.getElementById('colorPicker').value=hex;
+  document.getElementById('hexInput').value=hex;
+  document.getElementById('rgbInput').value=`rgb(${r}, ${g}, ${b})`;
+  document.getElementById('hslInput').value=`hsl(${h}, ${s}%, ${l}%)`;
+  document.getElementById('hsvInput').value=`hsv(${hsv.h}, ${hsv.s}%, ${hsv.v}%)`;
+  document.getElementById('cmykInput').value=`cmyk(${cmyk.c}%, ${cmyk.m}%, ${cmyk.y}%, ${cmyk.k}%)`;
+}
+function fromPicker(){const{r,g,b}=hexToRgb(document.getElementById('colorPicker').value);updateAll(r,g,b);}
+function fromHex(){const v=document.getElementById('hexInput').value.trim();if(/^#?[0-9a-fA-F]{6}$/.test(v)){const{r,g,b}=hexToRgb(v);updateAll(r,g,b);}}
+function fromRGB(){const m=document.getElementById('rgbInput').value.match(/(\d+),\s*(\d+),\s*(\d+)/);if(m)updateAll(+m[1],+m[2],+m[3]);}
+function fromHSL(){const m=document.getElementById('hslInput').value.match(/(\d+),\s*(\d+)%,\s*(\d+)%/);if(!m)return;let h=+m[1]/360,s=+m[2]/100,l=+m[3]/100;let r,g,b;if(s===0){r=g=b=l;}else{const q=l<0.5?l*(1+s):l+s-l*s,p=2*l-q,hue2rgb=(p,q,t)=>{if(t<0)t+=1;if(t>1)t-=1;if(t<1/6)return p+(q-p)*6*t;if(t<1/2)return q;if(t<2/3)return p+(q-p)*(2/3-t)*6;return p;};r=hue2rgb(p,q,h+1/3);g=hue2rgb(p,q,h);b=hue2rgb(p,q,h-1/3);}updateAll(Math.round(r*255),Math.round(g*255),Math.round(b*255));}
+function copyHex(){navigator.clipboard.writeText(document.getElementById('hexInput').value).then(()=>showToast('HEX copied!','success'));}
+function copyRGB(){navigator.clipboard.writeText(document.getElementById('rgbInput').value).then(()=>showToast('RGB copied!','success'));}
+updateAll(0, 229, 255);</script>
+</body>
+</html>

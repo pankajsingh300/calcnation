@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unix Timestamp Converter Online Free | CalcNation</title>
+<meta name="description" content="Convert Unix timestamps to human-readable dates and vice versa. Current timestamp, UTC and local time.">
+<meta name="keywords" content="unix timestamp converter, epoch time converter, timestamp to date, date to timestamp">
+<link rel="canonical" href="https://calcnation-jade.vercel.app/dev/timestamp.html">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+<link rel="stylesheet" href="../assets/css/main.css">
+<style>
+.btn-sm{padding:6px 14px;font-size:13px;font-weight:600;border-radius:6px;border:1px solid var(--border);background:var(--bg3);color:var(--text2);cursor:pointer;transition:all 0.2s;}
+.btn-sm:hover{border-color:var(--accent);color:var(--accent);} .btn-sm.active{background:var(--accent);color:#000;border-color:var(--accent);}
+.ts-input{width:100%;padding:14px 16px;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-family:"Fira Code",monospace;font-size:15px;outline:none;transition:border-color 0.2s;} .ts-input:focus{border-color:var(--accent);}
+</style>
+</head>
+<body>
+<nav>
+  <a href="../index.html" class="nav-logo">⚡ CalcNation</a>
+  <div class="nav-links">
+    <a href="../pdf/compress.html">PDF Tools</a>
+    <a href="json-formatter.html" class="active">Dev Tools</a>
+    <a href="#">Finance</a><a href="#">Health</a>
+  </div>
+</nav>
+<div class="breadcrumb"><a href="../index.html">Home</a> <span>›</span> <a href="json-formatter.html">Dev Tools</a> <span>›</span> <span>Timestamp Converter</span></div>
+<main class="tool-page">
+  <div class="tool-header">
+    <div class="tool-icon">⏱️</div>
+    <h1>Timestamp Converter</h1>
+    <p>Convert Unix timestamps to human-readable dates and vice versa. Current timestamp, UTC and local time.</p>
+    <div style="display:flex;gap:8px;margin-top:12px"><span class="badge">Free</span><span class="badge orange">Instant</span><span class="badge purple">100% Private</span></div>
+  </div>
+  <div class="tool-box">
+    <div class="tool-box-header"><h2>Timestamp Converter</h2></div>
+    <div class="tool-box-body">
+      <div style="margin-bottom:20px">
+        <div style="font-size:13px;color:var(--text2);font-weight:600;margin-bottom:8px">Current Unix Timestamp</div>
+        <div style="display:flex;gap:12px;align-items:center">
+          <div id="currentTs" style="font-family:'Fira Code',monospace;font-size:22px;color:var(--accent);font-weight:700"></div>
+          <button class="btn btn-secondary" style="padding:8px 16px;font-size:13px" onclick="copyCurrentTs()">Copy</button>
+        </div>
+      </div>
+      <div class="settings-row"><div><div class="settings-label">Unix Timestamp → Date</div><div class="settings-desc">Enter a Unix timestamp to convert</div></div></div>
+      <input class="ts-input" id="tsInput" placeholder="e.g. 1700000000" oninput="tsToDate()">
+      <div id="tsResult" style="margin-top:8px;font-size:14px;color:var(--text2);font-family:'Fira Code',monospace;min-height:40px"></div>
+      <div class="settings-row" style="margin-top:24px"><div><div class="settings-label">Date → Unix Timestamp</div><div class="settings-desc">Enter a date to convert</div></div></div>
+      <input class="ts-input" type="datetime-local" id="dateInput" oninput="dateToTs()">
+      <div id="dateResult" style="margin-top:8px;font-size:14px;color:var(--text2);font-family:'Fira Code',monospace;min-height:40px"></div></div>
+  </div>
+  <div class="related-tools"><h2>Related Tools</h2><div class="related-grid">
+    <a href="json-formatter.html" class="related-card"><span class="related-card-icon">{ }</span><span class="related-card-name">JSON Formatter</span></a>
+    <a href="base64.html" class="related-card"><span class="related-card-icon">🔤</span><span class="related-card-name">Base64 Encoder</span></a>
+    <a href="regex-tester.html" class="related-card"><span class="related-card-icon">🔍</span><span class="related-card-name">Regex Tester</span></a>
+    <a href="url-encoder.html" class="related-card"><span class="related-card-icon">🔗</span><span class="related-card-name">URL Encoder</span></a>
+  </div></div>
+</main>
+<footer><div style="margin-bottom:16px"><a href="../index.html" class="nav-logo" style="font-size:18px">⚡ CalcNation</a></div><div>© 2024 CalcNation · Free tools · No signup · Your data stays private</div></footer>
+<div class="toast" id="toast"></div>
+<script src="../assets/js/utils.js"></script>
+<script>
+function updateCurrent() {
+  document.getElementById('currentTs').textContent = Math.floor(Date.now()/1000);
+}
+setInterval(updateCurrent, 1000); updateCurrent();
+function copyCurrentTs() {
+  navigator.clipboard.writeText(document.getElementById('currentTs').textContent).then(()=>showToast('Copied!','success'));
+}
+function tsToDate() {
+  const ts = parseInt(document.getElementById('tsInput').value);
+  if (!ts) { document.getElementById('tsResult').textContent = ''; return; }
+  const d = new Date(ts * 1000);
+  document.getElementById('tsResult').innerHTML =
+    '<div>UTC: <span style="color:var(--text)">'+d.toUTCString()+'</span></div>' +
+    '<div>Local: <span style="color:var(--text)">'+d.toLocaleString()+'</span></div>' +
+    '<div>ISO: <span style="color:var(--text)">'+d.toISOString()+'</span></div>';
+}
+function dateToTs() {
+  const val = document.getElementById('dateInput').value;
+  if (!val) { document.getElementById('dateResult').textContent = ''; return; }
+  const ts = Math.floor(new Date(val).getTime()/1000);
+  document.getElementById('dateResult').innerHTML = 'Unix Timestamp: <span style="color:var(--accent);font-size:16px">'+ts+'</span> <button class="btn-sm" onclick="navigator.clipboard.writeText(''+ts+'').then(()=>showToast('Copied!','success'))">Copy</button>';
+}
+document.getElementById('dateInput').value = new Date().toISOString().slice(0,16);
+dateToTs();</script>
+</body>
+</html>

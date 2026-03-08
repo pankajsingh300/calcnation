@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JSON Formatter & Validator Online Free | CalcNation</title>
+<meta name="description" content="Format, beautify and validate JSON online for free. Minify JSON, fix errors, tree view. Works instantly in your browser. No data sent to server.">
+<meta name="keywords" content="json formatter, json validator, json beautifier, format json online, json pretty print">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://calcnation-jade.vercel.app/dev/json-formatter.html">
+<meta property="og:title" content="JSON Formatter & Validator Free | CalcNation">
+<meta property="og:description" content="Format, validate and minify JSON online. Free, instant, private.">
+<meta property="og:site_name" content="CalcNation">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+<link rel="stylesheet" href="../assets/css/main.css">
+<style>
+.editor-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+@media(max-width:768px){ .editor-grid { grid-template-columns: 1fr; } }
+.editor-wrap { display: flex; flex-direction: column; gap: 8px; }
+.editor-label { font-size: 12px; font-weight: 700; color: var(--text3); text-transform: uppercase; letter-spacing: 1px; display: flex; justify-content: space-between; align-items: center; }
+textarea {
+  width: 100%; height: 400px; padding: 16px;
+  background: var(--bg); border: 1px solid var(--border);
+  border-radius: var(--radius-sm); color: var(--text);
+  font-family: 'Fira Code', monospace; font-size: 13px;
+  line-height: 1.6; resize: vertical; outline: none;
+  transition: border-color 0.2s;
+}
+textarea:focus { border-color: var(--accent); }
+textarea.error { border-color: #ff4444; }
+textarea.success { border-color: var(--success); }
+.toolbar { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 4px; }
+.btn-sm {
+  padding: 6px 14px; font-size: 13px; font-weight: 600;
+  border-radius: 6px; border: 1px solid var(--border);
+  background: var(--bg3); color: var(--text2);
+  cursor: pointer; transition: all 0.2s;
+}
+.btn-sm:hover { border-color: var(--accent); color: var(--accent); }
+.btn-sm.active { background: var(--accent); color: #000; border-color: var(--accent); }
+.error-msg { font-size: 13px; color: #ff4444; padding: 8px 12px; background: rgba(255,68,68,0.08); border-radius: 6px; border: 1px solid rgba(255,68,68,0.2); display: none; }
+.error-msg.show { display: block; }
+.stats-bar { display: flex; gap: 16px; font-size: 12px; color: var(--text3); font-family: 'Fira Code', monospace; }
+</style>
+</head>
+<body>
+<nav>
+  <a href="../index.html" class="nav-logo">⚡ CalcNation</a>
+  <div class="nav-links">
+    <a href="../pdf/compress.html">PDF Tools</a>
+    <a href="json-formatter.html" class="active">Dev Tools</a>
+    <a href="#">Finance</a>
+    <a href="#">Health</a>
+  </div>
+</nav>
+
+<div class="breadcrumb">
+  <a href="../index.html">Home</a> <span>›</span>
+  <a href="json-formatter.html">Dev Tools</a> <span>›</span>
+  <span>JSON Formatter</span>
+</div>
+
+<main class="tool-page">
+  <div class="tool-header">
+    <div class="tool-icon">{ }</div>
+    <h1>JSON Formatter & Validator</h1>
+    <p>Format, beautify, minify and validate JSON instantly. Paste your JSON and get it cleaned up in one click.</p>
+    <div style="display:flex;gap:8px;margin-top:12px">
+      <span class="badge">Free</span>
+      <span class="badge orange">Instant</span>
+      <span class="badge purple">100% Private</span>
+    </div>
+  </div>
+
+  <div class="tool-box">
+    <div class="tool-box-header">
+      <h2>JSON Editor</h2>
+      <div class="toolbar">
+        <button class="btn-sm active" onclick="formatJSON(2)">Beautify</button>
+        <button class="btn-sm" onclick="formatJSON(0)">Minify</button>
+        <button class="btn-sm" onclick="formatJSON(4)">4 Spaces</button>
+        <button class="btn-sm" onclick="sortKeys()">Sort Keys</button>
+        <button class="btn-sm" onclick="clearAll()">Clear</button>
+      </div>
+    </div>
+    <div class="tool-box-body">
+      <div class="editor-grid">
+        <div class="editor-wrap">
+          <div class="editor-label">
+            <span>Input JSON</span>
+            <div class="stats-bar" id="inputStats">0 chars</div>
+          </div>
+          <textarea id="inputJSON" placeholder='Paste your JSON here...&#10;&#10;Example:&#10;{"name":"John","age":30,"city":"New York"}'
+            oninput="autoFormat()"></textarea>
+          <div class="error-msg" id="errorMsg">⚠️ Invalid JSON</div>
+        </div>
+        <div class="editor-wrap">
+          <div class="editor-label">
+            <span>Formatted Output</span>
+            <div class="stats-bar" id="outputStats">0 chars</div>
+          </div>
+          <textarea id="outputJSON" placeholder="Formatted JSON will appear here..." readonly></textarea>
+          <div class="btn-actions" style="margin-top:8px">
+            <button class="btn btn-primary" onclick="copyOutput()">📋 Copy</button>
+            <button class="btn btn-secondary" onclick="downloadJSON()">⬇️ Download</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="info-section">
+    <h2>How to Format JSON</h2>
+    <div class="steps">
+      <div class="step"><div class="step-num">STEP 01</div><h3>Paste JSON</h3><p>Paste your raw or minified JSON into the input box on the left.</p></div>
+      <div class="step"><div class="step-num">STEP 02</div><h3>Click Beautify</h3><p>Click Beautify to format with 2-space indentation, or Minify to compress.</p></div>
+      <div class="step"><div class="step-num">STEP 03</div><h3>Copy or Download</h3><p>Copy the formatted JSON to clipboard or download as a .json file.</p></div>
+    </div>
+  </div>
+
+  <div class="info-section">
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq">
+      <div class="faq-item"><div class="faq-q">Is my JSON data sent to any server? <span>+</span></div><div class="faq-a">No. All formatting happens entirely in your browser using JavaScript. Your data never leaves your device.</div></div>
+      <div class="faq-item"><div class="faq-q">What's the difference between Beautify and Minify? <span>+</span></div><div class="faq-a">Beautify adds indentation and line breaks to make JSON human-readable. Minify removes all whitespace to reduce file size — useful for APIs and production code.</div></div>
+      <div class="faq-item"><div class="faq-q">Can it handle large JSON files? <span>+</span></div><div class="faq-a">Yes, it can handle JSON files up to several MB without any issues. Very large files (50MB+) may be slow depending on your device.</div></div>
+      <div class="faq-item"><div class="faq-q">What does Sort Keys do? <span>+</span></div><div class="faq-a">Sort Keys alphabetically orders all object keys at every nesting level, making it easier to compare or diff JSON objects.</div></div>
+    </div>
+  </div>
+
+  <div class="related-tools">
+    <h2>Related Developer Tools</h2>
+    <div class="related-grid">
+      <a href="base64.html" class="related-card"><span class="related-card-icon">🔤</span><span class="related-card-name">Base64 Encoder</span></a>
+      <a href="url-encoder.html" class="related-card"><span class="related-card-icon">🔗</span><span class="related-card-name">URL Encoder</span></a>
+      <a href="xml-formatter.html" class="related-card"><span class="related-card-icon">📄</span><span class="related-card-name">XML Formatter</span></a>
+      <a href="jwt-decoder.html" class="related-card"><span class="related-card-icon">🔑</span><span class="related-card-name">JWT Decoder</span></a>
+      <a href="diff-checker.html" class="related-card"><span class="related-card-icon">🔀</span><span class="related-card-name">Diff Checker</span></a>
+      <a href="hash-generator.html" class="related-card"><span class="related-card-icon">#</span><span class="related-card-name">Hash Generator</span></a>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div style="margin-bottom:16px"><a href="../index.html" class="nav-logo" style="font-size:18px">⚡ CalcNation</a></div>
+  <div>© 2024 CalcNation · Free tools · No signup · Your data stays private</div>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script src="../assets/js/utils.js"></script>
+<script>
+let debounceTimer;
+
+function autoFormat() {
+  clearTimeout(debounceTimer);
+  debounceTimer = setTimeout(() => {
+    const input = document.getElementById('inputJSON').value.trim();
+    if (!input) return;
+    const chars = input.length;
+    document.getElementById('inputStats').textContent = chars.toLocaleString() + ' chars';
+    try {
+      const parsed = JSON.parse(input);
+      document.getElementById('inputJSON').classList.remove('error');
+      document.getElementById('inputJSON').classList.add('success');
+      document.getElementById('errorMsg').classList.remove('show');
+      const formatted = JSON.stringify(parsed, null, 2);
+      document.getElementById('outputJSON').value = formatted;
+      document.getElementById('outputStats').textContent = formatted.length.toLocaleString() + ' chars';
+    } catch(e) {
+      document.getElementById('inputJSON').classList.add('error');
+      document.getElementById('inputJSON').classList.remove('success');
+      document.getElementById('errorMsg').textContent = '⚠️ ' + e.message;
+      document.getElementById('errorMsg').classList.add('show');
+    }
+  }, 300);
+}
+
+function formatJSON(spaces) {
+  const input = document.getElementById('inputJSON').value.trim();
+  if (!input) return showToast('Please paste some JSON first', 'error');
+  try {
+    const parsed = JSON.parse(input);
+    const formatted = JSON.stringify(parsed, null, spaces);
+    document.getElementById('outputJSON').value = formatted;
+    document.getElementById('outputStats').textContent = formatted.length.toLocaleString() + ' chars';
+    document.getElementById('errorMsg').classList.remove('show');
+    document.getElementById('inputJSON').classList.remove('error');
+    showToast(spaces === 0 ? 'JSON minified!' : 'JSON formatted!', 'success');
+  } catch(e) {
+    document.getElementById('errorMsg').textContent = '⚠️ ' + e.message;
+    document.getElementById('errorMsg').classList.add('show');
+    document.getElementById('inputJSON').classList.add('error');
+    showToast('Invalid JSON — check for errors', 'error');
+  }
+}
+
+function sortKeys() {
+  const input = document.getElementById('inputJSON').value.trim();
+  if (!input) return showToast('Please paste some JSON first', 'error');
+  try {
+    const parsed = JSON.parse(input);
+    const sorted = sortObject(parsed);
+    const formatted = JSON.stringify(sorted, null, 2);
+    document.getElementById('outputJSON').value = formatted;
+    document.getElementById('inputJSON').value = formatted;
+    showToast('Keys sorted alphabetically!', 'success');
+  } catch(e) {
+    showToast('Invalid JSON', 'error');
+  }
+}
+
+function sortObject(obj) {
+  if (Array.isArray(obj)) return obj.map(sortObject);
+  if (obj !== null && typeof obj === 'object') {
+    return Object.keys(obj).sort().reduce((acc, key) => {
+      acc[key] = sortObject(obj[key]); return acc;
+    }, {});
+  }
+  return obj;
+}
+
+function copyOutput() {
+  const output = document.getElementById('outputJSON').value;
+  if (!output) return showToast('Nothing to copy', 'error');
+  navigator.clipboard.writeText(output).then(() => showToast('Copied to clipboard!', 'success'));
+}
+
+function downloadJSON() {
+  const output = document.getElementById('outputJSON').value;
+  if (!output) return showToast('Nothing to download', 'error');
+  const blob = new Blob([output], { type: 'application/json' });
+  const a = document.createElement('a'); a.href = URL.createObjectURL(blob);
+  a.download = 'formatted.json'; a.click();
+  showToast('Downloaded!', 'success');
+}
+
+function clearAll() {
+  document.getElementById('inputJSON').value = '';
+  document.getElementById('outputJSON').value = '';
+  document.getElementById('inputStats').textContent = '0 chars';
+  document.getElementById('outputStats').textContent = '0 chars';
+  document.getElementById('errorMsg').classList.remove('show');
+  document.getElementById('inputJSON').classList.remove('error','success');
+}
+
+setupFAQ();
+</script>
+</body>
+</html>

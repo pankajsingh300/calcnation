@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diff Checker Online Free — Compare Text Side by Side | CalcNation</title>
+<meta name="description" content="Compare two texts or code snippets online. Highlights differences line by line. Free, instant, private.">
+<meta name="keywords" content="diff checker, text comparison, compare text online, find differences, code diff">
+<link rel="canonical" href="https://calcnation-jade.vercel.app/dev/diff-checker.html">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+<link rel="stylesheet" href="../assets/css/main.css">
+<style>
+.btn-sm{padding:6px 14px;font-size:13px;font-weight:600;border-radius:6px;border:1px solid var(--border);background:var(--bg3);color:var(--text2);cursor:pointer;transition:all 0.2s;}
+.btn-sm:hover{border-color:var(--accent);color:var(--accent);} .btn-sm.active{background:var(--accent);color:#000;border-color:var(--accent);}
+.diff-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;} @media(max-width:768px){.diff-grid{grid-template-columns:1fr;}} textarea{width:100%;height:220px;padding:16px;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-family:"Fira Code",monospace;font-size:13px;line-height:1.6;resize:vertical;outline:none;} .diff-result{margin-top:16px;border:1px solid var(--border);border-radius:var(--radius-sm);overflow:hidden;} .diff-line{padding:4px 16px;font-family:"Fira Code",monospace;font-size:13px;line-height:1.6;white-space:pre-wrap;word-break:break-all;} .diff-added{background:rgba(0,212,138,0.1);color:var(--success);} .diff-removed{background:rgba(255,68,68,0.1);color:#ff7777;} .diff-unchanged{color:var(--text2);}
+</style>
+</head>
+<body>
+<nav>
+  <a href="../index.html" class="nav-logo">⚡ CalcNation</a>
+  <div class="nav-links">
+    <a href="../pdf/compress.html">PDF Tools</a>
+    <a href="json-formatter.html" class="active">Dev Tools</a>
+    <a href="#">Finance</a><a href="#">Health</a>
+  </div>
+</nav>
+<div class="breadcrumb"><a href="../index.html">Home</a> <span>›</span> <a href="json-formatter.html">Dev Tools</a> <span>›</span> <span>Diff Checker</span></div>
+<main class="tool-page">
+  <div class="tool-header">
+    <div class="tool-icon">🔀</div>
+    <h1>Diff Checker</h1>
+    <p>Compare two texts or code snippets online. Highlights differences line by line. Free, instant, private.</p>
+    <div style="display:flex;gap:8px;margin-top:12px"><span class="badge">Free</span><span class="badge orange">Instant</span><span class="badge purple">100% Private</span></div>
+  </div>
+  <div class="tool-box">
+    <div class="tool-box-header"><h2>Diff Checker</h2></div>
+    <div class="tool-box-body">
+      <div class="diff-grid">
+        <div><div style="font-size:12px;color:var(--text3);font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px">Original Text</div><textarea id="text1" placeholder="Paste original text here..."></textarea></div>
+        <div><div style="font-size:12px;color:var(--text3);font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px">Changed Text</div><textarea id="text2" placeholder="Paste changed text here..."></textarea></div>
+      </div>
+      <div class="btn-actions"><button class="btn btn-primary" onclick="doDiff()">🔀 Compare</button><button class="btn btn-secondary" onclick="clearDiff()">🗑️ Clear</button></div>
+      <div id="diffResult" class="diff-result" style="display:none"></div></div>
+  </div>
+  <div class="related-tools"><h2>Related Tools</h2><div class="related-grid">
+    <a href="json-formatter.html" class="related-card"><span class="related-card-icon">{ }</span><span class="related-card-name">JSON Formatter</span></a>
+    <a href="base64.html" class="related-card"><span class="related-card-icon">🔤</span><span class="related-card-name">Base64 Encoder</span></a>
+    <a href="regex-tester.html" class="related-card"><span class="related-card-icon">🔍</span><span class="related-card-name">Regex Tester</span></a>
+    <a href="url-encoder.html" class="related-card"><span class="related-card-icon">🔗</span><span class="related-card-name">URL Encoder</span></a>
+  </div></div>
+</main>
+<footer><div style="margin-bottom:16px"><a href="../index.html" class="nav-logo" style="font-size:18px">⚡ CalcNation</a></div><div>© 2024 CalcNation · Free tools · No signup · Your data stays private</div></footer>
+<div class="toast" id="toast"></div>
+<script src="../assets/js/utils.js"></script>
+<script>
+function doDiff(){
+  const a=document.getElementById('text1').value.split('\n'),b=document.getElementById('text2').value.split('\n');
+  let html='';let added=0,removed=0;
+  const maxLen=Math.max(a.length,b.length);
+  for(let i=0;i<maxLen;i++){
+    const la=a[i]!==undefined?a[i]:null,lb=b[i]!==undefined?b[i]:null;
+    if(la===lb){html+=`<div class="diff-line diff-unchanged">  ${escHtml(la||'')}</div>`;}
+    else{
+      if(la!==null){html+=`<div class="diff-line diff-removed">- ${escHtml(la)}</div>`;removed++;}
+      if(lb!==null){html+=`<div class="diff-line diff-added">+ ${escHtml(lb)}</div>`;added++;}
+    }
+  }
+  const r=document.getElementById('diffResult');
+  r.style.display='block';
+  r.innerHTML=`<div style="padding:10px 16px;background:var(--bg2);border-bottom:1px solid var(--border);font-size:13px;display:flex;gap:16px"><span style="color:var(--success)">+${added} added</span><span style="color:#ff7777">-${removed} removed</span></div>${html}`;
+  showToast('Diff complete!','success');
+}
+function escHtml(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function clearDiff(){document.getElementById('text1').value='';document.getElementById('text2').value='';document.getElementById('diffResult').style.display='none';}</script>
+</body>
+</html>

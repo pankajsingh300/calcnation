@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JWT Decoder Online Free — Decode JWT Tokens | CalcNation</title>
+<meta name="description" content="Decode and inspect JWT tokens online for free. View header, payload and signature. No data sent to server.">
+<meta name="keywords" content="jwt decoder, jwt online, decode jwt token, jwt viewer, json web token decoder">
+<link rel="canonical" href="https://calcnation-jade.vercel.app/dev/jwt-decoder.html">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+<link rel="stylesheet" href="../assets/css/main.css">
+<style>
+.btn-sm{padding:6px 14px;font-size:13px;font-weight:600;border-radius:6px;border:1px solid var(--border);background:var(--bg3);color:var(--text2);cursor:pointer;transition:all 0.2s;}
+.btn-sm:hover{border-color:var(--accent);color:var(--accent);} .btn-sm.active{background:var(--accent);color:#000;border-color:var(--accent);}
+.jwt-part { background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius-sm);margin-bottom:12px;overflow:hidden; }
+.jwt-part-header { padding:10px 16px;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1px;border-bottom:1px solid var(--border); }
+.jwt-part-body { padding:16px;font-family:'Fira Code',monospace;font-size:13px;line-height:1.6;white-space:pre-wrap;word-break:break-all; }
+.dot-red { color:#ff4444; }.dot-purple { color:#a78bfa; }.dot-green { color:var(--success); }
+</style>
+</head>
+<body>
+<nav>
+  <a href="../index.html" class="nav-logo">⚡ CalcNation</a>
+  <div class="nav-links">
+    <a href="../pdf/compress.html">PDF Tools</a>
+    <a href="json-formatter.html" class="active">Dev Tools</a>
+    <a href="#">Finance</a><a href="#">Health</a>
+  </div>
+</nav>
+<div class="breadcrumb"><a href="../index.html">Home</a> <span>›</span> <a href="json-formatter.html">Dev Tools</a> <span>›</span> <span>JWT Decoder</span></div>
+<main class="tool-page">
+  <div class="tool-header">
+    <div class="tool-icon">🔑</div>
+    <h1>JWT Decoder</h1>
+    <p>Decode and inspect JWT tokens online for free. View header, payload and signature. No data sent to server.</p>
+    <div style="display:flex;gap:8px;margin-top:12px"><span class="badge">Free</span><span class="badge orange">Instant</span><span class="badge purple">100% Private</span></div>
+  </div>
+  <div class="tool-box">
+    <div class="tool-box-header"><h2>JWT Decoder</h2></div>
+    <div class="tool-box-body">
+      <label style="font-size:13px;color:var(--text2);font-weight:600;display:block;margin-bottom:8px">JWT Token</label>
+      <textarea id="jwtInput" style="height:120px;font-size:12px" placeholder="Paste your JWT token here...&#10;eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c" oninput="decodeJWT()"></textarea>
+      <div id="jwtResult" style="margin-top:16px"></div></div>
+  </div>
+  <div class="related-tools"><h2>Related Tools</h2><div class="related-grid">
+    <a href="json-formatter.html" class="related-card"><span class="related-card-icon">{ }</span><span class="related-card-name">JSON Formatter</span></a>
+    <a href="base64.html" class="related-card"><span class="related-card-icon">🔤</span><span class="related-card-name">Base64 Encoder</span></a>
+    <a href="regex-tester.html" class="related-card"><span class="related-card-icon">🔍</span><span class="related-card-name">Regex Tester</span></a>
+    <a href="url-encoder.html" class="related-card"><span class="related-card-icon">🔗</span><span class="related-card-name">URL Encoder</span></a>
+  </div></div>
+</main>
+<footer><div style="margin-bottom:16px"><a href="../index.html" class="nav-logo" style="font-size:18px">⚡ CalcNation</a></div><div>© 2024 CalcNation · Free tools · No signup · Your data stays private</div></footer>
+<div class="toast" id="toast"></div>
+<script src="../assets/js/utils.js"></script>
+<script>
+function decodeJWT() {
+  const token = document.getElementById('jwtInput').value.trim();
+  const result = document.getElementById('jwtResult');
+  if (!token) { result.innerHTML = ''; return; }
+  const parts = token.split('.');
+  if (parts.length !== 3) { result.innerHTML = '<p style="color:#ff4444">Invalid JWT — must have 3 parts separated by dots</p>'; return; }
+  try {
+    const header = JSON.parse(atob(parts[0].replace(/-/g,'+').replace(/_/g,'/')));
+    const payload = JSON.parse(atob(parts[1].replace(/-/g,'+').replace(/_/g,'/')));
+    let expInfo = '';
+    if (payload.exp) {
+      const expDate = new Date(payload.exp * 1000);
+      const expired = expDate < new Date();
+      expInfo = `<div style="margin-bottom:8px;padding:8px 12px;border-radius:6px;font-size:13px;background:${expired?'rgba(255,68,68,0.1)':'rgba(0,212,138,0.1)'};color:${expired?'#ff4444':'var(--success)'};border:1px solid ${expired?'rgba(255,68,68,0.3)':'rgba(0,212,138,0.3)'}">
+        ${expired ? '⚠️ Token expired' : '✅ Token valid'} — Expires: ${expDate.toLocaleString()}</div>`;
+    }
+    result.innerHTML = expInfo +
+      `<div class="jwt-part"><div class="jwt-part-header dot-red">Header</div><div class="jwt-part-body">${JSON.stringify(header,null,2)}</div></div>` +
+      `<div class="jwt-part"><div class="jwt-part-header dot-purple">Payload</div><div class="jwt-part-body">${JSON.stringify(payload,null,2)}</div></div>` +
+      `<div class="jwt-part"><div class="jwt-part-header dot-green">Signature</div><div class="jwt-part-body">${parts[2]}</div></div>`;
+  } catch(e) { result.innerHTML = '<p style="color:#ff4444">Error decoding JWT: ' + e.message + '</p>'; }
+}
+decodeJWT();</script>
+</body>
+</html>

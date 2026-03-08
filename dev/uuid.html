@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UUID Generator Online Free — Generate UUID v4 | CalcNation</title>
+<meta name="description" content="Generate random UUID v4 values online for free. Generate single or bulk UUIDs instantly.">
+<meta name="keywords" content="uuid generator, uuid v4, generate uuid online, random uuid, guid generator">
+<link rel="canonical" href="https://calcnation-jade.vercel.app/dev/uuid.html">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+<link rel="stylesheet" href="../assets/css/main.css">
+<style>
+.btn-sm{padding:6px 14px;font-size:13px;font-weight:600;border-radius:6px;border:1px solid var(--border);background:var(--bg3);color:var(--text2);cursor:pointer;transition:all 0.2s;}
+.btn-sm:hover{border-color:var(--accent);color:var(--accent);} .btn-sm.active{background:var(--accent);color:#000;border-color:var(--accent);}
+.uuid-item{padding:10px 16px;background:var(--bg2);border:1px solid var(--border);border-radius:6px;font-family:'Fira Code',monospace;font-size:13px;display:flex;justify-content:space-between;align-items:center;gap:12px;}
+.uuid-copy{background:none;border:none;color:var(--text3);cursor:pointer;font-size:13px;padding:4px 8px;border-radius:4px;transition:all 0.2s;}
+.uuid-copy:hover{color:var(--accent);background:var(--bg3);}
+</style>
+</head>
+<body>
+<nav>
+  <a href="../index.html" class="nav-logo">⚡ CalcNation</a>
+  <div class="nav-links">
+    <a href="../pdf/compress.html">PDF Tools</a>
+    <a href="json-formatter.html" class="active">Dev Tools</a>
+    <a href="#">Finance</a><a href="#">Health</a>
+  </div>
+</nav>
+<div class="breadcrumb"><a href="../index.html">Home</a> <span>›</span> <a href="json-formatter.html">Dev Tools</a> <span>›</span> <span>UUID Generator</span></div>
+<main class="tool-page">
+  <div class="tool-header">
+    <div class="tool-icon">🆔</div>
+    <h1>UUID Generator</h1>
+    <p>Generate random UUID v4 values online for free. Generate single or bulk UUIDs instantly.</p>
+    <div style="display:flex;gap:8px;margin-top:12px"><span class="badge">Free</span><span class="badge orange">Instant</span><span class="badge purple">100% Private</span></div>
+  </div>
+  <div class="tool-box">
+    <div class="tool-box-header"><h2>UUID Generator</h2></div>
+    <div class="tool-box-body">
+      <div class="settings-row"><div><div class="settings-label">Number of UUIDs</div></div>
+        <div style="display:flex;gap:6px">
+          <button class="btn-sm active" onclick="setCount(1)">1</button>
+          <button class="btn-sm" onclick="setCount(5)">5</button>
+          <button class="btn-sm" onclick="setCount(10)">10</button>
+          <button class="btn-sm" onclick="setCount(25)">25</button>
+        </div>
+      </div>
+      <div class="btn-actions"><button class="btn btn-primary" onclick="generateUUIDs()">⚡ Generate UUIDs</button><button class="btn btn-secondary" onclick="copyAll()">📋 Copy All</button></div>
+      <div id="uuidList" style="margin-top:16px;display:flex;flex-direction:column;gap:6px"></div></div>
+  </div>
+  <div class="related-tools"><h2>Related Tools</h2><div class="related-grid">
+    <a href="json-formatter.html" class="related-card"><span class="related-card-icon">{ }</span><span class="related-card-name">JSON Formatter</span></a>
+    <a href="base64.html" class="related-card"><span class="related-card-icon">🔤</span><span class="related-card-name">Base64 Encoder</span></a>
+    <a href="regex-tester.html" class="related-card"><span class="related-card-icon">🔍</span><span class="related-card-name">Regex Tester</span></a>
+    <a href="url-encoder.html" class="related-card"><span class="related-card-icon">🔗</span><span class="related-card-name">URL Encoder</span></a>
+  </div></div>
+</main>
+<footer><div style="margin-bottom:16px"><a href="../index.html" class="nav-logo" style="font-size:18px">⚡ CalcNation</a></div><div>© 2024 CalcNation · Free tools · No signup · Your data stays private</div></footer>
+<div class="toast" id="toast"></div>
+<script src="../assets/js/utils.js"></script>
+<script>
+let count = 1;
+function setCount(n) { count=n; document.querySelectorAll('.btn-sm').forEach((b,i)=>b.classList.toggle('active',[1,5,10,25][i]===n)); generateUUIDs(); }
+function uuidv4() { return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g,c=>{const r=Math.random()*16|0;return(c==='x'?r:(r&0x3|0x8)).toString(16);}); }
+function generateUUIDs() {
+  const list = document.getElementById('uuidList');
+  list.innerHTML = '';
+  for(let i=0;i<count;i++){
+    const id = uuidv4();
+    list.innerHTML += `<div class="uuid-item"><span>${id}</span><button class="uuid-copy" onclick="navigator.clipboard.writeText('${id}').then(()=>showToast('Copied!','success'))">Copy</button></div>`;
+  }
+}
+function copyAll() {
+  const uuids = [...document.querySelectorAll('.uuid-item span')].map(s=>s.textContent).join('\n');
+  navigator.clipboard.writeText(uuids).then(()=>showToast('All UUIDs copied!','success'));
+}
+generateUUIDs();</script>
+</body>
+</html>

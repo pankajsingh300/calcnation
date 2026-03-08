@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>URL Encoder Decoder Online Free | CalcNation</title>
+<meta name="description" content="Encode and decode URLs online for free. Percent-encode special characters or decode encoded URLs instantly. No signup required.">
+<meta name="keywords" content="url encoder, url decoder, percent encoding, url encode online, url decode online">
+<link rel="canonical" href="https://calcnation-jade.vercel.app/dev/url-encoder.html">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+<link rel="stylesheet" href="../assets/css/main.css">
+<style>
+textarea { width:100%;height:150px;padding:16px;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-family:'Fira Code',monospace;font-size:13px;line-height:1.6;resize:vertical;outline:none;transition:border-color 0.2s; }
+textarea:focus { border-color:var(--accent); }
+.mode-tabs{display:flex;gap:4px;background:var(--bg2);border-radius:8px;padding:4px;margin-bottom:20px;}
+.mode-tab{flex:1;padding:8px;text-align:center;border-radius:6px;cursor:pointer;font-size:14px;font-weight:600;color:var(--text2);transition:all 0.2s;border:none;background:none;}
+.mode-tab.active{background:var(--accent);color:#000;}
+</style>
+</head>
+<body>
+<nav><a href="../index.html" class="nav-logo">⚡ CalcNation</a><div class="nav-links"><a href="../pdf/compress.html">PDF Tools</a><a href="json-formatter.html" class="active">Dev Tools</a><a href="#">Finance</a><a href="#">Health</a></div></nav>
+<div class="breadcrumb"><a href="../index.html">Home</a> <span>›</span> <a href="json-formatter.html">Dev Tools</a> <span>›</span> <span>URL Encoder</span></div>
+
+<main class="tool-page">
+  <div class="tool-header">
+    <div class="tool-icon">🔗</div>
+    <h1>URL Encoder / Decoder</h1>
+    <p>Encode special characters in URLs using percent-encoding, or decode encoded URLs back to readable text.</p>
+    <div style="display:flex;gap:8px;margin-top:12px"><span class="badge">Free</span><span class="badge orange">Instant</span><span class="badge purple">Private</span></div>
+  </div>
+  <div class="tool-box">
+    <div class="tool-box-header"><h2>URL Converter</h2></div>
+    <div class="tool-box-body">
+      <div class="mode-tabs">
+        <button class="mode-tab active" onclick="setMode('encode')">Encode URL</button>
+        <button class="mode-tab" onclick="setMode('decode')">Decode URL</button>
+        <button class="mode-tab" onclick="setMode('component')">Encode Component</button>
+      </div>
+      <label style="font-size:13px;color:var(--text2);font-weight:600;display:block;margin-bottom:8px" id="inputLabel">Input URL</label>
+      <textarea id="inputText" placeholder="Paste URL or text here..." oninput="convert()">https://example.com/search?q=hello world&lang=en&special=<test></textarea>
+      <div style="margin-top:16px;margin-bottom:8px;font-size:13px;color:var(--text2);font-weight:600" id="outputLabel">Encoded Output</div>
+      <textarea id="outputText" readonly placeholder="Result appears here..."></textarea>
+      <div class="btn-actions">
+        <button class="btn btn-primary" onclick="copyOutput()">📋 Copy</button>
+        <button class="btn btn-secondary" onclick="swapValues()">⇅ Swap</button>
+        <button class="btn btn-secondary" onclick="clearAll()">🗑️ Clear</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="info-section">
+    <h2>When to Use URL Encoding</h2>
+    <p>URL encoding converts special characters (spaces, &, =, #, etc.) into a format safe for URLs. Use <strong>Encode URL</strong> for full URLs, and <strong>Encode Component</strong> for individual query parameter values.</p>
+  </div>
+
+  <div class="related-tools"><h2>Related Tools</h2><div class="related-grid">
+    <a href="base64.html" class="related-card"><span class="related-card-icon">🔤</span><span class="related-card-name">Base64 Encoder</span></a>
+    <a href="hash-generator.html" class="related-card"><span class="related-card-icon">#</span><span class="related-card-name">Hash Generator</span></a>
+    <a href="json-formatter.html" class="related-card"><span class="related-card-icon">{ }</span><span class="related-card-name">JSON Formatter</span></a>
+  </div></div>
+</main>
+<footer><div style="margin-bottom:16px"><a href="../index.html" class="nav-logo" style="font-size:18px">⚡ CalcNation</a></div><div>© 2024 CalcNation · Free tools · No signup · Your data stays private</div></footer>
+<div class="toast" id="toast"></div>
+<script src="../assets/js/utils.js"></script>
+<script>
+let mode = 'encode';
+function setMode(m) {
+  mode = m;
+  document.querySelectorAll('.mode-tab').forEach((t,i)=>t.classList.toggle('active',['encode','decode','component'][i]===m));
+  document.getElementById('inputLabel').textContent = m === 'decode' ? 'Encoded URL Input' : 'Input URL';
+  document.getElementById('outputLabel').textContent = m === 'decode' ? 'Decoded Output' : 'Encoded Output';
+  convert();
+}
+function convert() {
+  const input = document.getElementById('inputText').value;
+  try {
+    let out = mode === 'encode' ? encodeURI(input) : mode === 'decode' ? decodeURIComponent(input) : encodeURIComponent(input);
+    document.getElementById('outputText').value = out;
+  } catch(e) { document.getElementById('outputText').value = 'Error: ' + e.message; }
+}
+function copyOutput() {
+  const v = document.getElementById('outputText').value;
+  if (!v) return showToast('Nothing to copy','error');
+  navigator.clipboard.writeText(v).then(()=>showToast('Copied!','success'));
+}
+function swapValues() {
+  document.getElementById('inputText').value = document.getElementById('outputText').value;
+  setMode(mode === 'encode' ? 'decode' : 'encode');
+  setTimeout(convert, 50);
+}
+function clearAll() { document.getElementById('inputText').value=''; document.getElementById('outputText').value=''; }
+convert();
+</script>
+</body>
+</html>

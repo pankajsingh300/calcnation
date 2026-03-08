@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Regex Tester Online Free — Test Regular Expressions | CalcNation</title>
+<meta name="description" content="Test and debug regular expressions online for free. Real-time match highlighting, capture groups, flags support. JavaScript regex tester with live results.">
+<meta name="keywords" content="regex tester, regular expression tester, regex online, test regex, regex debugger">
+<link rel="canonical" href="https://calcnation-jade.vercel.app/dev/regex-tester.html">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+<link rel="stylesheet" href="../assets/css/main.css">
+<style>
+.regex-input-wrap { display: flex; align-items: center; background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-sm); overflow: hidden; margin-bottom: 12px; transition: border-color 0.2s; }
+.regex-input-wrap:focus-within { border-color: var(--accent); }
+.regex-slash { padding: 12px 14px; font-family: 'Fira Code', monospace; font-size: 20px; color: var(--accent); background: var(--bg2); }
+.regex-input { flex: 1; padding: 12px; background: none; border: none; color: var(--text); font-family: 'Fira Code', monospace; font-size: 15px; outline: none; }
+.regex-flags { padding: 8px 12px; background: var(--bg2); }
+.regex-flags input { width: 60px; background: none; border: none; color: var(--accent); font-family: 'Fira Code', monospace; font-size: 15px; outline: none; }
+.flag-btn { padding: 4px 10px; font-size: 12px; font-weight: 700; border-radius: 4px; border: 1px solid var(--border); background: var(--bg3); color: var(--text2); cursor: pointer; transition: all 0.2s; font-family: 'Fira Code', monospace; }
+.flag-btn.active { background: var(--accent); color: #000; border-color: var(--accent); }
+.flags-row { display: flex; gap: 6px; margin-bottom: 12px; flex-wrap: wrap; align-items: center; }
+.flags-label { font-size: 12px; color: var(--text3); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+textarea { width: 100%; height: 200px; padding: 16px; background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-sm); color: var(--text); font-family: 'Fira Code', monospace; font-size: 13px; line-height: 1.6; resize: vertical; outline: none; }
+textarea:focus { border-color: var(--accent); }
+.highlight-zone { min-height: 200px; padding: 16px; background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-sm); font-family: 'Fira Code', monospace; font-size: 13px; line-height: 1.6; white-space: pre-wrap; word-break: break-all; color: var(--text); }
+mark { background: rgba(0,229,255,0.3); color: var(--text); border-radius: 2px; outline: 1px solid var(--accent); }
+mark.group { background: rgba(255,107,53,0.3); outline-color: var(--accent2); }
+.match-count { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 700; padding: 6px 14px; border-radius: 20px; margin-bottom: 12px; }
+.match-count.found { background: rgba(0,212,138,0.1); color: var(--success); border: 1px solid rgba(0,212,138,0.3); }
+.match-count.none { background: rgba(255,68,68,0.1); color: #ff4444; border: 1px solid rgba(255,68,68,0.3); }
+.match-count.idle { background: var(--bg2); color: var(--text3); border: 1px solid var(--border); }
+.matches-list { margin-top: 12px; display: flex; flex-direction: column; gap: 6px; }
+.match-item { background: var(--bg2); border: 1px solid var(--border); border-radius: 6px; padding: 8px 14px; font-family: 'Fira Code', monospace; font-size: 12px; display: flex; gap: 12px; }
+.match-idx { color: var(--accent); min-width: 24px; }
+.match-val { color: var(--text); flex: 1; word-break: break-all; }
+.match-pos { color: var(--text3); }
+.regex-error { font-size: 13px; color: #ff4444; padding: 8px 12px; background: rgba(255,68,68,0.08); border-radius: 6px; display: none; margin-top: 8px; }
+.regex-error.show { display: block; }
+</style>
+</head>
+<body>
+<nav>
+  <a href="../index.html" class="nav-logo">⚡ CalcNation</a>
+  <div class="nav-links">
+    <a href="../pdf/compress.html">PDF Tools</a>
+    <a href="json-formatter.html" class="active">Dev Tools</a>
+    <a href="#">Finance</a><a href="#">Health</a>
+  </div>
+</nav>
+<div class="breadcrumb"><a href="../index.html">Home</a> <span>›</span> <a href="json-formatter.html">Dev Tools</a> <span>›</span> <span>Regex Tester</span></div>
+
+<main class="tool-page">
+  <div class="tool-header">
+    <div class="tool-icon">🔍</div>
+    <h1>Regex Tester</h1>
+    <p>Test regular expressions with real-time match highlighting. See all matches, positions and capture groups instantly.</p>
+    <div style="display:flex;gap:8px;margin-top:12px">
+      <span class="badge">Free</span><span class="badge orange">Real-time</span><span class="badge purple">JavaScript Regex</span>
+    </div>
+  </div>
+
+  <div class="tool-box">
+    <div class="tool-box-header"><h2>Regular Expression</h2></div>
+    <div class="tool-box-body">
+      <div class="regex-input-wrap">
+        <span class="regex-slash">/</span>
+        <input class="regex-input" id="regexInput" placeholder="Enter your regex pattern..." oninput="testRegex()">
+        <span class="regex-slash">/</span>
+        <div class="regex-flags"><input id="flagsInput" value="g" maxlength="6" oninput="testRegex()" placeholder="flags"></div>
+      </div>
+      <div class="flags-row">
+        <span class="flags-label">Flags:</span>
+        <button class="flag-btn active" onclick="toggleFlag('g')" id="flag-g" title="Global — find all matches">g</button>
+        <button class="flag-btn" onclick="toggleFlag('i')" id="flag-i" title="Case insensitive">i</button>
+        <button class="flag-btn" onclick="toggleFlag('m')" id="flag-m" title="Multiline">m</button>
+        <button class="flag-btn" onclick="toggleFlag('s')" id="flag-s" title="Dot matches newline">s</button>
+      </div>
+      <div class="regex-error" id="regexError"></div>
+
+      <div style="margin-bottom:8px;font-size:13px;color:var(--text2);font-weight:600">Test String</div>
+      <textarea id="testString" placeholder="Paste your test string here..." oninput="testRegex()">The quick brown fox jumps over the lazy dog.
+Email: user@example.com
+Phone: +1-555-123-4567
+URL: https://calcnation.com</textarea>
+
+      <div style="margin-top:20px;margin-bottom:8px;font-size:13px;color:var(--text2);font-weight:600;display:flex;align-items:center;gap:12px">
+        <span>Match Highlights</span>
+        <span class="match-count idle" id="matchCount">Enter a pattern above</span>
+      </div>
+      <div class="highlight-zone" id="highlightZone"></div>
+
+      <div id="matchesList" style="margin-top:16px"></div>
+    </div>
+  </div>
+
+  <div class="info-section">
+    <h2>Common Regex Patterns</h2>
+    <div class="steps">
+      <div class="step" style="cursor:pointer" onclick="loadPattern('email')"><div class="step-num">CLICK TO USE</div><h3>Email Address</h3><p><code style="font-size:11px;color:var(--accent)">[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}</code></p></div>
+      <div class="step" style="cursor:pointer" onclick="loadPattern('url')"><div class="step-num">CLICK TO USE</div><h3>URL</h3><p><code style="font-size:11px;color:var(--accent)">https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}</code></p></div>
+      <div class="step" style="cursor:pointer" onclick="loadPattern('phone')"><div class="step-num">CLICK TO USE</div><h3>Phone Number</h3><p><code style="font-size:11px;color:var(--accent)">[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}</code></p></div>
+      <div class="step" style="cursor:pointer" onclick="loadPattern('ip')"><div class="step-num">CLICK TO USE</div><h3>IP Address</h3><p><code style="font-size:11px;color:var(--accent)">\b(?:[0-9]{1,3}\.){3}[0-9]{1,3}\b</code></p></div>
+    </div>
+  </div>
+
+  <div class="related-tools">
+    <h2>Related Tools</h2>
+    <div class="related-grid">
+      <a href="json-formatter.html" class="related-card"><span class="related-card-icon">{ }</span><span class="related-card-name">JSON Formatter</span></a>
+      <a href="diff-checker.html" class="related-card"><span class="related-card-icon">🔀</span><span class="related-card-name">Diff Checker</span></a>
+      <a href="url-encoder.html" class="related-card"><span class="related-card-icon">🔗</span><span class="related-card-name">URL Encoder</span></a>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div style="margin-bottom:16px"><a href="../index.html" class="nav-logo" style="font-size:18px">⚡ CalcNation</a></div>
+  <div>© 2024 CalcNation · Free tools · No signup · Your data stays private</div>
+</footer>
+<div class="toast" id="toast"></div>
+
+<script src="../assets/js/utils.js"></script>
+<script>
+const patterns = {
+  email: { pattern: '[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}', flags: 'g' },
+  url: { pattern: 'https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_\\+.~#?&//=]*)', flags: 'gi' },
+  phone: { pattern: '[\\+]?[(]?[0-9]{3}[)]?[-\\s\\.]?[0-9]{3}[-\\s\\.]?[0-9]{4,6}', flags: 'g' },
+  ip: { pattern: '\\b(?:[0-9]{1,3}\\.){3}[0-9]{1,3}\\b', flags: 'g' }
+};
+
+function loadPattern(name) {
+  document.getElementById('regexInput').value = patterns[name].pattern;
+  document.getElementById('flagsInput').value = patterns[name].flags;
+  syncFlags(patterns[name].flags);
+  testRegex();
+}
+
+function toggleFlag(f) {
+  let flags = document.getElementById('flagsInput').value;
+  flags = flags.includes(f) ? flags.replace(f, '') : flags + f;
+  document.getElementById('flagsInput').value = flags;
+  syncFlags(flags);
+  testRegex();
+}
+
+function syncFlags(flags) {
+  ['g','i','m','s'].forEach(f => {
+    document.getElementById('flag-' + f).classList.toggle('active', flags.includes(f));
+  });
+}
+
+function testRegex() {
+  const pattern = document.getElementById('regexInput').value;
+  const flags = document.getElementById('flagsInput').value;
+  const text = document.getElementById('testString').value;
+  syncFlags(flags);
+
+  if (!pattern) {
+    document.getElementById('highlightZone').textContent = text;
+    document.getElementById('matchCount').className = 'match-count idle';
+    document.getElementById('matchCount').textContent = 'Enter a pattern above';
+    document.getElementById('matchesList').innerHTML = '';
+    document.getElementById('regexError').classList.remove('show');
+    return;
+  }
+
+  try {
+    const regex = new RegExp(pattern, flags);
+    document.getElementById('regexError').classList.remove('show');
+    const matches = [...text.matchAll(new RegExp(pattern, flags.includes('g') ? flags : flags + 'g'))];
+
+    if (matches.length === 0) {
+      document.getElementById('highlightZone').textContent = text;
+      document.getElementById('matchCount').className = 'match-count none';
+      document.getElementById('matchCount').textContent = '0 matches';
+      document.getElementById('matchesList').innerHTML = '';
+      return;
+    }
+
+    document.getElementById('matchCount').className = 'match-count found';
+    document.getElementById('matchCount').textContent = matches.length + ' match' + (matches.length > 1 ? 'es' : '');
+
+    // Highlight
+    let result = ''; let lastIndex = 0;
+    matches.forEach(m => {
+      result += escapeHtml(text.slice(lastIndex, m.index));
+      result += '<mark>' + escapeHtml(m[0]) + '</mark>';
+      lastIndex = m.index + m[0].length;
+    });
+    result += escapeHtml(text.slice(lastIndex));
+    document.getElementById('highlightZone').innerHTML = result;
+
+    // List matches
+    let listHtml = '<div class="matches-list">';
+    matches.forEach((m, i) => {
+      listHtml += `<div class="match-item"><span class="match-idx">${i+1}</span><span class="match-val">${escapeHtml(m[0])}</span><span class="match-pos">@${m.index}</span></div>`;
+    });
+    listHtml += '</div>';
+    document.getElementById('matchesList').innerHTML = listHtml;
+
+  } catch(e) {
+    document.getElementById('regexError').textContent = '⚠️ ' + e.message;
+    document.getElementById('regexError').classList.add('show');
+    document.getElementById('highlightZone').textContent = text;
+    document.getElementById('matchCount').className = 'match-count idle';
+    document.getElementById('matchCount').textContent = 'Invalid pattern';
+  }
+}
+
+function escapeHtml(str) {
+  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+testRegex();
+</script>
+</body>
+</html>
