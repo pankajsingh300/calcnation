@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pregnancy Due Date Calculator Free | CalcNation</title>
+<meta name="description" content="Calculate your pregnancy due date. Know your baby's EDD based on LMP or conception date. Free pregnancy calculator.">
+<meta name="keywords" content="pregnancy due date calculator, edd calculator, due date calculator, pregnancy calculator, baby due date">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://calcnation-jade.vercel.app/health/pregnancy-due-date.html">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+<link rel="stylesheet" href="../assets/css/main.css">
+<style>
+.tool-input{width:100%;padding:12px 16px;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-size:15px;outline:none;margin-bottom:12px;}
+.tool-input:focus{border-color:var(--accent);}
+label.fl{font-size:12px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:6px;}
+.result-box{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:24px;margin-top:20px;}
+.rnum{font-size:28px;font-weight:900;font-family:'Syne',sans-serif;background:linear-gradient(135deg,#ec4899,var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.rlabel{font-size:13px;color:var(--text3);margin-top:4px;}
+.info-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-top:20px;}
+.info-item{background:var(--bg3);padding:16px;border-radius:var(--radius-sm);border:1px solid var(--border);}
+.info-item .val{font-size:18px;font-weight:700;color:var(--text);}
+.info-item .lab{font-size:11px;color:var(--text3);margin-top:4px;}
+</style>
+</head>
+<body>
+<nav>
+  <a href="../index.html" class="nav-logo">⚡ CalcNation</a>
+  <div class="nav-links">
+    <a href="../pdf/compress.html">PDF Tools</a>
+    <a href="../dev/json-formatter.html">Dev Tools</a>
+    <div class="nav-dropdown">
+      <a href="../social/youtube-money-calculator.html" class="nav-dropdown-trigger">Social ▾</a>
+      <div class="nav-dropdown-menu nav-dropdown-wide">
+        <div class="nav-dropdown-col">
+          <div class="nav-dropdown-heading">YouTube</div>
+          <a href="../social/youtube-money-calculator.html"><span>💰</span> Money Calculator</a>
+          <a href="../social/youtube-cpm-calculator.html"><span>📊</span> CPM Calculator</a>
+          <a href="../social/youtube-tag-generator.html"><span>🏷️</span> Tag Generator</a>
+          <a href="../social/youtube-title-generator.html"><span>✍️</span> Title Generator</a>
+          <a href="../social/youtube-thumbnail-resizer.html"><span>🖼️</span> Thumbnail Resizer</a>
+          <a href="../social/video-length-optimizer.html"><span>⏱️</span> Video Optimizer</a>
+          <a href="../social/youtube-channel-analyzer.html"><span>🔍</span> Channel Analyzer</a>
+        </div>
+        <div class="nav-dropdown-col">
+          <div class="nav-dropdown-heading">Social Media</div>
+          <a href="../social/instagram-engagement.html"><span>📸</span> Instagram Engagement</a>
+          <a href="../social/tiktok-money-calculator.html"><span>🎵</span> TikTok Earnings</a>
+          <a href="../social/hashtag-generator.html"><span>#️⃣</span> Hashtag Generator</a>
+          <a href="../social/influencer-earnings.html"><span>⭐</span> Influencer Earnings</a>
+          <a href="../social/best-time-to-post.html"><span>🕐</span> Best Time to Post</a>
+          <a href="../social/caption-generator.html"><span>💬</span> Caption Generator</a>
+          <a href="../social/social-media-image-resizer.html"><span>📐</span> Image Resizer</a>
+        </div>
+        <div class="nav-dropdown-col">
+          <div class="nav-dropdown-heading">Finance</div>
+          <a href="../finance/mortgage-calculator.html"><span>🏠</span> Mortgage Calculator</a>
+          <a href="../finance/emi-calculator.html"><span>📋</span> EMI Calculator</a>
+          <a href="../finance/compound-interest-calculator.html"><span>📈</span> Compound Interest</a>
+          <a href="../tools/tip-calculator.html"><span>💵</span> Tip Calculator</a>
+        </div>
+        <div class="nav-dropdown-col">
+          <div class="nav-dropdown-heading">Health</div>
+          <a href="../tools/bmi-calculator.html"><span>⚖️</span> BMI Calculator</a>
+          <a href="../health/calorie-calculator.html"><span>🔥</span> Calorie Calculator</a>
+          <a href="../health/pregnancy-due-date.html"><span>👶</span> Pregnancy Due Date</a>
+          <a href="../health/water-calculator.html"><span>💧</span> Water Intake</a>
+          <a href="../tools/age-calculator.html"><span>🎂</span> Age Calculator</a>
+        </div>
+      </div>
+    </div>
+    <div class="nav-dropdown">
+      <a href="../finance/mortgage-calculator.html" class="nav-dropdown-trigger">Finance ▾</a>
+      <div class="nav-dropdown-menu">
+        <a href="../finance/mortgage-calculator.html"><span>🏠</span> Mortgage Calculator</a>
+        <a href="../finance/emi-calculator.html"><span>📋</span> EMI Calculator</a>
+        <a href="../finance/compound-interest-calculator.html"><span>📈</span> Compound Interest</a>
+        <a href="../tools/tip-calculator.html"><span>💵</span> Tip Calculator</a>
+      </div>
+    </div>
+    <div class="nav-dropdown">
+      <a href="../health/calorie-calculator.html" class="nav-dropdown-trigger">Health ▾</a>
+      <div class="nav-dropdown-menu">
+        <a href="../tools/bmi-calculator.html"><span>⚖️</span> BMI Calculator</a>
+        <a href="../health/calorie-calculator.html"><span>🔥</span> Calorie Calculator</a>
+        <a href="../health/pregnancy-due-date.html"><span>👶</span> Pregnancy Due Date</a>
+        <a href="../health/water-calculator.html"><span>💧</span> Water Intake</a>
+      </div>
+    </div>
+  </div>
+</nav>
+<div class="breadcrumb"><a href="../index.html">Home</a> <span>›</span> <a href="../health/calorie-calculator.html">Health</a> <span>›</span> <span>Pregnancy Due Date</span></div>
+<main class="tool-page">
+  <div class="tool-header">
+    <div class="tool-icon">👶</div>
+    <h1>Pregnancy Due Date Calculator</h1>
+    <p>Calculate your baby's due date (EDD) based on your last menstrual period (LMP). Uses Naegele's rule.</p>
+    <div style="display:flex;gap:8px;margin-top:12px"><span class="badge">Free</span><span class="badge orange">Instant</span><span class="badge purple">No Signup</span></div>
+  </div>
+  <div class="tool-box">
+    <div class="tool-box-header"><h2>Last Menstrual Period (LMP)</h2></div>
+    <div class="tool-box-body">
+      <div style="max-width:320px"><label class="fl">First day of last period</label><input class="tool-input" type="date" id="lmp" onchange="calcDueDate()"></div>
+      <div class="result-box" id="resultBox">
+        <div class="rnum" id="dueDate">—</div>
+        <div class="rlabel">Estimated Due Date (EDD)</div>
+        <div class="info-grid">
+          <div class="info-item"><div class="val" id="weeksPreg">0</div><div class="lab">Weeks Pregnant</div></div>
+          <div class="info-item"><div class="val" id="daysPreg">0</div><div class="lab">Days</div></div>
+          <div class="info-item"><div class="val" id="trimester">—</div><div class="lab">Trimester</div></div>
+          <div class="info-item"><div class="val" id="daysLeft">—</div><div class="lab">Days to Due Date</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="related-tools"><h2>Related Tools</h2><div class="related-grid">
+    <a href="calorie-calculator.html" class="related-card"><span class="related-card-icon">🔥</span><span class="related-card-name">Calorie Calculator</span></a>
+    <a href="water-calculator.html" class="related-card"><span class="related-card-icon">💧</span><span class="related-card-name">Water Intake</span></a>
+    <a href="../tools/bmi-calculator.html" class="related-card"><span class="related-card-icon">⚖️</span><span class="related-card-name">BMI Calculator</span></a>
+  </div></div>
+</main>
+<footer><div style="margin-bottom:16px"><a href="../index.html" class="nav-logo" style="font-size:18px">⚡ CalcNation</a></div><div>© 2024 CalcNation · Free tools · No signup required</div></footer>
+<script src="../assets/js/utils.js"></script>
+<script>
+const today=new Date();document.getElementById('lmp').value=today.toISOString().slice(0,10);document.getElementById('lmp').valueAsDate=new Date(today.getTime()-84*24*60*60*1000);
+function calcDueDate(){
+  const lmp=new Date(document.getElementById('lmp').value);if(!lmp.getTime())return;
+  const due=new Date(lmp);due.setDate(due.getDate()+280);
+  const now=new Date();const diff=Math.floor((now-lmp)/(24*60*60*1000));
+  const weeks=Math.floor(diff/7);const days=diff%7;
+  let trimester='First';if(weeks>=13)trimester='Second';if(weeks>=27)trimester='Third';
+  const daysLeft=Math.max(0,Math.ceil((due-now)/(24*60*60*1000)));
+  document.getElementById('dueDate').textContent=due.toLocaleDateString('en-US',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+  document.getElementById('weeksPreg').textContent=weeks;document.getElementById('daysPreg').textContent=days;
+  document.getElementById('trimester').textContent=trimester;document.getElementById('daysLeft').textContent=daysLeft;
+}
+calcDueDate();
+</script>
+</body>
+</html>
