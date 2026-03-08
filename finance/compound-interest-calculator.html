@@ -7,7 +7,7 @@
 <meta name="description" content="Calculate compound interest on investments. See how your money grows with monthly/yearly compounding. Free investment calculator.">
 <meta name="keywords" content="compound interest calculator, investment calculator, savings growth calculator, fd calculator">
 <meta name="robots" content="index, follow">
-<link rel="canonical" href="https://calcnation-jade.vercel.app/finance/compound-interest-calculator.html">
+<link rel="canonical" href="https://calcnation.com/finance/compound-interest-calculator.html">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
 <link rel="stylesheet" href="../assets/css/main.css">
 <style>
@@ -89,9 +89,8 @@ label.fl{font-size:12px;font-weight:700;color:var(--text3);text-transform:upperc
     </div>
   </div>
 </nav>
-<script src="../assets/js/finance.js"></script>
 <div class="breadcrumb"><a href="../index.html">Home</a> <span>›</span> <a href="../finance/mortgage-calculator.html">Finance</a> <span>›</span> <span>Compound Interest</span></div>
-<main class="tool-page" data-recalc-on-currency="calcCompound">
+<main class="tool-page">
   <div class="tool-header">
     <div class="tool-icon">📈</div>
     <h1>Compound Interest Calculator</h1>
@@ -102,18 +101,18 @@ label.fl{font-size:12px;font-weight:700;color:var(--text3);text-transform:upperc
     <div class="tool-box-header"><h2>Investment Details</h2></div>
     <div class="tool-box-body">
       <div class="grid2">
-        <div><label class="fl">Initial Investment (<span class="currency-symbol"></span>)</label><input class="tool-input" data-currency-input type="number" id="principal" value="10000" min="0" step="100" oninput="calcCompound()"></div>
-        <div><label class="fl">Monthly Contribution (<span class="currency-symbol"></span>)</label><input class="tool-input" data-currency-input type="number" id="monthly" value="500" min="0" step="50" oninput="calcCompound()"></div>
+        <div><label class="fl">Initial Investment</label><input class="tool-input" type="number" id="principal" value="10000" min="0" step="100" oninput="calcCompound()"></div>
+        <div><label class="fl">Monthly Contribution</label><input class="tool-input" type="number" id="monthly" value="500" min="0" step="50" oninput="calcCompound()"></div>
         <div><label class="fl">Annual Interest Rate (%)</label><input class="tool-input" type="number" id="rate" value="8" min="0" step="0.1" oninput="calcCompound()"></div>
         <div><label class="fl">Time Period (years)</label><input class="tool-input" type="number" id="years" value="10" min="1" max="50" oninput="calcCompound()"></div>
       </div>
       <div class="result-box" id="resultBox">
-        <div class="rnum" id="finalVal">$98,358</div>
+        <div class="rnum" id="finalVal">—</div>
         <div class="rlabel">Future Value</div>
         <div class="result-grid">
-          <div><div style="font-size:18px;font-weight:700;color:var(--text)" id="totalContrib">$70,000</div><div class="rlabel">Total Invested</div></div>
-          <div><div style="font-size:18px;font-weight:700;color:var(--success)" id="totalEarned">$28,358</div><div class="rlabel">Interest Earned</div></div>
-          <div><div style="font-size:18px;font-weight:700;color:var(--accent)" id="roi">40%</div><div class="rlabel">Return on Investment</div></div>
+          <div><div style="font-size:18px;font-weight:700;color:var(--text)" id="totalContrib">—</div><div class="rlabel">Total Invested</div></div>
+          <div><div style="font-size:18px;font-weight:700;color:var(--success)" id="totalEarned">—</div><div class="rlabel">Interest Earned</div></div>
+          <div><div style="font-size:18px;font-weight:700;color:var(--accent)" id="roi">—</div><div class="rlabel">Return on Investment</div></div>
         </div>
       </div>
     </div>
@@ -124,21 +123,46 @@ label.fl{font-size:12px;font-weight:700;color:var(--text3);text-transform:upperc
     <a href="../tools/tip-calculator.html" class="related-card"><span class="related-card-icon">💵</span><span class="related-card-name">Tip Calculator</span></a>
   </div></div>
 </main>
-<footer><div style="margin-bottom:16px"><a href="../index.html" class="nav-logo" style="font-size:18px">⚡ CalcNation</a></div><div>© 2024 CalcNation · Free tools · No signup required</div></footer>
+<footer><div style="margin-bottom:16px"><a href="../index.html" class="nav-logo" style="font-size:18px">⚡ CalcNation</a></div><div>© 2025 CalcNation · Free tools · No signup required</div></footer>
 <script src="../assets/js/utils.js"></script>
 <script>
-function calcCompound(){
-  const P=parseFloat(document.getElementById('principal').value)||0;
-  const pm=parseFloat(document.getElementById('monthly').value)||0;
-  const r=parseFloat(document.getElementById('rate').value)||0;
-  const years=parseInt(document.getElementById('years').value)||10;
-  const data = Finance.calcCompoundValues(P, pm, r, years);
-  if(!data) return;
-  document.getElementById('finalVal').textContent = Finance.formatAmount(data.finalValue);
-  document.getElementById('totalContrib').textContent = Finance.formatAmount(data.totalContrib);
-  document.getElementById('totalEarned').textContent = Finance.formatAmount(data.totalEarned);
-  document.getElementById('roi').textContent = data.roi.toFixed(1) + '%';
+function fmt(num) {
+  return num.toLocaleString(undefined, { maximumFractionDigits: 0 });
 }
+
+function calcCompound() {
+  const P     = parseFloat(document.getElementById('principal').value) || 0;
+  const pm    = parseFloat(document.getElementById('monthly').value)   || 0;
+  const r     = parseFloat(document.getElementById('rate').value)      || 0;
+  const years = parseInt(document.getElementById('years').value)       || 10;
+
+  if (r < 0 || years <= 0) return;
+
+  const monthlyRate = r / (12 * 100);   // monthly interest rate
+  const periods     = years * 12;       // total months
+
+  // Future value of lump sum
+  const fvPrincipal = P * Math.pow(1 + monthlyRate, periods);
+
+  // Future value of monthly contributions
+  let fvContributions = 0;
+  if (monthlyRate > 0) {
+    fvContributions = pm * ((Math.pow(1 + monthlyRate, periods) - 1) / monthlyRate);
+  } else {
+    fvContributions = pm * periods;
+  }
+
+  const finalValue   = fvPrincipal + fvContributions;
+  const totalContrib = P + (pm * periods);
+  const totalEarned  = finalValue - totalContrib;
+  const roi          = totalContrib > 0 ? (totalEarned / totalContrib) * 100 : 0;
+
+  document.getElementById('finalVal').textContent    = fmt(finalValue);
+  document.getElementById('totalContrib').textContent = fmt(totalContrib);
+  document.getElementById('totalEarned').textContent  = fmt(totalEarned);
+  document.getElementById('roi').textContent          = roi.toFixed(1) + '%';
+}
+
 calcCompound();
 </script>
 </body>

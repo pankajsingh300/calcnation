@@ -7,7 +7,7 @@
 <meta name="description" content="Calculate mortgage monthly payments, total interest, and amortization schedule. Free home loan calculator. Plan your purchase.">
 <meta name="keywords" content="mortgage calculator, home loan calculator, monthly payment calculator, amortization calculator">
 <meta name="robots" content="index, follow">
-<link rel="canonical" href="https://calcnation-jade.vercel.app/finance/mortgage-calculator.html">
+<link rel="canonical" href="https://calcnation.com/finance/mortgage-calculator.html">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
 <link rel="stylesheet" href="../assets/css/main.css">
 <style>
@@ -93,9 +93,8 @@ label.fl{font-size:12px;font-weight:700;color:var(--text3);text-transform:upperc
     </div>
   </div>
 </nav>
-<script src="../assets/js/finance.js"></script>
 <div class="breadcrumb"><a href="../index.html">Home</a> <span>›</span> <a href="../finance/mortgage-calculator.html">Finance</a> <span>›</span> <span>Mortgage Calculator</span></div>
-<main class="tool-page" data-recalc-on-currency="calcMortgage">
+<main class="tool-page">
   <div class="tool-header">
     <div class="tool-icon">🏠</div>
     <h1>Mortgage Calculator</h1>
@@ -106,18 +105,18 @@ label.fl{font-size:12px;font-weight:700;color:var(--text3);text-transform:upperc
     <div class="tool-box-header"><h2>Enter Loan Details</h2></div>
     <div class="tool-box-body">
       <div class="grid2">
-        <div><label class="fl">Loan Amount (<span class="currency-symbol"></span>)</label><input class="tool-input" data-currency-input type="number" id="principal" value="300000" min="1000" step="1000" oninput="calcMortgage()"></div>
+        <div><label class="fl">Loan Amount</label><input class="tool-input" type="number" id="principal" value="300000" min="1000" step="1000" oninput="calcMortgage()"></div>
         <div><label class="fl">Interest Rate (% per year)</label><input class="tool-input" type="number" id="rate" value="6.5" min="0.1" step="0.1" oninput="calcMortgage()"></div>
         <div><label class="fl">Loan Term (years)</label><input class="tool-input" type="number" id="years" value="30" min="1" max="50" oninput="calcMortgage()"></div>
-        <div><label class="fl">Down Payment (<span class="currency-symbol"></span>) — optional</label><input class="tool-input" data-currency-input type="number" id="down" value="0" min="0" step="1000" oninput="calcMortgage()"></div>
+        <div><label class="fl">Down Payment — optional</label><input class="tool-input" type="number" id="down" value="0" min="0" step="1000" oninput="calcMortgage()"></div>
       </div>
       <div class="result-box" id="resultBox">
-        <div class="rnum" id="monthlyPay">$1,896</div>
+        <div class="rnum" id="monthlyPay">—</div>
         <div class="rlabel">Monthly Payment</div>
         <div class="result-grid">
-          <div><div style="font-size:18px;font-weight:700;color:var(--text)" id="totalPay">$682,633</div><div class="rlabel">Total Payment</div></div>
-          <div><div style="font-size:18px;font-weight:700;color:var(--accent2)" id="totalInt">$382,633</div><div class="rlabel">Total Interest</div></div>
-          <div><div style="font-size:18px;font-weight:700;color:var(--success)" id="payoffYear">2055</div><div class="rlabel">Payoff Year</div></div>
+          <div><div style="font-size:18px;font-weight:700;color:var(--text)" id="totalPay">—</div><div class="rlabel">Total Payment</div></div>
+          <div><div style="font-size:18px;font-weight:700;color:var(--accent2)" id="totalInt">—</div><div class="rlabel">Total Interest</div></div>
+          <div><div style="font-size:18px;font-weight:700;color:var(--success)" id="payoffYear">—</div><div class="rlabel">Payoff Year</div></div>
         </div>
         <div style="margin-top:20px">
           <button class="btn btn-secondary" id="toggleAmort" onclick="toggleAmort()">Show Amortization Schedule</button>
@@ -134,33 +133,69 @@ label.fl{font-size:12px;font-weight:700;color:var(--text3);text-transform:upperc
     <a href="../tools/tip-calculator.html" class="related-card"><span class="related-card-icon">💵</span><span class="related-card-name">Tip Calculator</span></a>
   </div></div>
 </main>
-<footer><div style="margin-bottom:16px"><a href="../index.html" class="nav-logo" style="font-size:18px">⚡ CalcNation</a></div><div>© 2024 CalcNation · Free tools · No signup required</div></footer>
+<footer><div style="margin-bottom:16px"><a href="../index.html" class="nav-logo" style="font-size:18px">⚡ CalcNation</a></div><div>© 2025 CalcNation · Free tools · No signup required</div></footer>
 <script src="../assets/js/utils.js"></script>
 <script>
-function calcMortgage(){
-  const principal=parseFloat(document.getElementById('principal').value)||0;
-  const down=parseFloat(document.getElementById('down').value)||0;
-  const rate=parseFloat(document.getElementById('rate').value)||0;
-  const years=parseInt(document.getElementById('years').value)||30;
-  const data=Finance.calcMortgageValues(principal, rate, years, down);
-  if(!data) return;
-  document.getElementById('monthlyPay').textContent=Finance.formatAmount(data.monthly);
-  document.getElementById('totalPay').textContent=Finance.formatAmount(data.total);
-  document.getElementById('totalInt').textContent=Finance.formatAmount(data.totalInt);
-  document.getElementById('payoffYear').textContent=Math.floor(data.payoffYear);
-  let bal=data.principal;
-  let html='<thead><tr><th>Month</th><th>Payment</th><th>Principal</th><th>Interest</th><th>Balance</th></tr></thead><tbody>';
-  for(let i=1;i<=Math.min(data.periods,60);i++){
-    const interest=bal*data.rate;
-    const principalPortion=data.monthly-interest;
-    bal=Math.max(0,bal-principalPortion);
-    html+=`<tr><td>${i}</td><td>${Finance.formatAmount(data.monthly)}</td><td>${Finance.formatAmount(principalPortion)}</td><td>${Finance.formatAmount(interest)}</td><td>${Finance.formatAmount(bal)}</td></tr>`;
-  }
-  if(data.periods>60)html+=`<tr><td colspan="5" style="color:var(--text3);font-size:12px">... ${data.periods-60} more months</td></tr>`;
-  html+='</tbody>';
-  document.getElementById('amortTable').innerHTML=html;
+function fmt(num) {
+  return num.toLocaleString(undefined, { maximumFractionDigits: 0 });
 }
-function toggleAmort(){const w=document.getElementById('amortWrap');const b=document.getElementById('toggleAmort');w.style.display=w.style.display==='none'?'block':'none';b.textContent=w.style.display==='block'?'Hide Amortization':'Show Amortization Schedule';}
+
+function calcMortgage() {
+  const homeValue = parseFloat(document.getElementById('principal').value) || 0;
+  const down      = parseFloat(document.getElementById('down').value)      || 0;
+  const annualRate = parseFloat(document.getElementById('rate').value)     || 0;
+  const years     = parseInt(document.getElementById('years').value)       || 30;
+
+  const P = homeValue - down;  // actual loan amount after down payment
+  if (P <= 0 || annualRate <= 0 || years <= 0) return;
+
+  const r = annualRate / (12 * 100);  // monthly interest rate
+  const n = years * 12;               // total months
+
+  // Standard mortgage / EMI formula
+  const monthly     = (P * r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
+  const totalPay    = monthly * n;
+  const totalInt    = totalPay - P;
+  const payoffYear  = new Date().getFullYear() + years;
+
+  document.getElementById('monthlyPay').textContent = fmt(monthly);
+  document.getElementById('totalPay').textContent   = fmt(totalPay);
+  document.getElementById('totalInt').textContent   = fmt(totalInt);
+  document.getElementById('payoffYear').textContent = payoffYear;
+
+  // Build amortization table
+  let balance = P;
+  let html = '<thead><tr><th>Month</th><th>Payment</th><th>Principal</th><th>Interest</th><th>Balance</th></tr></thead><tbody>';
+  const maxRows = Math.min(n, 60);
+
+  for (let i = 1; i <= maxRows; i++) {
+    const interestPortion   = balance * r;
+    const principalPortion  = monthly - interestPortion;
+    balance = Math.max(0, balance - principalPortion);
+    html += `<tr>
+      <td>${i}</td>
+      <td>${fmt(monthly)}</td>
+      <td>${fmt(principalPortion)}</td>
+      <td>${fmt(interestPortion)}</td>
+      <td>${fmt(balance)}</td>
+    </tr>`;
+  }
+
+  if (n > 60) {
+    html += `<tr><td colspan="5" style="color:var(--text3);font-size:12px">... ${n - 60} more months</td></tr>`;
+  }
+  html += '</tbody>';
+  document.getElementById('amortTable').innerHTML = html;
+}
+
+function toggleAmort() {
+  const w = document.getElementById('amortWrap');
+  const b = document.getElementById('toggleAmort');
+  const isHidden = w.style.display === 'none';
+  w.style.display = isHidden ? 'block' : 'none';
+  b.textContent   = isHidden ? 'Hide Amortization' : 'Show Amortization Schedule';
+}
+
 calcMortgage();
 </script>
 </body>
