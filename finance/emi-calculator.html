@@ -95,7 +95,7 @@ label.fl{font-size:12px;font-weight:700;color:var(--text3);text-transform:upperc
 </nav>
 <script src="../assets/js/finance.js"></script>
 <div class="breadcrumb"><a href="../index.html">Home</a> <span>›</span> <a href="../finance/mortgage-calculator.html">Finance</a> <span>›</span> <span>EMI Calculator</span></div>
-<main class="tool-page" data-recalc-on-currency="calcEMI">
+<main class="tool-page">
   <div class="tool-header">
     <div class="tool-icon">📋</div>
     <h1>EMI Calculator</h1>
@@ -106,11 +106,21 @@ label.fl{font-size:12px;font-weight:700;color:var(--text3);text-transform:upperc
     <div class="tool-box-header"><h2>Loan Details</h2></div>
     <div class="tool-box-body">
       <div class="grid2">
-        <div><label class="fl">Loan Amount (<span class="currency-symbol"></span>)</label><input class="tool-input" data-currency-input type="number" id="principal" value="100000" min="0" step="0.01" oninput="calcEMI()"></div>
-        <div><label class="fl">Interest Rate (% per year)</label><input class="tool-input" type="number" id="rate" value="10" min="0.1" step="0.1" oninput="calcEMI()"></div>
-        <div><label class="fl">Tenure (months)</label><input class="tool-input" type="number" id="months" value="36" min="1" max="360" oninput="calcEMI()"></div>
+        <div>
+          <label class="fl">Loan Amount (₹)</label>
+          <input class="tool-input" type="number" id="principal" value="100000" min="0" step="1" oninput="calcEMI()">
+        </div>
+        <div>
+          <label class="fl">Interest Rate (% per year)</label>
+          <input class="tool-input" type="number" id="rate" value="10" min="0.1" step="0.1" oninput="calcEMI()">
+        </div>
+        <div>
+          <label class="fl">Tenure (months)</label>
+          <input class="tool-input" type="number" id="months" value="36" min="1" max="360" oninput="calcEMI()">
+        </div>
         <div style="display:flex;gap:8px;align-items:flex-end">
-          <div style="flex:1"><label class="fl">Quick Tenure</label>
+          <div style="flex:1">
+            <label class="fl">Quick Tenure</label>
             <div style="display:flex;gap:6px;flex-wrap:wrap">
               <button class="btn btn-secondary" style="font-size:12px;padding:6px 12px" onclick="setMonths(12)">1Y</button>
               <button class="btn btn-secondary" style="font-size:12px;padding:6px 12px" onclick="setMonths(24)">2Y</button>
@@ -122,12 +132,12 @@ label.fl{font-size:12px;font-weight:700;color:var(--text3);text-transform:upperc
         </div>
       </div>
       <div class="result-box" id="resultBox">
-        <div class="rnum" id="emiVal">₹3,085</div>
+        <div class="rnum" id="emiVal">—</div>
         <div class="rlabel">Monthly EMI</div>
         <div class="result-grid">
-          <div><div style="font-size:18px;font-weight:700;color:var(--text)" id="totalPay">₹111,060</div><div class="rlabel">Total Payment</div></div>
-          <div><div style="font-size:18px;font-weight:700;color:var(--accent2)" id="totalInt">₹11,060</div><div class="rlabel">Total Interest</div></div>
-          <div><div style="font-size:18px;font-weight:700;color:var(--success)" id="principalAmt">₹100,000</div><div class="rlabel">Principal</div></div>
+          <div><div style="font-size:18px;font-weight:700;color:var(--text)" id="totalPay">—</div><div class="rlabel">Total Payment</div></div>
+          <div><div style="font-size:18px;font-weight:700;color:var(--accent2)" id="totalInt">—</div><div class="rlabel">Total Interest</div></div>
+          <div><div style="font-size:18px;font-weight:700;color:var(--success)" id="principalAmt">—</div><div class="rlabel">Principal</div></div>
         </div>
         <div class="pie-wrap">
           <div class="pie-legend">
@@ -144,29 +154,43 @@ label.fl{font-size:12px;font-weight:700;color:var(--text3);text-transform:upperc
     <a href="../tools/tip-calculator.html" class="related-card"><span class="related-card-icon">💵</span><span class="related-card-name">Tip Calculator</span></a>
   </div></div>
 </main>
-<footer><div style="margin-bottom:16px"><a href="../index.html" class="nav-logo" style="font-size:18px">⚡ CalcNation</a></div><div>© 2024 CalcNation · Free tools · No signup required</div></footer>
+<footer><div style="margin-bottom:16px"><a href="../index.html" class="nav-logo" style="font-size:18px">⚡ CalcNation</a></div><div>© 2025 CalcNation · Free tools · No signup required</div></footer>
 <script src="../assets/js/utils.js"></script>
 <script>
-function setMonths(m){document.getElementById('months').value=m;calcEMI();}
-function calcEMI(){
-  let P = parseFloat(document.getElementById('principal').value) || 0;
-  const r = parseFloat(document.getElementById('rate').value) || 0;
-  const n = parseInt(document.getElementById('months').value) || 36;
-  const cur = getCurrentCurrency();
-  if (cur !== 'USD') {
-    const rate = currencyRates[cur] || 1;
-    P = P / rate; // convert to USD for calculation
-  }
-  const data = Finance.calcEMIValues(P, r, n);
-  if(!data) return;
-  document.getElementById('emiVal').textContent = Finance.formatAmount(data.emi);
-  document.getElementById('totalPay').textContent = Finance.formatAmount(data.total);
-  document.getElementById('totalInt').textContent = Finance.formatAmount(data.totalInt);
-  document.getElementById('principalAmt').textContent = Finance.formatAmount(data.principal);
+function setMonths(m) {
+  document.getElementById('months').value = m;
+  calcEMI();
 }
-// Force INR currency for EMI calculator
-localStorage.setItem('currency', 'INR');
-updateCurrencyUI();
+
+function fmt(num) {
+  return '₹' + Math.round(num).toLocaleString('en-IN');
+}
+
+function calcEMI() {
+  const P = parseFloat(document.getElementById('principal').value) || 0;
+  const annualRate = parseFloat(document.getElementById('rate').value) || 0;
+  const n = parseInt(document.getElementById('months').value) || 36;
+
+  if (P <= 0 || annualRate <= 0 || n <= 0) return;
+
+  const r = annualRate / (12 * 100); // monthly interest rate
+
+  let emi;
+  if (r === 0) {
+    emi = P / n;
+  } else {
+    emi = (P * r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
+  }
+
+  const totalPayment = emi * n;
+  const totalInterest = totalPayment - P;
+
+  document.getElementById('emiVal').textContent = fmt(emi);
+  document.getElementById('totalPay').textContent = fmt(totalPayment);
+  document.getElementById('totalInt').textContent = fmt(totalInterest);
+  document.getElementById('principalAmt').textContent = fmt(P);
+}
+
 calcEMI();
 </script>
 </body>
