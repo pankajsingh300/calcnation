@@ -860,3 +860,197 @@ footer a:hover { color: var(--accent); }
   right: auto !important;
   max-width: 95vw;
 }
+/* ═══════════════════════════════════════════════════
+   CalcNation — Shared Navigation Styles
+   Add this block to assets/css/main.css
+   ═══════════════════════════════════════════════════ */
+
+/* ── Base nav ─────────────────────────────────────── */
+.site-nav {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0 24px;
+  height: 58px;
+  background: rgba(10, 12, 22, 0.95);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  flex-wrap: nowrap;
+  overflow: visible;
+}
+
+.nav-logo {
+  font-weight: 900;
+  font-size: 18px;
+  color: var(--text);
+  text-decoration: none;
+  white-space: nowrap;
+  margin-right: 12px;
+  flex-shrink: 0;
+}
+
+/* ── Nav links container ──────────────────────────── */
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  flex: 1;
+  flex-wrap: nowrap;
+}
+
+/* ── Each dropdown wrapper ────────────────────────── */
+.nav-dropdown {
+  position: relative;
+  flex-shrink: 0;
+}
+
+/* ── Trigger button ───────────────────────────────── */
+.nav-dropdown-trigger {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 10px;
+  background: none;
+  border: none;
+  color: var(--text2);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: 6px;
+  white-space: nowrap;
+  font-family: inherit;
+  transition: background 0.15s, color 0.15s;
+}
+.nav-dropdown-trigger:hover,
+.nav-dropdown:hover .nav-dropdown-trigger {
+  background: var(--bg3);
+  color: var(--text);
+}
+.nav-arrow {
+  font-size: 10px;
+  opacity: 0.6;
+  transition: transform 0.2s;
+}
+.nav-dropdown-menu.open ~ * .nav-arrow,
+.nav-dropdown:has(.nav-dropdown-menu.open) .nav-arrow {
+  transform: rotate(180deg);
+}
+
+/* ── Dropdown menu ────────────────────────────────── */
+.nav-dropdown-menu {
+  display: none;
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  min-width: 210px;
+  background: var(--card, #141828);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  box-shadow: 0 16px 48px rgba(0,0,0,0.5);
+  overflow: hidden;
+  z-index: 2000;
+}
+.nav-dropdown-menu.open {
+  display: block;
+}
+.nav-dropdown-menu a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 14px;
+  color: var(--text2);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+  transition: background 0.15s, color 0.15s;
+  white-space: nowrap;
+}
+.nav-dropdown-menu a:hover {
+  background: var(--bg3);
+  color: var(--text);
+}
+
+/* ── Plain link (Blog) ────────────────────────────── */
+.nav-link-plain {
+  padding: 6px 10px;
+  color: var(--text2);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 6px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: background 0.15s, color 0.15s;
+}
+.nav-link-plain:hover {
+  background: var(--bg3);
+  color: var(--text);
+}
+
+/* ── Hamburger ────────────────────────────────────── */
+.nav-hamburger {
+  display: none;
+  margin-left: auto;
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-size: 18px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+/* ── Mobile ───────────────────────────────────────── */
+@media (max-width: 768px) {
+  .site-nav {
+    flex-wrap: wrap;
+    height: auto;
+    padding: 12px 16px;
+  }
+  .nav-hamburger {
+    display: block;
+  }
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    padding: 8px 0;
+    gap: 0;
+  }
+  .nav-links.open {
+    display: flex;
+  }
+  .nav-dropdown {
+    width: 100%;
+  }
+  .nav-dropdown-trigger {
+    width: 100%;
+    justify-content: space-between;
+    padding: 10px 12px;
+    font-size: 14px;
+  }
+  .nav-dropdown-menu {
+    position: static;
+    box-shadow: none;
+    border: none;
+    border-radius: 0;
+    border-left: 2px solid var(--accent);
+    margin-left: 16px;
+    min-width: unset;
+    background: transparent;
+  }
+  .nav-dropdown-menu a {
+    font-size: 13px;
+    padding: 8px 12px;
+  }
+  .nav-link-plain {
+    width: 100%;
+    padding: 10px 12px;
+    font-size: 14px;
+  }
+}
