@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>404 — Page Not Found | CalcNation</title>
+<meta name="robots" content="noindex, follow">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+<link rel="stylesheet" href="/assets/css/main.css">
+<style>
+  .error-page {
+    min-height: 70vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 40px 20px;
+  }
+  .error-code {
+    font-size: 120px;
+    font-weight: 900;
+    font-family: 'Syne', sans-serif;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    line-height: 1;
+    margin-bottom: 16px;
+  }
+  .error-title {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: var(--text);
+  }
+  .error-desc {
+    font-size: 16px;
+    color: var(--text3);
+    max-width: 460px;
+    margin-bottom: 32px;
+    line-height: 1.6;
+  }
+  .error-links {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 48px;
+  }
+  .popular-tools {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 12px;
+    max-width: 700px;
+    width: 100%;
+    margin-top: 8px;
+  }
+  .popular-tool-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 16px 12px;
+    text-decoration: none;
+    color: var(--text);
+    font-size: 14px;
+    font-weight: 600;
+    transition: border-color 0.2s, transform 0.2s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+  .popular-tool-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+  }
+  .popular-tool-card .tool-emoji { font-size: 28px; }
+  .section-label {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--text3);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 16px;
+  }
+</style>
+</head>
+<body>
+
+<div id="nav-placeholder"></div>
+
+<main class="error-page">
+  <div class="error-code">404</div>
+  <div class="error-title">Page not found</div>
+  <div class="error-desc">
+    The page you're looking for doesn't exist or may have been moved.
+    Try searching for a tool or pick one below.
+  </div>
+
+  <div class="error-links">
+    <a href="/index.html" class="btn btn-primary">Go to Homepage</a>
+    <a href="/index.html#searchInput" class="btn btn-secondary">Search Tools</a>
+  </div>
+
+  <div class="section-label">// Popular Tools</div>
+  <div class="popular-tools">
+    <a href="/pdf/compress.html" class="popular-tool-card">
+      <span class="tool-emoji">🗜️</span>Compress PDF
+    </a>
+    <a href="/pdf/merge.html" class="popular-tool-card">
+      <span class="tool-emoji">📎</span>Merge PDF
+    </a>
+    <a href="/pdf/pdf-to-word.html" class="popular-tool-card">
+      <span class="tool-emoji">📝</span>PDF to Word
+    </a>
+    <a href="/dev/json-formatter.html" class="popular-tool-card">
+      <span class="tool-emoji">{}</span>JSON Formatter
+    </a>
+    <a href="/finance/emi-calculator.html" class="popular-tool-card">
+      <span class="tool-emoji">📋</span>EMI Calculator
+    </a>
+    <a href="/tools/bmi-calculator.html" class="popular-tool-card">
+      <span class="tool-emoji">⚖️</span>BMI Calculator
+    </a>
+    <a href="/tools/qr-code-generator.html" class="popular-tool-card">
+      <span class="tool-emoji">📱</span>QR Generator
+    </a>
+    <a href="/social/youtube-money-calculator.html" class="popular-tool-card">
+      <span class="tool-emoji">💰</span>YouTube Money
+    </a>
+  </div>
+</main>
+
+<div id="footer-placeholder"></div>
+
+<script src="/assets/js/nav-loader.js"></script>
+</body>
+</html>
