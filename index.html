@@ -238,6 +238,48 @@
   .section { padding: 60px 20px; }
   .hero-stats { gap: 20px; }
 }
+
+/* NAV DROPDOWN */
+.nav-dropdown { position: relative; }
+.nav-dropdown-trigger {
+  color: var(--text2); text-decoration: none;
+  font-size: 14px; font-weight: 500;
+  padding: 6px 14px; border-radius: 6px;
+  transition: all 0.2s; cursor: pointer;
+  display: block;
+}
+.nav-dropdown:hover .nav-dropdown-trigger,
+.nav-dropdown-trigger:hover {
+  color: var(--text); background: var(--bg3);
+}
+.nav-dropdown-menu {
+  position: absolute; top: calc(100% + 8px); left: 0;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  min-width: 200px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+  opacity: 0; visibility: hidden;
+  transform: translateY(-8px);
+  transition: all 0.2s; z-index: 200;
+  overflow: hidden;
+}
+.nav-dropdown:hover .nav-dropdown-menu {
+  opacity: 1; visibility: visible; transform: translateY(0);
+}
+.nav-dropdown-menu a {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 16px;
+  color: var(--text2); text-decoration: none;
+  font-size: 14px; font-weight: 500;
+  transition: all 0.15s;
+  border-bottom: 1px solid var(--border);
+}
+.nav-dropdown-menu a:last-child { border-bottom: none; }
+.nav-dropdown-menu a:hover {
+  background: var(--bg3); color: var(--accent);
+}
+.nav-dropdown-menu a span { font-size: 16px; }
 </style>
 </head>
 <body>
@@ -245,7 +287,17 @@
 <nav>
   <a href="index.html" class="nav-logo">⚡ CalcNation</a>
   <div class="nav-links">
-    <a href="pdf/compress.html">PDF Tools</a>
+    <div class="nav-dropdown">
+      <a href="pdf/compress.html" class="nav-dropdown-trigger">PDF Tools ▾</a>
+      <div class="nav-dropdown-menu">
+        <a href="pdf/compress.html"><span>🗜️</span> Compress PDF</a>
+        <a href="pdf/merge.html"><span>📎</span> Merge PDF</a>
+        <a href="pdf/split.html"><span>✂️</span> Split PDF</a>
+        <a href="pdf/pdf-to-jpg.html"><span>🖼️</span> PDF to JPG</a>
+        <a href="pdf/jpg-to-pdf.html"><span>📷</span> JPG to PDF</a>
+        <a href="pdf/pdf-to-word.html"><span>📝</span> PDF to Word</a>
+      </div>
+    </div>
     <a href="#">Dev Tools</a>
     <a href="#">Finance</a>
     <a href="#">Health</a>
