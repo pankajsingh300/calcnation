@@ -853,3 +853,10 @@ footer a:hover { color: var(--accent); }
     font-size: 11px;
   }
 }
+
+/* Fix mega-menu overflow — always open left-aligned */
+.nav-dropdown-wide {
+  left: 0 !important;
+  right: auto !important;
+  max-width: 95vw;
+}
