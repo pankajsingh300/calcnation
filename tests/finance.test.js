@@ -31,5 +31,14 @@ console.log('Running finance module tests');
   console.log('📈 compound interest tests passed');
 })();
 
+// currency conversion tests
+(function(){
+  const conv = Finance.convertAmount(100, 'USD', 'EUR');
+  assert(Math.abs(conv - 93) < 0.1, '100 USD -> ~93 EUR');
+  const conv2 = Finance.convertAmount(50, 'EUR', 'USD');
+  assert(Math.abs(conv2 - 50/0.93) < 0.2, 'EUR to USD conversion works');
+  console.log('💱 currency conversion tests passed');
+})();
+
 // formatting helper (depends on global formatCurrency -> may not exist) 
 console.log('All tests completed');
