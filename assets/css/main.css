@@ -381,9 +381,24 @@ footer a:hover { color: var(--accent); }
 .nav-dropdown-menu a:last-child { border-bottom: none; }
 .nav-dropdown-menu a:hover { background: var(--bg3); color: var(--accent); }
 .nav-dropdown-menu a span { font-size: 16px; flex-shrink: 0; }
-.nav-dropdown-wide { min-width: 580px; display: flex; }
-.nav-dropdown-col { flex: 1; border-right: 1px solid var(--border); }
+.nav-dropdown-wide {
+  min-width: 600px !important;
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: stretch;
+}
+.nav-dropdown-col {
+  flex: 1;
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
 .nav-dropdown-col:last-child { border-right: none; }
+.nav-dropdown-col a {
+  border-bottom: 1px solid rgba(30,42,66,0.5) !important;
+  white-space: nowrap;
+}
 .nav-dropdown-heading {
   padding: 10px 16px 6px; font-size: 11px; font-weight: 700;
   color: var(--accent); text-transform: uppercase; letter-spacing: 1px;
