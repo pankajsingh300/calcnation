@@ -84,14 +84,17 @@ function setCurrentCurrency(cur) {
 function formatCurrency(amount) {
   const cur = getCurrentCurrency();
   const rate = currencyRates[cur] || 1;
+  const converted = amount * rate;
+  if (cur === 'INR') {
+    return '₹' + converted.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  }
   let locale = 'en-US';
-  if (cur === 'INR') locale = 'en-IN';
-  else if (cur === 'EUR') locale = 'en-EU';
+  if (cur === 'EUR') locale = 'en-EU';
   else if (cur === 'GBP') locale = 'en-GB';
   else if (cur === 'JPY') locale = 'ja-JP';
   else if (cur === 'AUD') locale = 'en-AU';
   const options = { style: 'currency', currency: cur, minimumFractionDigits: 2, maximumFractionDigits: 2 };
-  return new Intl.NumberFormat(locale, options).format(amount * rate);
+  return new Intl.NumberFormat(locale, options).format(converted);
 }
 
 function injectCurrencySelector() {
