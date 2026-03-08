@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unlock PDF Online Free — Remove PDF Password | CalcNation</title>
+<meta name="description" content="Remove password protection from PDF files online for free. Unlock PDFs instantly in your browser.">
+<link rel="canonical" href="https://calcnation-jade.vercel.app/pdf/unlock.html">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+<link rel="stylesheet" href="../assets/css/main.css">
+<style>.password-input{width:100%;padding:14px 16px;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-size:15px;outline:none;font-family:'Fira Code',monospace;}
+.password-input:focus{border-color:var(--accent);}</style>
+</head><body>
+<nav><a href="../index.html" class="nav-logo">⚡ CalcNation</a><div class="nav-links"><a href="compress.html" class="active">PDF Tools</a><a href="../dev/json-formatter.html">Dev Tools</a><a href="#">Finance</a><a href="#">Health</a></div></nav>
+<div class="breadcrumb"><a href="../index.html">Home</a> <span>›</span> <a href="compress.html">PDF Tools</a> <span>›</span> <span>Unlock PDF</span></div>
+<main class="tool-page">
+  <div class="tool-header"><div class="tool-icon">🔓</div><h1>Unlock PDF</h1><p>Remove password protection from PDF files. Enter the password to unlock and download an unrestricted PDF.</p>
+  <div style="display:flex;gap:8px;margin-top:12px"><span class="badge">Free</span><span class="badge purple">Private — runs in browser</span></div></div>
+  <div class="tool-box"><div class="tool-box-header"><h2>Remove PDF Password</h2></div>
+  <div class="tool-box-body">
+    <div id="uploadSection">
+      <div class="upload-zone" id="uploadZone" onclick="document.getElementById('pdfInput').click()">
+        <input type="file" id="pdfInput" accept=".pdf" style="display:none" onchange="loadPDF(this)">
+        <div class="upload-icon">🔓</div><h3>Click to upload password-protected PDF</h3><p>Your file never leaves your device</p>
+      </div>
+    </div>
+    <div id="unlockSection" style="display:none">
+      <div style="margin-bottom:20px;padding:14px;background:var(--bg2);border-radius:10px">
+        <div id="fileName" style="font-weight:600"></div>
+        <div style="font-size:13px;color:var(--text3);margin-top:2px">Password-protected PDF detected</div>
+      </div>
+      <label style="font-size:13px;font-weight:600;color:var(--text2);display:block;margin-bottom:8px">PDF Password</label>
+      <input class="password-input" type="password" id="pdfPassword" placeholder="Enter PDF password...">
+      <div class="btn-actions">
+        <button class="btn btn-primary" onclick="unlockPDF()">🔓 Unlock & Download</button>
+        <button class="btn btn-secondary" onclick="resetTool()">Change File</button>
+      </div>
+      <div id="errorMsg" style="display:none;margin-top:12px;padding:10px 14px;background:rgba(255,68,68,0.1);border:1px solid rgba(255,68,68,0.3);border-radius:8px;color:#ff4444;font-size:13px"></div>
+    </div>
+  </div></div>
+  <div class="info-section"><h2>Important Note</h2><p>This tool can remove the owner password (printing/copying restrictions) from PDFs. For user-password protected files, you must know the password. Only remove passwords from PDFs you own or have permission to modify.</p></div>
+  <div class="related-tools"><h2>Related PDF Tools</h2><div class="related-grid">
+    <a href="compress.html" class="related-card"><span class="related-card-icon">🗜️</span><span class="related-card-name">Compress PDF</span></a>
+    <a href="merge.html" class="related-card"><span class="related-card-icon">📎</span><span class="related-card-name">Merge PDF</span></a>
+  </div></div>
+</main>
+<footer><div style="margin-bottom:16px"><a href="../index.html" class="nav-logo" style="font-size:18px">⚡ CalcNation</a></div><div>© 2024 CalcNation</div></footer>
+<div class="toast" id="toast"></div>
+<script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+<script src="../assets/js/utils.js"></script>
+<script>
+let pdfFile=null;
+function loadPDF(input){
+  pdfFile=input.files[0];if(!pdfFile)return;
+  document.getElementById('fileName').textContent=pdfFile.name;
+  document.getElementById('uploadSection').style.display='none';
+  document.getElementById('unlockSection').style.display='block';
+}
+function resetTool(){pdfFile=null;document.getElementById('uploadSection').style.display='block';document.getElementById('unlockSection').style.display='none';document.getElementById('errorMsg').style.display='none';}
+async function unlockPDF(){
+  if(!pdfFile)return;
+  const password=document.getElementById('pdfPassword').value;
+  try{
+    const buf=await pdfFile.arrayBuffer();
+    const opts=password?{password}:{};
+    const pdf=await PDFLib.PDFDocument.load(buf,opts);
+    const bytes=await pdf.save({useObjectStreams:false});
+    const blob=new Blob([bytes],{type:'application/pdf'});
+    const a=document.createElement('a');a.href=URL.createObjectURL(blob);
+    a.download='unlocked-'+pdfFile.name;a.click();
+    showToast('PDF unlocked and downloaded!','success');
+  }catch(e){
+    document.getElementById('errorMsg').textContent='⚠️ Incorrect password or PDF cannot be unlocked: '+e.message;
+    document.getElementById('errorMsg').style.display='block';
+    showToast('Failed to unlock PDF','error');
+  }
+}
+setupDragDrop('uploadZone','pdfInput',loadPDF);
+</script></body></html>

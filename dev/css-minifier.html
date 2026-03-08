@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CSS Minifier Online Free | CalcNation</title>
+<meta name="description" content="Minify and compress CSS online for free. Remove whitespace, comments and optimize your CSS instantly.">
+<link rel="canonical" href="https://calcnation-jade.vercel.app/dev/css-minifier.html">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+<link rel="stylesheet" href="../assets/css/main.css">
+<style>
+.editor-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+@media(max-width:768px){.editor-grid{grid-template-columns:1fr;}}
+textarea{width:100%;height:360px;padding:16px;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-family:'Fira Code',monospace;font-size:13px;line-height:1.6;resize:vertical;outline:none;}
+textarea:focus{border-color:var(--accent);}
+.stat{font-size:13px;color:var(--text3);font-family:'Fira Code',monospace;}
+</style>
+</head><body>
+<nav><a href="../index.html" class="nav-logo">⚡ CalcNation</a><div class="nav-links"><a href="../pdf/compress.html">PDF Tools</a><a href="json-formatter.html" class="active">Dev Tools</a><a href="#">Finance</a><a href="#">Health</a></div></nav>
+<div class="breadcrumb"><a href="../index.html">Home</a> <span>›</span> <a href="json-formatter.html">Dev Tools</a> <span>›</span> <span>CSS Minifier</span></div>
+<main class="tool-page">
+  <div class="tool-header"><div class="tool-icon">🎨</div><h1>CSS Minifier</h1><p>Minify and compress CSS by removing whitespace, comments and unnecessary characters. Reduce file size instantly.</p>
+  <div style="display:flex;gap:8px;margin-top:12px"><span class="badge">Free</span><span class="badge orange">Instant</span><span class="badge purple">Private</span></div></div>
+  <div class="tool-box"><div class="tool-box-header"><h2>CSS Compressor</h2>
+    <div style="display:flex;gap:8px"><button class="btn btn-primary" onclick="minifyCSS()">⚡ Minify CSS</button><button class="btn btn-secondary" onclick="beautifyCSS()">✨ Beautify</button></div>
+  </div>
+  <div class="tool-box-body">
+    <div class="editor-grid">
+      <div><div style="font-size:12px;color:var(--text3);font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;display:flex;justify-content:space-between"><span>Input CSS</span><span class="stat" id="inputSize">0 bytes</span></div>
+      <textarea id="cssInput" oninput="updateStats()" placeholder="Paste your CSS here...">/* Navigation styles */
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 40px;
+  height: 64px;
+  background: rgba(10, 14, 26, 0.92);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid #1e2a42;
+}
+
+/* Button styles */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}</textarea></div>
+      <div><div style="font-size:12px;color:var(--text3);font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;display:flex;justify-content:space-between"><span>Minified Output</span><span class="stat" id="outputSize">0 bytes</span></div>
+      <textarea id="cssOutput" readonly placeholder="Minified CSS appears here..."></textarea>
+      <div class="btn-actions" style="margin-top:8px"><button class="btn btn-primary" onclick="copyOutput()">📋 Copy</button><button class="btn btn-secondary" onclick="downloadCSS()">⬇️ Download</button></div></div>
+    </div>
+    <div id="savings" style="margin-top:12px;font-size:13px;color:var(--success);display:none"></div>
+  </div></div>
+  <div class="related-tools"><h2>Related Tools</h2><div class="related-grid">
+    <a href="js-minifier.html" class="related-card"><span class="related-card-icon">⚡</span><span class="related-card-name">JS Minifier</span></a>
+    <a href="html-formatter.html" class="related-card"><span class="related-card-icon">🌐</span><span class="related-card-name">HTML Formatter</span></a>
+    <a href="json-formatter.html" class="related-card"><span class="related-card-icon">{ }</span><span class="related-card-name">JSON Formatter</span></a>
+  </div></div>
+</main>
+<footer><div style="margin-bottom:16px"><a href="../index.html" class="nav-logo" style="font-size:18px">⚡ CalcNation</a></div><div>© 2024 CalcNation</div></footer>
+<div class="toast" id="toast"></div>
+<script src="../assets/js/utils.js"></script>
+<script>
+function updateStats(){document.getElementById('inputSize').textContent=document.getElementById('cssInput').value.length+' bytes';}
+function minifyCSS(){
+  let css=document.getElementById('cssInput').value;
+  if(!css)return showToast('Paste some CSS first','error');
+  let min=css
+    .replace(/\/\*[\s\S]*?\*\//g,'')
+    .replace(/\s+/g,' ')
+    .replace(/\s*{\s*/g,'{')
+    .replace(/\s*}\s*/g,'}')
+    .replace(/\s*:\s*/g,':')
+    .replace(/\s*;\s*/g,';')
+    .replace(/\s*,\s*/g,',')
+    .replace(/;}/g,'}')
+    .trim();
+  document.getElementById('cssOutput').value=min;
+  const saved=Math.round((1-min.length/css.length)*100);
+  document.getElementById('savings').textContent='✅ Saved '+saved+'% — '+css.length+' → '+min.length+' bytes';
+  document.getElementById('savings').style.display='block';
+  document.getElementById('outputSize').textContent=min.length+' bytes';
+  showToast('CSS minified! Saved '+saved+'%','success');
+}
+function beautifyCSS(){
+  let css=document.getElementById('cssInput').value;
+  if(!css)return showToast('Paste some CSS first','error');
+  let b=css
+    .replace(/\s+/g,' ')
+    .replace(/{\s*/g,' {
+  ')
+    .replace(/;\s*/g,';
+  ')
+    .replace(/\s*}\s*/g,'
+}
+')
+    .trim();
+  document.getElementById('cssOutput').value=b;
+  showToast('CSS beautified!','success');
+}
+function copyOutput(){const v=document.getElementById('cssOutput').value;if(!v)return showToast('Nothing to copy','error');navigator.clipboard.writeText(v).then(()=>showToast('Copied!','success'));}
+function downloadCSS(){const v=document.getElementById('cssOutput').value;if(!v)return;const b=new Blob([v],{type:'text/css'});const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='styles.min.css';a.click();}
+updateStats();
+</script></body></html>

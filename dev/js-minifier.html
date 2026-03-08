@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JavaScript Minifier Online Free | CalcNation</title>
+<meta name="description" content="Minify and compress JavaScript online for free. Remove whitespace and comments to reduce JS file size instantly.">
+<link rel="canonical" href="https://calcnation-jade.vercel.app/dev/js-minifier.html">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+<link rel="stylesheet" href="../assets/css/main.css">
+<style>.editor-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}@media(max-width:768px){.editor-grid{grid-template-columns:1fr;}}textarea{width:100%;height:360px;padding:16px;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-family:'Fira Code',monospace;font-size:13px;line-height:1.6;resize:vertical;outline:none;}textarea:focus{border-color:var(--accent);}</style>
+</head><body>
+<nav><a href="../index.html" class="nav-logo">⚡ CalcNation</a><div class="nav-links"><a href="../pdf/compress.html">PDF Tools</a><a href="json-formatter.html" class="active">Dev Tools</a><a href="#">Finance</a><a href="#">Health</a></div></nav>
+<div class="breadcrumb"><a href="../index.html">Home</a> <span>›</span> <a href="json-formatter.html">Dev Tools</a> <span>›</span> <span>JS Minifier</span></div>
+<main class="tool-page">
+  <div class="tool-header"><div class="tool-icon">⚡</div><h1>JavaScript Minifier</h1><p>Minify JavaScript by removing whitespace, comments and newlines. Reduce JS file size for faster page loads.</p>
+  <div style="display:flex;gap:8px;margin-top:12px"><span class="badge">Free</span><span class="badge orange">Instant</span><span class="badge purple">Private</span></div></div>
+  <div class="tool-box"><div class="tool-box-header"><h2>JS Compressor</h2>
+    <button class="btn btn-primary" onclick="minifyJS()">⚡ Minify JS</button>
+  </div>
+  <div class="tool-box-body">
+    <div class="editor-grid">
+      <div><div style="font-size:12px;color:var(--text3);font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;display:flex;justify-content:space-between"><span>Input JS</span><span style="font-family:'Fira Code',monospace;font-size:12px;color:var(--text3)" id="inSize">0 bytes</span></div>
+      <textarea id="jsInput" oninput="document.getElementById('inSize').textContent=this.value.length+' bytes'" placeholder="Paste your JavaScript here...">// Calculate fibonacci sequence
+function fibonacci(n) {
+  if (n <= 1) {
+    return n;
+  }
+  
+  let prev = 0;
+  let curr = 1;
+  
+  for (let i = 2; i <= n; i++) {
+    // Store previous value
+    let temp = curr;
+    curr = prev + curr;
+    prev = temp;
+  }
+  
+  return curr;
+}
+
+// Export the function
+module.exports = { fibonacci };</textarea></div>
+      <div><div style="font-size:12px;color:var(--text3);font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;display:flex;justify-content:space-between"><span>Minified Output</span><span style="font-family:'Fira Code',monospace;font-size:12px;color:var(--text3)" id="outSize">0 bytes</span></div>
+      <textarea id="jsOutput" readonly placeholder="Minified JS appears here..."></textarea>
+      <div class="btn-actions" style="margin-top:8px"><button class="btn btn-primary" onclick="copyOutput()">📋 Copy</button><button class="btn btn-secondary" onclick="downloadJS()">⬇️ Download</button></div></div>
+    </div>
+    <div id="savings" style="margin-top:12px;font-size:13px;color:var(--success);display:none"></div>
+  </div></div>
+  <div class="related-tools"><h2>Related Tools</h2><div class="related-grid">
+    <a href="css-minifier.html" class="related-card"><span class="related-card-icon">🎨</span><span class="related-card-name">CSS Minifier</span></a>
+    <a href="html-formatter.html" class="related-card"><span class="related-card-icon">🌐</span><span class="related-card-name">HTML Formatter</span></a>
+    <a href="json-formatter.html" class="related-card"><span class="related-card-icon">{ }</span><span class="related-card-name">JSON Formatter</span></a>
+  </div></div>
+</main>
+<footer><div style="margin-bottom:16px"><a href="../index.html" class="nav-logo" style="font-size:18px">⚡ CalcNation</a></div><div>© 2024 CalcNation</div></footer>
+<div class="toast" id="toast"></div>
+<script src="../assets/js/utils.js"></script>
+<script>
+function minifyJS(){
+  const js=document.getElementById('jsInput').value;
+  if(!js)return showToast('Paste some JS first','error');
+  let min=js
+    .replace(/\/\/[^
+]*/g,'')
+    .replace(/\/\*[\s\S]*?\*\//g,'')
+    .replace(/
+\s*
+/g,'
+')
+    .replace(/\s+/g,' ')
+    .replace(/\s*([{}();,=+\-*/<>!&|?:])\s*/g,'$1')
+    .trim();
+  document.getElementById('jsOutput').value=min;
+  document.getElementById('outSize').textContent=min.length+' bytes';
+  const saved=Math.round((1-min.length/js.length)*100);
+  document.getElementById('savings').textContent='✅ Saved '+saved+'% — '+js.length+' → '+min.length+' bytes';
+  document.getElementById('savings').style.display='block';
+  showToast('JS minified! Saved '+saved+'%','success');
+}
+function copyOutput(){const v=document.getElementById('jsOutput').value;if(!v)return showToast('Nothing to copy','error');navigator.clipboard.writeText(v).then(()=>showToast('Copied!','success'));}
+function downloadJS(){const v=document.getElementById('jsOutput').value;if(!v)return;const b=new Blob([v],{type:'text/javascript'});const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='script.min.js';a.click();}
+</script></body></html>

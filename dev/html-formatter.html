@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HTML Formatter & Beautifier Online Free | CalcNation</title>
+<meta name="description" content="Format and beautify HTML code online for free. Pretty print HTML with proper indentation instantly.">
+<link rel="canonical" href="https://calcnation-jade.vercel.app/dev/html-formatter.html">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+<link rel="stylesheet" href="../assets/css/main.css">
+<style>.editor-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}@media(max-width:768px){.editor-grid{grid-template-columns:1fr;}}textarea{width:100%;height:380px;padding:16px;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-family:'Fira Code',monospace;font-size:13px;line-height:1.6;resize:vertical;outline:none;}textarea:focus{border-color:var(--accent);}</style>
+</head><body>
+<nav><a href="../index.html" class="nav-logo">⚡ CalcNation</a><div class="nav-links"><a href="../pdf/compress.html">PDF Tools</a><a href="json-formatter.html" class="active">Dev Tools</a><a href="#">Finance</a><a href="#">Health</a></div></nav>
+<div class="breadcrumb"><a href="../index.html">Home</a> <span>›</span> <a href="json-formatter.html">Dev Tools</a> <span>›</span> <span>HTML Formatter</span></div>
+<main class="tool-page">
+  <div class="tool-header"><div class="tool-icon">🌐</div><h1>HTML Formatter & Beautifier</h1><p>Beautify and format HTML code with proper indentation. Also minify HTML to reduce file size.</p>
+  <div style="display:flex;gap:8px;margin-top:12px"><span class="badge">Free</span><span class="badge orange">Instant</span><span class="badge purple">Private</span></div></div>
+  <div class="tool-box"><div class="tool-box-header"><h2>HTML Formatter</h2>
+    <div style="display:flex;gap:8px"><button class="btn btn-primary" onclick="formatHTML()">✨ Beautify</button><button class="btn btn-secondary" onclick="minifyHTML()">⚡ Minify</button></div>
+  </div>
+  <div class="tool-box-body">
+    <div class="editor-grid">
+      <div><div style="font-size:12px;color:var(--text3);font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px">Input HTML</div>
+      <textarea id="htmlInput" placeholder="Paste your HTML here..."><html><head><title>Test</title></head><body><div class="container"><h1>Hello World</h1><p>This is a paragraph with <strong>bold</strong> text.</p><ul><li>Item 1</li><li>Item 2</li><li>Item 3</li></ul></div></body></html></textarea></div>
+      <div><div style="font-size:12px;color:var(--text3);font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px">Formatted Output</div>
+      <textarea id="htmlOutput" readonly placeholder="Formatted HTML appears here..."></textarea>
+      <div class="btn-actions" style="margin-top:8px"><button class="btn btn-primary" onclick="copyOutput()">📋 Copy</button></div></div>
+    </div>
+  </div></div>
+  <div class="related-tools"><h2>Related Tools</h2><div class="related-grid">
+    <a href="css-minifier.html" class="related-card"><span class="related-card-icon">🎨</span><span class="related-card-name">CSS Minifier</span></a>
+    <a href="js-minifier.html" class="related-card"><span class="related-card-icon">⚡</span><span class="related-card-name">JS Minifier</span></a>
+    <a href="markdown.html" class="related-card"><span class="related-card-icon">📝</span><span class="related-card-name">Markdown Preview</span></a>
+  </div></div>
+</main>
+<footer><div style="margin-bottom:16px"><a href="../index.html" class="nav-logo" style="font-size:18px">⚡ CalcNation</a></div><div>© 2024 CalcNation</div></footer>
+<div class="toast" id="toast"></div>
+<script src="../assets/js/utils.js"></script>
+<script>
+function formatHTML(){
+  let html=document.getElementById('htmlInput').value;
+  if(!html)return showToast('Paste some HTML first','error');
+  let indent=0;
+  const voids=['area','base','br','col','embed','hr','img','input','link','meta','param','source','track','wbr'];
+  let result='';
+  html=html.replace(/>\s*</g,'>
+<').trim();
+  html.split('
+').forEach(line=>{
+    line=line.trim();
+    if(!line)return;
+    if(line.match(/^<\/[^>]+>/)){indent=Math.max(0,indent-1);}
+    result+='  '.repeat(indent)+line+'
+';
+    const tag=line.match(/^<([a-zA-Z0-9]+)/);
+    if(tag&&!voids.includes(tag[1].toLowerCase())&&!line.match(/\/\s*>$/)&&!line.match(/^<\//)){indent++;}
+  });
+  document.getElementById('htmlOutput').value=result.trim();
+  showToast('HTML formatted!','success');
+}
+function minifyHTML(){
+  let html=document.getElementById('htmlInput').value;
+  if(!html)return showToast('Paste some HTML first','error');
+  let min=html.replace(/\s+/g,' ').replace(/>\s+</g,'><').trim();
+  document.getElementById('htmlOutput').value=min;
+  showToast('HTML minified!','success');
+}
+function copyOutput(){const v=document.getElementById('htmlOutput').value;if(!v)return showToast('Nothing to copy','error');navigator.clipboard.writeText(v).then(()=>showToast('Copied!','success'));}
+</script></body></html>

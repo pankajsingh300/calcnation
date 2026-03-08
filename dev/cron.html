@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cron Expression Parser Online Free | CalcNation</title>
+<meta name="description" content="Parse and validate cron expressions online for free. See human-readable description and next run times instantly.">
+<link rel="canonical" href="https://calcnation-jade.vercel.app/dev/cron.html">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+<link rel="stylesheet" href="../assets/css/main.css">
+<style>
+.cron-input{width:100%;padding:16px 20px;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-family:'Fira Code',monospace;font-size:20px;letter-spacing:4px;outline:none;text-align:center;}
+.cron-input:focus{border-color:var(--accent);}
+.cron-parts{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:12px;}
+.cron-part{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:10px;text-align:center;}
+.cron-part-val{font-family:'Fira Code',monospace;font-size:18px;color:var(--accent);font-weight:700;}
+.cron-part-label{font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:1px;margin-top:4px;}
+.next-runs{margin-top:20px;display:flex;flex-direction:column;gap:8px;}
+.next-run{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:10px 16px;font-family:'Fira Code',monospace;font-size:13px;color:var(--text2);}
+.cron-desc{margin-top:16px;padding:16px;background:rgba(0,229,255,0.05);border:1px solid rgba(0,229,255,0.2);border-radius:10px;font-size:15px;color:var(--text);font-weight:500;text-align:center;}
+.preset-btn{padding:6px 14px;font-size:12px;font-weight:600;border-radius:6px;border:1px solid var(--border);background:var(--bg3);color:var(--text2);cursor:pointer;transition:all 0.2s;font-family:'Fira Code',monospace;}
+.preset-btn:hover{border-color:var(--accent);color:var(--accent);}
+</style>
+</head><body>
+<nav><a href="../index.html" class="nav-logo">⚡ CalcNation</a><div class="nav-links"><a href="../pdf/compress.html">PDF Tools</a><a href="json-formatter.html" class="active">Dev Tools</a><a href="#">Finance</a><a href="#">Health</a></div></nav>
+<div class="breadcrumb"><a href="../index.html">Home</a> <span>›</span> <a href="json-formatter.html">Dev Tools</a> <span>›</span> <span>Cron Parser</span></div>
+<main class="tool-page">
+  <div class="tool-header"><div class="tool-icon">⏰</div><h1>Cron Expression Parser</h1><p>Parse cron expressions and get a human-readable description plus the next 5 run times.</p>
+  <div style="display:flex;gap:8px;margin-top:12px"><span class="badge">Free</span><span class="badge orange">Instant</span><span class="badge purple">Private</span></div></div>
+  <div class="tool-box"><div class="tool-box-header"><h2>Cron Parser</h2></div>
+  <div class="tool-box-body">
+    <input class="cron-input" id="cronInput" value="0 9 * * 1-5" oninput="parseCron()" placeholder="* * * * *">
+    <div class="cron-parts">
+      <div class="cron-part"><div class="cron-part-val" id="p0">0</div><div class="cron-part-label">Minute</div></div>
+      <div class="cron-part"><div class="cron-part-val" id="p1">9</div><div class="cron-part-label">Hour</div></div>
+      <div class="cron-part"><div class="cron-part-val" id="p2">*</div><div class="cron-part-label">Day (Month)</div></div>
+      <div class="cron-part"><div class="cron-part-val" id="p3">*</div><div class="cron-part-label">Month</div></div>
+      <div class="cron-part"><div class="cron-part-val" id="p4">1-5</div><div class="cron-part-label">Day (Week)</div></div>
+    </div>
+    <div class="cron-desc" id="cronDesc">At 09:00, Monday through Friday</div>
+    <div style="margin-top:20px;margin-bottom:10px;font-size:13px;font-weight:600;color:var(--text2)">Common Presets</div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px">
+      <button class="preset-btn" onclick="setPreset('* * * * *')">Every minute</button>
+      <button class="preset-btn" onclick="setPreset('0 * * * *')">Every hour</button>
+      <button class="preset-btn" onclick="setPreset('0 0 * * *')">Daily midnight</button>
+      <button class="preset-btn" onclick="setPreset('0 9 * * 1-5')">Weekdays 9am</button>
+      <button class="preset-btn" onclick="setPreset('0 0 * * 0')">Weekly Sunday</button>
+      <button class="preset-btn" onclick="setPreset('0 0 1 * *')">Monthly</button>
+      <button class="preset-btn" onclick="setPreset('0 0 1 1 *')">Yearly</button>
+      <button class="preset-btn" onclick="setPreset('*/5 * * * *')">Every 5 min</button>
+      <button class="preset-btn" onclick="setPreset('*/15 * * * *')">Every 15 min</button>
+    </div>
+    <div style="font-size:13px;font-weight:600;color:var(--text2);margin-bottom:10px">Next 5 Run Times</div>
+    <div class="next-runs" id="nextRuns"></div>
+  </div></div>
+</main>
+<footer><div style="margin-bottom:16px"><a href="../index.html" class="nav-logo" style="font-size:18px">⚡ CalcNation</a></div><div>© 2024 CalcNation</div></footer>
+<div class="toast" id="toast"></div>
+<script src="../assets/js/utils.js"></script>
+<script>
+function setPreset(v){document.getElementById('cronInput').value=v;parseCron();}
+function parseCron(){
+  const val=document.getElementById('cronInput').value.trim();
+  const parts=val.split(/\s+/);
+  if(parts.length!==5){document.getElementById('cronDesc').textContent='Invalid cron — needs 5 parts: minute hour day month weekday';return;}
+  ['p0','p1','p2','p3','p4'].forEach((id,i)=>{document.getElementById(id).textContent=parts[i];});
+  document.getElementById('cronDesc').textContent=describeCron(parts);
+  showNextRuns(parts);
+}
+function describeCron(p){
+  let desc='';
+  const min=p[0]==='*'?'every minute':(p[0].startsWith('*/')? 'every '+p[0].slice(2)+' minutes' :'at minute '+p[0]);
+  const hr=p[1]==='*'?'':(p[1].startsWith('*/')? ', every '+p[1].slice(2)+' hours' :' past hour '+p[1]);
+  const dom=p[2]==='*'?'':', every day';
+  const dow=p[4]==='*'?'':(p[4]==='1-5'?', Monday through Friday':(p[4]==='0'?', on Sunday':p[4]==='6'?', on Saturday':', on weekday '+p[4]));
+  const mon=p[3]==='*'?'':['',' in January',' in February',' in March',' in April',' in May',' in June',' in July',' in August',' in September',' in October',' in November',' in December'][parseInt(p[3])]||'';
+  if(p[0]==='0'&&p[1]!=='*'){desc='At '+p[1].padStart(2,'0')+':00';}
+  else{desc='At '+min+hr;}
+  return desc+(dow||dom)+mon;
+}
+function showNextRuns(parts){
+  const runs=document.getElementById('nextRuns');
+  runs.innerHTML='';
+  let d=new Date();d.setSeconds(0);d.setMilliseconds(0);d.setMinutes(d.getMinutes()+1);
+  let found=0;let tries=0;
+  while(found<5&&tries<10000){
+    tries++;
+    if(matchCron(parts,d)){
+      runs.innerHTML+=`<div class="next-run">${d.toLocaleString()}</div>`;
+      found++;
+    }
+    d=new Date(d.getTime()+60000);
+  }
+}
+function matchCron(parts,d){
+  const match=(expr,val,min,max)=>{
+    if(expr==='*')return true;
+    if(expr.startsWith('*/')){return val%parseInt(expr.slice(2))===0;}
+    if(expr.includes('-')){const[a,b]=expr.split('-').map(Number);return val>=a&&val<=b;}
+    if(expr.includes(',')){return expr.split(',').map(Number).includes(val);}
+    return parseInt(expr)===val;
+  };
+  return match(parts[0],d.getMinutes())&&match(parts[1],d.getHours())&&match(parts[2],d.getDate())&&match(parts[3],d.getMonth()+1)&&match(parts[4],d.getDay());
+}
+parseCron();
+</script></body></html>

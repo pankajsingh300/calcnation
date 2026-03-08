@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Add Watermark to PDF Online Free | CalcNation</title>
+<meta name="description" content="Add text watermark to PDF pages online for free. Customize text, opacity, color and position.">
+<link rel="canonical" href="https://calcnation-jade.vercel.app/pdf/watermark.html">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+<link rel="stylesheet" href="../assets/css/main.css">
+<style>.setting-input{width:100%;padding:10px 14px;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-size:14px;outline:none;}
+.setting-input:focus{border-color:var(--accent);}
+.settings-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+@media(max-width:600px){.settings-grid{grid-template-columns:1fr;}}</style>
+</head><body>
+<nav><a href="../index.html" class="nav-logo">⚡ CalcNation</a><div class="nav-links"><a href="compress.html" class="active">PDF Tools</a><a href="../dev/json-formatter.html">Dev Tools</a><a href="#">Finance</a><a href="#">Health</a></div></nav>
+<div class="breadcrumb"><a href="../index.html">Home</a> <span>›</span> <a href="compress.html">PDF Tools</a> <span>›</span> <span>Watermark PDF</span></div>
+<main class="tool-page">
+  <div class="tool-header"><div class="tool-icon">💧</div><h1>Add Watermark to PDF</h1><p>Add a custom text watermark to every page of your PDF. Control position, opacity, font size and color.</p>
+  <div style="display:flex;gap:8px;margin-top:12px"><span class="badge">Free</span><span class="badge orange">Instant</span><span class="badge purple">Private</span></div></div>
+  <div class="tool-box"><div class="tool-box-header"><h2>Watermark Settings</h2></div>
+  <div class="tool-box-body">
+    <div id="uploadSection">
+      <div class="upload-zone" id="uploadZone" onclick="document.getElementById('pdfInput').click()">
+        <input type="file" id="pdfInput" accept=".pdf" style="display:none" onchange="loadPDF(this)">
+        <div class="upload-icon">💧</div><h3>Click to upload PDF</h3><p>PDF to add watermark to</p>
+      </div>
+    </div>
+    <div id="watermarkSection" style="display:none">
+      <div style="margin-bottom:20px;padding:14px;background:var(--bg2);border-radius:10px;display:flex;justify-content:space-between;align-items:center">
+        <div><div id="fileName" style="font-weight:600"></div><div id="pageCount" style="font-size:13px;color:var(--text3)"></div></div>
+        <button class="btn btn-secondary" onclick="resetTool()" style="padding:8px 16px;font-size:13px">Change</button>
+      </div>
+      <div class="settings-grid">
+        <div><label style="font-size:12px;color:var(--text3);font-weight:700;text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:6px">Watermark Text</label>
+        <input class="setting-input" id="wmText" value="CONFIDENTIAL" placeholder="Watermark text..."></div>
+        <div><label style="font-size:12px;color:var(--text3);font-weight:700;text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:6px">Font Size</label>
+        <input class="setting-input" type="number" id="wmSize" value="60" min="10" max="200"></div>
+        <div><label style="font-size:12px;color:var(--text3);font-weight:700;text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:6px">Opacity (0-1)</label>
+        <input class="setting-input" type="number" id="wmOpacity" value="0.15" min="0.05" max="1" step="0.05"></div>
+        <div><label style="font-size:12px;color:var(--text3);font-weight:700;text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:6px">Color</label>
+        <select class="setting-input" id="wmColor">
+          <option value="gray">Gray</option><option value="red">Red</option>
+          <option value="blue">Blue</option><option value="black">Black</option>
+        </select></div>
+      </div>
+      <div class="btn-actions">
+        <button class="btn btn-primary" onclick="addWatermark()">💧 Add Watermark & Download</button>
+      </div>
+      <div class="progress-wrap" id="progressWrap" style="display:none;margin-top:16px"><div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div></div>
+    </div>
+  </div></div>
+  <div class="related-tools"><h2>Related PDF Tools</h2><div class="related-grid">
+    <a href="compress.html" class="related-card"><span class="related-card-icon">🗜️</span><span class="related-card-name">Compress PDF</span></a>
+    <a href="merge.html" class="related-card"><span class="related-card-icon">📎</span><span class="related-card-name">Merge PDF</span></a>
+  </div></div>
+</main>
+<footer><div style="margin-bottom:16px"><a href="../index.html" class="nav-logo" style="font-size:18px">⚡ CalcNation</a></div><div>© 2024 CalcNation</div></footer>
+<div class="toast" id="toast"></div>
+<script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+<script src="../assets/js/utils.js"></script>
+<script>
+let pdfFile=null;
+function loadPDF(input){
+  pdfFile=input.files[0];if(!pdfFile)return;
+  document.getElementById('fileName').textContent=pdfFile.name;
+  document.getElementById('uploadSection').style.display='none';
+  document.getElementById('watermarkSection').style.display='block';
+  const reader=new FileReader();
+  reader.onload=async(e)=>{const pdf=await PDFLib.PDFDocument.load(e.target.result);document.getElementById('pageCount').textContent=pdf.getPageCount()+' pages';};
+  reader.readAsArrayBuffer(pdfFile);
+}
+function resetTool(){pdfFile=null;document.getElementById('uploadSection').style.display='block';document.getElementById('watermarkSection').style.display='none';}
+async function addWatermark(){
+  if(!pdfFile)return;
+  document.getElementById('progressWrap').style.display='block';
+  setProgress(20);
+  const buf=await pdfFile.arrayBuffer();
+  const pdf=await PDFLib.PDFDocument.load(buf);
+  const text=document.getElementById('wmText').value||'WATERMARK';
+  const size=parseInt(document.getElementById('wmSize').value)||60;
+  const opacity=parseFloat(document.getElementById('wmOpacity').value)||0.15;
+  const colorMap={gray:PDFLib.rgb(0.5,0.5,0.5),red:PDFLib.rgb(0.8,0.1,0.1),blue:PDFLib.rgb(0.1,0.1,0.8),black:PDFLib.rgb(0,0,0)};
+  const color=colorMap[document.getElementById('wmColor').value]||colorMap.gray;
+  setProgress(40);
+  const font=await pdf.embedFont(PDFLib.StandardFonts.HelveticaBold);
+  const pages=pdf.getPages();
+  pages.forEach(page=>{
+    const{width,height}=page.getSize();
+    const textWidth=font.widthOfTextAtSize(text,size);
+    page.drawText(text,{x:(width-textWidth)/2,y:height/2-size/2,size,font,color,opacity,rotate:PDFLib.degrees(-45)});
+  });
+  setProgress(80);
+  const bytes=await pdf.save();
+  setProgress(100);
+  const blob=new Blob([bytes],{type:'application/pdf'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);
+  a.download='watermarked-'+pdfFile.name;a.click();
+  showToast('Watermark added and downloaded!','success');
+  setTimeout(()=>document.getElementById('progressWrap').style.display='none',1500);
+}
+function setProgress(p){document.getElementById('progressFill').style.width=p+'%';}
+setupDragDrop('uploadZone','pdfInput',loadPDF);
+</script></body></html>

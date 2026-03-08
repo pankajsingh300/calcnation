@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rotate PDF Online Free | CalcNation</title>
+<meta name="description" content="Rotate PDF pages online for free. Rotate all pages or individual pages by 90, 180 or 270 degrees.">
+<link rel="canonical" href="https://calcnation-jade.vercel.app/pdf/rotate.html">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+<link rel="stylesheet" href="../assets/css/main.css">
+<style>.angle-btn{padding:10px 20px;font-size:14px;font-weight:600;border-radius:8px;border:1px solid var(--border);background:var(--bg3);color:var(--text2);cursor:pointer;transition:all 0.2s;display:flex;flex-direction:column;align-items:center;gap:4px;}.angle-btn:hover,.angle-btn.active{border-color:var(--accent);color:var(--accent);background:rgba(0,229,255,0.05);}.angle-icon{font-size:24px;}</style>
+</head><body>
+<nav><a href="../index.html" class="nav-logo">⚡ CalcNation</a><div class="nav-links"><a href="compress.html" class="active">PDF Tools</a><a href="../dev/json-formatter.html">Dev Tools</a><a href="#">Finance</a><a href="#">Health</a></div></nav>
+<div class="breadcrumb"><a href="../index.html">Home</a> <span>›</span> <a href="compress.html">PDF Tools</a> <span>›</span> <span>Rotate PDF</span></div>
+<main class="tool-page">
+  <div class="tool-header"><div class="tool-icon">🔄</div><h1>Rotate PDF</h1><p>Rotate all pages or individual pages of a PDF by 90°, 180° or 270°. Free and works in your browser.</p>
+  <div style="display:flex;gap:8px;margin-top:12px"><span class="badge">Free</span><span class="badge orange">Instant</span><span class="badge purple">Private</span></div></div>
+  <div class="tool-box"><div class="tool-box-header"><h2>Rotate PDF Pages</h2></div>
+  <div class="tool-box-body">
+    <div id="uploadSection">
+      <div class="upload-zone" id="uploadZone" onclick="document.getElementById('pdfInput').click()">
+        <input type="file" id="pdfInput" accept=".pdf" style="display:none" onchange="loadPDF(this)">
+        <div class="upload-icon">🔄</div><h3>Click or drag a PDF here</h3><p>Select the PDF you want to rotate</p>
+      </div>
+    </div>
+    <div id="rotateSection" style="display:none">
+      <div style="margin-bottom:20px;padding:14px;background:var(--bg2);border-radius:10px;display:flex;justify-content:space-between;align-items:center">
+        <div><div id="fileName" style="font-weight:600"></div><div id="pageCount" style="font-size:13px;color:var(--text3);margin-top:2px"></div></div>
+        <button class="btn btn-secondary" onclick="resetTool()" style="padding:8px 16px;font-size:13px">Change File</button>
+      </div>
+      <div style="margin-bottom:20px">
+        <div style="font-size:13px;font-weight:600;color:var(--text2);margin-bottom:12px">Choose Rotation Angle</div>
+        <div style="display:flex;gap:12px;flex-wrap:wrap">
+          <button class="angle-btn active" id="btn90" onclick="setAngle(90)"><span class="angle-icon">↻</span>90° Clockwise</button>
+          <button class="angle-btn" id="btn180" onclick="setAngle(180)"><span class="angle-icon">↕</span>180°</button>
+          <button class="angle-btn" id="btn270" onclick="setAngle(270)"><span class="angle-icon">↺</span>90° Counter</button>
+        </div>
+      </div>
+      <button class="btn btn-primary btn-block" onclick="rotatePDF()" id="rotateBtn">🔄 Rotate & Download</button>
+      <div class="progress-wrap" id="progressWrap" style="display:none;margin-top:16px"><div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div></div>
+    </div>
+  </div></div>
+  <div class="related-tools"><h2>Related PDF Tools</h2><div class="related-grid">
+    <a href="merge.html" class="related-card"><span class="related-card-icon">📎</span><span class="related-card-name">Merge PDF</span></a>
+    <a href="split.html" class="related-card"><span class="related-card-icon">✂️</span><span class="related-card-name">Split PDF</span></a>
+    <a href="compress.html" class="related-card"><span class="related-card-icon">🗜️</span><span class="related-card-name">Compress PDF</span></a>
+  </div></div>
+</main>
+<footer><div style="margin-bottom:16px"><a href="../index.html" class="nav-logo" style="font-size:18px">⚡ CalcNation</a></div><div>© 2024 CalcNation</div></footer>
+<div class="toast" id="toast"></div>
+<script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+<script src="../assets/js/utils.js"></script>
+<script>
+let pdfFile=null, angle=90;
+function setAngle(a){angle=a;document.querySelectorAll('.angle-btn').forEach(b=>b.classList.remove('active'));document.getElementById('btn'+a).classList.add('active');}
+function loadPDF(input){
+  pdfFile=input.files[0];if(!pdfFile)return;
+  document.getElementById('fileName').textContent=pdfFile.name;
+  document.getElementById('uploadSection').style.display='none';
+  document.getElementById('rotateSection').style.display='block';
+  const reader=new FileReader();
+  reader.onload=async(e)=>{
+    const pdf=await PDFLib.PDFDocument.load(e.target.result);
+    document.getElementById('pageCount').textContent=pdf.getPageCount()+' pages';
+  };
+  reader.readAsArrayBuffer(pdfFile);
+}
+function resetTool(){pdfFile=null;document.getElementById('uploadSection').style.display='block';document.getElementById('rotateSection').style.display='none';document.getElementById('pdfInput').value='';}
+async function rotatePDF(){
+  if(!pdfFile)return;
+  document.getElementById('progressWrap').style.display='block';
+  setProgress(20);
+  const buf=await pdfFile.arrayBuffer();
+  const pdf=await PDFLib.PDFDocument.load(buf);
+  setProgress(50);
+  const degrees={90:PDFLib.degrees(90),180:PDFLib.degrees(180),270:PDFLib.degrees(270)};
+  pdf.getPages().forEach(p=>{const cur=p.getRotation().angle;p.setRotation(PDFLib.degrees((cur+angle)%360));});
+  setProgress(80);
+  const bytes=await pdf.save();
+  setProgress(100);
+  const blob=new Blob([bytes],{type:'application/pdf'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);
+  a.download='rotated-'+pdfFile.name;a.click();
+  showToast('PDF rotated and downloaded!','success');
+  setTimeout(()=>document.getElementById('progressWrap').style.display='none',1500);
+}
+function setProgress(p){document.getElementById('progressFill').style.width=p+'%';}
+setupDragDrop('uploadZone','pdfInput',loadPDF);
+</script></body></html>
