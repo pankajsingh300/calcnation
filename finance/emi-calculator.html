@@ -122,12 +122,12 @@ label.fl{font-size:12px;font-weight:700;color:var(--text3);text-transform:upperc
         </div>
       </div>
       <div class="result-box" id="resultBox">
-        <div class="rnum" id="emiVal">$3,227</div>
+        <div class="rnum" id="emiVal">₹3,085</div>
         <div class="rlabel">Monthly EMI</div>
         <div class="result-grid">
-          <div><div style="font-size:18px;font-weight:700;color:var(--text)" id="totalPay">$116,164</div><div class="rlabel">Total Payment</div></div>
-          <div><div style="font-size:18px;font-weight:700;color:var(--accent2)" id="totalInt">$16,164</div><div class="rlabel">Total Interest</div></div>
-          <div><div style="font-size:18px;font-weight:700;color:var(--success)" id="principalAmt">$100,000</div><div class="rlabel">Principal</div></div>
+          <div><div style="font-size:18px;font-weight:700;color:var(--text)" id="totalPay">₹111,060</div><div class="rlabel">Total Payment</div></div>
+          <div><div style="font-size:18px;font-weight:700;color:var(--accent2)" id="totalInt">₹11,060</div><div class="rlabel">Total Interest</div></div>
+          <div><div style="font-size:18px;font-weight:700;color:var(--success)" id="principalAmt">₹100,000</div><div class="rlabel">Principal</div></div>
         </div>
         <div class="pie-wrap">
           <div class="pie-legend">
@@ -159,6 +159,9 @@ function calcEMI(){
   document.getElementById('totalInt').textContent = Finance.formatAmount(data.totalInt);
   document.getElementById('principalAmt').textContent = Finance.formatAmount(data.principal);
 }
+// Force INR currency for EMI calculator
+localStorage.setItem('currency', 'INR');
+updateCurrencyUI();
 calcEMI();
 </script>
 </body>
