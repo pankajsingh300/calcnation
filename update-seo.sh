@@ -5,13 +5,24 @@
 echo "🚀 Starting Phase 2 head section updates..."
 
 # ── INDEX.HTML ──
+# we'll build keywords from tools.json (names only)
+kw=$(python3 - <<'PY'
+import json
+try:
+    tools = json.load(open('tools.json'))
+    names = [t['name'] for t in tools]
+    print(', '.join(names[:50]))
+except Exception as e:
+    print('free online tools')
+PY
+)
 cat > /tmp/index_head.html << 'INDEXHEAD'
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CalcNation — Free Online Tools, PDF Utilities & Calculators</title>
 <meta name="description" content="300+ free online tools in one place. Compress PDF, merge PDF, developer tools, finance calculators, health calculators. No signup, no upload — works in your browser.">
-<meta name="keywords" content="free online tools, pdf compressor, merge pdf, compress pdf, pdf to jpg, jpg to pdf, split pdf, bmi calculator, mortgage calculator, json formatter">
+<meta name="keywords" content="$kw">
 <meta name="author" content="CalcNation">
 <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
 <link rel="canonical" href="https://calcnation-jade.vercel.app/">

@@ -68,14 +68,17 @@ function getCurrentCurrency() {
 }
 
 function setCurrentCurrency(cur) {
-  if (currencyRates[cur]) {
-    localStorage.setItem('currency', cur);
-    updateCurrencyUI();
-    // trigger recalculations if pages have global calc functions
-    document.querySelectorAll('[data-recalc-on-currency]').forEach(fnEl => {
-      try { window[fnEl.dataset.recalcOnCurrency](); } catch(e) {}
-    });
-  }
+  if (!currencyRates[cur]) return;
+  const prev = getCurrentCurrency();
+  if (prev === cur) return;
+  localStorage.setItem('currency', cur);
+  updateCurrencyUI();
+  // convert any inputs that carry data-currency-input
+  convertInputs(prev, cur);
+  // trigger recalculations if pages have global calc functions
+  document.querySelectorAll('[data-recalc-on-currency]').forEach(fnEl => {
+    try { window[fnEl.dataset.recalcOnCurrency](); } catch(e) {}
+  });
 }
 
 function formatCurrency(amount) {
@@ -115,6 +118,17 @@ function updateCurrencyUI() {
   });
   const sel = document.getElementById('currencySelect');
   if (sel) sel.value = getCurrentCurrency();
+}
+
+function convertInputs(prev, cur) {
+  if (prev === cur) return;
+  const ratePrev = currencyRates[prev] || 1;
+  const rateCur = currencyRates[cur] || 1;
+  document.querySelectorAll('[data-currency-input]').forEach(input => {
+    const v = parseFloat(input.value) || 0;
+    const newVal = v * (rateCur / ratePrev);
+    input.value = newVal.toFixed( (input.step && input.step.indexOf('.')>-1) ? input.step.split('.')[1].length : 2 );
+  });
 }
 
 function ensureMobileToggle() {

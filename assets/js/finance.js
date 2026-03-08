@@ -40,6 +40,22 @@ function calcCompoundValues(principal, monthly, ratePct, years) {
   return { finalValue: FV, totalContrib, totalEarned, roi };
 }
 
+// exportable currency rate table (matches utils.js)
+const currencyRates = {
+  USD: 1,
+  EUR: 0.93,
+  GBP: 0.80,
+  INR: 83.0,
+  JPY: 140.0,
+  AUD: 1.5
+};
+
+function convertAmount(value, from, to) {
+  const rfrom = currencyRates[from] || 1;
+  const rto = currencyRates[to] || 1;
+  return value * (rto / rfrom);
+}
+
 // helper exporters for browser usage
 function formatAmount(val) {
   // wrapper around utils.formatCurrency if available
@@ -54,7 +70,9 @@ const Finance = {
   calcMortgageValues,
   calcEMIValues,
   calcCompoundValues,
-  formatAmount
+  formatAmount,
+  currencyRates,
+  convertAmount
 };
 
 if (typeof window !== 'undefined') {

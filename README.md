@@ -1,5 +1,8 @@
 # ⚡ CalcNation — Phase 1 Complete
 
+> 📁 **tools.json** now holds the master list of every tool. The homepage search script fetches it automatically, so you only need to update one file when adding or removing tools.
+
+
 ## What's Built in This Package
 
 ```

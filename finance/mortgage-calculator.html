@@ -106,10 +106,10 @@ label.fl{font-size:12px;font-weight:700;color:var(--text3);text-transform:upperc
     <div class="tool-box-header"><h2>Enter Loan Details</h2></div>
     <div class="tool-box-body">
       <div class="grid2">
-        <div><label class="fl">Loan Amount (<span class="currency-symbol"></span>)</label><input class="tool-input" type="number" id="principal" value="300000" min="1000" step="1000" oninput="calcMortgage()"></div>
+        <div><label class="fl">Loan Amount (<span class="currency-symbol"></span>)</label><input class="tool-input" data-currency-input type="number" id="principal" value="300000" min="1000" step="1000" oninput="calcMortgage()"></div>
         <div><label class="fl">Interest Rate (% per year)</label><input class="tool-input" type="number" id="rate" value="6.5" min="0.1" step="0.1" oninput="calcMortgage()"></div>
         <div><label class="fl">Loan Term (years)</label><input class="tool-input" type="number" id="years" value="30" min="1" max="50" oninput="calcMortgage()"></div>
-        <div><label class="fl">Down Payment (<span class="currency-symbol"></span>) — optional</label><input class="tool-input" type="number" id="down" value="0" min="0" step="1000" oninput="calcMortgage()"></div>
+        <div><label class="fl">Down Payment (<span class="currency-symbol"></span>) — optional</label><input class="tool-input" data-currency-input type="number" id="down" value="0" min="0" step="1000" oninput="calcMortgage()"></div>
       </div>
       <div class="result-box" id="resultBox">
         <div class="rnum" id="monthlyPay">$1,896</div>

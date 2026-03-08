@@ -20,6 +20,14 @@
 {"@context":"https://schema.org","@type":"WebSite","name":"CalcNation","url":"https://calcnation-jade.vercel.app","description":"60+ free online tools: PDF, developer, finance, health. No signup required.","potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://calcnation-jade.vercel.app/?q={search_term_string}"},"query-input":"required name=search_term_string"}}
 </script>
 <link rel="stylesheet" href="assets/css/main.css">
+<!-- Google Analytics (replace UA-XXXXX-Y with your ID) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-XXXXX-Y"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-XXXXX-Y');
+</script>
 <style>
 /* ── HERO ── */
 .hero {
@@ -506,35 +514,20 @@
 
 <script src="assets/js/utils.js"></script>
 <script>
-const allTools = [
-  { name: 'Compress PDF', icon: '🗜️', cat: 'PDF Tools', url: 'pdf/compress.html' },
-  { name: 'Merge PDF', icon: '📎', cat: 'PDF Tools', url: 'pdf/merge.html' },
-  { name: 'Split PDF', icon: '✂️', cat: 'PDF Tools', url: 'pdf/split.html' },
-  { name: 'PDF to JPG', icon: '🖼️', cat: 'PDF Tools', url: 'pdf/pdf-to-jpg.html' },
-  { name: 'JPG to PDF', icon: '📷', cat: 'PDF Tools', url: 'pdf/jpg-to-pdf.html' },
-  { name: 'PDF to Word', icon: '📝', cat: 'PDF Tools', url: 'pdf/pdf-to-word.html' },
-  { name: 'Rotate PDF', icon: '🔄', cat: 'PDF Tools', url: 'pdf/rotate.html' },
-  { name: 'Unlock PDF', icon: '🔓', cat: 'PDF Tools', url: 'pdf/unlock.html' },
-  { name: 'JSON Formatter', icon: '{}', cat: 'Dev Tools', url: 'dev/json-formatter.html' },
-  { name: 'Base64 Encoder', icon: '🔤', cat: 'Dev Tools', url: 'dev/base64.html' },
-  { name: 'Regex Tester', icon: '〰️', cat: 'Dev Tools', url: 'dev/regex-tester.html' },
-  { name: 'URL Encoder', icon: '🔗', cat: 'Dev Tools', url: 'dev/url-encoder.html' },
-  { name: 'JWT Decoder', icon: '🔑', cat: 'Dev Tools', url: 'dev/jwt-decoder.html' },
-  { name: 'UUID Generator', icon: '🆔', cat: 'Dev Tools', url: 'dev/uuid.html' },
-  { name: 'Mortgage Calculator', icon: '🏠', cat: 'Finance', url: 'finance/mortgage-calculator.html' },
-  { name: 'EMI Calculator', icon: '📋', cat: 'Finance', url: 'finance/emi-calculator.html' },
-  { name: 'Compound Interest', icon: '📈', cat: 'Finance', url: 'finance/compound-interest-calculator.html' },
-  { name: 'Tip Calculator', icon: '💵', cat: 'Finance', url: 'tools/tip-calculator.html' },
-  { name: 'BMI Calculator', icon: '⚖️', cat: 'Health', url: 'tools/bmi-calculator.html' },
-  { name: 'Calorie Calculator', icon: '🔥', cat: 'Health', url: 'health/calorie-calculator.html' },
-  { name: 'Pregnancy Due Date', icon: '👶', cat: 'Health', url: 'health/pregnancy-due-date.html' },
-  { name: 'Water Intake', icon: '💧', cat: 'Health', url: 'health/water-calculator.html' },
-  { name: 'Age Calculator', icon: '🎂', cat: 'Health', url: 'tools/age-calculator.html' },
-  { name: 'QR Code Generator', icon: '📱', cat: 'Tools', url: 'tools/qr-code-generator.html' },
-  { name: 'Password Generator', icon: '🔐', cat: 'Tools', url: 'tools/password-generator.html' },
-  { name: 'Word Counter', icon: '📝', cat: 'Tools', url: 'tools/word-counter.html' },
-  { name: 'Character Counter', icon: '🔢', cat: 'Tools', url: 'tools/character-counter.html' },
-];
+let allTools = [];
+
+// load tools list from JSON file (used for search autocomplete)
+fetch('tools.json')
+  .then(r => r.json())
+  .then(data => {
+    allTools = data;
+    // if search input already has text, re-run filter
+    const input = document.getElementById('searchInput');
+    if (input && input.value.trim()) {
+      input.dispatchEvent(new Event('input'));
+    }
+  })
+  .catch(e => console.error('Failed to load tools.json', e));
 
 const input = document.getElementById('searchInput');
 const results = document.getElementById('searchResults');
