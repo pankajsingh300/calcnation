@@ -149,9 +149,14 @@ label.fl{font-size:12px;font-weight:700;color:var(--text3);text-transform:upperc
 <script>
 function setMonths(m){document.getElementById('months').value=m;calcEMI();}
 function calcEMI(){
-  const P=parseFloat(document.getElementById('principal').value)||0;
-  const r=parseFloat(document.getElementById('rate').value)||0;
-  const n=parseInt(document.getElementById('months').value)||36;
+  let P = parseFloat(document.getElementById('principal').value) || 0;
+  const r = parseFloat(document.getElementById('rate').value) || 0;
+  const n = parseInt(document.getElementById('months').value) || 36;
+  const cur = getCurrentCurrency();
+  if (cur !== 'USD') {
+    const rate = currencyRates[cur] || 1;
+    P = P / rate; // convert to USD for calculation
+  }
   const data = Finance.calcEMIValues(P, r, n);
   if(!data) return;
   document.getElementById('emiVal').textContent = Finance.formatAmount(data.emi);
