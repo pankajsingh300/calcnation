@@ -340,16 +340,42 @@
 </head>
 <body>
 
+<!-- navigation component will be injected here if using nav-loader.js, otherwise static as below -->
 <nav>
   <a href="index.html" class="nav-logo">⚡ CalcNation</a>
   <button class="nav-toggle" id="navToggle" aria-label="Menu">☰</button>
   <div class="nav-links" id="navLinks">
-    <a href="pdf/compress.html">PDF Tools</a>
-    <a href="dev/json-formatter.html">Dev Tools</a>
-    <a href="automation/test-data-generator.html">Automation</a>
-    <a href="blog/">Blog</a>
     <div class="nav-dropdown">
-      <a href="social/youtube-money-calculator.html" class="nav-dropdown-trigger">Social ▾</a>
+      <a href="/tools/" class="nav-dropdown-trigger">Tools ▾</a>
+      <div class="nav-dropdown-menu nav-dropdown-wide">
+        <!-- simplified tool list for homepage nav -->
+        <div class="nav-dropdown-col">
+          <div class="nav-dropdown-heading">PDF & Basic</div>
+          <a href="pdf/compress.html">PDF Compressor</a>
+          <a href="tools/age-calculator.html">Age Calculator</a>
+          <a href="tools/bmi-calculator.html">BMI Calculator</a>
+        </div>
+        <div class="nav-dropdown-col">
+          <div class="nav-dropdown-heading">Dev</div>
+          <a href="dev/json-formatter.html">JSON Formatter</a>
+          <a href="dev/base64.html">Base64 Encoder</a>
+          <a href="dev/password-generator.html">Password Generator</a>
+        </div>
+        <div class="nav-dropdown-col">
+          <div class="nav-dropdown-heading">Finance / Health</div>
+          <a href="finance/emi-calculator.html">EMI Calculator</a>
+          <a href="finance/mortgage-calculator.html">Mortgage Calculator</a>
+          <a href="health/calorie-calculator.html">Calorie Calculator</a>
+        </div>
+      </div>
+    </div>
+    <a href="learn/math.html">Learn</a>
+    <a href="interview/automation-testing.html">Interview Prep</a>
+    <a href="cheatsheets/js.html">Cheat Sheets</a>
+    <a href="quiz/js.html">Quizzes</a>
+    <a href="blog/">Blog</a>
+  </div>
+</nav>
       <div class="nav-dropdown-menu nav-dropdown-wide">
         <div class="nav-dropdown-col">
           <div class="nav-dropdown-heading">YouTube</div>
@@ -425,14 +451,14 @@
   </div>
 
   <h1>
-    The Complete Toolkit<br>
-    <span class="grad">for Everyone</span>
+    Learn Faster. Solve Problems.<br>
+    <span class="grad">Use Smart Tools</span>
   </h1>
-  <p>Powerful, free tools for all users. PDF manipulation, code formatting, financial calculations, health tracking & more. No signup. No hidden costs. 100% private processing.</p>
+  <p>Your one-stop knowledge hub for tools, tutorials, quizzes and interview prep.</p>
 
   <div class="search-wrap">
     <span class="search-icon">🔍</span>
-    <input type="text" class="search-bar" placeholder="Search tools... (PDF, JSON, EMI, etc)" id="searchInput" autocomplete="off">
+    <input type="text" class="search-bar" placeholder="Search tools, articles, quizzes…" id="searchInput" autocomplete="off">
     <span class="search-kbd">⌘K</span>
     <div class="search-results" id="searchResults"></div>
   </div>
@@ -563,6 +589,72 @@
       <div class="why-title">Works Everywhere</div>
       <div class="why-text">Desktop, tablet, mobile. Responsive design. Same powerful features on every device. Sync across browsers.</div>
     </div>
+  </div>
+</div>
+
+<!-- RESOURCE SECTIONS -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-tag">// LEARNING HUB</div>
+    <h2 class="section-title">Tools + Tutorials</h2>
+    <p class="section-sub">Each calculator page doubles as a lesson with explanation, examples and FAQs.</p>
+  </div>
+  <div class="card-grid">
+    <a href="learn/math.html" class="card">Learn Math</a>
+    <a href="learn/programming.html" class="card">Learn Programming</a>
+    <a href="learn/finance.html" class="card">Learn Finance</a>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-header">
+    <div class="section-tag">// INTERVIEW PREP</div>
+    <h2 class="section-title">Practice Questions</h2>
+    <p class="section-sub">Top questions with answers, examples and explanations.</p>
+  </div>
+  <div class="card-grid">
+    <a href="interview/automation-testing.html" class="card">Automation Testing</a>
+    <a href="interview/java.html" class="card">Java</a>
+    <a href="interview/sql.html" class="card">SQL</a>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-header">
+    <div class="section-tag">// CHEAT SHEETS</div>
+    <h2 class="section-title">Quick Reference</h2>
+    <p class="section-sub">Essential commands and syntax at a glance.</p>
+  </div>
+  <div class="card-grid">
+    <a href="cheatsheets/js.html" class="card">JavaScript</a>
+    <a href="cheatsheets/git.html" class="card">Git Commands</a>
+    <a href="cheatsheets/xpath.html" class="card">XPath</a>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-header">
+    <div class="section-tag">// PRACTICE QUIZZES</div>
+    <h2 class="section-title">Test Your Knowledge</h2>
+    <p class="section-sub">Short quizzes to reinforce what you've learned.</p>
+  </div>
+  <div class="card-grid">
+    <a href="quiz/js.html" class="card">JavaScript Quiz</a>
+    <a href="quiz/math.html" class="card">Math Quiz</a>
+    <a href="quiz/automation.html" class="card">Automation Quiz</a>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-header">
+    <div class="section-tag">// LATEST ARTICLES</div>
+    <h2 class="section-title">Recent Reads</h2>
+    <p class="section-sub">Fresh blog posts and tutorials.</p>
+  </div>
+  <div class="card-grid">
+    <a href="blog/emi-calculator-guide.html" class="card">How EMI Works</a>
+    <a href="blog/percentage-calculator.html" class="card">What is Percentage</a>
+    <a href="blog/robot-framework-guide.html" class="card">Robot Framework Tutorial</a>
   </div>
 </div>
 
