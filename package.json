@@ -1,0 +1,8 @@
+{
+  "name": "calcnation",
+  "version": "1.0.0",
+  "description": "CalcNation static tools site",
+  "scripts": {
+    "test": "node tests/finance.test.js"
+  }
+}

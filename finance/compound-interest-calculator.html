@@ -89,8 +89,9 @@ label.fl{font-size:12px;font-weight:700;color:var(--text3);text-transform:upperc
     </div>
   </div>
 </nav>
+<script src="../assets/js/finance.js"></script>
 <div class="breadcrumb"><a href="../index.html">Home</a> <span>›</span> <a href="../finance/mortgage-calculator.html">Finance</a> <span>›</span> <span>Compound Interest</span></div>
-<main class="tool-page">
+<main class="tool-page" data-recalc-on-currency="calcCompound">
   <div class="tool-header">
     <div class="tool-icon">📈</div>
     <h1>Compound Interest Calculator</h1>
@@ -101,8 +102,8 @@ label.fl{font-size:12px;font-weight:700;color:var(--text3);text-transform:upperc
     <div class="tool-box-header"><h2>Investment Details</h2></div>
     <div class="tool-box-body">
       <div class="grid2">
-        <div><label class="fl">Initial Investment ($)</label><input class="tool-input" type="number" id="principal" value="10000" min="0" step="100" oninput="calcCompound()"></div>
-        <div><label class="fl">Monthly Contribution ($)</label><input class="tool-input" type="number" id="monthly" value="500" min="0" step="50" oninput="calcCompound()"></div>
+        <div><label class="fl">Initial Investment (<span class="currency-symbol"></span>)</label><input class="tool-input" type="number" id="principal" value="10000" min="0" step="100" oninput="calcCompound()"></div>
+        <div><label class="fl">Monthly Contribution (<span class="currency-symbol"></span>)</label><input class="tool-input" type="number" id="monthly" value="500" min="0" step="50" oninput="calcCompound()"></div>
         <div><label class="fl">Annual Interest Rate (%)</label><input class="tool-input" type="number" id="rate" value="8" min="0" step="0.1" oninput="calcCompound()"></div>
         <div><label class="fl">Time Period (years)</label><input class="tool-input" type="number" id="years" value="10" min="1" max="50" oninput="calcCompound()"></div>
       </div>
@@ -129,18 +130,14 @@ label.fl{font-size:12px;font-weight:700;color:var(--text3);text-transform:upperc
 function calcCompound(){
   const P=parseFloat(document.getElementById('principal').value)||0;
   const pm=parseFloat(document.getElementById('monthly').value)||0;
-  const r=(parseFloat(document.getElementById('rate').value)||0)/100/12;
-  const n=(parseInt(document.getElementById('years').value)||10)*12;
-  let FV=P*Math.pow(1+r,n);
-  if(pm>0&&r>0)FV+=pm*((Math.pow(1+r,n)-1)/r);
-  else if(pm>0)FV+=pm*n;
-  const totalContrib=P+pm*n;
-  const totalEarned=FV-totalContrib;
-  const roi=totalContrib>0?((totalEarned/totalContrib)*100).toFixed(1):0;
-  document.getElementById('finalVal').textContent='$'+FV.toLocaleString('en-US',{maximumFractionDigits:0});
-  document.getElementById('totalContrib').textContent='$'+totalContrib.toLocaleString('en-US',{maximumFractionDigits:0});
-  document.getElementById('totalEarned').textContent='$'+totalEarned.toLocaleString('en-US',{maximumFractionDigits:0});
-  document.getElementById('roi').textContent=roi+'%';
+  const r=parseFloat(document.getElementById('rate').value)||0;
+  const years=parseInt(document.getElementById('years').value)||10;
+  const data = Finance.calcCompoundValues(P, pm, r, years);
+  if(!data) return;
+  document.getElementById('finalVal').textContent = Finance.formatAmount(data.finalValue);
+  document.getElementById('totalContrib').textContent = Finance.formatAmount(data.totalContrib);
+  document.getElementById('totalEarned').textContent = Finance.formatAmount(data.totalEarned);
+  document.getElementById('roi').textContent = data.roi.toFixed(1) + '%';
 }
 calcCompound();
 </script>

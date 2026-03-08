@@ -145,6 +145,9 @@ nav {
 }
 .nav-links a:hover { color: var(--text); background: var(--bg3); }
 .nav-links a.active { color: var(--accent); }
+/* currency dropdown styling */
+.nav-links select { color: var(--text); background: var(--bg); border: 1px solid var(--border); border-radius: 6px; font-size: 14px; }
+@media(max-width:600px){ .nav-links select { width: 100%; margin-top: 8px; } }
 
 /* BREADCRUMB */
 .breadcrumb {

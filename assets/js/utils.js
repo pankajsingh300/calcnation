@@ -53,7 +53,99 @@ function setProgress(pct, label = '') {
   if (wrap) wrap.classList.toggle('show', pct > 0 && pct < 100);
 }
 
-document.addEventListener('DOMContentLoaded', setupFAQ);
+// currency selector and formatting helpers
+const currencyRates = {
+  USD: 1,
+  EUR: 0.93,
+  GBP: 0.80,
+  INR: 83.0,
+  JPY: 140.0,
+  AUD: 1.5
+};
+
+function getCurrentCurrency() {
+  return localStorage.getItem('currency') || 'USD';
+}
+
+function setCurrentCurrency(cur) {
+  if (currencyRates[cur]) {
+    localStorage.setItem('currency', cur);
+    updateCurrencyUI();
+    // trigger recalculations if pages have global calc functions
+    document.querySelectorAll('[data-recalc-on-currency]').forEach(fnEl => {
+      try { window[fnEl.dataset.recalcOnCurrency](); } catch(e) {}
+    });
+  }
+}
+
+function formatCurrency(amount) {
+  const cur = getCurrentCurrency();
+  const rate = currencyRates[cur] || 1;
+  const options = { style: 'currency', currency: cur, minimumFractionDigits: 2, maximumFractionDigits: 2 };
+  return new Intl.NumberFormat('en-US', options).format(amount * rate);
+}
+
+function injectCurrencySelector() {
+  const nav = document.querySelector('nav .nav-links');
+  if (!nav) return;
+  const sel = document.createElement('select');
+  sel.id = 'currencySelect';
+  sel.style.marginLeft = '8px';
+  sel.style.padding = '6px 10px';
+  sel.style.background = 'var(--bg)';
+  sel.style.color = 'var(--text)';
+  sel.style.border = '1px solid var(--border)';
+  sel.style.borderRadius = '6px';
+  sel.style.fontSize = '14px';
+  Object.keys(currencyRates).forEach(cur => {
+    const opt = document.createElement('option');
+    opt.value = cur;
+    opt.textContent = cur;
+    sel.appendChild(opt);
+  });
+  sel.value = getCurrentCurrency();
+  sel.addEventListener('change', e => setCurrentCurrency(e.target.value));
+  nav.appendChild(sel);
+}
+
+function updateCurrencyUI() {
+  // update any elements that show currency symbol
+  document.querySelectorAll('.currency-symbol').forEach(el => {
+    el.textContent = getCurrentCurrency();
+  });
+  const sel = document.getElementById('currencySelect');
+  if (sel) sel.value = getCurrentCurrency();
+}
+
+function ensureMobileToggle() {
+  const nav = document.querySelector('nav');
+  if (!nav) return;
+  if (!document.getElementById('navToggle')) {
+    const btn = document.createElement('button');
+    btn.className = 'nav-toggle';
+    btn.id = 'navToggle';
+    btn.setAttribute('aria-label', 'Menu');
+    btn.textContent = '☰';
+    // insert before links for easier styling
+    nav.insertBefore(btn, nav.firstChild.nextSibling);
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  setupFAQ();
+  injectCurrencySelector();
+  updateCurrencyUI();
+  ensureMobileToggle();
+
+  // mobile nav toggle (index.html used to have inline script)
+  const navToggle = document.getElementById('navToggle');
+  if (navToggle) {
+    navToggle.addEventListener('click', () => {
+      const links = document.getElementById('navLinks');
+      if (links) links.classList.toggle('open');
+    });
+  }
+});
 
 
 // ── Mega-menu overflow fix ──────────────────────────────────────────────────
