@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Word Counter Online Free — Count Words, Characters, Sentences | CalcNation</title>
+<meta name="description" content="Count words, characters, sentences and paragraphs online. Real-time word counter for essays, articles, tweets.">
+<meta name="keywords" content="word counter, word count online, character counter, count words online, essay word counter">
+<link rel="canonical" href="https://calcnation-jade.vercel.app/tools/word-counter.html">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+<link rel="stylesheet" href="../assets/css/main.css">
+<style>
+.result-box{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:24px;text-align:center;margin-top:16px;}
+.result-number{font-size:48px;font-weight:900;font-family:"Syne",sans-serif;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.result-label{font-size:14px;color:var(--text3);margin-top:4px;}
+.tool-input{width:100%;padding:12px 16px;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-size:15px;outline:none;}
+.tool-input:focus{border-color:var(--accent);}
+.tool-select{width:100%;padding:12px 16px;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-size:15px;outline:none;cursor:pointer;}
+label.field-label{font-size:12px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:6px;}
+textarea.tool-textarea{width:100%;padding:16px;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-size:14px;line-height:1.7;resize:vertical;outline:none;font-family:inherit;}
+textarea.tool-textarea:focus{border-color:var(--accent);}
+</style>
+</head>
+<body>
+<nav>
+  <a href="../index.html" class="nav-logo">⚡ CalcNation</a>
+  <div class="nav-links">
+    <a href="../pdf/compress.html">PDF Tools</a>
+    <a href="../dev/json-formatter.html">Dev Tools</a>
+    <div class="nav-dropdown">
+      <a href="word-counter.html" class="nav-dropdown-trigger active">Social ▾</a>
+      <div class="nav-dropdown-menu nav-dropdown-wide">
+        <div class="nav-dropdown-col">
+          <div class="nav-dropdown-heading">YouTube Tools</div>
+          <a href="../social/youtube-money-calculator.html"><span>💰</span> Money Calculator</a>
+          <a href="../social/youtube-tag-generator.html"><span>🏷️</span> Tag Generator</a>
+          <a href="../social/youtube-thumbnail-resizer.html"><span>🖼️</span> Thumbnail Resizer</a>
+          <a href="../social/youtube-title-generator.html"><span>✍️</span> Title Generator</a>
+          <a href="../social/youtube-cpm-calculator.html"><span>📊</span> CPM Calculator</a>
+          <a href="../social/video-length-optimizer.html"><span>⏱️</span> Video Length Optimizer</a>
+        </div>
+        <div class="nav-dropdown-col">
+          <div class="nav-dropdown-heading">Social Media</div>
+          <a href="../social/instagram-engagement.html"><span>📸</span> Instagram Engagement</a>
+          <a href="../social/tiktok-money-calculator.html"><span>🎵</span> TikTok Earnings</a>
+          <a href="../social/hashtag-generator.html"><span>#️⃣</span> Hashtag Generator</a>
+          <a href="../social/influencer-earnings.html"><span>⭐</span> Influencer Earnings</a>
+        </div>
+        <div class="nav-dropdown-col">
+          <div class="nav-dropdown-heading">Viral Tools</div>
+          <a href="love-calculator.html"><span>❤️</span> Love Calculator</a>
+          <a href="random-name-picker.html"><span>🎲</span> Name Picker</a>
+          <a href="random-team-generator.html"><span>👥</span> Team Generator</a>
+          <a href="dice-roller.html"><span>🎲</span> Dice Roller</a>
+          <a href="qr-code-generator.html"><span>📱</span> QR Code Generator</a>
+          <a href="word-counter.html"><span>📝</span> Word Counter</a>
+        </div>
+        <div class="nav-dropdown-col">
+          <div class="nav-dropdown-heading">Text Tools</div>
+          <a href="text-case-converter.html"><span>🔡</span> Case Converter</a>
+          <a href="character-counter.html"><span>🔢</span> Character Counter</a>
+          <a href="fake-address-generator.html"><span>📍</span> Fake Address</a>
+          <a href="barcode-generator.html"><span>▌▌▌</span> Barcode Generator</a>
+        </div>
+      </div>
+    </div>
+    <a href="#">Finance</a>
+    <a href="#">Health</a>
+  </div>
+</nav>
+<div class="breadcrumb"><a href="../index.html">Home</a> <span>›</span> <span>Viral Tools</span> <span>›</span> <span>Word Counter</span></div>
+<main class="tool-page">
+  <div class="tool-header">
+    <div class="tool-icon">📝</div>
+    <h1>Word Counter</h1>
+    <p>Count words, characters, sentences, paragraphs and reading time instantly. Perfect for essays, articles and social media.</p>
+    <div style="display:flex;gap:8px;margin-top:12px"><span class="badge">Free</span><span class="badge orange">Instant</span><span class="badge purple">No Signup</span></div>
+  </div>
+  <div class="tool-box">
+    <div class="tool-box-header"><h2>Word Counter</h2></div>
+    <div class="tool-box-body"><div style="margin-bottom:12px;display:flex;gap:8px;flex-wrap:wrap">
+  <div style="background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:10px 18px;text-align:center;flex:1;min-width:80px">
+    <div style="font-size:24px;font-weight:900;color:var(--accent);font-family:'Syne',sans-serif" id="wWords">0</div>
+    <div style="font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:1px">Words</div>
+  </div>
+  <div style="background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:10px 18px;text-align:center;flex:1;min-width:80px">
+    <div style="font-size:24px;font-weight:900;color:var(--accent);font-family:'Syne',sans-serif" id="wChars">0</div>
+    <div style="font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:1px">Characters</div>
+  </div>
+  <div style="background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:10px 18px;text-align:center;flex:1;min-width:80px">
+    <div style="font-size:24px;font-weight:900;color:var(--accent);font-family:'Syne',sans-serif" id="wSentences">0</div>
+    <div style="font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:1px">Sentences</div>
+  </div>
+  <div style="background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:10px 18px;text-align:center;flex:1;min-width:80px">
+    <div style="font-size:24px;font-weight:900;color:var(--accent);font-family:'Syne',sans-serif" id="wParas">0</div>
+    <div style="font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:1px">Paragraphs</div>
+  </div>
+  <div style="background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:10px 18px;text-align:center;flex:1;min-width:80px">
+    <div style="font-size:24px;font-weight:900;color:var(--accent);font-family:'Syne',sans-serif" id="wRead">0m</div>
+    <div style="font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:1px">Read Time</div>
+  </div>
+</div>
+<textarea class="tool-textarea" id="wcInput" rows="12" placeholder="Start typing or paste your text here..." oninput="countWords()"></textarea>
+<div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap">
+  <div style="font-size:13px;color:var(--text3)" id="wNoSpace">0 chars (no spaces)</div>
+  <div style="margin-left:auto;display:flex;gap:8px">
+    <button class="btn btn-secondary" onclick="copyText()" style="padding:7px 14px;font-size:13px">📋 Copy</button>
+    <button class="btn btn-secondary" onclick="document.getElementById('wcInput').value='';countWords()" style="padding:7px 14px;font-size:13px">🗑️ Clear</button>
+  </div>
+</div></div>
+  </div>
+  <div class="related-tools"><h2>Related Tools</h2><div class="related-grid"><a href="character-counter.html" class="related-card"><span class="related-card-icon">🔢</span><span class="related-card-name">Character Counter</span></a><a href="text-case-converter.html" class="related-card"><span class="related-card-icon">🔡</span><span class="related-card-name">Case Converter</span></a><a href="../dev/lorem-ipsum.html" class="related-card"><span class="related-card-icon">📖</span><span class="related-card-name">Lorem Ipsum</span></a></div></div>
+</main>
+<footer><div style="margin-bottom:16px"><a href="../index.html" class="nav-logo" style="font-size:18px">⚡ CalcNation</a></div><div>© 2024 CalcNation · Free tools · No signup required</div></footer>
+<div class="toast" id="toast"></div>
+<script src="../assets/js/utils.js"></script>
+<script>function countWords(){
+  const text=document.getElementById('wcInput').value;
+  const words=text.trim()===''?0:text.trim().split(/\s+/).length;
+  const chars=text.length;
+  const sentences=(text.match(/[.!?]+/g)||[]).length;
+  const paras=text.trim()===''?0:text.trim().split(/\n\s*\n/).length;
+  const noSpace=text.replace(/\s/g,'').length;
+  const readTime=Math.ceil(words/200);
+  document.getElementById('wWords').textContent=words.toLocaleString();
+  document.getElementById('wChars').textContent=chars.toLocaleString();
+  document.getElementById('wSentences').textContent=sentences.toLocaleString();
+  document.getElementById('wParas').textContent=paras.toLocaleString();
+  document.getElementById('wRead').textContent=readTime+'m';
+  document.getElementById('wNoSpace').textContent=noSpace.toLocaleString()+' chars (no spaces)';
+}
+function copyText(){const t=document.getElementById('wcInput').value;if(!t)return;navigator.clipboard.writeText(t).then(()=>showToast('Copied!','success'));}</script>
+</body>
+</html>

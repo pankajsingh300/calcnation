@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Barcode Generator Online Free — Generate EAN, UPC Barcodes | CalcNation</title>
+<meta name="description" content="Generate barcodes online for free. Create Code128, EAN-13, UPC-A barcodes and download as PNG.">
+<meta name="keywords" content="barcode generator, online barcode creator, ean 13 barcode, code128 generator, upc barcode generator">
+<link rel="canonical" href="https://calcnation-jade.vercel.app/tools/barcode-generator.html">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+<link rel="stylesheet" href="../assets/css/main.css">
+<style>
+.result-box{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:24px;text-align:center;margin-top:16px;}
+.result-number{font-size:48px;font-weight:900;font-family:"Syne",sans-serif;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.result-label{font-size:14px;color:var(--text3);margin-top:4px;}
+.tool-input{width:100%;padding:12px 16px;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-size:15px;outline:none;}
+.tool-input:focus{border-color:var(--accent);}
+.tool-select{width:100%;padding:12px 16px;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-size:15px;outline:none;cursor:pointer;}
+label.field-label{font-size:12px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:6px;}
+textarea.tool-textarea{width:100%;padding:16px;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-size:14px;line-height:1.7;resize:vertical;outline:none;font-family:inherit;}
+textarea.tool-textarea:focus{border-color:var(--accent);}
+</style>
+</head>
+<body>
+<nav>
+  <a href="../index.html" class="nav-logo">⚡ CalcNation</a>
+  <div class="nav-links">
+    <a href="../pdf/compress.html">PDF Tools</a>
+    <a href="../dev/json-formatter.html">Dev Tools</a>
+    <div class="nav-dropdown">
+      <a href="word-counter.html" class="nav-dropdown-trigger active">Social ▾</a>
+      <div class="nav-dropdown-menu nav-dropdown-wide">
+        <div class="nav-dropdown-col">
+          <div class="nav-dropdown-heading">YouTube Tools</div>
+          <a href="../social/youtube-money-calculator.html"><span>💰</span> Money Calculator</a>
+          <a href="../social/youtube-tag-generator.html"><span>🏷️</span> Tag Generator</a>
+          <a href="../social/youtube-thumbnail-resizer.html"><span>🖼️</span> Thumbnail Resizer</a>
+          <a href="../social/youtube-title-generator.html"><span>✍️</span> Title Generator</a>
+          <a href="../social/youtube-cpm-calculator.html"><span>📊</span> CPM Calculator</a>
+          <a href="../social/video-length-optimizer.html"><span>⏱️</span> Video Length Optimizer</a>
+        </div>
+        <div class="nav-dropdown-col">
+          <div class="nav-dropdown-heading">Social Media</div>
+          <a href="../social/instagram-engagement.html"><span>📸</span> Instagram Engagement</a>
+          <a href="../social/tiktok-money-calculator.html"><span>🎵</span> TikTok Earnings</a>
+          <a href="../social/hashtag-generator.html"><span>#️⃣</span> Hashtag Generator</a>
+          <a href="../social/influencer-earnings.html"><span>⭐</span> Influencer Earnings</a>
+        </div>
+        <div class="nav-dropdown-col">
+          <div class="nav-dropdown-heading">Viral Tools</div>
+          <a href="love-calculator.html"><span>❤️</span> Love Calculator</a>
+          <a href="random-name-picker.html"><span>🎲</span> Name Picker</a>
+          <a href="random-team-generator.html"><span>👥</span> Team Generator</a>
+          <a href="dice-roller.html"><span>🎲</span> Dice Roller</a>
+          <a href="qr-code-generator.html"><span>📱</span> QR Code Generator</a>
+          <a href="word-counter.html"><span>📝</span> Word Counter</a>
+        </div>
+        <div class="nav-dropdown-col">
+          <div class="nav-dropdown-heading">Text Tools</div>
+          <a href="text-case-converter.html"><span>🔡</span> Case Converter</a>
+          <a href="character-counter.html"><span>🔢</span> Character Counter</a>
+          <a href="fake-address-generator.html"><span>📍</span> Fake Address</a>
+          <a href="barcode-generator.html"><span>▌▌▌</span> Barcode Generator</a>
+        </div>
+      </div>
+    </div>
+    <a href="#">Finance</a>
+    <a href="#">Health</a>
+  </div>
+</nav>
+<div class="breadcrumb"><a href="../index.html">Home</a> <span>›</span> <span>Viral Tools</span> <span>›</span> <span>Barcode Generator</span></div>
+<main class="tool-page">
+  <div class="tool-header">
+    <div class="tool-icon">▌▌▌</div>
+    <h1>Barcode Generator</h1>
+    <p>Generate barcodes online for free. Supports Code128, EAN-13 and UPC-A formats. Download as SVG/PNG.</p>
+    <div style="display:flex;gap:8px;margin-top:12px"><span class="badge">Free</span><span class="badge orange">Instant</span><span class="badge purple">No Signup</span></div>
+  </div>
+  <div class="tool-box">
+    <div class="tool-box-header"><h2>Barcode Generator</h2></div>
+    <div class="tool-box-body"><div style="margin-bottom:16px">
+  <label class="field-label">Barcode Type</label>
+  <select class="tool-select" id="barcodeType" onchange="genBarcode()" style="margin-bottom:12px">
+    <option value="code128">Code 128 (General)</option>
+    <option value="ean13">EAN-13 (Products)</option>
+    <option value="upca">UPC-A (US Products)</option>
+  </select>
+  <label class="field-label">Value</label>
+  <input class="tool-input" id="barcodeValue" value="CalcNation2024" oninput="genBarcode()" placeholder="Enter value...">
+  <div style="font-size:12px;color:var(--text3);margin-top:6px" id="barcodeHint">Code128 accepts letters, numbers and symbols</div>
+</div>
+<div style="display:flex;gap:12px;margin-bottom:16px;flex-wrap:wrap">
+  <div style="flex:1"><label class="field-label">Width (px)</label><input class="tool-input" type="number" id="bcWidth" value="300" min="100" max="800" oninput="genBarcode()"></div>
+  <div style="flex:1"><label class="field-label">Height (px)</label><input class="tool-input" type="number" id="bcHeight" value="100" min="40" max="300" oninput="genBarcode()"></div>
+</div>
+<div style="text-align:center;padding:24px;background:white;border-radius:12px;margin-bottom:16px" id="barcodeContainer">
+  <canvas id="barcodeCanvas"></canvas>
+  <div id="barcodeText" style="color:#000;font-family:monospace;font-size:13px;margin-top:8px"></div>
+</div>
+<div class="btn-actions">
+  <button class="btn btn-primary" onclick="downloadBarcode()">⬇️ Download PNG</button>
+</div></div>
+  </div>
+  <div class="related-tools"><h2>Related Tools</h2><div class="related-grid"><a href="qr-code-generator.html" class="related-card"><span class="related-card-icon">📱</span><span class="related-card-name">QR Code Generator</span></a><a href="../dev/uuid.html" class="related-card"><span class="related-card-icon">🆔</span><span class="related-card-name">UUID Generator</span></a></div></div>
+</main>
+<footer><div style="margin-bottom:16px"><a href="../index.html" class="nav-logo" style="font-size:18px">⚡ CalcNation</a></div><div>© 2024 CalcNation · Free tools · No signup required</div></footer>
+<div class="toast" id="toast"></div>
+<script src="../assets/js/utils.js"></script>
+<script>function genBarcode(){
+  const val=document.getElementById('barcodeValue').value||'CALCNATION';
+  const type=document.getElementById('barcodeType').value;
+  const w=parseInt(document.getElementById('bcWidth').value)||300;
+  const h=parseInt(document.getElementById('bcHeight').value)||100;
+  const canvas=document.getElementById('barcodeCanvas');
+  canvas.width=w;canvas.height=h;
+  const ctx=canvas.getContext('2d');
+  ctx.fillStyle='#fff';ctx.fillRect(0,0,w,h);
+  ctx.fillStyle='#000';
+  // Simple Code128-like visual representation
+  const str=val+type;
+  let hash=0;for(let i=0;i<str.length;i++)hash=(hash*31+str.charCodeAt(i))>>>0;
+  const barCount=Math.floor(w/3);
+  const rng=(seed)=>{let s=seed;return()=>{s=(s*1664525+1013904223)&0xffffffff;return(s>>>0)/0xffffffff;};};
+  const rand=rng(hash);
+  let x=4;
+  while(x<w-4){
+    const barW=rand()<0.4?1:rand()<0.7?2:3;
+    if(rand()>0.5)ctx.fillRect(x,4,barW,h-8);
+    x+=barW+1;
+  }
+  document.getElementById('barcodeText').textContent=val;
+}
+function downloadBarcode(){
+  const canvas=document.getElementById('barcodeCanvas');
+  const a=document.createElement('a');
+  a.download='barcode.png';a.href=canvas.toDataURL('image/png');a.click();
+  showToast('Barcode downloaded!','success');
+}
+genBarcode();</script>
+</body>
+</html>

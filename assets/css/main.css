@@ -43,7 +43,7 @@
 /* WIDE 3-COLUMN MENU */
 .nav-dropdown-wide {
   display: grid !important;
-  grid-template-columns: 180px 180px 180px;
+  grid-template-columns: repeat(auto-fit, 180px);
   white-space: nowrap;
   left: auto !important;
   right: 0;

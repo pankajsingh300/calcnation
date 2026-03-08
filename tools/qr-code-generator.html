@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QR Code Generator Online Free — Create QR Codes Instantly | CalcNation</title>
+<meta name="description" content="Generate QR codes for URLs, text, email, phone numbers online free. Download as PNG instantly.">
+<meta name="keywords" content="qr code generator, create qr code, free qr code, qr code maker, generate qr code online">
+<link rel="canonical" href="https://calcnation-jade.vercel.app/tools/qr-code-generator.html">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+<link rel="stylesheet" href="../assets/css/main.css">
+<style>
+.result-box{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:24px;text-align:center;margin-top:16px;}
+.result-number{font-size:48px;font-weight:900;font-family:"Syne",sans-serif;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.result-label{font-size:14px;color:var(--text3);margin-top:4px;}
+.tool-input{width:100%;padding:12px 16px;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-size:15px;outline:none;}
+.tool-input:focus{border-color:var(--accent);}
+.tool-select{width:100%;padding:12px 16px;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-size:15px;outline:none;cursor:pointer;}
+label.field-label{font-size:12px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:6px;}
+textarea.tool-textarea{width:100%;padding:16px;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-size:14px;line-height:1.7;resize:vertical;outline:none;font-family:inherit;}
+textarea.tool-textarea:focus{border-color:var(--accent);}
+</style>
+</head>
+<body>
+<nav>
+  <a href="../index.html" class="nav-logo">⚡ CalcNation</a>
+  <div class="nav-links">
+    <a href="../pdf/compress.html">PDF Tools</a>
+    <a href="../dev/json-formatter.html">Dev Tools</a>
+    <div class="nav-dropdown">
+      <a href="word-counter.html" class="nav-dropdown-trigger active">Social ▾</a>
+      <div class="nav-dropdown-menu nav-dropdown-wide">
+        <div class="nav-dropdown-col">
+          <div class="nav-dropdown-heading">YouTube Tools</div>
+          <a href="../social/youtube-money-calculator.html"><span>💰</span> Money Calculator</a>
+          <a href="../social/youtube-tag-generator.html"><span>🏷️</span> Tag Generator</a>
+          <a href="../social/youtube-thumbnail-resizer.html"><span>🖼️</span> Thumbnail Resizer</a>
+          <a href="../social/youtube-title-generator.html"><span>✍️</span> Title Generator</a>
+          <a href="../social/youtube-cpm-calculator.html"><span>📊</span> CPM Calculator</a>
+          <a href="../social/video-length-optimizer.html"><span>⏱️</span> Video Length Optimizer</a>
+        </div>
+        <div class="nav-dropdown-col">
+          <div class="nav-dropdown-heading">Social Media</div>
+          <a href="../social/instagram-engagement.html"><span>📸</span> Instagram Engagement</a>
+          <a href="../social/tiktok-money-calculator.html"><span>🎵</span> TikTok Earnings</a>
+          <a href="../social/hashtag-generator.html"><span>#️⃣</span> Hashtag Generator</a>
+          <a href="../social/influencer-earnings.html"><span>⭐</span> Influencer Earnings</a>
+        </div>
+        <div class="nav-dropdown-col">
+          <div class="nav-dropdown-heading">Viral Tools</div>
+          <a href="love-calculator.html"><span>❤️</span> Love Calculator</a>
+          <a href="random-name-picker.html"><span>🎲</span> Name Picker</a>
+          <a href="random-team-generator.html"><span>👥</span> Team Generator</a>
+          <a href="dice-roller.html"><span>🎲</span> Dice Roller</a>
+          <a href="qr-code-generator.html"><span>📱</span> QR Code Generator</a>
+          <a href="word-counter.html"><span>📝</span> Word Counter</a>
+        </div>
+        <div class="nav-dropdown-col">
+          <div class="nav-dropdown-heading">Text Tools</div>
+          <a href="text-case-converter.html"><span>🔡</span> Case Converter</a>
+          <a href="character-counter.html"><span>🔢</span> Character Counter</a>
+          <a href="fake-address-generator.html"><span>📍</span> Fake Address</a>
+          <a href="barcode-generator.html"><span>▌▌▌</span> Barcode Generator</a>
+        </div>
+      </div>
+    </div>
+    <a href="#">Finance</a>
+    <a href="#">Health</a>
+  </div>
+</nav>
+<div class="breadcrumb"><a href="../index.html">Home</a> <span>›</span> <span>Viral Tools</span> <span>›</span> <span>QR Code Generator</span></div>
+<main class="tool-page">
+  <div class="tool-header">
+    <div class="tool-icon">📱</div>
+    <h1>QR Code Generator</h1>
+    <p>Generate QR codes for URLs, text, contact info and more. Download as PNG instantly, completely free.</p>
+    <div style="display:flex;gap:8px;margin-top:12px"><span class="badge">Free</span><span class="badge orange">Instant</span><span class="badge purple">No Signup</span></div>
+  </div>
+  <div class="tool-box">
+    <div class="tool-box-header"><h2>QR Code Generator</h2></div>
+    <div class="tool-box-body"><div style="margin-bottom:12px">
+  <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px">
+    <button class="btn btn-secondary" style="font-size:12px;padding:6px 12px" onclick="setQRType('url')">🔗 URL</button>
+    <button class="btn btn-secondary" style="font-size:12px;padding:6px 12px" onclick="setQRType('text')">📝 Text</button>
+    <button class="btn btn-secondary" style="font-size:12px;padding:6px 12px" onclick="setQRType('email')">📧 Email</button>
+    <button class="btn btn-secondary" style="font-size:12px;padding:6px 12px" onclick="setQRType('phone')">📞 Phone</button>
+    <button class="btn btn-secondary" style="font-size:12px;padding:6px 12px" onclick="setQRType('wifi')">📶 WiFi</button>
+  </div>
+  <label class="field-label" id="qrLabel">URL or Text</label>
+  <input class="tool-input" id="qrInput" placeholder="https://example.com" value="https://calcnation-jade.vercel.app" oninput="genQR()">
+  <div id="wifiFields" style="display:none;margin-top:12px">
+    <input class="tool-input" id="wifiSSID" placeholder="WiFi Network Name (SSID)" style="margin-bottom:8px">
+    <input class="tool-input" id="wifiPass" placeholder="WiFi Password" type="password">
+  </div>
+</div>
+<div style="display:flex;gap:12px;align-items:center;margin-bottom:16px">
+  <div style="flex:1"><label class="field-label">Size</label>
+    <select class="tool-select" id="qrSize" onchange="genQR()">
+      <option value="150">Small (150px)</option>
+      <option value="250" selected>Medium (250px)</option>
+      <option value="400">Large (400px)</option>
+    </select>
+  </div>
+</div>
+<div style="text-align:center;margin:16px 0">
+  <div id="qrContainer" style="display:inline-block;padding:16px;background:white;border-radius:12px"></div>
+</div>
+<div class="btn-actions">
+  <button class="btn btn-primary" onclick="downloadQR()">⬇️ Download PNG</button>
+  <button class="btn btn-secondary" onclick="genQR()">🔄 Refresh</button>
+</div></div>
+  </div>
+  <div class="related-tools"><h2>Related Tools</h2><div class="related-grid"><a href="barcode-generator.html" class="related-card"><span class="related-card-icon">▌▌▌</span><span class="related-card-name">Barcode Generator</span></a><a href="../dev/url-encoder.html" class="related-card"><span class="related-card-icon">🔗</span><span class="related-card-name">URL Encoder</span></a></div></div>
+</main>
+<footer><div style="margin-bottom:16px"><a href="../index.html" class="nav-logo" style="font-size:18px">⚡ CalcNation</a></div><div>© 2024 CalcNation · Free tools · No signup required</div></footer>
+<div class="toast" id="toast"></div>
+<script src="../assets/js/utils.js"></script>
+<script>let qrType='url';
+function setQRType(t){
+  qrType=t;
+  const labels={url:'Enter URL',text:'Enter Text',email:'Enter Email Address',phone:'Enter Phone Number',wifi:''};
+  document.getElementById('qrLabel').textContent=labels[t]||'Input';
+  document.getElementById('wifiFields').style.display=t==='wifi'?'block':'none';
+  document.getElementById('qrInput').placeholder=t==='url'?'https://example.com':t==='email'?'user@example.com':t==='phone'?'+1234567890':'Enter value...';
+  genQR();
+}
+function getQRData(){
+  const val=document.getElementById('qrInput').value.trim();
+  if(qrType==='email')return 'mailto:'+val;
+  if(qrType==='phone')return 'tel:'+val;
+  if(qrType==='wifi'){const ssid=document.getElementById('wifiSSID').value;const pass=document.getElementById('wifiPass').value;return `WIFI:T:WPA;S:${ssid};P:${pass};;`;}
+  return val||'https://calcnation-jade.vercel.app';
+}
+function genQR(){
+  const data=getQRData();
+  const size=document.getElementById('qrSize').value;
+  const url=`https://api.qrserver.com/v1/create-qr-code/?size=${size}x${size}&data=${encodeURIComponent(data)}&format=png&margin=0`;
+  document.getElementById('qrContainer').innerHTML=`<img src="${url}" width="${size}" height="${size}" id="qrImg" style="display:block;border-radius:4px">`;
+}
+function downloadQR(){
+  const data=getQRData();const size=document.getElementById('qrSize').value;
+  const url=`https://api.qrserver.com/v1/create-qr-code/?size=${size}x${size}&data=${encodeURIComponent(data)}&format=png&margin=10`;
+  const a=document.createElement('a');a.href=url;a.download='qrcode.png';a.target='_blank';a.click();
+  showToast('QR Code downloaded!','success');
+}
+genQR();</script>
+</body>
+</html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Random Team Generator Online Free — Split People into Teams | CalcNation</title>
+<meta name="description" content="Split a list of names into random teams. Fair team generator for sports, work, classroom.">
+<meta name="keywords" content="random team generator, split into teams, random group generator, team picker, group generator">
+<link rel="canonical" href="https://calcnation-jade.vercel.app/tools/random-team-generator.html">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+<link rel="stylesheet" href="../assets/css/main.css">
+<style>
+.result-box{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:24px;text-align:center;margin-top:16px;}
+.result-number{font-size:48px;font-weight:900;font-family:"Syne",sans-serif;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.result-label{font-size:14px;color:var(--text3);margin-top:4px;}
+.tool-input{width:100%;padding:12px 16px;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-size:15px;outline:none;}
+.tool-input:focus{border-color:var(--accent);}
+.tool-select{width:100%;padding:12px 16px;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-size:15px;outline:none;cursor:pointer;}
+label.field-label{font-size:12px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:6px;}
+textarea.tool-textarea{width:100%;padding:16px;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-size:14px;line-height:1.7;resize:vertical;outline:none;font-family:inherit;}
+textarea.tool-textarea:focus{border-color:var(--accent);}
+</style>
+</head>
+<body>
+<nav>
+  <a href="../index.html" class="nav-logo">⚡ CalcNation</a>
+  <div class="nav-links">
+    <a href="../pdf/compress.html">PDF Tools</a>
+    <a href="../dev/json-formatter.html">Dev Tools</a>
+    <div class="nav-dropdown">
+      <a href="word-counter.html" class="nav-dropdown-trigger active">Social ▾</a>
+      <div class="nav-dropdown-menu nav-dropdown-wide">
+        <div class="nav-dropdown-col">
+          <div class="nav-dropdown-heading">YouTube Tools</div>
+          <a href="../social/youtube-money-calculator.html"><span>💰</span> Money Calculator</a>
+          <a href="../social/youtube-tag-generator.html"><span>🏷️</span> Tag Generator</a>
+          <a href="../social/youtube-thumbnail-resizer.html"><span>🖼️</span> Thumbnail Resizer</a>
+          <a href="../social/youtube-title-generator.html"><span>✍️</span> Title Generator</a>
+          <a href="../social/youtube-cpm-calculator.html"><span>📊</span> CPM Calculator</a>
+          <a href="../social/video-length-optimizer.html"><span>⏱️</span> Video Length Optimizer</a>
+        </div>
+        <div class="nav-dropdown-col">
+          <div class="nav-dropdown-heading">Social Media</div>
+          <a href="../social/instagram-engagement.html"><span>📸</span> Instagram Engagement</a>
+          <a href="../social/tiktok-money-calculator.html"><span>🎵</span> TikTok Earnings</a>
+          <a href="../social/hashtag-generator.html"><span>#️⃣</span> Hashtag Generator</a>
+          <a href="../social/influencer-earnings.html"><span>⭐</span> Influencer Earnings</a>
+        </div>
+        <div class="nav-dropdown-col">
+          <div class="nav-dropdown-heading">Viral Tools</div>
+          <a href="love-calculator.html"><span>❤️</span> Love Calculator</a>
+          <a href="random-name-picker.html"><span>🎲</span> Name Picker</a>
+          <a href="random-team-generator.html"><span>👥</span> Team Generator</a>
+          <a href="dice-roller.html"><span>🎲</span> Dice Roller</a>
+          <a href="qr-code-generator.html"><span>📱</span> QR Code Generator</a>
+          <a href="word-counter.html"><span>📝</span> Word Counter</a>
+        </div>
+        <div class="nav-dropdown-col">
+          <div class="nav-dropdown-heading">Text Tools</div>
+          <a href="text-case-converter.html"><span>🔡</span> Case Converter</a>
+          <a href="character-counter.html"><span>🔢</span> Character Counter</a>
+          <a href="fake-address-generator.html"><span>📍</span> Fake Address</a>
+          <a href="barcode-generator.html"><span>▌▌▌</span> Barcode Generator</a>
+        </div>
+      </div>
+    </div>
+    <a href="#">Finance</a>
+    <a href="#">Health</a>
+  </div>
+</nav>
+<div class="breadcrumb"><a href="../index.html">Home</a> <span>›</span> <span>Viral Tools</span> <span>›</span> <span>Random Team Generator</span></div>
+<main class="tool-page">
+  <div class="tool-header">
+    <div class="tool-icon">👥</div>
+    <h1>Random Team Generator</h1>
+    <p>Split any list of names into random balanced teams. Perfect for sports, class projects, hackathons.</p>
+    <div style="display:flex;gap:8px;margin-top:12px"><span class="badge">Free</span><span class="badge orange">Instant</span><span class="badge purple">No Signup</span></div>
+  </div>
+  <div class="tool-box">
+    <div class="tool-box-header"><h2>Random Team Generator</h2></div>
+    <div class="tool-box-body"><div style="margin-bottom:12px">
+  <label class="field-label">Enter Names (one per line)</label>
+  <textarea class="tool-textarea" id="teamNames" rows="8" placeholder="Alice&#10;Bob&#10;Charlie...">Alice
+Bob
+Charlie
+Diana
+Eve
+Frank
+Grace
+Henry
+Ivan
+Julia</textarea>
+</div>
+<div style="display:flex;gap:12px;margin-bottom:16px;flex-wrap:wrap">
+  <div style="flex:1;min-width:120px">
+    <label class="field-label">Number of Teams</label>
+    <input class="tool-input" type="number" id="numTeams" value="2" min="2" max="20">
+  </div>
+  <div style="display:flex;align-items:flex-end;gap:8px">
+    <label style="display:flex;align-items:center;gap:6px;font-size:14px;color:var(--text2);cursor:pointer;padding-bottom:4px">
+      <input type="checkbox" id="shuffleTeams" checked> Shuffle order
+    </label>
+  </div>
+</div>
+<button class="btn btn-primary btn-block" onclick="genTeams()" style="font-size:16px">👥 Generate Teams</button>
+<div id="teamsResult" style="display:none;margin-top:20px"></div></div>
+  </div>
+  <div class="related-tools"><h2>Related Tools</h2><div class="related-grid"><a href="random-name-picker.html" class="related-card"><span class="related-card-icon">🎯</span><span class="related-card-name">Name Picker</span></a><a href="dice-roller.html" class="related-card"><span class="related-card-icon">🎲</span><span class="related-card-name">Dice Roller</span></a></div></div>
+</main>
+<footer><div style="margin-bottom:16px"><a href="../index.html" class="nav-logo" style="font-size:18px">⚡ CalcNation</a></div><div>© 2024 CalcNation · Free tools · No signup required</div></footer>
+<div class="toast" id="toast"></div>
+<script src="../assets/js/utils.js"></script>
+<script>const teamColors=['var(--accent)','var(--accent2)','#a78bfa','#34d399','#fb923c','#f472b6'];
+function genTeams(){
+  const text=document.getElementById('teamNames').value;
+  let names=text.split('\n').map(n=>n.trim()).filter(n=>n);
+  if(names.length<2)return showToast('Add at least 2 names','error');
+  const n=Math.min(parseInt(document.getElementById('numTeams').value)||2,names.length);
+  if(document.getElementById('shuffleTeams').checked){for(let i=names.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[names[i],names[j]]=[names[j],names[i]];}}
+  const teams=Array.from({length:n},()=>[]);
+  names.forEach((name,i)=>teams[i%n].push(name));
+  const letters='ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  document.getElementById('teamsResult').innerHTML='<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px">'+
+    teams.map((team,i)=>`<div style="background:var(--bg2);border:1px solid var(--border);border-radius:10px;overflow:hidden">
+      <div style="padding:10px 16px;background:var(--bg3);border-bottom:1px solid var(--border);font-weight:700;color:${teamColors[i%teamColors.length]}">Team ${letters[i]}</div>
+      ${team.map(m=>`<div style="padding:8px 16px;border-bottom:1px solid rgba(30,42,66,0.4);font-size:14px;color:var(--text2)">${m}</div>`).join('')}
+    </div>`).join('')+'</div>';
+  document.getElementById('teamsResult').style.display='block';
+  showToast(n+' teams generated!','success');
+}</script>
+</body>
+</html>

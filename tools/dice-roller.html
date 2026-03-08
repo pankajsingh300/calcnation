@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dice Roller Online Free — Roll D4 D6 D8 D10 D12 D20 | CalcNation</title>
+<meta name="description" content="Roll virtual dice online. Supports D4, D6, D8, D10, D12, D20 and custom dice. Free dice roller.">
+<meta name="keywords" content="dice roller, virtual dice, roll dice online, d20 roller, d6 dice, dnd dice roller">
+<link rel="canonical" href="https://calcnation-jade.vercel.app/tools/dice-roller.html">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+<link rel="stylesheet" href="../assets/css/main.css">
+<style>
+.result-box{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:24px;text-align:center;margin-top:16px;}
+.result-number{font-size:48px;font-weight:900;font-family:"Syne",sans-serif;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.result-label{font-size:14px;color:var(--text3);margin-top:4px;}
+.tool-input{width:100%;padding:12px 16px;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-size:15px;outline:none;}
+.tool-input:focus{border-color:var(--accent);}
+.tool-select{width:100%;padding:12px 16px;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-size:15px;outline:none;cursor:pointer;}
+label.field-label{font-size:12px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:6px;}
+textarea.tool-textarea{width:100%;padding:16px;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-size:14px;line-height:1.7;resize:vertical;outline:none;font-family:inherit;}
+textarea.tool-textarea:focus{border-color:var(--accent);}
+</style>
+</head>
+<body>
+<nav>
+  <a href="../index.html" class="nav-logo">⚡ CalcNation</a>
+  <div class="nav-links">
+    <a href="../pdf/compress.html">PDF Tools</a>
+    <a href="../dev/json-formatter.html">Dev Tools</a>
+    <div class="nav-dropdown">
+      <a href="word-counter.html" class="nav-dropdown-trigger active">Social ▾</a>
+      <div class="nav-dropdown-menu nav-dropdown-wide">
+        <div class="nav-dropdown-col">
+          <div class="nav-dropdown-heading">YouTube Tools</div>
+          <a href="../social/youtube-money-calculator.html"><span>💰</span> Money Calculator</a>
+          <a href="../social/youtube-tag-generator.html"><span>🏷️</span> Tag Generator</a>
+          <a href="../social/youtube-thumbnail-resizer.html"><span>🖼️</span> Thumbnail Resizer</a>
+          <a href="../social/youtube-title-generator.html"><span>✍️</span> Title Generator</a>
+          <a href="../social/youtube-cpm-calculator.html"><span>📊</span> CPM Calculator</a>
+          <a href="../social/video-length-optimizer.html"><span>⏱️</span> Video Length Optimizer</a>
+        </div>
+        <div class="nav-dropdown-col">
+          <div class="nav-dropdown-heading">Social Media</div>
+          <a href="../social/instagram-engagement.html"><span>📸</span> Instagram Engagement</a>
+          <a href="../social/tiktok-money-calculator.html"><span>🎵</span> TikTok Earnings</a>
+          <a href="../social/hashtag-generator.html"><span>#️⃣</span> Hashtag Generator</a>
+          <a href="../social/influencer-earnings.html"><span>⭐</span> Influencer Earnings</a>
+        </div>
+        <div class="nav-dropdown-col">
+          <div class="nav-dropdown-heading">Viral Tools</div>
+          <a href="love-calculator.html"><span>❤️</span> Love Calculator</a>
+          <a href="random-name-picker.html"><span>🎲</span> Name Picker</a>
+          <a href="random-team-generator.html"><span>👥</span> Team Generator</a>
+          <a href="dice-roller.html"><span>🎲</span> Dice Roller</a>
+          <a href="qr-code-generator.html"><span>📱</span> QR Code Generator</a>
+          <a href="word-counter.html"><span>📝</span> Word Counter</a>
+        </div>
+        <div class="nav-dropdown-col">
+          <div class="nav-dropdown-heading">Text Tools</div>
+          <a href="text-case-converter.html"><span>🔡</span> Case Converter</a>
+          <a href="character-counter.html"><span>🔢</span> Character Counter</a>
+          <a href="fake-address-generator.html"><span>📍</span> Fake Address</a>
+          <a href="barcode-generator.html"><span>▌▌▌</span> Barcode Generator</a>
+        </div>
+      </div>
+    </div>
+    <a href="#">Finance</a>
+    <a href="#">Health</a>
+  </div>
+</nav>
+<div class="breadcrumb"><a href="../index.html">Home</a> <span>›</span> <span>Viral Tools</span> <span>›</span> <span>Dice Roller</span></div>
+<main class="tool-page">
+  <div class="tool-header">
+    <div class="tool-icon">🎲</div>
+    <h1>Dice Roller</h1>
+    <p>Roll virtual dice of any type — D4, D6, D8, D10, D12, D20 and custom. Perfect for board games, RPGs and decisions.</p>
+    <div style="display:flex;gap:8px;margin-top:12px"><span class="badge">Free</span><span class="badge orange">Instant</span><span class="badge purple">No Signup</span></div>
+  </div>
+  <div class="tool-box">
+    <div class="tool-box-header"><h2>Dice Roller</h2></div>
+    <div class="tool-box-body"><div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:24px;justify-content:center">
+  <button class="btn btn-secondary" onclick="roll(4)" style="font-size:16px;padding:12px 20px;min-width:70px">D4</button>
+  <button class="btn btn-primary" onclick="roll(6)" style="font-size:16px;padding:12px 20px;min-width:70px">D6</button>
+  <button class="btn btn-secondary" onclick="roll(8)" style="font-size:16px;padding:12px 20px;min-width:70px">D8</button>
+  <button class="btn btn-secondary" onclick="roll(10)" style="font-size:16px;padding:12px 20px;min-width:70px">D10</button>
+  <button class="btn btn-secondary" onclick="roll(12)" style="font-size:16px;padding:12px 20px;min-width:70px">D12</button>
+  <button class="btn btn-secondary" onclick="roll(20)" style="font-size:16px;padding:12px 20px;min-width:70px">D20</button>
+  <button class="btn btn-secondary" onclick="roll(100)" style="font-size:16px;padding:12px 20px;min-width:70px">D100</button>
+</div>
+<div style="display:flex;gap:10px;align-items:flex-end;justify-content:center;margin-bottom:24px">
+  <div><label class="field-label">Custom Dice</label><input class="tool-input" type="number" id="customSides" value="6" min="2" max="1000" style="width:100px;text-align:center"></div>
+  <div><label class="field-label">Number of Dice</label><input class="tool-input" type="number" id="numDice" value="1" min="1" max="20" style="width:80px;text-align:center"></div>
+  <button class="btn btn-primary" onclick="rollCustom()" style="padding:12px 20px">Roll!</button>
+</div>
+<div id="diceResult" style="text-align:center;display:none">
+  <div id="diceDisplay" style="font-size:80px;margin-bottom:8px;animation:none"></div>
+  <div class="result-number" id="diceTotal"></div>
+  <div class="result-label" id="diceLabel"></div>
+  <div id="diceBreakdown" style="font-size:14px;color:var(--text3);margin-top:8px"></div>
+</div>
+<div style="margin-top:20px">
+  <div style="font-size:13px;font-weight:600;color:var(--text2);margin-bottom:8px">Roll History</div>
+  <div id="diceHistory" style="display:flex;flex-wrap:wrap;gap:6px"></div>
+</div></div>
+  </div>
+  <div class="related-tools"><h2>Related Tools</h2><div class="related-grid"><a href="random-name-picker.html" class="related-card"><span class="related-card-icon">🎲</span><span class="related-card-name">Name Picker</span></a><a href="random-team-generator.html" class="related-card"><span class="related-card-icon">👥</span><span class="related-card-name">Team Generator</span></a><a href="love-calculator.html" class="related-card"><span class="related-card-icon">❤️</span><span class="related-card-name">Love Calculator</span></a></div></div>
+</main>
+<footer><div style="margin-bottom:16px"><a href="../index.html" class="nav-logo" style="font-size:18px">⚡ CalcNation</a></div><div>© 2024 CalcNation · Free tools · No signup required</div></footer>
+<div class="toast" id="toast"></div>
+<script src="../assets/js/utils.js"></script>
+<script>const diceEmoji={4:'🔺',6:'🎲',8:'🔷',10:'🔟',12:'⬡',20:'🏆',100:'💯'};
+let history=[];
+function roll(sides){
+  const n=parseInt(document.getElementById('numDice').value)||1;
+  const rolls=Array.from({length:n},()=>Math.floor(Math.random()*sides)+1);
+  const total=rolls.reduce((a,b)=>a+b,0);
+  showResult(sides,rolls,total);
+}
+function rollCustom(){
+  const sides=parseInt(document.getElementById('customSides').value)||6;
+  const n=parseInt(document.getElementById('numDice').value)||1;
+  const rolls=Array.from({length:n},()=>Math.floor(Math.random()*sides)+1);
+  const total=rolls.reduce((a,b)=>a+b,0);
+  showResult(sides,rolls,total);
+}
+function showResult(sides,rolls,total){
+  const emoji=diceEmoji[sides]||'🎲';
+  const n=rolls.length;
+  document.getElementById('diceDisplay').textContent=emoji;
+  document.getElementById('diceTotal').textContent=total;
+  document.getElementById('diceLabel').textContent=n>1?n+'× D'+sides+' rolled':'D'+sides+' rolled';
+  document.getElementById('diceBreakdown').textContent=n>1?'Individual: '+rolls.join(', '):'';
+  document.getElementById('diceResult').style.display='block';
+  history.unshift({sides,total,rolls:rolls.join(',')});
+  if(history.length>20)history.pop();
+  document.getElementById('diceHistory').innerHTML=history.slice(0,15).map(h=>`<span style="padding:4px 10px;background:var(--bg2);border:1px solid var(--border);border-radius:6px;font-size:12px;font-family:'Fira Code',monospace;color:var(--text2)">D${h.sides}: <strong style="color:var(--accent)">${h.total}</strong></span>`).join('');
+}</script>
+</body>
+</html>

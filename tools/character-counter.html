@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Character Counter Online Free — Count Characters for Twitter, Instagram | CalcNation</title>
+<meta name="description" content="Count characters online for Twitter, Instagram, TikTok bios. See character limits in real time.">
+<meta name="keywords" content="character counter, twitter character counter, instagram bio character limit, character count online">
+<link rel="canonical" href="https://calcnation-jade.vercel.app/tools/character-counter.html">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+<link rel="stylesheet" href="../assets/css/main.css">
+<style>
+.result-box{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:24px;text-align:center;margin-top:16px;}
+.result-number{font-size:48px;font-weight:900;font-family:"Syne",sans-serif;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.result-label{font-size:14px;color:var(--text3);margin-top:4px;}
+.tool-input{width:100%;padding:12px 16px;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-size:15px;outline:none;}
+.tool-input:focus{border-color:var(--accent);}
+.tool-select{width:100%;padding:12px 16px;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-size:15px;outline:none;cursor:pointer;}
+label.field-label{font-size:12px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:6px;}
+textarea.tool-textarea{width:100%;padding:16px;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-size:14px;line-height:1.7;resize:vertical;outline:none;font-family:inherit;}
+textarea.tool-textarea:focus{border-color:var(--accent);}
+</style>
+</head>
+<body>
+<nav>
+  <a href="../index.html" class="nav-logo">⚡ CalcNation</a>
+  <div class="nav-links">
+    <a href="../pdf/compress.html">PDF Tools</a>
+    <a href="../dev/json-formatter.html">Dev Tools</a>
+    <div class="nav-dropdown">
+      <a href="word-counter.html" class="nav-dropdown-trigger active">Social ▾</a>
+      <div class="nav-dropdown-menu nav-dropdown-wide">
+        <div class="nav-dropdown-col">
+          <div class="nav-dropdown-heading">YouTube Tools</div>
+          <a href="../social/youtube-money-calculator.html"><span>💰</span> Money Calculator</a>
+          <a href="../social/youtube-tag-generator.html"><span>🏷️</span> Tag Generator</a>
+          <a href="../social/youtube-thumbnail-resizer.html"><span>🖼️</span> Thumbnail Resizer</a>
+          <a href="../social/youtube-title-generator.html"><span>✍️</span> Title Generator</a>
+          <a href="../social/youtube-cpm-calculator.html"><span>📊</span> CPM Calculator</a>
+          <a href="../social/video-length-optimizer.html"><span>⏱️</span> Video Length Optimizer</a>
+        </div>
+        <div class="nav-dropdown-col">
+          <div class="nav-dropdown-heading">Social Media</div>
+          <a href="../social/instagram-engagement.html"><span>📸</span> Instagram Engagement</a>
+          <a href="../social/tiktok-money-calculator.html"><span>🎵</span> TikTok Earnings</a>
+          <a href="../social/hashtag-generator.html"><span>#️⃣</span> Hashtag Generator</a>
+          <a href="../social/influencer-earnings.html"><span>⭐</span> Influencer Earnings</a>
+        </div>
+        <div class="nav-dropdown-col">
+          <div class="nav-dropdown-heading">Viral Tools</div>
+          <a href="love-calculator.html"><span>❤️</span> Love Calculator</a>
+          <a href="random-name-picker.html"><span>🎲</span> Name Picker</a>
+          <a href="random-team-generator.html"><span>👥</span> Team Generator</a>
+          <a href="dice-roller.html"><span>🎲</span> Dice Roller</a>
+          <a href="qr-code-generator.html"><span>📱</span> QR Code Generator</a>
+          <a href="word-counter.html"><span>📝</span> Word Counter</a>
+        </div>
+        <div class="nav-dropdown-col">
+          <div class="nav-dropdown-heading">Text Tools</div>
+          <a href="text-case-converter.html"><span>🔡</span> Case Converter</a>
+          <a href="character-counter.html"><span>🔢</span> Character Counter</a>
+          <a href="fake-address-generator.html"><span>📍</span> Fake Address</a>
+          <a href="barcode-generator.html"><span>▌▌▌</span> Barcode Generator</a>
+        </div>
+      </div>
+    </div>
+    <a href="#">Finance</a>
+    <a href="#">Health</a>
+  </div>
+</nav>
+<div class="breadcrumb"><a href="../index.html">Home</a> <span>›</span> <span>Viral Tools</span> <span>›</span> <span>Character Counter</span></div>
+<main class="tool-page">
+  <div class="tool-header">
+    <div class="tool-icon">🔢</div>
+    <h1>Character Counter</h1>
+    <p>Count characters for Twitter (280), Instagram bio (150), TikTok (150), LinkedIn (2000) and more. Real-time limits.</p>
+    <div style="display:flex;gap:8px;margin-top:12px"><span class="badge">Free</span><span class="badge orange">Instant</span><span class="badge purple">No Signup</span></div>
+  </div>
+  <div class="tool-box">
+    <div class="tool-box-header"><h2>Character Counter</h2></div>
+    <div class="tool-box-body"><div style="margin-bottom:12px;display:flex;gap:8px;flex-wrap:wrap">
+  <button class="btn btn-secondary" style="font-size:12px;padding:6px 12px" onclick="setLimit(280,'Twitter/X')">Twitter (280)</button>
+  <button class="btn btn-secondary" style="font-size:12px;padding:6px 12px" onclick="setLimit(150,'Instagram Bio')">Instagram Bio (150)</button>
+  <button class="btn btn-secondary" style="font-size:12px;padding:6px 12px" onclick="setLimit(150,'TikTok Bio')">TikTok Bio (150)</button>
+  <button class="btn btn-secondary" style="font-size:12px;padding:6px 12px" onclick="setLimit(2200,'Instagram Caption')">IG Caption (2200)</button>
+  <button class="btn btn-secondary" style="font-size:12px;padding:6px 12px" onclick="setLimit(2000,'LinkedIn')">LinkedIn (2000)</button>
+  <button class="btn btn-secondary" style="font-size:12px;padding:6px 12px" onclick="setLimit(0,'No Limit')">No Limit</button>
+</div>
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+  <div style="font-size:13px;color:var(--text2);font-weight:600" id="limitLabel">No character limit set</div>
+  <div style="font-family:'Fira Code',monospace;font-size:18px;font-weight:700;color:var(--accent)" id="charCount">0</div>
+</div>
+<div style="height:6px;background:var(--bg3);border-radius:3px;margin-bottom:12px;overflow:hidden">
+  <div id="limitBar" style="height:100%;background:var(--accent);transition:width 0.2s,background 0.2s;border-radius:3px;width:0%"></div>
+</div>
+<textarea class="tool-textarea" id="ccInput" rows="10" placeholder="Type or paste text here..." oninput="countChars()"></textarea>
+<div style="display:flex;gap:16px;margin-top:10px;font-size:13px;color:var(--text3)">
+  <span id="ccWords">0 words</span>
+  <span id="ccRemaining"></span>
+</div></div>
+  </div>
+  <div class="related-tools"><h2>Related Tools</h2><div class="related-grid"><a href="word-counter.html" class="related-card"><span class="related-card-icon">📝</span><span class="related-card-name">Word Counter</span></a><a href="text-case-converter.html" class="related-card"><span class="related-card-icon">🔡</span><span class="related-card-name">Case Converter</span></a></div></div>
+</main>
+<footer><div style="margin-bottom:16px"><a href="../index.html" class="nav-logo" style="font-size:18px">⚡ CalcNation</a></div><div>© 2024 CalcNation · Free tools · No signup required</div></footer>
+<div class="toast" id="toast"></div>
+<script src="../assets/js/utils.js"></script>
+<script>let limit=0;let limitName='';
+function setLimit(l,name){limit=l;limitName=name;document.getElementById('limitLabel').textContent=l?name+': '+l+' characters max':'No character limit set';countChars();}
+function countChars(){
+  const text=document.getElementById('ccInput').value;
+  const chars=text.length;
+  const words=text.trim()===''?0:text.trim().split(/\s+/).length;
+  document.getElementById('charCount').textContent=chars;
+  document.getElementById('ccWords').textContent=words+' words';
+  if(limit>0){
+    const pct=Math.min(100,(chars/limit)*100);
+    const bar=document.getElementById('limitBar');
+    bar.style.width=pct+'%';
+    bar.style.background=pct>100?'#ff4444':pct>80?'#ff9900':'var(--accent)';
+    document.getElementById('ccRemaining').textContent=chars<=limit?(limit-chars)+' remaining':'⚠️ '+(chars-limit)+' over limit';
+    document.getElementById('charCount').style.color=chars>limit?'#ff4444':'var(--accent)';
+  } else {
+    document.getElementById('limitBar').style.width='0%';
+    document.getElementById('ccRemaining').textContent='';
+  }
+}</script>
+</body>
+</html>

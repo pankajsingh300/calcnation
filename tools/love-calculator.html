@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Love Calculator — Test Your Love Compatibility Free | CalcNation</title>
+<meta name="description" content="Calculate love compatibility between two names. Fun love percentage calculator for couples.">
+<meta name="keywords" content="love calculator, love compatibility, love percentage calculator, name love test, couple compatibility">
+<link rel="canonical" href="https://calcnation-jade.vercel.app/tools/love-calculator.html">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+<link rel="stylesheet" href="../assets/css/main.css">
+<style>
+.result-box{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:24px;text-align:center;margin-top:16px;}
+.result-number{font-size:48px;font-weight:900;font-family:"Syne",sans-serif;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.result-label{font-size:14px;color:var(--text3);margin-top:4px;}
+.tool-input{width:100%;padding:12px 16px;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-size:15px;outline:none;}
+.tool-input:focus{border-color:var(--accent);}
+.tool-select{width:100%;padding:12px 16px;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-size:15px;outline:none;cursor:pointer;}
+label.field-label{font-size:12px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:6px;}
+textarea.tool-textarea{width:100%;padding:16px;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-size:14px;line-height:1.7;resize:vertical;outline:none;font-family:inherit;}
+textarea.tool-textarea:focus{border-color:var(--accent);}
+</style>
+</head>
+<body>
+<nav>
+  <a href="../index.html" class="nav-logo">⚡ CalcNation</a>
+  <div class="nav-links">
+    <a href="../pdf/compress.html">PDF Tools</a>
+    <a href="../dev/json-formatter.html">Dev Tools</a>
+    <div class="nav-dropdown">
+      <a href="word-counter.html" class="nav-dropdown-trigger active">Social ▾</a>
+      <div class="nav-dropdown-menu nav-dropdown-wide">
+        <div class="nav-dropdown-col">
+          <div class="nav-dropdown-heading">YouTube Tools</div>
+          <a href="../social/youtube-money-calculator.html"><span>💰</span> Money Calculator</a>
+          <a href="../social/youtube-tag-generator.html"><span>🏷️</span> Tag Generator</a>
+          <a href="../social/youtube-thumbnail-resizer.html"><span>🖼️</span> Thumbnail Resizer</a>
+          <a href="../social/youtube-title-generator.html"><span>✍️</span> Title Generator</a>
+          <a href="../social/youtube-cpm-calculator.html"><span>📊</span> CPM Calculator</a>
+          <a href="../social/video-length-optimizer.html"><span>⏱️</span> Video Length Optimizer</a>
+        </div>
+        <div class="nav-dropdown-col">
+          <div class="nav-dropdown-heading">Social Media</div>
+          <a href="../social/instagram-engagement.html"><span>📸</span> Instagram Engagement</a>
+          <a href="../social/tiktok-money-calculator.html"><span>🎵</span> TikTok Earnings</a>
+          <a href="../social/hashtag-generator.html"><span>#️⃣</span> Hashtag Generator</a>
+          <a href="../social/influencer-earnings.html"><span>⭐</span> Influencer Earnings</a>
+        </div>
+        <div class="nav-dropdown-col">
+          <div class="nav-dropdown-heading">Viral Tools</div>
+          <a href="love-calculator.html"><span>❤️</span> Love Calculator</a>
+          <a href="random-name-picker.html"><span>🎲</span> Name Picker</a>
+          <a href="random-team-generator.html"><span>👥</span> Team Generator</a>
+          <a href="dice-roller.html"><span>🎲</span> Dice Roller</a>
+          <a href="qr-code-generator.html"><span>📱</span> QR Code Generator</a>
+          <a href="word-counter.html"><span>📝</span> Word Counter</a>
+        </div>
+        <div class="nav-dropdown-col">
+          <div class="nav-dropdown-heading">Text Tools</div>
+          <a href="text-case-converter.html"><span>🔡</span> Case Converter</a>
+          <a href="character-counter.html"><span>🔢</span> Character Counter</a>
+          <a href="fake-address-generator.html"><span>📍</span> Fake Address</a>
+          <a href="barcode-generator.html"><span>▌▌▌</span> Barcode Generator</a>
+        </div>
+      </div>
+    </div>
+    <a href="#">Finance</a>
+    <a href="#">Health</a>
+  </div>
+</nav>
+<div class="breadcrumb"><a href="../index.html">Home</a> <span>›</span> <span>Viral Tools</span> <span>›</span> <span>Love Calculator</span></div>
+<main class="tool-page">
+  <div class="tool-header">
+    <div class="tool-icon">❤️</div>
+    <h1>Love Calculator</h1>
+    <p>Test the love compatibility between two names. Fun and shareable — see your love percentage instantly!</p>
+    <div style="display:flex;gap:8px;margin-top:12px"><span class="badge">Free</span><span class="badge orange">Instant</span><span class="badge purple">No Signup</span></div>
+  </div>
+  <div class="tool-box">
+    <div class="tool-box-header"><h2>Love Calculator</h2></div>
+    <div class="tool-box-body"><div style="max-width:460px;margin:0 auto">
+  <div style="margin-bottom:12px">
+    <label class="field-label">Your Name</label>
+    <input class="tool-input" id="name1" placeholder="Enter first name..." oninput="calcLove()">
+  </div>
+  <div style="text-align:center;font-size:28px;margin:8px 0">❤️</div>
+  <div style="margin-bottom:16px">
+    <label class="field-label">Partner's Name</label>
+    <input class="tool-input" id="name2" placeholder="Enter second name..." oninput="calcLove()">
+  </div>
+  <button class="btn btn-primary btn-block" onclick="calcLove()" style="font-size:16px">❤️ Calculate Love</button>
+  <div id="loveResult" style="display:none;margin-top:20px">
+    <div class="result-box">
+      <div class="result-number" id="lovePct"></div>
+      <div class="result-label">Love Compatibility</div>
+      <div style="margin:16px 0;background:var(--bg3);border-radius:20px;height:16px;overflow:hidden">
+        <div id="loveBar" style="height:100%;background:linear-gradient(90deg,#ff4d4d,#ff9900);transition:width 1s ease;border-radius:20px"></div>
+      </div>
+      <div id="loveMsg" style="font-size:16px;color:var(--text);font-weight:600;margin-top:8px"></div>
+    </div>
+    <div style="text-align:center;margin-top:12px">
+      <button class="btn btn-secondary" onclick="shareResult()" style="padding:8px 20px;font-size:13px">📤 Share Result</button>
+    </div>
+  </div>
+</div></div>
+  </div>
+  <div class="related-tools"><h2>Related Tools</h2><div class="related-grid"><a href="random-name-picker.html" class="related-card"><span class="related-card-icon">🎲</span><span class="related-card-name">Name Picker</span></a><a href="dice-roller.html" class="related-card"><span class="related-card-icon">🎲</span><span class="related-card-name">Dice Roller</span></a></div></div>
+</main>
+<footer><div style="margin-bottom:16px"><a href="../index.html" class="nav-logo" style="font-size:18px">⚡ CalcNation</a></div><div>© 2024 CalcNation · Free tools · No signup required</div></footer>
+<div class="toast" id="toast"></div>
+<script src="../assets/js/utils.js"></script>
+<script>function calcLove(){
+  const n1=document.getElementById('name1').value.trim();
+  const n2=document.getElementById('name2').value.trim();
+  if(!n1||!n2)return;
+  const combined=(n1+n2).toLowerCase();
+  let hash=0;
+  for(let i=0;i<combined.length;i++){hash=(hash*31+combined.charCodeAt(i))%100;}
+  const pct=Math.max(25,hash);
+  document.getElementById('lovePct').textContent=pct+'%';
+  document.getElementById('loveBar').style.width=pct+'%';
+  const msgs=[
+    [90,'🔥 Soulmates! You were made for each other!'],
+    [75,'💕 Great match! Strong chemistry and compatibility.'],
+    [60,'😊 Good potential! With effort, this could be wonderful.'],
+    [45,'🤔 Mixed signals. Could work with understanding.'],
+    [0,'💔 Opposites attract... or maybe not!']
+  ];
+  const msg=msgs.find(([min])=>pct>=min);
+  document.getElementById('loveMsg').textContent=msg[1];
+  document.getElementById('loveResult').style.display='block';
+}
+function shareResult(){
+  const n1=document.getElementById('name1').value;
+  const n2=document.getElementById('name2').value;
+  const pct=document.getElementById('lovePct').textContent;
+  navigator.clipboard.writeText(`${n1} ❤️ ${n2} = ${pct} love compatibility! Test yours at calcnation-jade.vercel.app/tools/love-calculator.html`).then(()=>showToast('Result copied to share!','success'));
+}</script>
+</body>
+</html>

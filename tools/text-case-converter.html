@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Text Case Converter Online Free — UPPERCASE, lowercase, Title Case | CalcNation</title>
+<meta name="description" content="Convert text between uppercase, lowercase, title case, camelCase, snake_case online free.">
+<meta name="keywords" content="text case converter, uppercase converter, lowercase converter, title case, camelcase converter, snake case">
+<link rel="canonical" href="https://calcnation-jade.vercel.app/tools/text-case-converter.html">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+<link rel="stylesheet" href="../assets/css/main.css">
+<style>
+.result-box{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:24px;text-align:center;margin-top:16px;}
+.result-number{font-size:48px;font-weight:900;font-family:"Syne",sans-serif;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.result-label{font-size:14px;color:var(--text3);margin-top:4px;}
+.tool-input{width:100%;padding:12px 16px;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-size:15px;outline:none;}
+.tool-input:focus{border-color:var(--accent);}
+.tool-select{width:100%;padding:12px 16px;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-size:15px;outline:none;cursor:pointer;}
+label.field-label{font-size:12px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:6px;}
+textarea.tool-textarea{width:100%;padding:16px;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-size:14px;line-height:1.7;resize:vertical;outline:none;font-family:inherit;}
+textarea.tool-textarea:focus{border-color:var(--accent);}
+</style>
+</head>
+<body>
+<nav>
+  <a href="../index.html" class="nav-logo">⚡ CalcNation</a>
+  <div class="nav-links">
+    <a href="../pdf/compress.html">PDF Tools</a>
+    <a href="../dev/json-formatter.html">Dev Tools</a>
+    <div class="nav-dropdown">
+      <a href="word-counter.html" class="nav-dropdown-trigger active">Social ▾</a>
+      <div class="nav-dropdown-menu nav-dropdown-wide">
+        <div class="nav-dropdown-col">
+          <div class="nav-dropdown-heading">YouTube Tools</div>
+          <a href="../social/youtube-money-calculator.html"><span>💰</span> Money Calculator</a>
+          <a href="../social/youtube-tag-generator.html"><span>🏷️</span> Tag Generator</a>
+          <a href="../social/youtube-thumbnail-resizer.html"><span>🖼️</span> Thumbnail Resizer</a>
+          <a href="../social/youtube-title-generator.html"><span>✍️</span> Title Generator</a>
+          <a href="../social/youtube-cpm-calculator.html"><span>📊</span> CPM Calculator</a>
+          <a href="../social/video-length-optimizer.html"><span>⏱️</span> Video Length Optimizer</a>
+        </div>
+        <div class="nav-dropdown-col">
+          <div class="nav-dropdown-heading">Social Media</div>
+          <a href="../social/instagram-engagement.html"><span>📸</span> Instagram Engagement</a>
+          <a href="../social/tiktok-money-calculator.html"><span>🎵</span> TikTok Earnings</a>
+          <a href="../social/hashtag-generator.html"><span>#️⃣</span> Hashtag Generator</a>
+          <a href="../social/influencer-earnings.html"><span>⭐</span> Influencer Earnings</a>
+        </div>
+        <div class="nav-dropdown-col">
+          <div class="nav-dropdown-heading">Viral Tools</div>
+          <a href="love-calculator.html"><span>❤️</span> Love Calculator</a>
+          <a href="random-name-picker.html"><span>🎲</span> Name Picker</a>
+          <a href="random-team-generator.html"><span>👥</span> Team Generator</a>
+          <a href="dice-roller.html"><span>🎲</span> Dice Roller</a>
+          <a href="qr-code-generator.html"><span>📱</span> QR Code Generator</a>
+          <a href="word-counter.html"><span>📝</span> Word Counter</a>
+        </div>
+        <div class="nav-dropdown-col">
+          <div class="nav-dropdown-heading">Text Tools</div>
+          <a href="text-case-converter.html"><span>🔡</span> Case Converter</a>
+          <a href="character-counter.html"><span>🔢</span> Character Counter</a>
+          <a href="fake-address-generator.html"><span>📍</span> Fake Address</a>
+          <a href="barcode-generator.html"><span>▌▌▌</span> Barcode Generator</a>
+        </div>
+      </div>
+    </div>
+    <a href="#">Finance</a>
+    <a href="#">Health</a>
+  </div>
+</nav>
+<div class="breadcrumb"><a href="../index.html">Home</a> <span>›</span> <span>Viral Tools</span> <span>›</span> <span>Text Case Converter</span></div>
+<main class="tool-page">
+  <div class="tool-header">
+    <div class="tool-icon">🔡</div>
+    <h1>Text Case Converter</h1>
+    <p>Convert text between any case: UPPERCASE, lowercase, Title Case, camelCase, snake_case, kebab-case and more.</p>
+    <div style="display:flex;gap:8px;margin-top:12px"><span class="badge">Free</span><span class="badge orange">Instant</span><span class="badge purple">No Signup</span></div>
+  </div>
+  <div class="tool-box">
+    <div class="tool-box-header"><h2>Text Case Converter</h2></div>
+    <div class="tool-box-body"><div style="margin-bottom:12px">
+  <label class="field-label">Input Text</label>
+  <textarea class="tool-textarea" id="caseInput" rows="6" placeholder="Type or paste text here..." oninput="autoConvert()">The quick brown fox jumps over the lazy dog</textarea>
+</div>
+<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px">
+  <button class="btn btn-secondary" style="font-size:13px;padding:7px 14px" onclick="convert('upper')">UPPERCASE</button>
+  <button class="btn btn-secondary" style="font-size:13px;padding:7px 14px" onclick="convert('lower')">lowercase</button>
+  <button class="btn btn-secondary" style="font-size:13px;padding:7px 14px" onclick="convert('title')">Title Case</button>
+  <button class="btn btn-secondary" style="font-size:13px;padding:7px 14px" onclick="convert('sentence')">Sentence case</button>
+  <button class="btn btn-secondary" style="font-size:13px;padding:7px 14px" onclick="convert('camel')">camelCase</button>
+  <button class="btn btn-secondary" style="font-size:13px;padding:7px 14px" onclick="convert('pascal')">PascalCase</button>
+  <button class="btn btn-secondary" style="font-size:13px;padding:7px 14px" onclick="convert('snake')">snake_case</button>
+  <button class="btn btn-secondary" style="font-size:13px;padding:7px 14px" onclick="convert('kebab')">kebab-case</button>
+  <button class="btn btn-secondary" style="font-size:13px;padding:7px 14px" onclick="convert('alternate')">AlTeRnAtE</button>
+  <button class="btn btn-secondary" style="font-size:13px;padding:7px 14px" onclick="convert('reverse')">esreveR</button>
+</div>
+<div style="margin-bottom:8px;font-size:12px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:1px">Output</div>
+<textarea class="tool-textarea" id="caseOutput" rows="6" readonly placeholder="Converted text appears here..."></textarea>
+<div class="btn-actions">
+  <button class="btn btn-primary" onclick="copyOutput()">📋 Copy</button>
+  <button class="btn btn-secondary" onclick="swapInputOutput()">⇅ Swap</button>
+</div></div>
+  </div>
+  <div class="related-tools"><h2>Related Tools</h2><div class="related-grid"><a href="word-counter.html" class="related-card"><span class="related-card-icon">📝</span><span class="related-card-name">Word Counter</span></a><a href="character-counter.html" class="related-card"><span class="related-card-icon">🔢</span><span class="related-card-name">Character Counter</span></a></div></div>
+</main>
+<footer><div style="margin-bottom:16px"><a href="../index.html" class="nav-logo" style="font-size:18px">⚡ CalcNation</a></div><div>© 2024 CalcNation · Free tools · No signup required</div></footer>
+<div class="toast" id="toast"></div>
+<script src="../assets/js/utils.js"></script>
+<script>function convert(type){
+  const input=document.getElementById('caseInput').value;
+  if(!input)return;
+  let out='';
+  const words=input.trim().split(/\s+/);
+  switch(type){
+    case 'upper': out=input.toUpperCase(); break;
+    case 'lower': out=input.toLowerCase(); break;
+    case 'title': out=words.map(w=>w.charAt(0).toUpperCase()+w.slice(1).toLowerCase()).join(' '); break;
+    case 'sentence': out=input.toLowerCase().replace(/(^|[.!?]\s+)([a-z])/g,(m,p1,p2)=>p1+p2.toUpperCase()); break;
+    case 'camel': out=words.map((w,i)=>i===0?w.toLowerCase():w.charAt(0).toUpperCase()+w.slice(1).toLowerCase()).join(''); break;
+    case 'pascal': out=words.map(w=>w.charAt(0).toUpperCase()+w.slice(1).toLowerCase()).join(''); break;
+    case 'snake': out=words.map(w=>w.toLowerCase()).join('_'); break;
+    case 'kebab': out=words.map(w=>w.toLowerCase()).join('-'); break;
+    case 'alternate': out=[...input].map((c,i)=>i%2===0?c.toUpperCase():c.toLowerCase()).join(''); break;
+    case 'reverse': out=input.split('').reverse().join(''); break;
+  }
+  document.getElementById('caseOutput').value=out;
+}
+function autoConvert(){if(document.getElementById('caseOutput').value)convert('lower');}
+function copyOutput(){const v=document.getElementById('caseOutput').value;if(!v)return showToast('Nothing to copy','error');navigator.clipboard.writeText(v).then(()=>showToast('Copied!','success'));}
+function swapInputOutput(){const o=document.getElementById('caseOutput').value;if(o){document.getElementById('caseInput').value=o;document.getElementById('caseOutput').value='';}}</script>
+</body>
+</html>

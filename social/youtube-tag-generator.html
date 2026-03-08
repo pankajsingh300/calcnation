@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YouTube Tag Generator — SEO Tags for YouTube Free | CalcNation</title>
+<meta name="description" content="Generate SEO-optimized tags for YouTube videos. Get relevant tags to rank higher and get more views.">
+<meta name="keywords" content="youtube tag generator, youtube tags, youtube seo tags, video tags generator, youtube keywords">
+<link rel="canonical" href="https://calcnation-jade.vercel.app/social/youtube-tag-generator.html">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+<link rel="stylesheet" href="../assets/css/main.css">
+<style>
+.result-box{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:24px;text-align:center;margin-top:16px;}
+.result-number{font-size:42px;font-weight:900;font-family:"Syne",sans-serif;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.result-label{font-size:14px;color:var(--text3);margin-top:4px;}
+.input-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;}
+@media(max-width:600px){.input-row{grid-template-columns:1fr;}}
+.tool-input{width:100%;padding:12px 16px;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-size:15px;outline:none;}
+.tool-input:focus{border-color:var(--accent);}
+.tool-select{width:100%;padding:12px 16px;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-size:15px;outline:none;cursor:pointer;}
+label.field-label{font-size:12px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:6px;}
+.tag-cloud{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;}
+.tag{padding:6px 14px;background:var(--bg3);border:1px solid var(--border);border-radius:20px;font-size:13px;color:var(--text2);cursor:pointer;transition:all 0.2s;}
+.tag:hover{border-color:var(--accent);color:var(--accent);}
+textarea.tool-textarea{width:100%;padding:16px;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-size:14px;line-height:1.7;resize:vertical;outline:none;font-family:inherit;}
+textarea.tool-textarea:focus{border-color:var(--accent);}
+</style>
+</head>
+<body>
+<nav>
+  <a href="../index.html" class="nav-logo">⚡ CalcNation</a>
+  <div class="nav-links">
+    <a href="../pdf/compress.html">PDF Tools</a>
+    <a href="../dev/json-formatter.html">Dev Tools</a>
+    <div class="nav-dropdown">
+      <a href="youtube-money-calculator.html" class="nav-dropdown-trigger active">Social ▾</a>
+      <div class="nav-dropdown-menu nav-dropdown-wide">
+        <div class="nav-dropdown-col">
+          <div class="nav-dropdown-heading">YouTube Tools</div>
+          <a href="youtube-money-calculator.html"><span>💰</span> Money Calculator</a>
+          <a href="youtube-tag-generator.html"><span>🏷️</span> Tag Generator</a>
+          <a href="youtube-thumbnail-resizer.html"><span>🖼️</span> Thumbnail Resizer</a>
+          <a href="youtube-title-generator.html"><span>✍️</span> Title Generator</a>
+          <a href="youtube-cpm-calculator.html"><span>📊</span> CPM Calculator</a>
+          <a href="video-length-optimizer.html"><span>⏱️</span> Video Length Optimizer</a>
+        </div>
+        <div class="nav-dropdown-col">
+          <div class="nav-dropdown-heading">Social Media</div>
+          <a href="instagram-engagement.html"><span>📸</span> Instagram Engagement</a>
+          <a href="tiktok-money-calculator.html"><span>🎵</span> TikTok Earnings</a>
+          <a href="hashtag-generator.html"><span>#️⃣</span> Hashtag Generator</a>
+          <a href="influencer-earnings.html"><span>⭐</span> Influencer Earnings</a>
+        </div>
+        <div class="nav-dropdown-col">
+          <div class="nav-dropdown-heading">Viral Tools</div>
+          <a href="../tools/love-calculator.html"><span>❤️</span> Love Calculator</a>
+          <a href="../tools/random-name-picker.html"><span>🎲</span> Name Picker</a>
+          <a href="../tools/random-team-generator.html"><span>👥</span> Team Generator</a>
+          <a href="../tools/dice-roller.html"><span>🎲</span> Dice Roller</a>
+          <a href="../tools/qr-code-generator.html"><span>📱</span> QR Code Generator</a>
+          <a href="../tools/word-counter.html"><span>📝</span> Word Counter</a>
+        </div>
+        <div class="nav-dropdown-col">
+          <div class="nav-dropdown-heading">Text Tools</div>
+          <a href="../tools/text-case-converter.html"><span>🔡</span> Case Converter</a>
+          <a href="../tools/character-counter.html"><span>🔢</span> Character Counter</a>
+          <a href="../tools/fake-address-generator.html"><span>📍</span> Fake Address</a>
+          <a href="../tools/barcode-generator.html"><span>▌▌▌</span> Barcode Generator</a>
+        </div>
+      </div>
+    </div>
+    <a href="#">Finance</a>
+    <a href="#">Health</a>
+  </div>
+</nav>
+<div class="breadcrumb"><a href="../index.html">Home</a> <span>›</span> <span>Social Tools</span> <span>›</span> <span>YouTube Tag Generator</span></div>
+<main class="tool-page">
+  <div class="tool-header">
+    <div class="tool-icon">🏷️</div>
+    <h1>YouTube Tag Generator</h1>
+    <p>Generate SEO-optimized tags for your YouTube videos. Enter your topic and get 20+ relevant tags instantly.</p>
+    <div style="display:flex;gap:8px;margin-top:12px"><span class="badge">Free</span><span class="badge orange">Instant</span><span class="badge purple">No Signup</span></div>
+  </div>
+  <div class="tool-box">
+    <div class="tool-box-header"><h2>YouTube Tag Generator</h2></div>
+    <div class="tool-box-body"><div style="margin-bottom:16px">
+  <label class="field-label">Video Topic / Title / Keywords</label>
+  <input class="tool-input" id="ytTagTopic" placeholder="e.g. how to invest in stocks for beginners 2024...">
+  <div style="margin-top:12px;display:flex;gap:8px">
+    <select class="tool-select" id="ytTagNiche">
+      <option value="general">General</option>
+      <option value="tech">Tech / Tutorial</option>
+      <option value="finance">Finance / Business</option>
+      <option value="gaming">Gaming</option>
+      <option value="lifestyle">Lifestyle / Vlog</option>
+      <option value="education">Education</option>
+    </select>
+    <button class="btn btn-primary" onclick="genYTTags()">🏷️ Generate Tags</button>
+  </div>
+</div>
+<div id="ytTagResult" style="display:none">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+    <div style="font-size:13px;font-weight:600;color:var(--text2)" id="ytTagCount"></div>
+    <button class="btn btn-secondary" style="padding:6px 14px;font-size:13px" onclick="copyYTTags()">📋 Copy All</button>
+  </div>
+  <div id="ytTagCloud" class="tag-cloud"></div>
+  <div id="ytTagStr" style="margin-top:12px;padding:14px;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);font-size:13px;color:var(--text2);line-height:2"></div>
+</div></div>
+  </div>
+  <div class="related-tools"><h2>Related Tools</h2><div class="related-grid"><a href="youtube-title-generator.html" class="related-card"><span class="related-card-icon">✍️</span><span class="related-card-name">Title Generator</span></a><a href="youtube-money-calculator.html" class="related-card"><span class="related-card-icon">💰</span><span class="related-card-name">Money Calculator</span></a><a href="hashtag-generator.html" class="related-card"><span class="related-card-icon">#️⃣</span><span class="related-card-name">Hashtag Generator</span></a></div></div>
+</main>
+<footer><div style="margin-bottom:16px"><a href="../index.html" class="nav-logo" style="font-size:18px">⚡ CalcNation</a></div><div>© 2024 CalcNation · Free tools · No signup required</div></footer>
+<div class="toast" id="toast"></div>
+<script src="../assets/js/utils.js"></script>
+<script>function genYTTags(){
+  const topic=document.getElementById('ytTagTopic').value.trim();
+  if(!topic)return showToast('Enter a topic first','error');
+  const niche=document.getElementById('ytTagNiche').value;
+  const words=topic.toLowerCase().split(/\s+/).filter(w=>w.length>2&&!['the','and','for','how','with','that','this','from'].includes(w));
+  const nicheExtras={tech:['tutorial','howto','guide','tips','tricks','stepbystep','beginners','2024','free','best'],
+    finance:['money','investing','stocks','wealth','financial','passive income','savings','budget','profit','returns'],
+    gaming:['gameplay','walkthrough','tips','tricks','guide','best','top','rank','beginner','pro','tutorial'],
+    lifestyle:['vlog','daily','routine','life','motivation','inspiration','day in my life','travel','aesthetic'],
+    education:['learn','study','explained','understanding','guide','course','lesson','simple','easy','fast'],
+    general:['best','top','free','2024','how to','tips','guide','tutorial','beginners','results']
+  }[niche]||[];
+  let tags=[topic,...words];
+  words.forEach(w=>{tags.push(w+' tutorial',w+' guide',w+' tips','best '+w,'how to '+w,w+' 2024');});
+  tags=[...tags,...nicheExtras,'calcnation'];
+  tags=[...new Set(tags.map(t=>t.trim()).filter(t=>t.length>2))].slice(0,30);
+  document.getElementById('ytTagCount').textContent=tags.length+' tags — Copy all and paste into YouTube studio';
+  document.getElementById('ytTagCloud').innerHTML=tags.map(t=>`<span class="tag" onclick="navigator.clipboard.writeText('${t}').then(()=>showToast('Copied!','success'))">${t}</span>`).join('');
+  document.getElementById('ytTagStr').textContent=tags.join(', ');
+  document.getElementById('ytTagResult').style.display='block';
+  showToast(tags.length+' tags generated!','success');
+}
+function copyYTTags(){navigator.clipboard.writeText(document.getElementById('ytTagStr').textContent).then(()=>showToast('Tags copied!','success'));}</script>
+</body>
+</html>
