@@ -106,7 +106,7 @@ label.fl{font-size:12px;font-weight:700;color:var(--text3);text-transform:upperc
     <div class="tool-box-header"><h2>Loan Details</h2></div>
     <div class="tool-box-body">
       <div class="grid2">
-        <div><label class="fl">Loan Amount (<span class="currency-symbol"></span>)</label><input class="tool-input" data-currency-input type="number" id="principal" value="100000" min="1000" step="1000" oninput="calcEMI()"></div>
+        <div><label class="fl">Loan Amount (<span class="currency-symbol"></span>)</label><input class="tool-input" data-currency-input type="number" id="principal" value="100000" min="0" step="0.01" oninput="calcEMI()"></div>
         <div><label class="fl">Interest Rate (% per year)</label><input class="tool-input" type="number" id="rate" value="10" min="0.1" step="0.1" oninput="calcEMI()"></div>
         <div><label class="fl">Tenure (months)</label><input class="tool-input" type="number" id="months" value="36" min="1" max="360" oninput="calcEMI()"></div>
         <div style="display:flex;gap:8px;align-items:flex-end">

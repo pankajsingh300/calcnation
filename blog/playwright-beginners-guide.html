@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Playwright for Beginners: Your First Automated Test | CalcNation Blog</title>
+<meta name="description" content="Get started with Playwright automation in 10 minutes. Learn selectors, assertions, and write your first automated test script.">
+<link rel="canonical" href="https://calcnation-jade.vercel.app/blog/playwright-beginners-guide.html">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+<link rel="stylesheet" href="../assets/css/main.css">
+<style>
+.article-content { max-width: 900px; margin: 0 auto; line-height: 1.8; color: var(--text2); }
+.article-content h2 { font-size: 24px; font-weight: 700; margin: 32px 0 16px; color: var(--text); }
+.article-content h3 { font-size: 18px; font-weight: 600; margin: 24px 0 12px; color: var(--text); }
+.article-content p { margin: 16px 0; }
+.article-content code { background: var(--bg2); padding: 2px 6px; border-radius: 4px; font-family: 'Fira Code', monospace; color: var(--accent); }
+.article-content pre { background: var(--bg2); padding: 16px; border-radius: 8px; overflow-x: auto; margin: 16px 0; border-left: 4px solid var(--accent); }
+.article-content pre code { background: none; color: var(--text2); }
+.article-content ul { margin: 16px 0 16px 24px; }
+.article-content li { margin: 8px 0; }
+.article-header { padding: 32px; background: linear-gradient(135deg, rgba(0,229,255,0.08), rgba(124,58,237,0.08)); border-radius: 12px; margin-bottom: 32px; }
+.article-meta { font-size: 14px; color: var(--text3); margin-top: 12px; }
+</style>
+</head>
+<body>
+<nav>
+  <a href="../index.html" class="nav-logo">⚡ CalcNation</a>
+  <div class="nav-links">
+    <a href="../index.html">Tools</a>
+    <a href="../blog/">Blog</a>
+  </div>
+</nav>
+
+<div class="breadcrumb"><a href="../index.html">Home</a> <span>›</span> <a href="../blog/">Blog</a> <span>›</span> <span>Playwright for Beginners</span></div>
+
+<main class="tool-page">
+  <div class="article-header">
+    <h1>Playwright for Beginners: Your First Automated Test</h1>
+    <div class="article-meta">📅 Mar 8, 2026 · 🔖 Automation · ⏱️ 8 min read</div>
+  </div>
+
+  <div class="article-content">
+    <p>If you're new to test automation, Playwright is one of the easiest and most powerful tools to get started. In this guide, we'll write your first automated test in under 10 minutes.</p>
+
+    <h2>What is Playwright?</h2>
+    <p>Playwright is a free, open-source automation library for testing web applications across Chrome, Firefox, and Safari. It's maintained by Microsoft and loved by QA engineers worldwide.</p>
+
+    <h3>Why Playwright?</h3>
+    <ul>
+      <li><strong>Fast:</strong> Runs tests in seconds, even across multiple browsers</li>
+      <li><strong>Reliable:</strong> Built-in waiting mechanisms avoid flaky tests</li>
+      <li><strong>Easy to learn:</strong> Simple syntax, great documentation</li>
+      <li><strong>Free:</strong> No licensing costs, open source forever</li>
+    </ul>
+
+    <h2>Step 1: Install Playwright</h2>
+    <p>Open your terminal and run:</p>
+    <pre><code>npm install -D playwright
+npx playwright install</code></pre>
+
+    <h2>Step 2: Write Your First Test</h2>
+    <p>Create a file called <code>test.js</code>:</p>
+    <pre><code>const { test, expect } = require('@playwright/test');
+
+test('Google search works', async ({ page }) => {
+  // Navigate to Google
+  await page.goto('https://www.google.com');
+  
+  // Type in search box
+  await page.fill('input[name="q"]', 'Playwright automation');
+  
+  // Press Enter
+  await page.press('input[name="q"]', 'Enter');
+  
+  // Wait for results and verify
+  await page.waitForSelector('#search');
+  await expect(page).toHaveTitle(/Playwright/);
+});</code></pre>
+
+    <h2>Step 3: Run the Test</h2>
+    <pre><code>npx playwright test test.js</code></pre>
+
+    <p>Congratulations! Your first test is running. 🎉</p>
+
+    <h2>Key Playwright Methods to Know</h2>
+    <ul>
+      <li><code>page.goto(url)</code> — Navigate to a URL</li>
+      <li><code>page.fill(selector, text)</code> — Type into input fields</li>
+      <li><code>page.click(selector)</code> — Click buttons</li>
+      <li><code>page.waitForSelector(selector)</code> — Wait for element to appear</li>
+      <li><code>expect(page).toHaveTitle(...)</code> — Assert page title</li>
+    </ul>
+
+    <h2>Common Selectors</h2>
+    <pre><code>// CSS Selector
+page.click('.button-class')
+
+// ID Selector
+page.click('#submit-button')
+
+// XPath
+page.click('//button[text()="Submit"]')
+
+// Attribute selector
+page.fill('input[type="email"]', 'test@example.com')</code></pre>
+
+    <h2>Debugging Tests</h2>
+    <p>Use the Playwright Inspector to debug tests interactively:</p>
+    <pre><code>PWDEBUG=1 npx playwright test test.js</code></pre>
+
+    <p>This opens a browser with a step-by-step debugger so you can see exactly what your test is doing.</p>
+
+    <h2>Next Steps</h2>
+    <ul>
+      <li>Read the <a href="https://playwright.dev" target="_blank">official Playwright docs</a></li>
+      <li>Learn about <strong>fixtures</strong> for reusable test setup</li>
+      <li>Try <strong>CI/CD integration</strong> with GitHub Actions</li>
+      <li>Use our <a href="../automation/test-data-generator.html">Test Data Generator</a> for realistic test inputs</li>
+    </ul>
+
+    <h2>Conclusion</h2>
+    <p>You now know enough Playwright to start testing. The best way to learn is by writing tests on your own projects. Start small, automate critical user flows, and gradually expand your test suite.</p>
+
+    <p><strong>Happy testing!</strong> 🚀</p>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-brand"><a href="../index.html" class="nav-logo" style="font-size:18px">⚡ CalcNation</a></div>
+  <div class="footer-links">
+    <a href="../index.html">Tools</a>
+    <a href="../blog/">Blog</a>
+    <a href="../privacy.html">Privacy</a>
+  </div>
+  <div class="footer-bottom">© 2026 CalcNation · Free tools · No signup · Your data stays private</div>
+</footer>
+
+<script src="../assets/js/utils.js"></script>
+</body>
+</html>
