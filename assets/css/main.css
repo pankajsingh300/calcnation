@@ -45,6 +45,8 @@
   display: grid !important;
   grid-template-columns: 180px 180px 180px;
   white-space: nowrap;
+  left: auto !important;
+  right: 0;
 }
 .nav-dropdown-col {
   border-right: 1px solid var(--border);
