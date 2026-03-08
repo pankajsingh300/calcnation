@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — CalcNation</title>
+<meta name="description" content="Get in touch with CalcNation. Report bugs, send feedback, or ask questions.">
+<link rel="canonical" href="https://calcnation-jade.vercel.app/contact.html">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+<link rel="stylesheet" href="assets/css/main.css">
+<style>
+.content { max-width: 900px; margin: 0 auto; line-height: 1.8; color: var(--text2); }
+.content h2 { font-size: 24px; font-weight: 700; margin: 32px 0 16px; color: var(--text); }
+.content p { margin: 16px 0; }
+
+.contact-form { 
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 24px 0;
+  max-width: 600px;
+}
+
+.contact-form label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: var(--text);
+}
+
+.contact-form input,
+.contact-form textarea {
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 14px;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.contact-form textarea {
+  min-height: 150px;
+  resize: vertical;
+}
+
+.contact-form button {
+  padding: 12px 24px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-light));
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.contact-form button:hover {
+  transform: scale(1.02);
+}
+
+.contact-methods {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  margin: 32px 0;
+}
+
+.contact-method {
+  padding: 20px;
+  background: var(--bg-secondary);
+  border-radius: 8px;
+}
+
+.contact-method h3 {
+  margin: 0 0 8px;
+  font-size: 16px;
+  color: var(--text);
+}
+
+.contact-method p {
+  margin: 0;
+  font-size: 14px;
+  color: var(--text2);
+}
+
+.contact-method a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.contact-method a:hover {
+  text-decoration: underline;
+}
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo">⚡ CalcNation</a>
+  <div class="nav-links">
+    <a href="index.html">Tools</a>
+    <a href="blog/">Blog</a>
+  </div>
+</nav>
+
+<div class="breadcrumb"><a href="index.html">Home</a> <span>›</span> <span>Contact</span></div>
+
+<main class="tool-page">
+  <div class="tool-header">
+    <div class="tool-icon">💬</div>
+    <h1>Get In Touch</h1>
+    <p>Found a bug? Have feedback? We'd love to hear from you.</p>
+  </div>
+
+  <div class="content">
+    <h2>How To Reach Us</h2>
+    
+    <div class="contact-methods">
+      <div class="contact-method">
+        <h3>📧 Email</h3>
+        <p><a href="mailto:hello@calcnation.com">hello@calcnation.com</a></p>
+      </div>
+      <div class="contact-method">
+        <h3>🐛 Bug Reports</h3>
+        <p><a href="https://github.com/calcnation/issues" target="_blank">GitHub Issues</a></p>
+      </div>
+      <div class="contact-method">
+        <h3>🤝 Collaborations</h3>
+        <p>Interested in partnering? Let's talk.</p>
+        <p><a href="mailto:team@calcnation.com">team@calcnation.com</a></p>
+      </div>
+    </div>
+
+    <h2>Send Us A Message</h2>
+    <form class="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+      <div>
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" required>
+      </div>
+      <div>
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required>
+      </div>
+      <div>
+        <label for="subject">Subject</label>
+        <input type="text" id="subject" name="subject" required>
+      </div>
+      <div>
+        <label for="message">Message</label>
+        <textarea id="message" name="message" required></textarea>
+      </div>
+      <button type="submit">Send Message</button>
+    </form>
+
+    <h2>Feedback</h2>
+    <p>What tool would you like us to build next? What's not working well? Drop us a message—we read everything.</p>
+
+    <h2>Response Time</h2>
+    <p>We aim to respond to all messages within 24-48 hours.</p>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-brand"><a href="index.html" class="nav-logo" style="font-size:18px">⚡ CalcNation</a></div>
+  <div class="footer-links">
+    <a href="index.html">Tools</a>
+    <a href="blog/">Blog</a>
+    <a href="about.html">About</a>
+    <a href="privacy.html">Privacy</a>
+    <a href="contact.html">Contact</a>
+  </div>
+  <div class="footer-bottom">© 2026 CalcNation · Free tools · No signup · Your data stays private</div>
+</footer>
+
+<script src="assets/js/utils.js"></script>
+</body>
+</html>
