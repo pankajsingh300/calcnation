@@ -31,26 +31,27 @@
 <style>
 /* ── HERO ── */
 .hero {
-  min-height: 88vh;
+  min-height: 90vh;
   display: flex; flex-direction: column;
   align-items: center; justify-content: center;
   text-align: center; padding: 60px 24px;
   position: relative; overflow: hidden;
+  background: linear-gradient(135deg, rgba(124,58,237,0.1) 0%, rgba(0,229,255,0.08) 50%, rgba(255,107,53,0.08) 100%);
 }
 .hero-bg {
   position: absolute; inset: 0; z-index: 0;
   background:
-    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(0,229,255,0.12) 0%, transparent 60%),
-    radial-gradient(ellipse 60% 40% at 80% 80%, rgba(124,58,237,0.1) 0%, transparent 50%),
-    radial-gradient(ellipse 50% 40% at 10% 90%, rgba(255,107,53,0.07) 0%, transparent 50%);
+    radial-gradient(circle 800px at 20% 50%, rgba(124,58,237,0.25) 0%, transparent 50%),
+    radial-gradient(circle 600px at 80% 80%, rgba(0,229,255,0.2) 0%, transparent 50%),
+    radial-gradient(circle 500px at 100% 0%, rgba(255,107,53,0.15) 0%, transparent 50%);
 }
 .hero-grid {
   position: absolute; inset: 0; z-index: 0;
   background-image:
-    linear-gradient(rgba(30,42,66,0.4) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(30,42,66,0.4) 1px, transparent 1px);
-  background-size: 48px 48px;
-  mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 80%);
+    linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse 100% 100% at 50% 50%, black 40%, transparent 90%);
 }
 .hero > * { position: relative; z-index: 1; }
 
@@ -169,26 +170,40 @@
   inset: 0; opacity: 0; transition: opacity 0.3s;
   border-radius: 16px;
 }
-.cat-card:hover { transform: translateY(-4px); border-color: transparent; }
+.cat-card::after {
+  content: ''; position: absolute;
+  top: -50%; right: -50%; width: 200%; height: 200%;
+  background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+  opacity: 0; transition: opacity 0.3s;
+}
+.cat-card:hover { transform: translateY(-8px); border-color: transparent; box-shadow: 0 20px 40px rgba(0,0,0,0.2); }
 .cat-card:hover::before { opacity: 1; }
+.cat-card:hover::after { opacity: 1; }
 
-.cat-card.pdf::before { background: linear-gradient(135deg, rgba(0,229,255,0.08), rgba(0,229,255,0.03)); border: 1px solid rgba(0,229,255,0.3); border-radius: 16px; }
-.cat-card.dev::before { background: linear-gradient(135deg, rgba(124,58,237,0.08), rgba(124,58,237,0.03)); border: 1px solid rgba(124,58,237,0.3); border-radius: 16px; }
-.cat-card.finance::before { background: linear-gradient(135deg, rgba(255,107,53,0.08), rgba(255,107,53,0.03)); border: 1px solid rgba(255,107,53,0.3); border-radius: 16px; }
-.cat-card.health::before { background: linear-gradient(135deg, rgba(0,212,138,0.08), rgba(0,212,138,0.03)); border: 1px solid rgba(0,212,138,0.3); border-radius: 16px; }
-.cat-card.tools::before { background: linear-gradient(135deg, rgba(251,191,36,0.08), rgba(251,191,36,0.03)); border: 1px solid rgba(251,191,36,0.3); border-radius: 16px; }
+.cat-card.pdf { background: linear-gradient(135deg, rgba(0,229,255,0.04) 0%, rgba(0,229,255,0.02) 100%); }
+.cat-card.dev { background: linear-gradient(135deg, rgba(124,58,237,0.04) 0%, rgba(124,58,237,0.02) 100%); }
+.cat-card.finance { background: linear-gradient(135deg, rgba(255,107,53,0.04) 0%, rgba(255,107,53,0.02) 100%); }
+.cat-card.health { background: linear-gradient(135deg, rgba(0,212,138,0.04) 0%, rgba(0,212,138,0.02) 100%); }
+.cat-card.tools { background: linear-gradient(135deg, rgba(251,191,36,0.04) 0%, rgba(251,191,36,0.02) 100%); }
+
+.cat-card.pdf::before { background: linear-gradient(135deg, rgba(0,229,255,0.15), rgba(0,229,255,0.05)); border: 1px solid rgba(0,229,255,0.4); }
+.cat-card.dev::before { background: linear-gradient(135deg, rgba(124,58,237,0.15), rgba(124,58,237,0.05)); border: 1px solid rgba(124,58,237,0.4); }
+.cat-card.finance::before { background: linear-gradient(135deg, rgba(255,107,53,0.15), rgba(255,107,53,0.05)); border: 1px solid rgba(255,107,53,0.4); }
+.cat-card.health::before { background: linear-gradient(135deg, rgba(0,212,138,0.15), rgba(0,212,138,0.05)); border: 1px solid rgba(0,212,138,0.4); }
+.cat-card.tools::before { background: linear-gradient(135deg, rgba(251,191,36,0.15), rgba(251,191,36,0.05)); border: 1px solid rgba(251,191,36,0.4); }
 
 .cat-icon-wrap {
-  width: 52px; height: 52px; border-radius: 12px;
+  width: 60px; height: 60px; border-radius: 14px;
   display: flex; align-items: center; justify-content: center;
-  font-size: 26px; margin-bottom: 16px;
+  font-size: 32px; margin-bottom: 16px;
   position: relative; z-index: 1;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
 }
-.cat-card.pdf .cat-icon-wrap { background: rgba(0,229,255,0.12); }
-.cat-card.dev .cat-icon-wrap { background: rgba(124,58,237,0.12); }
-.cat-card.finance .cat-icon-wrap { background: rgba(255,107,53,0.12); }
-.cat-card.health .cat-icon-wrap { background: rgba(0,212,138,0.12); }
-.cat-card.tools .cat-icon-wrap { background: rgba(251,191,36,0.12); }
+.cat-card.pdf .cat-icon-wrap { background: linear-gradient(135deg, rgba(0,229,255,0.2), rgba(0,150,200,0.1)); }
+.cat-card.dev .cat-icon-wrap { background: linear-gradient(135deg, rgba(124,58,237,0.2), rgba(99,25,200,0.1)); }
+.cat-card.finance .cat-icon-wrap { background: linear-gradient(135deg, rgba(255,107,53,0.2), rgba(230,80,30,0.1)); }
+.cat-card.health .cat-icon-wrap { background: linear-gradient(135deg, rgba(0,212,138,0.2), rgba(0,180,120,0.1)); }
+.cat-card.tools .cat-icon-wrap { background: linear-gradient(135deg, rgba(251,191,36,0.2), rgba(220,160,20,0.1)); }
 
 .cat-name {
   font-family: 'Syne', sans-serif;
@@ -209,26 +224,74 @@
 /* POPULAR TOOLS */
 .pop-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; }
 .pop-card {
-  background: var(--card); border: 1px solid var(--border);
-  border-radius: var(--radius); padding: 16px 18px;
+  background: linear-gradient(135deg, var(--card) 0%, rgba(124,58,237,0.02) 100%);
+  border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 18px 20px;
   display: flex; align-items: center; gap: 14px;
   text-decoration: none; transition: all 0.2s;
+  position: relative; overflow: hidden;
 }
-.pop-card:hover { border-color: var(--accent); transform: translateY(-2px); }
-.pop-card-icon { font-size: 24px; flex-shrink: 0; }
-.pop-card-info {}
-.pop-card-name { font-size: 13px; font-weight: 600; color: var(--text); }
-.pop-card-searches { font-size: 11px; color: var(--text3); margin-top: 2px; }
+.pop-card::before {
+  content: ''; position: absolute;
+  inset: 0; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+  opacity: 0; transition: opacity 0.3s;
+}
+.pop-card:hover { 
+  border-color: var(--accent); 
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(0,229,255,0.15);
+}
+.pop-card:hover::before { opacity: 1; }
+.pop-card-icon { 
+  font-size: 28px; 
+  flex-shrink: 0;
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
+}
+.pop-card-info { position: relative; z-index: 1; }
+.pop-card-name { font-size: 14px; font-weight: 700; color: var(--text); }
+.pop-card-searches { font-size: 12px; color: var(--accent); margin-top: 3px; font-weight: 500; }
 
 /* WHY SECTION */
 .why-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 20px; }
 .why-card {
-  background: var(--card); border: 1px solid var(--border);
-  border-radius: var(--radius); padding: 24px;
+  background: linear-gradient(135deg, var(--card) 0%, rgba(124,58,237,0.03) 100%);
+  border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 28px;
+  transition: all 0.3s;
+  position: relative; overflow: hidden;
 }
-.why-icon { font-size: 28px; margin-bottom: 12px; }
-.why-title { font-family: 'Syne', sans-serif; font-size: 16px; font-weight: 700; margin-bottom: 8px; }
-.why-text { font-size: 13px; color: var(--text3); line-height: 1.6; }
+.why-card::before {
+  content: ''; position: absolute;
+  top: 0; right: 0; width: 100%; height: 100%;
+  background: linear-gradient(135deg, rgba(0,229,255,0.1) 0%, transparent 100%);
+  opacity: 0; transition: opacity 0.3s;
+}
+.why-card:hover { 
+  transform: translateY(-8px);
+  border-color: var(--accent);
+  box-shadow: 0 20px 50px rgba(0,229,255,0.2);
+}
+.why-card:hover::before { opacity: 1; }
+.why-icon { 
+  font-size: 36px; 
+  margin-bottom: 16px;
+  display: block;
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
+}
+.why-title { 
+  font-family: 'Syne', sans-serif; 
+  font-size: 18px; 
+  font-weight: 700; 
+  margin-bottom: 10px;
+  color: var(--text);
+}
+.why-text { 
+  font-size: 14px; 
+  color: var(--text2); 
+  line-height: 1.6;
+  position: relative;
+  z-index: 1;
+}
 
 /* MARQUEE */
 .marquee-wrap {
@@ -352,18 +415,18 @@
 
   <div class="hero-badge">
     <div class="hero-badge-dot"></div>
-    60+ Free Tools — No Signup Required
+    ✨ 60+ Professional Tools Built for You
   </div>
 
   <h1>
-    Every Tool You<br>
-    Need, <span class="grad">For Free</span>
+    The Complete Toolkit<br>
+    <span class="grad">for Developers & QA</span>
   </h1>
-  <p>Free online tools for developers, QA engineers & automation professionals. PDF utilities, developer tools, finance calculators, automation helpers & more. No signup. No ads. Your files stay private.</p>
+  <p>Powerful, free tools for developers, QA engineers, automation professionals & business users. PDF manipulation, code formatting, financial calculations, testing automation & more. No signup. No hidden costs. 100% private processing.</p>
 
   <div class="search-wrap">
     <span class="search-icon">🔍</span>
-    <input type="text" class="search-bar" placeholder="Search 60+ tools..." id="searchInput" autocomplete="off">
+    <input type="text" class="search-bar" placeholder="Search tools... (PDF, JSON, EMI, etc)" id="searchInput" autocomplete="off">
     <span class="search-kbd">⌘K</span>
     <div class="search-results" id="searchResults"></div>
   </div>
@@ -371,19 +434,19 @@
   <div class="hero-stats">
     <div class="hero-stat">
       <div class="hero-stat-num">60<span>+</span></div>
-      <div class="hero-stat-label">Free Tools</div>
+      <div class="hero-stat-label">Tools & Utilities</div>
     </div>
     <div class="hero-stat">
-      <div class="hero-stat-num">0</div>
-      <div class="hero-stat-label">Cost Forever</div>
+      <div class="hero-stat-num">6</div>
+      <div class="hero-stat-label">Major Categories</div>
     </div>
     <div class="hero-stat">
-      <div class="hero-stat-num">100<span>%</span></div>
-      <div class="hero-stat-label">Private & Secure</div>
+      <div class="hero-stat-num">∞</div>
+      <div class="hero-stat-label">Always Free</div>
     </div>
     <div class="hero-stat">
-      <div class="hero-stat-num">6<span>+</span></div>
-      <div class="hero-stat-label">Categories</div>
+      <div class="hero-stat-num">🔒</div>
+      <div class="hero-stat-label">100% Private</div>
     </div>
   </div>
 </section>
@@ -396,16 +459,16 @@
 <!-- CATEGORIES -->
 <div class="section">
   <div class="section-header">
-    <div class="section-tag">// CATEGORIES</div>
-    <h2 class="section-title">What do you need today?</h2>
-    <p class="section-sub">Pick a category and get started instantly — no account, no install, no waiting.</p>
+    <div class="section-tag">// EXPLORE BY CATEGORY</div>
+    <h2 class="section-title">Tools for Every Need</h2>
+    <p class="section-sub">Organized by function. 60+ professional tools across 6 major categories. Find exactly what you need in seconds.</p>
   </div>
   <div class="cat-grid">
     <a href="pdf/compress.html" class="cat-card pdf">
       <div class="cat-icon-wrap">📄</div>
       <div class="cat-name">PDF Tools</div>
-      <div class="cat-desc">Compress, merge, split, convert PDFs and more. All processing in your browser.</div>
-      <div class="cat-count">10 tools available →</div>
+      <div class="cat-desc">Compress, merge, split, convert. No file limits. Professional-grade quality, instant processing.</div>
+      <div class="cat-count">8 powerful tools →</div>
     </a>
     <a href="dev/json-formatter.html" class="cat-card dev">
       <div class="cat-icon-wrap">💻</div>
@@ -469,31 +532,49 @@
 <!-- WHY US -->
 <div class="section" style="padding-top:0">
   <div class="section-header">
-    <div class="section-tag">// WHY CALCNATION</div>
-    <h2 class="section-title">Trusted by thousands</h2>
-    <p class="section-sub">Built for speed, privacy, and ease. No account ever.</p>
+    <div class="section-tag">// WHY CHOOSE CALCNATION</div>
+    <h2 class="section-title">Built for Trust & Speed</h2>
+    <p class="section-sub">Fast, secure, private. No accounts. No data collection. Just powerful tools that work.</p>
   </div>
   <div class="why-grid">
     <div class="why-card">
       <div class="why-icon">🔒</div>
       <div class="why-title">100% Private</div>
-      <div class="why-text">All PDF and file processing runs in your browser. Your files never leave your device or touch any server.</div>
+      <div class="why-text">All processing happens in your browser. No uploads to servers. No data collection. Your files, your control.</div>
     </div>
     <div class="why-card">
       <div class="why-icon">⚡</div>
-      <div class="why-title">Blazing Fast</div>
-      <div class="why-text">No uploads, no waiting. Tools run instantly in your browser using modern WebAssembly technology.</div>
+      <div class="why-title">Lightning Fast</div>
+      <div class="why-text">No waiting. No buffering. Tools run instantly using modern technology. Desktop-speed performance on mobile too.</div>
     </div>
     <div class="why-card">
-      <div class="why-icon">🚫</div>
-      <div class="why-title">No Signup Ever</div>
-      <div class="why-text">No account. No email. No credit card. Just open a tool and use it. That's the way it should be.</div>
+      <div class="why-icon">✨</div>
+      <div class="why-title">Always Free</div>
+      <div class="why-text">No premium plans. No hidden costs. No upgrade pressure. 60+ tools, completely free, forever.</div>
     </div>
     <div class="why-card">
       <div class="why-icon">📱</div>
       <div class="why-title">Works Everywhere</div>
-      <div class="why-text">Fully responsive. Works perfectly on desktop, tablet, and mobile with the same experience.</div>
+      <div class="why-text">Desktop, tablet, mobile. Responsive design. Same powerful features on every device. Sync across browsers.</div>
     </div>
+  </div>
+</div>
+
+<!-- CTA SECTION -->
+<div style="background: linear-gradient(135deg, rgba(124,58,237,0.15) 0%, rgba(0,229,255,0.1) 100%); border-top: 1px solid rgba(0,229,255,0.2); border-bottom: 1px solid rgba(0,229,255,0.2); padding: 60px 40px; margin: 80px 0; text-align: center;">
+  <h2 style="font-family: 'Syne', sans-serif; font-size: 36px; font-weight: 800; margin-bottom: 16px; background: linear-gradient(135deg, var(--accent), #a855f7); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+    Ready to Supercharge Your Workflow?
+  </h2>
+  <p style="font-size: 18px; color: var(--text2); max-width: 600px; margin: 0 auto 40px; line-height: 1.6;">
+    Join thousands of developers, QA engineers, and professionals using CalcNation daily. Start with any tool — no sign up, no credit card required.
+  </p>
+  <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+    <a href="#searchInput" style="display: inline-block; background: linear-gradient(135deg, var(--accent), #0dd9ff); color: white; padding: 14px 32px; border-radius: 8px; font-weight: 700; text-decoration: none; transition: all 0.3s; box-shadow: 0 10px 30px rgba(0,229,255,0.3);">
+      Explore Tools →
+    </a>
+    <a href="blog/" style="display: inline-block; background: var(--card); border: 1px solid var(--border); color: var(--text); padding: 14px 32px; border-radius: 8px; font-weight: 700; text-decoration: none; transition: all 0.3s;">
+      Read Blog ✍️
+    </a>
   </div>
 </div>
 

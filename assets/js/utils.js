@@ -64,7 +64,7 @@ const currencyRates = {
 };
 
 function getCurrentCurrency() {
-  return localStorage.getItem('currency') || 'USD';
+  return localStorage.getItem('currency') || 'INR';
 }
 
 function setCurrentCurrency(cur) {
@@ -200,8 +200,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // make sure inputs match stored currency on load
   const cur = getCurrentCurrency();
-  if (cur && cur !== 'USD') {
-    convertInputs('USD', cur);
+  if (cur && cur !== 'INR') {
+    convertInputs('INR', cur);
     document.querySelectorAll('[data-recalc-on-currency]').forEach(fnEl => {
       try { window[fnEl.dataset.recalcOnCurrency](); } catch(e) {}
     });
