@@ -3,20 +3,22 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="300+ free online tools in one place. Compress PDF, merge PDF, developer tools, finance calculators, health calculators. No signup, no upload — works in your browser.">
-<meta name="keywords" content="free online tools, pdf compressor, merge pdf, compress pdf, pdf to jpg, jpg to pdf, split pdf, bmi calculator, mortgage calculator, json formatter">
+<meta name="description" content="60+ free online tools: PDF compressor, merge, split, JSON formatter, mortgage calculator, BMI, QR generator. No signup. Works in your browser. Your files stay private.">
+<meta name="keywords" content="free online tools, pdf compressor, merge pdf, json formatter, mortgage calculator, bmi calculator, qr code generator, base64 encoder, password generator">
 <meta name="author" content="CalcNation">
-<meta name="robots" content="index, follow">
+<meta name="robots" content="index, follow, max-snippet:-1">
 <link rel="canonical" href="https://calcnation-jade.vercel.app/">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://calcnation-jade.vercel.app/">
-<meta property="og:title" content="CalcNation — 300+ Free Online Tools & Calculators">
-<meta property="og:description" content="Free PDF tools, developer utilities, finance and health calculators. No signup required.">
+<meta property="og:title" content="CalcNation — 60+ Free Online Tools">
+<meta property="og:description" content="PDF tools, developer utilities, finance & health tools. Compress, merge, format JSON, calculate. No signup. 100% private.">
 <meta property="og:site_name" content="CalcNation">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="CalcNation — 300+ Free Online Tools">
-<title>CalcNation — Free Online Tools, Calculators & PDF Utilities</title>
-<meta name="description" content="Free online tools for everyone. PDF tools, developer utilities, finance calculators, health calculators. Fast, free, no signup required.">
+<meta name="twitter:title" content="CalcNation — Free Online Tools">
+<title>CalcNation — Free Online Tools | PDF, Dev, Finance, Health</title>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebSite","name":"CalcNation","url":"https://calcnation-jade.vercel.app","description":"60+ free online tools: PDF, developer, finance, health. No signup required.","potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://calcnation-jade.vercel.app/?q={search_term_string}"},"query-input":"required name=search_term_string"}}
+</script>
 <link rel="stylesheet" href="assets/css/main.css">
 <style>
 /* ── HERO ── */
@@ -263,7 +265,8 @@
 
 <nav>
   <a href="index.html" class="nav-logo">⚡ CalcNation</a>
-  <div class="nav-links">
+  <button class="nav-toggle" id="navToggle" aria-label="Menu">☰</button>
+  <div class="nav-links" id="navLinks">
     <a href="pdf/compress.html">PDF Tools</a>
     <a href="dev/json-formatter.html">Dev Tools</a>
     <div class="nav-dropdown">
@@ -346,7 +349,7 @@
     Every Tool You<br>
     Need, <span class="grad">For Free</span>
   </h1>
-  <p>Compress PDFs, merge files, calculate mortgages, track calories, format JSON — 60+ free tools. Works in your browser. No signup. Your files stay private.</p>
+  <p>PDF tools, developer utilities, finance &amp; health tools — all free. Compress PDFs, format JSON, calculate EMI, track calories. No signup. Your files never leave your device.</p>
 
   <div class="search-wrap">
     <span class="search-icon">🔍</span>
@@ -402,15 +405,15 @@
     </a>
     <a href="finance/mortgage-calculator.html" class="cat-card finance">
       <div class="cat-icon-wrap">💰</div>
-      <div class="cat-name">Finance Calculators</div>
+      <div class="cat-name">Finance Tools</div>
       <div class="cat-desc">Mortgage, EMI, compound interest, tip calculator. Plan loans and investments.</div>
-      <div class="cat-count">4 calculators available →</div>
+      <div class="cat-count">4 tools →</div>
     </a>
     <a href="health/calorie-calculator.html" class="cat-card health">
       <div class="cat-icon-wrap">🏥</div>
-      <div class="cat-name">Health Calculators</div>
+      <div class="cat-name">Health Tools</div>
       <div class="cat-desc">BMI, calories, pregnancy due date, water intake. Stay healthy with data.</div>
-      <div class="cat-count">7+ health tools →</div>
+      <div class="cat-count">7+ tools →</div>
     </a>
     <a href="tools/qr-code-generator.html" class="cat-card tools">
       <div class="cat-icon-wrap">🔧</div>
@@ -439,9 +442,9 @@
     <a href="dev/json-formatter.html" class="pop-card"><span class="pop-card-icon">{}</span><div class="pop-card-info"><div class="pop-card-name">JSON Formatter</div><div class="pop-card-searches">3.2M searches/mo</div></div></a>
   </div>
   <div class="section-header" style="margin-top:48px">
-    <div class="section-tag">// NEW & FEATURED</div>
-    <h2 class="section-title">Finance &amp; Health Calculators</h2>
-    <p class="section-sub">Plan loans, track calories, and stay healthy with our latest calculators.</p>
+    <div class="section-tag">// FINANCE &amp; HEALTH</div>
+    <h2 class="section-title">Finance &amp; Health Tools</h2>
+    <p class="section-sub">Plan loans, track calories, and stay healthy with our free tools.</p>
   </div>
   <div class="pop-grid" style="margin-top:0">
     <a href="finance/mortgage-calculator.html" class="pop-card"><span class="pop-card-icon">🏠</span><div class="pop-card-info"><div class="pop-card-name">Mortgage Calculator</div><div class="pop-card-searches">Plan your home loan</div></div></a>
@@ -457,7 +460,8 @@
 <div class="section" style="padding-top:0">
   <div class="section-header">
     <div class="section-tag">// WHY CALCNATION</div>
-    <h2 class="section-title">Built differently</h2>
+    <h2 class="section-title">Trusted by thousands</h2>
+    <p class="section-sub">Built for speed, privacy, and ease. No account ever.</p>
   </div>
   <div class="why-grid">
     <div class="why-card">
@@ -483,19 +487,21 @@
   </div>
 </div>
 
-<footer>
-  <div style="margin-bottom:16px">
-    <a href="index.html" class="nav-logo" style="font-size:18px">⚡ CalcNation</a>
-  </div>
-  <div style="display:flex;gap:20px;justify-content:center;flex-wrap:wrap;margin-bottom:16px">
+<!-- AD PLACEHOLDER (Add your AdSense code here when approved) -->
+<div class="ad-slot ad-slot-footer" style="display:none"><!-- Ad space 728x90 --></div>
+
+<footer class="site-footer">
+  <div class="footer-brand"><a href="index.html" class="nav-logo" style="font-size:18px">⚡ CalcNation</a><span class="footer-tagline">Free tools for everyone</span></div>
+  <div class="footer-links">
     <a href="pdf/compress.html">PDF Tools</a>
     <a href="dev/json-formatter.html">Dev Tools</a>
     <a href="finance/mortgage-calculator.html">Finance</a>
     <a href="health/calorie-calculator.html">Health</a>
     <a href="tools/qr-code-generator.html">Tools</a>
     <a href="social/youtube-money-calculator.html">Social</a>
+    <a href="sitemap.xml">Sitemap</a>
   </div>
-  <div>© 2025 CalcNation · Free tools for everyone · No signup required</div>
+  <div class="footer-bottom">© 2025 CalcNation · 60+ free tools · No signup · Your files stay private</div>
 </footer>
 
 <script src="assets/js/utils.js"></script>
@@ -564,6 +570,11 @@ document.querySelectorAll('.cat-card, .pop-card, .why-card').forEach((el, i) => 
   el.style.opacity = 0; el.style.transform = 'translateY(20px)';
   el.style.transition = `opacity 0.5s ${i * 0.05}s ease, transform 0.5s ${i * 0.05}s ease`;
   observer.observe(el);
+});
+
+// Mobile menu
+document.getElementById('navToggle').addEventListener('click', () => {
+  document.getElementById('navLinks').classList.toggle('open');
 });
 </script>
 </body>
