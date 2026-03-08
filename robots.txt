@@ -1,11 +1,3 @@
 User-agent: *
 Allow: /
-
-# Block nothing — all pages should be indexed
-Disallow:
-
-# Sitemap location — Google reads this automatically
 Sitemap: https://calcnation-jade.vercel.app/sitemap.xml
-
-# Crawl delay (be nice to crawlers)
-Crawl-delay: 1

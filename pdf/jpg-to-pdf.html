@@ -3,31 +3,34 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>JPG to PDF Converter Free Online — Convert Images to PDF | CalcNation</title>
-<meta name="description" content="Convert JPG, PNG, WebP images to PDF online for free. Combine multiple images into one PDF. No upload to server — instant, private, no watermarks, no signup.">
-<meta name="keywords" content="jpg to pdf, image to pdf converter online free, convert jpg to pdf, png to pdf, multiple images to pdf">
+<meta name="description" content="Convert JPG, PNG, WebP images to PDF online for free. No upload to server — instant, private, no watermarks.">
+<meta name="keywords" content="jpg to pdf, image to pdf converter online free, convert jpg to pdf">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://calcnation-jade.vercel.app/pdf/jpg-to-pdf.html">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://calcnation-jade.vercel.app/pdf/jpg-to-pdf.html">
-<meta property="og:title" content="JPG to PDF Free — Convert Images to PDF Online | CalcNation">
-<meta property="og:description" content="Convert JPG, PNG, WebP to PDF. Combine multiple images. Free, instant, no watermarks.">
+<meta property="og:title" content="JPG to PDF Converter Free Online — Convert Images to PDF | CalcNation">
 <meta property="og:site_name" content="CalcNation">
 <meta name="twitter:card" content="summary">
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "SoftwareApplication",
-  "name": "JPG to PDF Converter",
-  "applicationCategory": "UtilitiesApplication",
-  "operatingSystem": "Web Browser",
-  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-  "description": "Convert JPG, PNG, WebP images to a PDF document. Combine multiple images. No watermarks.",
-  "url": "https://calcnation-jade.vercel.app/pdf/jpg-to-pdf.html"
-}
-<\/script>
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+<title>JPG to PDF Converter Free Online — Convert Images to PDF | CalcNation</title>
+<meta name="description" content="Convert JPG images to PDF online for free. Combine multiple images into one PDF. No upload required — 100% private browser-based tool. Instant results.">
 <link rel="stylesheet" href="../assets/css/main.css">
+<style>
+.image-preview-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; margin-top: 16px; }
+.img-thumb {
+  position: relative; border-radius: var(--radius-sm); overflow: hidden;
+  border: 1px solid var(--border); background: var(--bg2);
+  cursor: grab; user-select: none;
+}
+.img-thumb img { width: 100%; height: 100px; object-fit: cover; display: block; }
+.img-thumb-info { padding: 6px 8px; font-size: 11px; color: var(--text3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.img-thumb-remove {
+  position: absolute; top: 4px; right: 4px;
+  background: rgba(0,0,0,0.7); border: none; color: white;
+  border-radius: 50%; width: 22px; height: 22px; cursor: pointer;
+  font-size: 12px; display: flex; align-items: center; justify-content: center;
+}
+.img-thumb.drag-over-img { border-color: var(--accent); opacity: 0.7; }
+</style>
 </head>
 <body>
 <nav>
@@ -175,7 +178,7 @@
   <div>© 2024 CalcNation · Free tools · No signup · Your files stay private</div>
 </footer>
 
-<script src="../assets/js/pdf-lib.min.js"></script>
+<script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
 <script src="../assets/js/utils.js"></script>
 <script>
 const { PDFDocument, rgb } = PDFLib;

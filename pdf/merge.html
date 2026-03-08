@@ -3,31 +3,34 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Merge PDF Files Free Online — Combine Multiple PDFs Into One | CalcNation</title>
-<meta name="description" content="Merge multiple PDF files into one document online for free. Drag to reorder pages. No upload to server — 100% private, instant, no signup required.">
-<meta name="keywords" content="merge pdf, combine pdf files, join pdf online free, merge pdf files into one, pdf merger online">
+<meta name="description" content="Merge multiple PDF files into one document online for free. Drag to reorder pages. No upload to server.">
+<meta name="keywords" content="merge pdf, combine pdf files, join pdf online free">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://calcnation-jade.vercel.app/pdf/merge.html">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://calcnation-jade.vercel.app/pdf/merge.html">
-<meta property="og:title" content="Merge PDF Files Free — Combine PDFs Online | CalcNation">
-<meta property="og:description" content="Merge multiple PDFs into one file online. Drag to reorder. Free, private, no signup.">
+<meta property="og:title" content="Merge PDF Files Free Online — Combine Multiple PDFs Into One | CalcNation">
 <meta property="og:site_name" content="CalcNation">
 <meta name="twitter:card" content="summary">
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "SoftwareApplication",
-  "name": "PDF Merger",
-  "applicationCategory": "UtilitiesApplication",
-  "operatingSystem": "Web Browser",
-  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-  "description": "Free online PDF merger. Combine multiple PDF files into one. Drag to reorder.",
-  "url": "https://calcnation-jade.vercel.app/pdf/merge.html"
-}
-<\/script>
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+<title>Merge PDF Files Free Online — Combine Multiple PDFs Into One | CalcNation</title>
+<meta name="description" content="Merge multiple PDF files into one online for free. Combine PDFs in any order. No upload to server — 100% private and instant. No signup required.">
 <link rel="stylesheet" href="../assets/css/main.css">
+<style>
+.sortable-list { display:flex; flex-direction:column; gap:8px; margin-top:20px; }
+.sortable-item {
+  background: var(--bg2); border: 1px solid var(--border);
+  border-radius: var(--radius-sm); padding: 12px 16px;
+  display: flex; align-items: center; gap: 12px;
+  cursor: grab; user-select: none; transition: all 0.2s;
+}
+.sortable-item:active { cursor: grabbing; opacity: 0.8; }
+.sortable-item.drag-over-item { border-color: var(--accent); background: rgba(0,229,255,0.05); }
+.drag-handle { color: var(--text3); font-size: 16px; cursor: grab; }
+.item-num {
+  font-family: 'Fira Code', monospace; font-size: 12px;
+  color: var(--accent); min-width: 24px;
+}
+.reorder-hint { font-size: 12px; color: var(--text3); margin-top: 8px; text-align:center; }
+</style>
 </head>
 <body>
 <nav>
@@ -145,7 +148,7 @@
   <div>© 2024 CalcNation · Free tools · No signup · Your files stay private</div>
 </footer>
 
-<script src="../assets/js/pdf-lib.min.js"></script>
+<script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
 <script src="../assets/js/utils.js"></script>
 <script>
 const { PDFDocument } = PDFLib;
