@@ -25,6 +25,52 @@ label.fl{font-size:12px;font-weight:700;color:var(--text3);text-transform:upperc
 <!-- Google Analytics 4 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-PP2M41QH5D"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-PP2M41QH5D');</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "name": "Compound Interest Calculator",
+      "description": "Free compound interest calculator to see how investments grow over time with monthly contributions and compounding.",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "Any",
+      "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+      "url": "https://calcnation-jade.vercel.app"
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is compound interest?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Compound interest is interest calculated on both the initial principal and the accumulated interest from previous periods. It causes investments to grow exponentially over time."}
+    }
+    {
+      "@type": "Question",
+      "name": "What is the compound interest formula?",
+      "acceptedAnswer": {"@type": "Answer", "text": "A = P × (1 + r/n)^(nt), where A is the final amount, P is the principal, r is the annual interest rate, n is the number of times interest compounds per year, and t is the time in years."}
+    }
+    {
+      "@type": "Question",
+      "name": "What is the difference between compound and simple interest?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Simple interest is calculated only on the principal. Compound interest is calculated on the principal plus accumulated interest, making it grow much faster over time."}
+    }
+    {
+      "@type": "Question",
+      "name": "How do monthly contributions affect growth?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Regular monthly contributions significantly boost your final investment value through the power of compounding. Even small monthly amounts can make a huge difference over 10–20 years."}
+    }
+    {
+      "@type": "Question",
+      "name": "Is this investment calculator free?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Yes, completely free to use. No signup needed. All calculations are done instantly in your browser."}
+    }
+      ]
+    }
+  ]
+}
+</script>
 </head>
 <body>
 <nav>
@@ -125,6 +171,64 @@ label.fl{font-size:12px;font-weight:700;color:var(--text3);text-transform:upperc
     <a href="emi-calculator.html" class="related-card"><span class="related-card-icon">📋</span><span class="related-card-name">EMI Calculator</span></a>
     <a href="../tools/tip-calculator.html" class="related-card"><span class="related-card-icon">💵</span><span class="related-card-name">Tip Calculator</span></a>
   </div></div>
+
+<section class="faq-section">
+  <h2>// Frequently Asked Questions</h2>
+  <div class="faq-list">
+  <div class="faq-item" onclick="toggleFaq(this)">
+    <div class="faq-q">
+      <span>What is compound interest?</span>
+      <span class="faq-icon">+</span>
+    </div>
+    <div class="faq-a">Compound interest is interest calculated on both the initial principal and the accumulated interest from previous periods. It causes investments to grow exponentially over time.</div>
+  </div>
+  <div class="faq-item" onclick="toggleFaq(this)">
+    <div class="faq-q">
+      <span>What is the compound interest formula?</span>
+      <span class="faq-icon">+</span>
+    </div>
+    <div class="faq-a">A = P × (1 + r/n)^(nt), where A is the final amount, P is the principal, r is the annual interest rate, n is the number of times interest compounds per year, and t is the time in years.</div>
+  </div>
+  <div class="faq-item" onclick="toggleFaq(this)">
+    <div class="faq-q">
+      <span>What is the difference between compound and simple interest?</span>
+      <span class="faq-icon">+</span>
+    </div>
+    <div class="faq-a">Simple interest is calculated only on the principal. Compound interest is calculated on the principal plus accumulated interest, making it grow much faster over time.</div>
+  </div>
+  <div class="faq-item" onclick="toggleFaq(this)">
+    <div class="faq-q">
+      <span>How do monthly contributions affect growth?</span>
+      <span class="faq-icon">+</span>
+    </div>
+    <div class="faq-a">Regular monthly contributions significantly boost your final investment value through the power of compounding. Even small monthly amounts can make a huge difference over 10–20 years.</div>
+  </div>
+  <div class="faq-item" onclick="toggleFaq(this)">
+    <div class="faq-q">
+      <span>Is this investment calculator free?</span>
+      <span class="faq-icon">+</span>
+    </div>
+    <div class="faq-a">Yes, completely free to use. No signup needed. All calculations are done instantly in your browser.</div>
+  </div>
+  </div>
+</section>
+
+<style>
+.faq-section{max-width:800px;margin:40px auto;padding:0 20px;}
+.faq-section h2{font-size:13px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:16px;}
+.faq-list{display:flex;flex-direction:column;gap:8px;}
+.faq-item{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius-sm);overflow:hidden;cursor:pointer;transition:border-color 0.2s;}
+.faq-item:hover{border-color:var(--accent);}
+.faq-q{display:flex;justify-content:space-between;align-items:center;padding:16px 20px;font-weight:600;font-size:15px;color:var(--text);gap:12px;}
+.faq-icon{font-size:20px;color:var(--accent);flex-shrink:0;transition:transform 0.2s;}
+.faq-a{display:none;padding:0 20px 16px;font-size:14px;color:var(--text3);line-height:1.7;}
+.faq-item.open .faq-a{display:block;}
+.faq-item.open .faq-icon{transform:rotate(45deg);}
+</style>
+
+<script>
+function toggleFaq(el){el.classList.toggle('open');}
+</script>
 </main>
 <footer><div style="margin-bottom:16px"><a href="../index.html" class="nav-logo" style="font-size:18px">⚡ CalcNation</a></div><div>© 2025 CalcNation · Free tools · No signup required</div></footer>
 <script src="../assets/js/utils.js"></script>

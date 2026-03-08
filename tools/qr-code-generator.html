@@ -23,6 +23,52 @@ textarea.tool-textarea:focus{border-color:var(--accent);}
 <!-- Google Analytics 4 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-PP2M41QH5D"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-PP2M41QH5D');</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "name": "QR Code Generator",
+      "description": "Free online QR code generator. Create QR codes for URLs, text, contact info instantly. Download as PNG. No signup required.",
+      "applicationCategory": "WebApplication",
+      "operatingSystem": "Any",
+      "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+      "url": "https://calcnation-jade.vercel.app"
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is a QR code?",
+      "acceptedAnswer": {"@type": "Answer", "text": "A QR code (Quick Response code) is a 2D barcode that can be scanned by smartphones to instantly open URLs, show text, share contact info, or trigger other actions."}
+    }
+    {
+      "@type": "Question",
+      "name": "How do I generate a QR code?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Simply type or paste your URL or text into the input field and your QR code is generated instantly. Click download to save it as a PNG image."}
+    }
+    {
+      "@type": "Question",
+      "name": "Are QR codes generated here free to use?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Yes, all QR codes generated on CalcNation are completely free. You can use them for personal or commercial purposes with no restrictions."}
+    }
+    {
+      "@type": "Question",
+      "name": "What can I encode in a QR code?",
+      "acceptedAnswer": {"@type": "Answer", "text": "You can encode website URLs, plain text, email addresses, phone numbers, SMS messages, Wi-Fi credentials, and more."}
+    }
+    {
+      "@type": "Question",
+      "name": "Do QR codes expire?",
+      "acceptedAnswer": {"@type": "Answer", "text": "QR codes generated here are static and never expire. As long as the destination URL is active, the QR code will work forever."}
+    }
+      ]
+    }
+  ]
+}
+</script>
 </head>
 <body>
 <nav>
@@ -122,6 +168,64 @@ textarea.tool-textarea:focus{border-color:var(--accent);}
 </div></div>
   </div>
   <div class="related-tools"><h2>Related Tools</h2><div class="related-grid"><a href="barcode-generator.html" class="related-card"><span class="related-card-icon">▌▌▌</span><span class="related-card-name">Barcode Generator</span></a><a href="../dev/url-encoder.html" class="related-card"><span class="related-card-icon">🔗</span><span class="related-card-name">URL Encoder</span></a></div></div>
+
+<section class="faq-section">
+  <h2>// Frequently Asked Questions</h2>
+  <div class="faq-list">
+  <div class="faq-item" onclick="toggleFaq(this)">
+    <div class="faq-q">
+      <span>What is a QR code?</span>
+      <span class="faq-icon">+</span>
+    </div>
+    <div class="faq-a">A QR code (Quick Response code) is a 2D barcode that can be scanned by smartphones to instantly open URLs, show text, share contact info, or trigger other actions.</div>
+  </div>
+  <div class="faq-item" onclick="toggleFaq(this)">
+    <div class="faq-q">
+      <span>How do I generate a QR code?</span>
+      <span class="faq-icon">+</span>
+    </div>
+    <div class="faq-a">Simply type or paste your URL or text into the input field and your QR code is generated instantly. Click download to save it as a PNG image.</div>
+  </div>
+  <div class="faq-item" onclick="toggleFaq(this)">
+    <div class="faq-q">
+      <span>Are QR codes generated here free to use?</span>
+      <span class="faq-icon">+</span>
+    </div>
+    <div class="faq-a">Yes, all QR codes generated on CalcNation are completely free. You can use them for personal or commercial purposes with no restrictions.</div>
+  </div>
+  <div class="faq-item" onclick="toggleFaq(this)">
+    <div class="faq-q">
+      <span>What can I encode in a QR code?</span>
+      <span class="faq-icon">+</span>
+    </div>
+    <div class="faq-a">You can encode website URLs, plain text, email addresses, phone numbers, SMS messages, Wi-Fi credentials, and more.</div>
+  </div>
+  <div class="faq-item" onclick="toggleFaq(this)">
+    <div class="faq-q">
+      <span>Do QR codes expire?</span>
+      <span class="faq-icon">+</span>
+    </div>
+    <div class="faq-a">QR codes generated here are static and never expire. As long as the destination URL is active, the QR code will work forever.</div>
+  </div>
+  </div>
+</section>
+
+<style>
+.faq-section{max-width:800px;margin:40px auto;padding:0 20px;}
+.faq-section h2{font-size:13px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:16px;}
+.faq-list{display:flex;flex-direction:column;gap:8px;}
+.faq-item{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius-sm);overflow:hidden;cursor:pointer;transition:border-color 0.2s;}
+.faq-item:hover{border-color:var(--accent);}
+.faq-q{display:flex;justify-content:space-between;align-items:center;padding:16px 20px;font-weight:600;font-size:15px;color:var(--text);gap:12px;}
+.faq-icon{font-size:20px;color:var(--accent);flex-shrink:0;transition:transform 0.2s;}
+.faq-a{display:none;padding:0 20px 16px;font-size:14px;color:var(--text3);line-height:1.7;}
+.faq-item.open .faq-a{display:block;}
+.faq-item.open .faq-icon{transform:rotate(45deg);}
+</style>
+
+<script>
+function toggleFaq(el){el.classList.toggle('open');}
+</script>
 </main>
 <footer><div style="margin-bottom:16px"><a href="../index.html" class="nav-logo" style="font-size:18px">⚡ CalcNation</a></div><div>© 2025 CalcNation · Free tools · No signup required</div></footer>
 <div class="toast" id="toast"></div>

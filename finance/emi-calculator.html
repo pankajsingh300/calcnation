@@ -29,6 +29,52 @@ label.fl{font-size:12px;font-weight:700;color:var(--text3);text-transform:upperc
 <!-- Google Analytics 4 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-PP2M41QH5D"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-PP2M41QH5D');</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "name": "EMI Calculator",
+      "description": "Free online EMI calculator for personal, home, car and education loans. Calculate monthly installment, total interest and total payment instantly.",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "Any",
+      "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+      "url": "https://calcnation-jade.vercel.app"
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is EMI?",
+      "acceptedAnswer": {"@type": "Answer", "text": "EMI (Equated Monthly Installment) is a fixed monthly payment made to a lender to repay a loan over a set period. It includes both principal and interest components."}
+    }
+    {
+      "@type": "Question",
+      "name": "What is the formula used to calculate EMI?",
+      "acceptedAnswer": {"@type": "Answer", "text": "EMI = P × r × (1+r)^n / ((1+r)^n - 1), where P is the principal loan amount, r is the monthly interest rate (annual rate ÷ 12 ÷ 100), and n is the tenure in months."}
+    }
+    {
+      "@type": "Question",
+      "name": "How can I reduce my EMI?",
+      "acceptedAnswer": {"@type": "Answer", "text": "You can reduce EMI by increasing the loan tenure, making a larger down payment to reduce the principal, negotiating a lower interest rate, or prepaying part of the loan."}
+    }
+    {
+      "@type": "Question",
+      "name": "Is this EMI calculator free to use?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Yes, CalcNation's EMI calculator is completely free. No signup, no hidden charges. Results are instant and calculated directly in your browser."}
+    }
+    {
+      "@type": "Question",
+      "name": "Can I use this for home loan, car loan and personal loan?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Yes. This calculator works for any type of loan — home loan, car loan, personal loan, education loan. Just enter the loan amount, interest rate and tenure."}
+    }
+      ]
+    }
+  ]
+}
+</script>
 </head>
 <body>
 <nav>
@@ -156,6 +202,64 @@ label.fl{font-size:12px;font-weight:700;color:var(--text3);text-transform:upperc
     <a href="compound-interest-calculator.html" class="related-card"><span class="related-card-icon">📈</span><span class="related-card-name">Compound Interest</span></a>
     <a href="../tools/tip-calculator.html" class="related-card"><span class="related-card-icon">💵</span><span class="related-card-name">Tip Calculator</span></a>
   </div></div>
+
+<section class="faq-section">
+  <h2>// Frequently Asked Questions</h2>
+  <div class="faq-list">
+  <div class="faq-item" onclick="toggleFaq(this)">
+    <div class="faq-q">
+      <span>What is EMI?</span>
+      <span class="faq-icon">+</span>
+    </div>
+    <div class="faq-a">EMI (Equated Monthly Installment) is a fixed monthly payment made to a lender to repay a loan over a set period. It includes both principal and interest components.</div>
+  </div>
+  <div class="faq-item" onclick="toggleFaq(this)">
+    <div class="faq-q">
+      <span>What is the formula used to calculate EMI?</span>
+      <span class="faq-icon">+</span>
+    </div>
+    <div class="faq-a">EMI = P × r × (1+r)^n / ((1+r)^n - 1), where P is the principal loan amount, r is the monthly interest rate (annual rate ÷ 12 ÷ 100), and n is the tenure in months.</div>
+  </div>
+  <div class="faq-item" onclick="toggleFaq(this)">
+    <div class="faq-q">
+      <span>How can I reduce my EMI?</span>
+      <span class="faq-icon">+</span>
+    </div>
+    <div class="faq-a">You can reduce EMI by increasing the loan tenure, making a larger down payment to reduce the principal, negotiating a lower interest rate, or prepaying part of the loan.</div>
+  </div>
+  <div class="faq-item" onclick="toggleFaq(this)">
+    <div class="faq-q">
+      <span>Is this EMI calculator free to use?</span>
+      <span class="faq-icon">+</span>
+    </div>
+    <div class="faq-a">Yes, CalcNation's EMI calculator is completely free. No signup, no hidden charges. Results are instant and calculated directly in your browser.</div>
+  </div>
+  <div class="faq-item" onclick="toggleFaq(this)">
+    <div class="faq-q">
+      <span>Can I use this for home loan, car loan and personal loan?</span>
+      <span class="faq-icon">+</span>
+    </div>
+    <div class="faq-a">Yes. This calculator works for any type of loan — home loan, car loan, personal loan, education loan. Just enter the loan amount, interest rate and tenure.</div>
+  </div>
+  </div>
+</section>
+
+<style>
+.faq-section{max-width:800px;margin:40px auto;padding:0 20px;}
+.faq-section h2{font-size:13px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:16px;}
+.faq-list{display:flex;flex-direction:column;gap:8px;}
+.faq-item{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius-sm);overflow:hidden;cursor:pointer;transition:border-color 0.2s;}
+.faq-item:hover{border-color:var(--accent);}
+.faq-q{display:flex;justify-content:space-between;align-items:center;padding:16px 20px;font-weight:600;font-size:15px;color:var(--text);gap:12px;}
+.faq-icon{font-size:20px;color:var(--accent);flex-shrink:0;transition:transform 0.2s;}
+.faq-a{display:none;padding:0 20px 16px;font-size:14px;color:var(--text3);line-height:1.7;}
+.faq-item.open .faq-a{display:block;}
+.faq-item.open .faq-icon{transform:rotate(45deg);}
+</style>
+
+<script>
+function toggleFaq(el){el.classList.toggle('open');}
+</script>
 </main>
 <footer><div style="margin-bottom:16px"><a href="../index.html" class="nav-logo" style="font-size:18px">⚡ CalcNation</a></div><div>© 2025 CalcNation · Free tools · No signup required</div></footer>
 <script src="../assets/js/utils.js"></script>

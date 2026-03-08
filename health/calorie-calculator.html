@@ -31,6 +31,52 @@ label.fl{font-size:12px;font-weight:700;color:var(--text3);text-transform:upperc
 <!-- Google Analytics 4 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-PP2M41QH5D"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-PP2M41QH5D');</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "name": "Calorie Calculator",
+      "description": "Free daily calorie calculator based on age, weight, height and activity level. Find your TDEE and calorie needs for weight loss or gain.",
+      "applicationCategory": "HealthApplication",
+      "operatingSystem": "Any",
+      "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+      "url": "https://calcnation-jade.vercel.app"
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How are daily calorie needs calculated?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Daily calorie needs are calculated using the Mifflin-St Jeor equation to find BMR (Basal Metabolic Rate), then multiplied by an activity factor to get TDEE (Total Daily Energy Expenditure)."}
+    }
+    {
+      "@type": "Question",
+      "name": "What is BMR?",
+      "acceptedAnswer": {"@type": "Answer", "text": "BMR (Basal Metabolic Rate) is the number of calories your body burns at complete rest to maintain basic functions like breathing, circulation and cell production."}
+    }
+    {
+      "@type": "Question",
+      "name": "How many calories should I eat to lose weight?",
+      "acceptedAnswer": {"@type": "Answer", "text": "A common approach is to create a 500 calorie daily deficit from your TDEE, which leads to approximately 0.5kg of weight loss per week. Always consult a nutritionist for personalised advice."}
+    }
+    {
+      "@type": "Question",
+      "name": "What is TDEE?",
+      "acceptedAnswer": {"@type": "Answer", "text": "TDEE (Total Daily Energy Expenditure) is the total number of calories you burn per day including all activities. Eating at your TDEE maintains your current weight."}
+    }
+    {
+      "@type": "Question",
+      "name": "Is this calorie calculator free?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Yes, completely free. No account needed. Results are calculated instantly based on the Mifflin-St Jeor formula used by nutrition professionals worldwide."}
+    }
+      ]
+    }
+  ]
+}
+</script>
 </head>
 <body>
 <nav>
@@ -138,6 +184,64 @@ label.fl{font-size:12px;font-weight:700;color:var(--text3);text-transform:upperc
     <a href="water-calculator.html" class="related-card"><span class="related-card-icon">💧</span><span class="related-card-name">Water Intake</span></a>
     <a href="pregnancy-due-date.html" class="related-card"><span class="related-card-icon">👶</span><span class="related-card-name">Pregnancy Due Date</span></a>
   </div></div>
+
+<section class="faq-section">
+  <h2>// Frequently Asked Questions</h2>
+  <div class="faq-list">
+  <div class="faq-item" onclick="toggleFaq(this)">
+    <div class="faq-q">
+      <span>How are daily calorie needs calculated?</span>
+      <span class="faq-icon">+</span>
+    </div>
+    <div class="faq-a">Daily calorie needs are calculated using the Mifflin-St Jeor equation to find BMR (Basal Metabolic Rate), then multiplied by an activity factor to get TDEE (Total Daily Energy Expenditure).</div>
+  </div>
+  <div class="faq-item" onclick="toggleFaq(this)">
+    <div class="faq-q">
+      <span>What is BMR?</span>
+      <span class="faq-icon">+</span>
+    </div>
+    <div class="faq-a">BMR (Basal Metabolic Rate) is the number of calories your body burns at complete rest to maintain basic functions like breathing, circulation and cell production.</div>
+  </div>
+  <div class="faq-item" onclick="toggleFaq(this)">
+    <div class="faq-q">
+      <span>How many calories should I eat to lose weight?</span>
+      <span class="faq-icon">+</span>
+    </div>
+    <div class="faq-a">A common approach is to create a 500 calorie daily deficit from your TDEE, which leads to approximately 0.5kg of weight loss per week. Always consult a nutritionist for personalised advice.</div>
+  </div>
+  <div class="faq-item" onclick="toggleFaq(this)">
+    <div class="faq-q">
+      <span>What is TDEE?</span>
+      <span class="faq-icon">+</span>
+    </div>
+    <div class="faq-a">TDEE (Total Daily Energy Expenditure) is the total number of calories you burn per day including all activities. Eating at your TDEE maintains your current weight.</div>
+  </div>
+  <div class="faq-item" onclick="toggleFaq(this)">
+    <div class="faq-q">
+      <span>Is this calorie calculator free?</span>
+      <span class="faq-icon">+</span>
+    </div>
+    <div class="faq-a">Yes, completely free. No account needed. Results are calculated instantly based on the Mifflin-St Jeor formula used by nutrition professionals worldwide.</div>
+  </div>
+  </div>
+</section>
+
+<style>
+.faq-section{max-width:800px;margin:40px auto;padding:0 20px;}
+.faq-section h2{font-size:13px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:16px;}
+.faq-list{display:flex;flex-direction:column;gap:8px;}
+.faq-item{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius-sm);overflow:hidden;cursor:pointer;transition:border-color 0.2s;}
+.faq-item:hover{border-color:var(--accent);}
+.faq-q{display:flex;justify-content:space-between;align-items:center;padding:16px 20px;font-weight:600;font-size:15px;color:var(--text);gap:12px;}
+.faq-icon{font-size:20px;color:var(--accent);flex-shrink:0;transition:transform 0.2s;}
+.faq-a{display:none;padding:0 20px 16px;font-size:14px;color:var(--text3);line-height:1.7;}
+.faq-item.open .faq-a{display:block;}
+.faq-item.open .faq-icon{transform:rotate(45deg);}
+</style>
+
+<script>
+function toggleFaq(el){el.classList.toggle('open');}
+</script>
 </main>
 <footer><div style="margin-bottom:16px"><a href="../index.html" class="nav-logo" style="font-size:18px">⚡ CalcNation</a></div><div>© 2025 CalcNation · Free tools · No signup required</div></footer>
 <script src="../assets/js/utils.js"></script>

@@ -28,6 +28,52 @@ textarea.tool-textarea:focus{border-color:var(--accent);}
 <!-- Google Analytics 4 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-PP2M41QH5D"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-PP2M41QH5D');</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "name": "YouTube Money Calculator",
+      "description": "Free YouTube money calculator to estimate earnings from your YouTube channel based on views, CPM and engagement rate.",
+      "applicationCategory": "WebApplication",
+      "operatingSystem": "Any",
+      "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+      "url": "https://calcnation-jade.vercel.app"
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How much does YouTube pay per 1000 views?",
+      "acceptedAnswer": {"@type": "Answer", "text": "YouTube typically pays between $0.5 to $6 per 1000 views (RPM) depending on your niche, audience location, and time of year. Finance and tech channels earn more; entertainment channels earn less."}
+    }
+    {
+      "@type": "Question",
+      "name": "How is YouTube revenue calculated?",
+      "acceptedAnswer": {"@type": "Answer", "text": "YouTube revenue = (Total Views ÷ 1000) × RPM. RPM (Revenue Per Mille) is your actual earnings per 1000 views after YouTube takes its 45% cut from the advertiser CPM."}
+    }
+    {
+      "@type": "Question",
+      "name": "What is CPM on YouTube?",
+      "acceptedAnswer": {"@type": "Answer", "text": "CPM (Cost Per Mille) is what advertisers pay per 1000 ad impressions. RPM is what creators actually receive, which is typically 45–55% of the CPM rate."}
+    }
+    {
+      "@type": "Question",
+      "name": "How many views do you need to make $1000 on YouTube?",
+      "acceptedAnswer": {"@type": "Answer", "text": "At an average RPM of $2, you need approximately 500,000 views to earn $1000. At $5 RPM (finance/tech niche), you would need around 200,000 views."}
+    }
+    {
+      "@type": "Question",
+      "name": "Is this YouTube earnings calculator accurate?",
+      "acceptedAnswer": {"@type": "Answer", "text": "This calculator provides estimates based on average industry CPM and RPM data. Actual earnings vary based on niche, audience geography, ad formats, and seasonality."}
+    }
+      ]
+    }
+  ]
+}
+</script>
 </head>
 <body>
 <nav>
@@ -122,6 +168,64 @@ textarea.tool-textarea:focus{border-color:var(--accent);}
 </div></div>
   </div>
   <div class="related-tools"><h2>Related Tools</h2><div class="related-grid"><a href="youtube-cpm-calculator.html" class="related-card"><span class="related-card-icon">📊</span><span class="related-card-name">CPM Calculator</span></a><a href="tiktok-money-calculator.html" class="related-card"><span class="related-card-icon">🎵</span><span class="related-card-name">TikTok Earnings</span></a><a href="influencer-earnings.html" class="related-card"><span class="related-card-icon">⭐</span><span class="related-card-name">Influencer Earnings</span></a></div></div>
+
+<section class="faq-section">
+  <h2>// Frequently Asked Questions</h2>
+  <div class="faq-list">
+  <div class="faq-item" onclick="toggleFaq(this)">
+    <div class="faq-q">
+      <span>How much does YouTube pay per 1000 views?</span>
+      <span class="faq-icon">+</span>
+    </div>
+    <div class="faq-a">YouTube typically pays between $0.5 to $6 per 1000 views (RPM) depending on your niche, audience location, and time of year. Finance and tech channels earn more; entertainment channels earn less.</div>
+  </div>
+  <div class="faq-item" onclick="toggleFaq(this)">
+    <div class="faq-q">
+      <span>How is YouTube revenue calculated?</span>
+      <span class="faq-icon">+</span>
+    </div>
+    <div class="faq-a">YouTube revenue = (Total Views ÷ 1000) × RPM. RPM (Revenue Per Mille) is your actual earnings per 1000 views after YouTube takes its 45% cut from the advertiser CPM.</div>
+  </div>
+  <div class="faq-item" onclick="toggleFaq(this)">
+    <div class="faq-q">
+      <span>What is CPM on YouTube?</span>
+      <span class="faq-icon">+</span>
+    </div>
+    <div class="faq-a">CPM (Cost Per Mille) is what advertisers pay per 1000 ad impressions. RPM is what creators actually receive, which is typically 45–55% of the CPM rate.</div>
+  </div>
+  <div class="faq-item" onclick="toggleFaq(this)">
+    <div class="faq-q">
+      <span>How many views do you need to make $1000 on YouTube?</span>
+      <span class="faq-icon">+</span>
+    </div>
+    <div class="faq-a">At an average RPM of $2, you need approximately 500,000 views to earn $1000. At $5 RPM (finance/tech niche), you would need around 200,000 views.</div>
+  </div>
+  <div class="faq-item" onclick="toggleFaq(this)">
+    <div class="faq-q">
+      <span>Is this YouTube earnings calculator accurate?</span>
+      <span class="faq-icon">+</span>
+    </div>
+    <div class="faq-a">This calculator provides estimates based on average industry CPM and RPM data. Actual earnings vary based on niche, audience geography, ad formats, and seasonality.</div>
+  </div>
+  </div>
+</section>
+
+<style>
+.faq-section{max-width:800px;margin:40px auto;padding:0 20px;}
+.faq-section h2{font-size:13px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:16px;}
+.faq-list{display:flex;flex-direction:column;gap:8px;}
+.faq-item{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius-sm);overflow:hidden;cursor:pointer;transition:border-color 0.2s;}
+.faq-item:hover{border-color:var(--accent);}
+.faq-q{display:flex;justify-content:space-between;align-items:center;padding:16px 20px;font-weight:600;font-size:15px;color:var(--text);gap:12px;}
+.faq-icon{font-size:20px;color:var(--accent);flex-shrink:0;transition:transform 0.2s;}
+.faq-a{display:none;padding:0 20px 16px;font-size:14px;color:var(--text3);line-height:1.7;}
+.faq-item.open .faq-a{display:block;}
+.faq-item.open .faq-icon{transform:rotate(45deg);}
+</style>
+
+<script>
+function toggleFaq(el){el.classList.toggle('open');}
+</script>
 </main>
 <footer><div style="margin-bottom:16px"><a href="../index.html" class="nav-logo" style="font-size:18px">⚡ CalcNation</a></div><div>© 2025 CalcNation · Free tools · No signup required</div></footer>
 <div class="toast" id="toast"></div>

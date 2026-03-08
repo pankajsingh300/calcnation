@@ -29,6 +29,52 @@ label.fl{font-size:12px;font-weight:700;color:var(--text3);text-transform:upperc
 <!-- Google Analytics 4 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-PP2M41QH5D"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-PP2M41QH5D');</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "name": "Mortgage Calculator",
+      "description": "Free mortgage calculator to calculate monthly payments, total interest and amortization schedule for home loans.",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "Any",
+      "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+      "url": "https://calcnation-jade.vercel.app"
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is a mortgage calculator?",
+      "acceptedAnswer": {"@type": "Answer", "text": "A mortgage calculator helps you estimate your monthly home loan payments based on the loan amount, interest rate, loan term, and down payment."}
+    }
+    {
+      "@type": "Question",
+      "name": "What is the formula for mortgage calculation?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Monthly Payment = P × r × (1+r)^n / ((1+r)^n - 1), where P is the loan principal (home value minus down payment), r is the monthly interest rate, and n is the total number of payments."}
+    }
+    {
+      "@type": "Question",
+      "name": "What is an amortization schedule?",
+      "acceptedAnswer": {"@type": "Answer", "text": "An amortization schedule shows each monthly payment broken down into principal and interest portions, and the remaining loan balance after each payment."}
+    }
+    {
+      "@type": "Question",
+      "name": "How much down payment do I need?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Typically lenders require 10–20% down payment. A higher down payment reduces your monthly EMI and total interest paid over the loan term."}
+    }
+    {
+      "@type": "Question",
+      "name": "Is this mortgage calculator free?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Yes, completely free. No registration required. All calculations happen instantly in your browser with no data sent to any server."}
+    }
+      ]
+    }
+  ]
+}
+</script>
 </head>
 <body>
 <nav>
@@ -135,6 +181,64 @@ label.fl{font-size:12px;font-weight:700;color:var(--text3);text-transform:upperc
     <a href="compound-interest-calculator.html" class="related-card"><span class="related-card-icon">📈</span><span class="related-card-name">Compound Interest</span></a>
     <a href="../tools/tip-calculator.html" class="related-card"><span class="related-card-icon">💵</span><span class="related-card-name">Tip Calculator</span></a>
   </div></div>
+
+<section class="faq-section">
+  <h2>// Frequently Asked Questions</h2>
+  <div class="faq-list">
+  <div class="faq-item" onclick="toggleFaq(this)">
+    <div class="faq-q">
+      <span>What is a mortgage calculator?</span>
+      <span class="faq-icon">+</span>
+    </div>
+    <div class="faq-a">A mortgage calculator helps you estimate your monthly home loan payments based on the loan amount, interest rate, loan term, and down payment.</div>
+  </div>
+  <div class="faq-item" onclick="toggleFaq(this)">
+    <div class="faq-q">
+      <span>What is the formula for mortgage calculation?</span>
+      <span class="faq-icon">+</span>
+    </div>
+    <div class="faq-a">Monthly Payment = P × r × (1+r)^n / ((1+r)^n - 1), where P is the loan principal (home value minus down payment), r is the monthly interest rate, and n is the total number of payments.</div>
+  </div>
+  <div class="faq-item" onclick="toggleFaq(this)">
+    <div class="faq-q">
+      <span>What is an amortization schedule?</span>
+      <span class="faq-icon">+</span>
+    </div>
+    <div class="faq-a">An amortization schedule shows each monthly payment broken down into principal and interest portions, and the remaining loan balance after each payment.</div>
+  </div>
+  <div class="faq-item" onclick="toggleFaq(this)">
+    <div class="faq-q">
+      <span>How much down payment do I need?</span>
+      <span class="faq-icon">+</span>
+    </div>
+    <div class="faq-a">Typically lenders require 10–20% down payment. A higher down payment reduces your monthly EMI and total interest paid over the loan term.</div>
+  </div>
+  <div class="faq-item" onclick="toggleFaq(this)">
+    <div class="faq-q">
+      <span>Is this mortgage calculator free?</span>
+      <span class="faq-icon">+</span>
+    </div>
+    <div class="faq-a">Yes, completely free. No registration required. All calculations happen instantly in your browser with no data sent to any server.</div>
+  </div>
+  </div>
+</section>
+
+<style>
+.faq-section{max-width:800px;margin:40px auto;padding:0 20px;}
+.faq-section h2{font-size:13px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:16px;}
+.faq-list{display:flex;flex-direction:column;gap:8px;}
+.faq-item{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius-sm);overflow:hidden;cursor:pointer;transition:border-color 0.2s;}
+.faq-item:hover{border-color:var(--accent);}
+.faq-q{display:flex;justify-content:space-between;align-items:center;padding:16px 20px;font-weight:600;font-size:15px;color:var(--text);gap:12px;}
+.faq-icon{font-size:20px;color:var(--accent);flex-shrink:0;transition:transform 0.2s;}
+.faq-a{display:none;padding:0 20px 16px;font-size:14px;color:var(--text3);line-height:1.7;}
+.faq-item.open .faq-a{display:block;}
+.faq-item.open .faq-icon{transform:rotate(45deg);}
+</style>
+
+<script>
+function toggleFaq(el){el.classList.toggle('open');}
+</script>
 </main>
 <footer><div style="margin-bottom:16px"><a href="../index.html" class="nav-logo" style="font-size:18px">⚡ CalcNation</a></div><div>© 2025 CalcNation · Free tools · No signup required</div></footer>
 <script src="../assets/js/utils.js"></script>
