@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CI/CD Automation: GitHub Actions + Playwright — CalcNation Blog</title>
+<meta name="description" content="Run automated Playwright tests in GitHub Actions CI/CD pipeline. Setup, reporting, and failure notifications.">
+<link rel="canonical" href="https://calcnation-jade.vercel.app/blog/ci-cd-automation.html">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+<link rel="stylesheet" href="../assets/css/main.css">
+<style>
+.article-header { text-align: center; margin-bottom: 40px; }
+.article-meta { display: flex; gap: 16px; justify-content: center; font-size: 14px; color: var(--text2); margin: 16px 0; }
+.article-content { max-width: 800px; margin: 0 auto; line-height: 1.8; }
+.article-content h2 { font-size: 24px; margin: 32px 0 16px; }
+.article-content h3 { font-size: 18px; margin: 24px 0 12px; }
+.article-content p { margin: 16px 0; color: var(--text2); }
+.article-content code { background: var(--bg-secondary); padding: 2px 6px; border-radius: 4px; font-size: 13px; }
+.article-content pre { background: var(--bg-secondary); padding: 16px; border-radius: 8px; overflow-x: auto; margin: 16px 0; }
+.article-content pre code { background: none; padding: 0; }
+.article-content ul { margin: 16px 0 16px 20px; }
+.article-content li { margin: 8px 0; }
+.article-content a { color: var(--accent); }
+.article-content a:hover { text-decoration: underline; }
+.back-to-blog { margin-top: 40px; text-align: center; }
+.back-to-blog a { color: var(--accent); text-decoration: none; }
+</style>
+</head>
+<body>
+<nav>
+  <a href="../index.html" class="nav-logo">⚡ CalcNation</a>
+  <div class="nav-links">
+    <a href="../index.html">Tools</a>
+    <a href="./">Blog</a>
+  </div>
+</nav>
+
+<div class="breadcrumb"><a href="../index.html">Home</a> <span>›</span> <a href="./">Blog</a> <span>›</span> <span>CI/CD Automation</span></div>
+
+<main class="tool-page">
+  <article>
+    <div class="article-header">
+      <h1>CI/CD Automation: GitHub Actions + Playwright</h1>
+      <div class="article-meta">
+        <span>📅 February 20, 2026</span>
+        <span>📂 DevOps</span>
+        <span>⏱️ 9 min read</span>
+      </div>
+    </div>
+
+    <div class="article-content">
+      <p>Automated tests are only valuable if they run consistently. GitHub Actions makes it simple to run Playwright tests on every push, pull request, and schedule. This guide shows you how.</p>
+
+      <h2>Why CI/CD Matters for Automation Testing</h2>
+      <ul>
+        <li>Catch regressions before code is merged</li>
+        <li>Run tests on multiple OS/browser combinations</li>
+        <li>Generate test reports automatically</li>
+        <li>Fail fast on code quality issues</li>
+        <li>Maintain confidence as the codebase grows</li>
+      </ul>
+
+      <h2>GitHub Actions Setup</h2>
+      <p>Create a workflow file <code>.github/workflows/tests.yml</code>:</p>
+      <pre><code>name: Playwright Tests
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Install Playwright
+        run: npx playwright install
+      
+      - name: Run Playwright tests
+        run: npm run test:e2e
+      
+      - name: Upload test reports
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: playwright-reports
+          path: playwright-report/</code></pre>
+
+      <h2>Multi-Browser Testing</h2>
+      <p>Test across Chromium, Firefox, and WebKit:</p>
+      <pre><code>name: Multi-Browser Tests
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        browser: [chromium, firefox, webkit]
+    
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+      - run: npm ci && npx playwright install
+      
+      - name: Run tests on ${{ matrix.browser }}
+        run: npx playwright test --project=${{ matrix.browser }}
+      
+      - name: Upload reports
+        if: failure()
+        uses: actions/upload-artifact@v3
+        with:
+          name: test-results-${{ matrix.browser }}
+          path: test-results/</code></pre>
+
+      <h2>Test Reporting</h2>
+      <p>Generate HTML reports with test history:</p>
+      <pre><code>npm test --reporter=html</code></pre>
+      <p>View detailed reports, screenshots, and videos of failed tests.</p>
+
+      <h2>Slack Notifications</h2>
+      <p>Notify your team on test failures:</p>
+      <pre><code>- name: Notify Slack on Failure
+  if: failure()
+  uses: 8398a7/action-slack@v3
+  with:
+    status: ${{ job.status }}
+    text: 'Tests failed on ${{ github.repository }}'
+    webhook_url: ${{ secrets.SLACK_WEBHOOK }}</code></pre>
+
+      <h2>Performance Monitoring</h2>
+      <p>Track test execution time to catch slowdowns:</p>
+      <pre><code>- name: Store test metrics
+  run: |
+    echo "Test duration: $(cat test-results/metrics.json)"
+    
+- name: Fail if tests too slow
+  run: |
+    duration=$(jq '.totalDuration' test-results/metrics.json)
+    if [ $duration -gt 300000 ]; then
+      echo "Tests took too long: ${duration}ms"
+      exit 1
+    fi</code></pre>
+
+      <h2>Scheduled Tests (Nightly Runs)</h2>
+      <p>Run comprehensive tests on a schedule:</p>
+      <pre><code>on:
+  schedule:
+    - cron: '0 2 * * *'  # Run at 2 AM daily</code></pre>
+
+      <h2>Best Practices</h2>
+      <ul>
+        <li>Use <code>npm ci</code> instead of <code>npm install</code> for CI environments</li>
+        <li>Cache dependencies to speed up runs</li>
+        <li>Run tests in parallel when possible</li>
+        <li>Generate HTML reports for every run</li>
+        <li>Upload videos of failed tests for debugging</li>
+        <li>Set reasonable timeouts to prevent hanging</li>
+        <li>Use branch protection rules to require passing tests</li>
+      </ul>
+
+      <h2>Resources</h2>
+      <ul>
+        <li><a href="https://playwright.dev/docs/ci" target="_blank">Playwright CI Documentation</a></li>
+        <li><a href="https://docs.github.com/en/actions" target="_blank">GitHub Actions Docs</a></li>
+        <li><a href="https://github.com/features/actions" target="_blank">GitHub Actions Marketplace</a></li>
+      </ul>
+
+      <div class="back-to-blog">
+        <a href="./">← Back to Blog</a>
+      </div>
+    </div>
+  </article>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-brand"><a href="../index.html" class="nav-logo" style="font-size:18px">⚡ CalcNation</a></div>
+  <div class="footer-links">
+    <a href="../index.html">Tools</a>
+    <a href="./">Blog</a>
+    <a href="../about.html">About</a>
+    <a href="../privacy.html">Privacy</a>
+    <a href="../contact.html">Contact</a>
+  </div>
+  <div class="footer-bottom">© 2026 CalcNation · Free tools · No signup · Your data stays private</div>
+</footer>
+
+<script src="../assets/js/utils.js"></script>
+</body>
+</html>

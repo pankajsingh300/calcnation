@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>XPath vs CSS Selectors: Best Practices — CalcNation Blog</title>
+<meta name="description" content="Master CSS selectors and XPath. Learn how to write robust, maintainable selectors that don't break. Use our free Selector Inspector tool.">
+<link rel="canonical" href="https://calcnation-jade.vercel.app/blog/selector-strategy.html">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+<link rel="stylesheet" href="../assets/css/main.css">
+<style>
+.article-header { text-align: center; margin-bottom: 40px; }
+.article-meta { display: flex; gap: 16px; justify-content: center; font-size: 14px; color: var(--text2); margin: 16px 0; }
+.article-content { max-width: 800px; margin: 0 auto; line-height: 1.8; }
+.article-content h2 { font-size: 24px; margin: 32px 0 16px; }
+.article-content h3 { font-size: 18px; margin: 24px 0 12px; }
+.article-content p { margin: 16px 0; color: var(--text2); }
+.article-content code { background: var(--bg-secondary); padding: 2px 6px; border-radius: 4px; font-size: 13px; }
+.article-content pre { background: var(--bg-secondary); padding: 16px; border-radius: 8px; overflow-x: auto; margin: 16px 0; }
+.article-content pre code { background: none; padding: 0; }
+.article-content ul { margin: 16px 0 16px 20px; }
+.article-content li { margin: 8px 0; }
+.article-content a { color: var(--accent); }
+.article-content a:hover { text-decoration: underline; }
+.back-to-blog { margin-top: 40px; text-align: center; }
+.back-to-blog a { color: var(--accent); text-decoration: none; }
+</style>
+</head>
+<body>
+<nav>
+  <a href="../index.html" class="nav-logo">⚡ CalcNation</a>
+  <div class="nav-links">
+    <a href="../index.html">Tools</a>
+    <a href="./">Blog</a>
+  </div>
+</nav>
+
+<div class="breadcrumb"><a href="../index.html">Home</a> <span>›</span> <a href="./">Blog</a> <span>›</span> <span>Selector Strategy</span></div>
+
+<main class="tool-page">
+  <article>
+    <div class="article-header">
+      <h1>XPath vs CSS Selectors: Which Should You Use?</h1>
+      <div class="article-meta">
+        <span>📅 February 15, 2026</span>
+        <span>📂 Automation Best Practices</span>
+        <span>⏱️ 6 min read</span>
+      </div>
+    </div>
+
+    <div class="article-content">
+      <p>Bad selectors cause flaky tests. Good selectors are stable, readable, and maintainable. This guide covers both CSS selectors and XPath, helping you choose the right strategy for your tests.</p>
+
+      <h2>CSS Selectors</h2>
+
+      <h3>Advantages</h3>
+      <ul>
+        <li>Faster than XPath (browser-optimized)</li>
+        <li>Simpler syntax</li>
+        <li>Works across all browsers</li>
+        <li>Easier to read and maintain</li>
+      </ul>
+
+      <h3>Examples</h3>
+      <pre><code>/* ID selector (most specific, best) */
+#login-button
+
+/* Class selector */
+.submit-btn
+
+/* Attribute selector */
+[data-test-id="login"]
+
+/* Pseudo-selector */
+button:nth-child(2)
+
+/* Descendant combinator */
+.form .input-field
+
+/* Adjacent sibling */
+label + input</code></pre>
+
+      <h3>Best Practice CSS Selectors</h3>
+      <pre><code>// ❌ Brittle: dependent on DOM structure
+button:nth-child(5) > span
+
+// ✅ Better: uses stable attributes
+[data-test-id="submit-button"]
+
+// ❌ Too generic
+input[type="text"]
+
+// ✅ Better: combines attributes for uniqueness
+input[type="text"][name="username"]</code></pre>
+
+      <h2>XPath</h2>
+
+      <h3>Advantages</h3>
+      <ul>
+        <li>More powerful and flexible</li>
+        <li>Can traverse up the DOM (parent/ancestor)</li>
+        <li>Text matching</li>
+        <li>Complex conditions</li>
+      </ul>
+
+      <h3>Examples</h3>
+      <pre><code>/* Find by text */
+//button[contains(text(), 'Login')]
+
+/* Find by attribute */
+//input[@id='username']
+
+/* Find parent */
+//input[@name='password']/parent::form
+
+/* Find next sibling */
+//label[text()='Email']/following-sibling::input
+
+/* Complex conditions */
+//button[@type='submit' and contains(@class, 'primary')]</code></pre>
+
+      <h3>When to Use XPath</h3>
+      <ul>
+        <li>Matching by text content</li>
+        <li>Traversing up to find parent elements</li>
+        <li>Complex conditional logic</li>
+        <li>Finding elements without stable IDs/classes</li>
+      </ul>
+
+      <h2>CSS Selectors vs XPath: Comparison</h2>
+
+      <table style="width:100%; margin: 20px 0; border-collapse: collapse;">
+        <tr style="border-bottom: 1px solid var(--border);">
+          <th style="text-align: left; padding: 10px;">Criterion</th>
+          <th style="text-align: left; padding: 10px;">CSS</th>
+          <th style="text-align: left; padding: 10px;">XPath</th>
+        </tr>
+        <tr style="border-bottom: 1px solid var(--border);">
+          <td style="padding: 10px;">Speed</td>
+          <td style="padding: 10px;">Fast</td>
+          <td style="padding: 10px;">Slower</td>
+        </tr>
+        <tr style="border-bottom: 1px solid var(--border);">
+          <td style="padding: 10px;">Traverse up (parent)</td>
+          <td style="padding: 10px;">❌ No</td>
+          <td style="padding: 10px;">✅ Yes</td>
+        </tr>
+        <tr style="border-bottom: 1px solid var(--border);">
+          <td style="padding: 10px;">Text matching</td>
+          <td style="padding: 10px;">❌ Limited</td>
+          <td style="padding: 10px;">✅ Yes</td>
+        </tr>
+        <tr style="border-bottom: 1px solid var(--border);">
+          <td style="padding: 10px;">Readability</td>
+          <td style="padding: 10px;">✅ Easy</td>
+          <td style="padding: 10px;">⚠️ Complex</td>
+        </tr>
+      </table>
+
+      <h2>Avoiding Flaky Selectors</h2>
+
+      <h3>❌ Bad Practices</h3>
+      <ul>
+        <li>Relying on element position (nth-child)</li>
+        <li>Generic selectors (.button, input[type="text"])</li>
+        <li>Full DOM paths</li>
+        <li>Hardcoding generated class names</li>
+        <li>Text-based selectors without fallbacks</li>
+      </ul>
+
+      <h3>✅ Good Practices</h3>
+      <ul>
+        <li>Use <code>data-test-id</code> attributes (specifically for QA)</li>
+        <li>Prioritize IDs if they're stable</li>
+        <li>Use semantic HTML (label/input relationships)</li>
+        <li>Combine multiple attributes for uniqueness</li>
+        <li>Keep selectors as specific as possible</li>
+      </ul>
+
+      <h2>Recommendation</h2>
+      <p><strong>Default to CSS selectors</strong> for speed and simplicity. Use XPath only when you need:</p>
+      <ul>
+        <li>Text matching</li>
+        <li>Parent/ancestor traversal</li>
+        <li>Complex conditions</li>
+      </ul>
+
+      <p>In Playwright, you can also use text-based selectors:</p>
+      <pre><code>// Playwright text selector
+await page.click('button:has-text("Login")')
+
+// Or with test-id
+await page.click('[data-test-id="login-button"]')</code></pre>
+
+      <h2>Tools</h2>
+      <ul>
+        <li><strong>Selector Inspector</strong> — Our free tool helps you find and test selectors</li>
+        <li>Browser DevTools — Right-click → Inspect, use the console</li>
+        <li><strong>Playwright Inspector</strong> — Built-in debugging tool</li>
+      </ul>
+
+      <div class="back-to-blog">
+        <a href="./">← Back to Blog</a>
+      </div>
+    </div>
+  </article>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-brand"><a href="../index.html" class="nav-logo" style="font-size:18px">⚡ CalcNation</a></div>
+  <div class="footer-links">
+    <a href="../index.html">Tools</a>
+    <a href="./">Blog</a>
+    <a href="../about.html">About</a>
+    <a href="../privacy.html">Privacy</a>
+    <a href="../contact.html">Contact</a>
+  </div>
+  <div class="footer-bottom">© 2026 CalcNation · Free tools · No signup · Your data stays private</div>
+</footer>
+
+<script src="../assets/js/utils.js"></script>
+</body>
+</html>

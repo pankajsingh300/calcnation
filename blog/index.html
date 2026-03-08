@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CalcNation Blog — Automation Testing, Developer Tools & Tech News</title>
+<meta name="description" content="Latest articles on automation testing with Playwright, Robot Framework, test automation best practices, and developer tools.">
+<link rel="canonical" href="https://calcnation-jade.vercel.app/blog/">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+<link rel="stylesheet" href="../assets/css/main.css">
+<style>
+.blog-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 24px; margin-top: 32px; }
+.blog-card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--radius); overflow: hidden;
+  transition: all 0.3s; text-decoration: none; color: inherit;
+}
+.blog-card:hover { transform: translateY(-4px); border-color: var(--accent); }
+.blog-card-header {
+  padding: 24px; background: linear-gradient(135deg, rgba(0,229,255,0.08), rgba(124,58,237,0.08));
+  border-bottom: 1px solid var(--border);
+}
+.blog-card-title { font-size: 18px; font-weight: 700; color: var(--text); margin-bottom: 8px; }
+.blog-card-desc { font-size: 14px; color: var(--text3); line-height: 1.5; }
+.blog-card-footer {
+  padding: 12px 24px; background: var(--bg2); border-top: 1px solid var(--border);
+  display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: var(--text3);
+}
+.blog-tag { display: inline-block; padding: 4px 10px; background: var(--bg3); border-radius: 12px; margin: 4px 0; }
+</style>
+</head>
+<body>
+<nav>
+  <a href="../index.html" class="nav-logo">⚡ CalcNation</a>
+  <div class="nav-links">
+    <a href="../index.html">Tools</a>
+    <a href="./">Blog</a>
+  </div>
+</nav>
+
+<div class="breadcrumb"><a href="../index.html">Home</a> <span>›</span> <span>Blog</span></div>
+
+<main class="tool-page">
+  <div class="tool-header">
+    <div class="tool-icon">📰</div>
+    <h1>CalcNation Blog</h1>
+    <p>Learn about automation testing, developer tools, and tech insights. Expert tips from QA and automation engineers.</p>
+  </div>
+
+  <div class="blog-grid">
+    <a href="playwright-beginners-guide.html" class="blog-card">
+      <div class="blog-card-header">
+        <div class="blog-card-title">Playwright for Beginners: Your First Automated Test</div>
+        <div class="blog-card-desc">Get started with Playwright in 10 minutes. Learn selectors, assertions, and running your first test.</div>
+      </div>
+      <div class="blog-card-footer">
+        <span>Mar 8, 2026</span>
+        <span class="blog-tag">Automation</span>
+      </div>
+    </a>
+
+    <a href="robot-framework-guide.html" class="blog-card">
+      <div class="blog-card-header">
+        <div class="blog-card-title">Robot Framework Guide for QA Automation</div>
+        <div class="blog-card-desc">Master Robot Framework with keyword libraries, fixtures, and data-driven testing patterns.</div>
+      </div>
+      <div class="blog-card-footer">
+        <span>Mar 5, 2026</span>
+        <span class="blog-tag">QA</span>
+      </div>
+    </a>
+
+    <a href="api-testing-guide.html" class="blog-card">
+      <div class="blog-card-header">
+        <div class="blog-card-title">Complete Guide to API Testing & Automation</div>
+        <div class="blog-card-desc">Test RESTful APIs with Playwright, assertions, mock servers, and CI/CD integration.</div>
+      </div>
+      <div class="blog-card-footer">
+        <span>Mar 1, 2026</span>
+        <span class="blog-tag">API</span>
+      </div>
+    </a>
+
+    <a href="test-data-strategies.html" class="blog-card">
+      <div class="blog-card-header">
+        <div class="blog-card-title">Smart Test Data Generation for Automation</div>
+        <div class="blog-card-desc">Generate realistic test data with our free tools. Faker libraries, mock APIs, and CSV export.</div>
+      </div>
+      <div class="blog-card-footer">
+        <span>Feb 25, 2026</span>
+        <span class="blog-tag">Testing</span>
+      </div>
+    </a>
+
+    <a href="ci-cd-automation.html" class="blog-card">
+      <div class="blog-card-header">
+        <div class="blog-card-title">CI/CD Automation: GitHub Actions + Playwright</div>
+        <div class="blog-card-desc">Run automated tests on every commit. GitHub Actions setup, reporting, and failure alerts.</div>
+      </div>
+      <div class="blog-card-footer">
+        <span>Feb 20, 2026</span>
+        <span class="blog-tag">DevOps</span>
+      </div>
+    </a>
+
+    <a href="selector-strategy.html" class="blog-card">
+      <div class="blog-card-header">
+        <div class="blog-card-title">XPath vs CSS Selectors: Which Should You Use?</div>
+        <div class="blog-card-desc">Master selector strategies, avoid flaky tests, and use our free Selector Inspector tool.</div>
+      </div>
+      <div class="blog-card-footer">
+        <span>Feb 15, 2026</span>
+        <span class="blog-tag">Automation</span>
+      </div>
+    </a>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-brand"><a href="../index.html" class="nav-logo" style="font-size:18px">⚡ CalcNation</a></div>
+  <div class="footer-links">
+    <a href="../index.html">Tools</a>
+    <a href="./">Blog</a>
+    <a href="../about.html">About</a>
+    <a href="../privacy.html">Privacy</a>
+    <a href="../contact.html">Contact</a>
+  </div>
+  <div class="footer-bottom">© 2026 CalcNation · Free tools · No signup · Your data stays private</div>
+</footer>
+
+<script src="../assets/js/utils.js"></script>
+</body>
+</html>

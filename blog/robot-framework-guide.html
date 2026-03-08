@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Robot Framework Guide for QA Engineers — CalcNation Blog</title>
+<meta name="description" content="Complete guide to Robot Framework for QA automation. Learn syntax, keywords, test structure, and best practices for automation testing.">
+<link rel="canonical" href="https://calcnation-jade.vercel.app/blog/robot-framework-guide.html">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+<link rel="stylesheet" href="../assets/css/main.css">
+<style>
+.article-header { text-align: center; margin-bottom: 40px; }
+.article-meta { display: flex; gap: 16px; justify-content: center; font-size: 14px; color: var(--text2); margin: 16px 0; }
+.article-content { max-width: 800px; margin: 0 auto; line-height: 1.8; }
+.article-content h2 { font-size: 24px; margin: 32px 0 16px; }
+.article-content h3 { font-size: 18px; margin: 24px 0 12px; }
+.article-content p { margin: 16px 0; color: var(--text2); }
+.article-content code { background: var(--bg-secondary); padding: 2px 6px; border-radius: 4px; font-size: 13px; }
+.article-content pre { background: var(--bg-secondary); padding: 16px; border-radius: 8px; overflow-x: auto; margin: 16px 0; }
+.article-content pre code { background: none; padding: 0; }
+.article-content ul { margin: 16px 0 16px 20px; }
+.article-content li { margin: 8px 0; }
+.article-content a { color: var(--accent); }
+.article-content a:hover { text-decoration: underline; }
+.back-to-blog { margin-top: 40px; text-align: center; }
+.back-to-blog a { color: var(--accent); text-decoration: none; }
+</style>
+</head>
+<body>
+<nav>
+  <a href="../index.html" class="nav-logo">⚡ CalcNation</a>
+  <div class="nav-links">
+    <a href="../index.html">Tools</a>
+    <a href="./">Blog</a>
+  </div>
+</nav>
+
+<div class="breadcrumb"><a href="../index.html">Home</a> <span>›</span> <a href="./">Blog</a> <span>›</span> <span>Robot Framework Guide</span></div>
+
+<main class="tool-page">
+  <article>
+    <div class="article-header">
+      <h1>Robot Framework Guide for QA Automation Engineers</h1>
+      <div class="article-meta">
+        <span>📅 January 15, 2026</span>
+        <span>📂 Automation Testing</span>
+        <span>⏱️ 8 min read</span>
+      </div>
+    </div>
+
+    <div class="article-content">
+      <p><strong>Robot Framework</strong> is a keyword-driven automation framework that makes test automation accessible and maintainable. Unlike code-heavy tools like Selenium or Playwright, Robot Framework uses readable English-like syntax, making tests readable by both technical and non-technical stakeholders.</p>
+
+      <h2>What is Robot Framework?</h2>
+      <p>Robot Framework is an open-source test automation framework that uses a simple, keyword-based syntax. It's perfect for:</p>
+      <ul>
+        <li>Acceptance testing</li>
+        <li>Web application automation</li>
+        <li>API testing</li>
+        <li>Mobile app testing</li>
+        <li>RPA (Robotic Process Automation)</li>
+      </ul>
+
+      <h2>Installation</h2>
+      <p>Robot Framework requires Python 3.6+:</p>
+      <pre><code>pip install robotframework
+pip install robotframework-seleniumlibrary  # For web automation
+pip install robotframework-requests          # For API testing</code></pre>
+
+      <h2>Basic Syntax</h2>
+      <p>Robot Framework uses <code>.robot</code> files with a keyword-driven approach:</p>
+      <pre><code>*** Settings ***
+Library    SeleniumLibrary
+
+*** Test Cases ***
+Login Test
+    Open Browser    https://example.com    chrome
+    Input Text    id:username    admin
+    Input Text    id:password    password123
+    Click Button    id:login-btn
+    Page Should Contain    Dashboard
+    Close Browser
+
+*** Keywords ***
+User Login
+    [Arguments]    ${username}    ${password}
+    Input Text    id:username    ${username}
+    Input Text    id:password    ${password}
+    Click Button    id:login-btn</code></pre>
+
+      <h2>Key Concepts</h2>
+
+      <h3>Test Cases</h3>
+      <p>Test cases are defined under <code>*** Test Cases ***</code> section. Each test case is a series of keywords (built-in or custom).</p>
+
+      <h3>Keywords</h3>
+      <p>Keywords are reusable blocks of logic. They can be built-in (from libraries) or custom (defined by you).</p>
+
+      <h3>Variables</h3>
+      <p>Variables are defined with <code>${variable_name}</code>:</p>
+      <pre><code>*** Variables ***
+${BASE_URL}       https://example.com
+${USERNAME}       admin
+${PASSWORD}       password123
+
+*** Test Cases ***
+Login
+    Open Browser    ${BASE_URL}    chrome
+    Input Text    username    ${USERNAME}</code></pre>
+
+      <h3>Libraries</h3>
+      <p>Libraries extend Robot Framework's functionality. Common ones:</p>
+      <ul>
+        <li><code>SeleniumLibrary</code> — Web browser automation</li>
+        <li><code>RequestsLibrary</code> — HTTP API testing</li>
+        <li><code>DatabaseLibrary</code> — Database operations</li>
+        <li><code>Telnet Library</code> — Network testing</li>
+      </ul>
+
+      <h2>Web Automation Example</h2>
+      <pre><code>*** Settings ***
+Library    SeleniumLibrary
+
+*** Test Cases ***
+E2E Checkout Flow
+    Open Browser    https://shop.example.com    chrome
+    Click Link    Electronics
+    Click Element    xpath://button[@data-id='laptop-123']
+    Click Button    Add to Cart
+    Click Link    Cart
+    Click Button    Checkout
+    Input Text    email    user@example.com
+    Input Text    card-number    4111111111111111
+    Click Button    Purchase
+    Page Should Contain    Order Confirmed</code></pre>
+
+      <h2>API Testing Example</h2>
+      <pre><code>*** Settings ***
+Library    RequestsLibrary
+
+*** Test Cases ***
+GET User API
+    ${response}=    GET    https://api.example.com/users/1
+    Should Be Equal As Integers    ${response.status_code}    200
+    Should Contain    ${response.text}    "id": 1
+
+POST Create User
+    ${json}=    Create Dictionary    name=John    email=john@example.com
+    ${response}=    POST    https://api.example.com/users    json=${json}
+    Should Be Equal As Integers    ${response.status_code}    201</code></pre>
+
+      <h2>Best Practices</h2>
+
+      <h3>1. Use Data-Driven Testing</h3>
+      <p>Parameterize tests with multiple inputs:</p>
+      <pre><code>*** Test Cases ***
+Login With Various Credentials
+    [Template]    Verify Login
+    admin          password123    Dashboard
+    user           pass456        User Home
+    guest          guest789       Limited Access
+
+*** Keywords ***
+Verify Login
+    [Arguments]    ${user}    ${pass}    ${expected_page}
+    Open Browser    https://example.com    chrome
+    Input Text    username    ${user}
+    Input Text    password    ${pass}
+    Click Button    Login
+    Page Should Contain    ${expected_page}
+    Close Browser</code></pre>
+
+      <h3>2. Create Custom Keywords</h3>
+      <p>Encapsulate complex workflows into reusable keywords for cleaner tests.</p>
+
+      <h3>3. Use Page Object Model (POM)</h3>
+      <p>Separate test logic from UI element locators to make tests maintainable.</p>
+
+      <h3>4. Organize Tests by Feature</h3>
+      <p>Group related tests into test suites by feature or module.</p>
+
+      <h3>5. Use Descriptive Names</h3>
+      <p>Test names should clearly describe what's being tested:</p>
+      <pre><code>✅ Good: User Can Successfully Login With Valid Credentials
+❌ Bad: Test 1</code></pre>
+
+      <h2>Running Tests</h2>
+      <pre><code>robot test.robot                          # Run single file
+robot tests/                                # Run all .robot files in directory
+robot --tag login tests/                   # Run tests with specific tag
+robot --variable BROWSER:firefox test.robot # Override variables</code></pre>
+
+      <h2>Comparison: Robot Framework vs. Playwright</h2>
+      <ul>
+        <li><strong>Robot:</strong> Keyword-driven, readable, slower, large community</li>
+        <li><strong>Playwright:</strong> Code-first, fast, powerful, modern DevOps focus</li>
+      </ul>
+      <p>Choose Robot Framework for business-focused automation, Playwright for developer-focused automation.</p>
+
+      <h2>Resources</h2>
+      <ul>
+        <li><a href="https://robotframework.org/" target="_blank">Official Robot Framework Docs</a></li>
+        <li><a href="https://github.com/robotframework" target="_blank">Robot Framework GitHub</a></li>
+        <li><a href="https://robotframework.org/robotframework/" target="_blank">Robot Framework User Guide</a></li>
+      </ul>
+
+      <div class="back-to-blog">
+        <a href="./">← Back to Blog</a>
+      </div>
+    </div>
+  </article>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-brand"><a href="../index.html" class="nav-logo" style="font-size:18px">⚡ CalcNation</a></div>
+  <div class="footer-links">
+    <a href="../index.html">Tools</a>
+    <a href="./">Blog</a>
+    <a href="../about.html">About</a>
+    <a href="../privacy.html">Privacy</a>
+    <a href="../contact.html">Contact</a>
+  </div>
+  <div class="footer-bottom">© 2026 CalcNation · Free tools · No signup · Your data stays private</div>
+</footer>
+
+<script src="../assets/js/utils.js"></script>
+</body>
+</html>

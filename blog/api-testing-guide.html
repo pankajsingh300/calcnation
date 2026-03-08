@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>API Testing Best Practices — CalcNation Blog</title>
+<meta name="description" content="Complete guide to API testing with best practices, tools, and strategies. Learn how to test REST APIs, validate responses, and automate API testing.">
+<link rel="canonical" href="https://calcnation-jade.vercel.app/blog/api-testing-guide.html">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+<link rel="stylesheet" href="../assets/css/main.css">
+<style>
+.article-header { text-align: center; margin-bottom: 40px; }
+.article-meta { display: flex; gap: 16px; justify-content: center; font-size: 14px; color: var(--text2); margin: 16px 0; }
+.article-content { max-width: 800px; margin: 0 auto; line-height: 1.8; }
+.article-content h2 { font-size: 24px; margin: 32px 0 16px; }
+.article-content h3 { font-size: 18px; margin: 24px 0 12px; }
+.article-content p { margin: 16px 0; color: var(--text2); }
+.article-content code { background: var(--bg-secondary); padding: 2px 6px; border-radius: 4px; font-size: 13px; }
+.article-content pre { background: var(--bg-secondary); padding: 16px; border-radius: 8px; overflow-x: auto; margin: 16px 0; }
+.article-content pre code { background: none; padding: 0; }
+.article-content ul { margin: 16px 0 16px 20px; }
+.article-content li { margin: 8px 0; }
+.article-content a { color: var(--accent); }
+.article-content a:hover { text-decoration: underline; }
+.back-to-blog { margin-top: 40px; text-align: center; }
+.back-to-blog a { color: var(--accent); text-decoration: none; }
+</style>
+</head>
+<body>
+<nav>
+  <a href="../index.html" class="nav-logo">⚡ CalcNation</a>
+  <div class="nav-links">
+    <a href="../index.html">Tools</a>
+    <a href="./">Blog</a>
+  </div>
+</nav>
+
+<div class="breadcrumb"><a href="../index.html">Home</a> <span>›</span> <a href="./">Blog</a> <span>›</span> <span>API Testing Guide</span></div>
+
+<main class="tool-page">
+  <article>
+    <div class="article-header">
+      <h1>API Testing: Best Practices & Strategies for QA Engineers</h1>
+      <div class="article-meta">
+        <span>📅 January 10, 2026</span>
+        <span>📂 Testing Fundamentals</span>
+        <span>⏱️ 10 min read</span>
+      </div>
+    </div>
+
+    <div class="article-content">
+      <p>API testing is the foundation of modern software quality assurance. With microservices and distributed systems becoming the norm, testing APIs is as important as testing user interfaces—sometimes more so. This guide covers everything you need to know about testing APIs effectively.</p>
+
+      <h2>What is API Testing?</h2>
+      <p>API testing validates the business logic and functionality of Application Programming Interfaces by testing requests and responses. Unlike UI testing, API testing focuses on:</p>
+      <ul>
+        <li>HTTP status codes (200, 400, 404, 500, etc.)</li>
+        <li>Response data accuracy</li>
+        <li>Response time and performance</li>
+        <li>Security and authentication</li>
+        <li>Error handling</li>
+      </ul>
+
+      <h2>Types of API Testing</h2>
+
+      <h3>1. Functional Testing</h3>
+      <p>Validates that API functions work as documented:</p>
+      <pre><code>GET /api/users/123
+Response: { "id": 123, "name": "John", "email": "john@example.com" }
+Status: 200 OK</code></pre>
+
+      <h3>2. Performance Testing</h3>
+      <p>Measures response time under various loads:</p>
+      <ul>
+        <li>Load testing (expected traffic)</li>
+        <li>Stress testing (beyond capacity)</li>
+        <li>Spike testing (sudden traffic increase)</li>
+      </ul>
+
+      <h3>3. Security Testing</h3>
+      <p>Identifies vulnerabilities and unauthorized access:</p>
+      <ul>
+        <li>SQL injection attacks</li>
+        <li>Authentication bypass</li>
+        <li>CORS misconfiguration</li>
+        <li>Sensitive data exposure</li>
+      </ul>
+
+      <h3>4. Compatibility Testing</h3>
+      <p>Ensures API works across different clients and versions.</p>
+
+      <h2>API Testing Tools</h2>
+
+      <h3>Postman</h3>
+      <p>Manual and automated API testing. Great for beginners and quick exploratory testing.</p>
+      <pre><code>// Example Postman test
+pm.test("Status is 200", function() {
+    pm.response.to.have.status(200);
+});
+
+pm.test("Response contains id", function() {
+    var json = pm.response.json();
+    pm.expect(json).to.have.property('id');
+});</code></pre>
+
+      <h3>Pytest + Requests (Python)</h3>
+      <p>Powerful for automated API testing in CI/CD pipelines:</p>
+      <pre><code>import requests
+
+def test_get_user():
+    response = requests.get('https://api.example.com/users/1')
+    assert response.status_code == 200
+    assert response.json()['id'] == 1
+
+def test_create_user():
+    payload = {'name': 'John', 'email': 'john@example.com'}
+    response = requests.post('https://api.example.com/users', json=payload)
+    assert response.status_code == 201</code></pre>
+
+      <h3>REST Assured (Java)</h3>
+      <p>DSL for testing REST APIs in Java:</p>
+      <pre><code>given()
+    .header("Authorization", "Bearer token")
+    .when()
+    .get("https://api.example.com/users")
+    .then()
+    .statusCode(200)
+    .body("data.size()", greaterThan(0));</code></pre>
+
+      <h3>Cypress + API</h3>
+      <p>Cypress can also test APIs directly in your UI automation suites:</p>
+      <pre><code>cy.request('GET', '/api/users/1')
+    .should((response) => {
+        expect(response.status).to.eq(200);
+        expect(response.body.name).to.eq('John');
+    });</code></pre>
+
+      <h2>Best Practices</h2>
+
+      <h3>1. Test All HTTP Methods</h3>
+      <ul>
+        <li><code>GET</code> — Retrieve data (should not modify)</li>
+        <li><code>POST</code> — Create new resources</li>
+        <li><code>PUT</code> — Update existing resources</li>
+        <li><code>DELETE</code> — Remove resources</li>
+        <li><code>PATCH</code> — Partial updates</li>
+      </ul>
+
+      <h3>2. Validate Response Codes</h3>
+      <pre><code>✅ 200 OK — Request successful
+✅ 201 Created — Resource created
+✅ 204 No Content — Successful, no response body
+❌ 400 Bad Request — Client error, malformed request
+❌ 401 Unauthorized — Authentication required
+❌ 403 Forbidden — Authenticated but no permission
+❌ 404 Not Found — Resource doesn't exist
+❌ 500 Server Error — Server encountered error</code></pre>
+
+      <h3>3. Validate Response Data</h3>
+      <p>Don't just check the status code; validate the response content:</p>
+      <pre><code>def test_user_data():
+    response = requests.get('https://api.example.com/users/1')
+    data = response.json()
+    
+    assert data['id'] == 1
+    assert data['name'] == 'John'
+    assert 'email' in data
+    assert isinstance(data['created_at'], str)</code></pre>
+
+      <h3>4. Test Edge Cases</h3>
+      <ul>
+        <li>Empty request body</li>
+        <li>Missing required fields</li>
+        <li>Invalid data types</li>
+        <li>Null/None values</li>
+        <li>Boundary values (0, max int, empty strings)</li>
+      </ul>
+
+      <h3>5. Automate in CI/CD Pipeline</h3>
+      <p>Run API tests on every commit to catch regressions early:</p>
+      <pre><code># GitHub Actions example
+- name: Run API Tests
+  run: pytest tests/api/ -v --junit-xml=results.xml
+  
+- name: Publish Results
+  uses: actions/upload-artifact@v2
+  with:
+    name: test-results
+    path: results.xml</code></pre>
+
+      <h3>6. Use Test Data Wisely</h3>
+      <ul>
+        <li>Keep test data separate from production data</li>
+        <li>Use test fixtures or factories</li>
+        <li>Clean up test data after runs</li>
+        <li>Never test against real production APIs with destructive operations</li>
+      </ul>
+
+      <h3>7. Test Security</h3>
+      <pre><code>def test_unauthorized_access():
+    response = requests.get('https://api.example.com/admin')
+    assert response.status_code == 401
+
+def test_invalid_token():
+    headers = {'Authorization': 'Bearer invalid_token'}
+    response = requests.get('https://api.example.com/users', headers=headers)
+    assert response.status_code == 401</code></pre>
+
+      <h2>Common API Testing Mistakes</h2>
+      <ul>
+        <li>❌ Only testing the happy path (ignoring error scenarios)</li>
+        <li>❌ Not testing authentication/authorization</li>
+        <li>❌ Ignoring response time requirements</li>
+        <li>❌ Testing against production with write operations</li>
+        <li>❌ Not using environment variables for URLs and credentials</li>
+        <li>❌ Hardcoding test data instead of using factories</li>
+      </ul>
+
+      <h2>API Testing Checklist</h2>
+      <ul>
+        <li>☑ Validate HTTP status codes</li>
+        <li>☑ Validate response schema and data</li>
+        <li>☑ Test CRUD operations (Create, Read, Update, Delete)</li>
+        <li>☑ Test error responses</li>
+        <li>☑ Test authentication/authorization</li>
+        <li>☑ Test pagination and filtering</li>
+        <li>☑ Test rate limiting</li>
+        <li>☑ Test response time</li>
+        <li>☑ Test with various data types and edge cases</li>
+        <li>☑ Document test cases</li>
+      </ul>
+
+      <h2>Resources</h2>
+      <ul>
+        <li><a href="https://www.postman.com/" target="_blank">Postman API Platform</a></li>
+        <li><a href="https://docs.pytest.org/" target="_blank">Pytest Documentation</a></li>
+        <li><a href="https://requests.readthedocs.io/" target="_blank">Python Requests Library</a></li>
+        <li><a href="https://rest-assured.io/" target="_blank">REST Assured (Java)</a></li>
+      </ul>
+
+      <div class="back-to-blog">
+        <a href="./">← Back to Blog</a>
+      </div>
+    </div>
+  </article>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-brand"><a href="../index.html" class="nav-logo" style="font-size:18px">⚡ CalcNation</a></div>
+  <div class="footer-links">
+    <a href="../index.html">Tools</a>
+    <a href="./">Blog</a>
+    <a href="../about.html">About</a>
+    <a href="../privacy.html">Privacy</a>
+    <a href="../contact.html">Contact</a>
+  </div>
+  <div class="footer-bottom">© 2026 CalcNation · Free tools · No signup · Your data stays private</div>
+</footer>
+
+<script src="../assets/js/utils.js"></script>
+</body>
+</html>
