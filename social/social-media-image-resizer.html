@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Social Media Image Resizer Online Free | CalcNation | CalcNation</title>
+<meta name="description" content="Resize images for Instagram, Facebook, Twitter, LinkedIn, YouTube instantly. All platform sizes in one tool.">
+<link rel="canonical" href="https://calcnation-jade.vercel.app/social/social-media-image-resizer.html">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+<link rel="stylesheet" href="../assets/css/main.css">
+<style>
+.tool-input{width:100%;padding:12px 16px;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-size:15px;outline:none;margin-bottom:12px;}
+.tool-input:focus{border-color:var(--accent);}
+.tool-select{width:100%;padding:12px 16px;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-size:15px;outline:none;cursor:pointer;margin-bottom:12px;}
+label.fl{font-size:12px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:6px;}
+.result-box{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:24px;margin-top:16px;}
+.rnum{font-size:42px;font-weight:900;font-family:"Syne",sans-serif;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.rlabel{font-size:13px;color:var(--text3);margin-top:4px;}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+@media(max-width:600px){.grid2{grid-template-columns:1fr;}}
+.tag{display:inline-flex;padding:6px 14px;background:var(--bg3);border:1px solid var(--border);border-radius:20px;font-size:13px;color:var(--text2);cursor:pointer;transition:all 0.15s;margin:3px;}
+.tag:hover{border-color:var(--accent);color:var(--accent);}
+textarea.ta{width:100%;padding:16px;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-size:14px;line-height:1.7;resize:vertical;outline:none;font-family:inherit;}
+textarea.ta:focus{border-color:var(--accent);}
+</style>
+</head>
+<body>
+<nav>
+  <a href="../index.html" class="nav-logo">⚡ CalcNation</a>
+  <div class="nav-links">
+    <a href="../pdf/compress.html">PDF Tools</a>
+    <a href="../dev/json-formatter.html">Dev Tools</a>
+    <div class="nav-dropdown">
+      <a href="../social/youtube-money-calculator.html" class="nav-dropdown-trigger">Social ▾</a>
+      <div class="nav-dropdown-menu nav-dropdown-wide">
+        <div class="nav-dropdown-col">
+          <div class="nav-dropdown-heading">YouTube</div>
+          <a href="../social/youtube-money-calculator.html"><span>💰</span> Money Calculator</a>
+          <a href="../social/youtube-cpm-calculator.html"><span>📊</span> CPM Calculator</a>
+          <a href="../social/youtube-tag-generator.html"><span>🏷️</span> Tag Generator</a>
+          <a href="../social/youtube-title-generator.html"><span>✍️</span> Title Generator</a>
+          <a href="../social/youtube-thumbnail-resizer.html"><span>🖼️</span> Thumbnail Resizer</a>
+          <a href="../social/video-length-optimizer.html"><span>⏱️</span> Video Optimizer</a>
+          <a href="../social/youtube-channel-analyzer.html"><span>🔍</span> Channel Analyzer</a>
+        </div>
+        <div class="nav-dropdown-col">
+          <div class="nav-dropdown-heading">Social Media</div>
+          <a href="../social/instagram-engagement.html"><span>📸</span> Instagram Engagement</a>
+          <a href="../social/tiktok-money-calculator.html"><span>🎵</span> TikTok Earnings</a>
+          <a href="../social/hashtag-generator.html"><span>#️⃣</span> Hashtag Generator</a>
+          <a href="../social/influencer-earnings.html"><span>⭐</span> Influencer Earnings</a>
+          <a href="../social/best-time-to-post.html"><span>🕐</span> Best Time to Post</a>
+          <a href="../social/caption-generator.html"><span>💬</span> Caption Generator</a>
+          <a href="../social/social-media-image-resizer.html"><span>📐</span> Image Resizer</a>
+        </div>
+        <div class="nav-dropdown-col">
+          <div class="nav-dropdown-heading">Viral Tools</div>
+          <a href="../tools/love-calculator.html"><span>❤️</span> Love Calculator</a>
+          <a href="../tools/random-name-picker.html"><span>🎯</span> Name Picker</a>
+          <a href="../tools/random-team-generator.html"><span>👥</span> Team Generator</a>
+          <a href="../tools/dice-roller.html"><span>🎲</span> Dice Roller</a>
+          <a href="../tools/qr-code-generator.html"><span>📱</span> QR Generator</a>
+          <a href="../tools/word-counter.html"><span>📝</span> Word Counter</a>
+          <a href="../tools/password-generator.html"><span>🔐</span> Password Generator</a>
+        </div>
+        <div class="nav-dropdown-col">
+          <div class="nav-dropdown-heading">Quick Calculators</div>
+          <a href="../tools/text-case-converter.html"><span>🔡</span> Case Converter</a>
+          <a href="../tools/character-counter.html"><span>🔢</span> Character Counter</a>
+          <a href="../tools/age-calculator.html"><span>🎂</span> Age Calculator</a>
+          <a href="../tools/bmi-calculator.html"><span>⚖️</span> BMI Calculator</a>
+          <a href="../tools/tip-calculator.html"><span>💵</span> Tip Calculator</a>
+          <a href="../tools/fake-address-generator.html"><span>📍</span> Fake Address</a>
+          <a href="../tools/barcode-generator.html"><span>▌▌</span> Barcode Generator</a>
+        </div>
+      </div>
+    </div>
+    <a href="#">Finance</a>
+    <a href="#">Health</a>
+  </div>
+</nav>
+<div class="breadcrumb"><a href="../index.html">Home</a> <span>›</span> <span>Social Media Image Resizer</span></div>
+<main class="tool-page">
+  <div class="tool-header">
+    <div class="tool-icon">📐</div>
+    <h1>Social Media Image Resizer</h1>
+    <p>Resize any image to the exact dimensions for every social media platform. One tool, all platforms.</p>
+    <div style="display:flex;gap:8px;margin-top:12px"><span class="badge">Free</span><span class="badge orange">Instant</span><span class="badge purple">No Signup</span></div>
+  </div>
+  <div class="tool-box">
+    <div class="tool-box-header"><h2>Social Media Image Resizer</h2></div>
+    <div class="tool-box-body"><div id="uploadSection">
+  <div class="upload-zone" id="uploadZone" onclick="document.getElementById('imgInput').click()">
+    <input type="file" id="imgInput" accept="image/*" style="display:none" onchange="loadImage(this)">
+    <div class="upload-icon">📐</div><h3>Click to upload image</h3><p>JPG, PNG, WebP — any size</p>
+  </div>
+</div>
+<div id="resizeSection" style="display:none">
+  <div style="margin-bottom:16px;padding:12px;background:var(--bg2);border-radius:8px;display:flex;justify-content:space-between;align-items:center">
+    <div id="imgInfo" style="font-size:13px;color:var(--text2)"></div>
+    <button class="btn btn-secondary" onclick="resetTool()" style="padding:6px 12px;font-size:12px">Change</button>
+  </div>
+  <div style="font-size:13px;font-weight:700;color:var(--text2);margin-bottom:12px;text-transform:uppercase;letter-spacing:1px">Select Size to Download</div>
+  <div id="sizeGrid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px"></div>
+  <canvas id="canvas" style="display:none"></canvas>
+</div></div>
+  </div>
+  <div class="related-tools"><h2>Related Tools</h2><div class="related-grid"><a href="youtube-thumbnail-resizer.html" class="related-card"><span class="related-card-icon">🖼️</span><span class="related-card-name">YT Thumbnail Resizer</span></a><a href="hashtag-generator.html" class="related-card"><span class="related-card-icon">#️⃣</span><span class="related-card-name">Hashtag Generator</span></a></div></div>
+</main>
+<footer><div style="margin-bottom:16px"><a href="../index.html" class="nav-logo" style="font-size:18px">⚡ CalcNation</a></div><div>© 2024 CalcNation · Free tools · No signup required</div></footer>
+<div class="toast" id="toast"></div>
+<script src="../assets/js/utils.js"></script>
+<script>const sizes=[
+  {label:'Instagram Post',w:1080,h:1080,icon:'📸',platform:'Instagram'},
+  {label:'Instagram Story',w:1080,h:1920,icon:'📱',platform:'Instagram'},
+  {label:'Instagram Landscape',w:1080,h:566,icon:'🖼️',platform:'Instagram'},
+  {label:'YouTube Thumbnail',w:1280,h:720,icon:'▶️',platform:'YouTube'},
+  {label:'YouTube Channel Art',w:2560,h:1440,icon:'🎨',platform:'YouTube'},
+  {label:'Twitter Post',w:1200,h:675,icon:'🐦',platform:'Twitter'},
+  {label:'Twitter Header',w:1500,h:500,icon:'🔷',platform:'Twitter'},
+  {label:'Facebook Post',w:1200,h:630,icon:'👍',platform:'Facebook'},
+  {label:'Facebook Cover',w:851,h:315,icon:'📘',platform:'Facebook'},
+  {label:'Facebook Story',w:1080,h:1920,icon:'📲',platform:'Facebook'},
+  {label:'LinkedIn Post',w:1200,h:627,icon:'💼',platform:'LinkedIn'},
+  {label:'LinkedIn Cover',w:1584,h:396,icon:'🔵',platform:'LinkedIn'},
+  {label:'TikTok Video',w:1080,h:1920,icon:'🎵',platform:'TikTok'},
+  {label:'Pinterest Pin',w:1000,h:1500,icon:'📌',platform:'Pinterest'},
+  {label:'OG Image',w:1200,h:630,icon:'🔗',platform:'Web'},
+];
+let img=null;
+function loadImage(input){
+  const file=input.files[0];if(!file)return;
+  const reader=new FileReader();
+  reader.onload=e=>{
+    img=new Image();img.src=e.target.result;
+    img.onload=()=>{
+      document.getElementById('imgInfo').textContent=file.name+' — '+img.width+'×'+img.height+'px';
+      document.getElementById('uploadSection').style.display='none';
+      document.getElementById('resizeSection').style.display='block';
+      renderSizes();
+    };
+  };reader.readAsDataURL(file);
+}
+function renderSizes(){
+  document.getElementById('sizeGrid').innerHTML=sizes.map((s,i)=>
+    `<div onclick="downloadSize(${i})" style="padding:12px 14px;background:var(--bg2);border:1px solid var(--border);border-radius:8px;cursor:pointer;transition:all 0.15s"
+      onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='var(--border)'">
+      <div style="font-size:20px;margin-bottom:4px">${s.icon}</div>
+      <div style="font-size:13px;font-weight:600;color:var(--text)">${s.label}</div>
+      <div style="font-size:12px;color:var(--text3);margin-top:2px">${s.w}×${s.h}px</div>
+      <div style="font-size:11px;color:var(--accent);margin-top:2px">${s.platform}</div>
+    </div>`
+  ).join('');
+}
+function downloadSize(i){
+  const s=sizes[i];
+  const canvas=document.getElementById('canvas');
+  canvas.width=s.w;canvas.height=s.h;
+  const ctx=canvas.getContext('2d');
+  ctx.drawImage(img,0,0,s.w,s.h);
+  const a=document.createElement('a');
+  a.download=s.label.replace(/\s/g,'-').toLowerCase()+'-'+s.w+'x'+s.h+'.jpg';
+  a.href=canvas.toDataURL('image/jpeg',0.92);a.click();
+  showToast(s.label+' downloaded!','success');
+}
+function resetTool(){img=null;document.getElementById('uploadSection').style.display='block';document.getElementById('resizeSection').style.display='none';}
+setupDragDrop('uploadZone','imgInput',loadImage);</script>
+</body>
+</html>

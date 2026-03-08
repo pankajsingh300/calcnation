@@ -54,3 +54,41 @@ function setProgress(pct, label = '') {
 }
 
 document.addEventListener('DOMContentLoaded', setupFAQ);
+
+
+// ── Mega-menu overflow fix ──────────────────────────────────────────────────
+// Repositions any .nav-dropdown-wide so it never clips outside the viewport
+(function() {
+  function fixDropdownPosition(menu) {
+    // Reset first
+    menu.style.left = 'auto';
+    menu.style.right = '0px';
+    var rect = menu.getBoundingClientRect();
+    var overflow = rect.right - window.innerWidth + 12; // 12px gutter
+    if (overflow > 0) {
+      menu.style.right = (overflow) + 'px';
+    }
+    if (rect.left < 12) {
+      menu.style.right = 'auto';
+      menu.style.left = '0px';
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    var triggers = document.querySelectorAll('.nav-dropdown');
+    triggers.forEach(function(trigger) {
+      trigger.addEventListener('mouseenter', function() {
+        var wide = this.querySelector('.nav-dropdown-wide');
+        if (wide) {
+          // Small delay to let browser paint
+          setTimeout(function() { fixDropdownPosition(wide); }, 10);
+        }
+      });
+    });
+    // Also fix on resize
+    window.addEventListener('resize', function() {
+      var menus = document.querySelectorAll('.nav-dropdown-wide');
+      menus.forEach(fixDropdownPosition);
+    });
+  });
+})();

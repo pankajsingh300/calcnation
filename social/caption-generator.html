@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Social Media Caption Generator Free | CalcNation | CalcNation</title>
+<meta name="description" content="Generate engaging captions for Instagram, TikTok and Facebook posts. AI-style caption ideas instantly.">
+<link rel="canonical" href="https://calcnation-jade.vercel.app/social/caption-generator.html">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+<link rel="stylesheet" href="../assets/css/main.css">
+<style>
+.tool-input{width:100%;padding:12px 16px;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-size:15px;outline:none;margin-bottom:12px;}
+.tool-input:focus{border-color:var(--accent);}
+.tool-select{width:100%;padding:12px 16px;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-size:15px;outline:none;cursor:pointer;margin-bottom:12px;}
+label.fl{font-size:12px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:6px;}
+.result-box{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:24px;margin-top:16px;}
+.rnum{font-size:42px;font-weight:900;font-family:"Syne",sans-serif;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.rlabel{font-size:13px;color:var(--text3);margin-top:4px;}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+@media(max-width:600px){.grid2{grid-template-columns:1fr;}}
+.tag{display:inline-flex;padding:6px 14px;background:var(--bg3);border:1px solid var(--border);border-radius:20px;font-size:13px;color:var(--text2);cursor:pointer;transition:all 0.15s;margin:3px;}
+.tag:hover{border-color:var(--accent);color:var(--accent);}
+textarea.ta{width:100%;padding:16px;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-size:14px;line-height:1.7;resize:vertical;outline:none;font-family:inherit;}
+textarea.ta:focus{border-color:var(--accent);}
+</style>
+</head>
+<body>
+<nav>
+  <a href="../index.html" class="nav-logo">⚡ CalcNation</a>
+  <div class="nav-links">
+    <a href="../pdf/compress.html">PDF Tools</a>
+    <a href="../dev/json-formatter.html">Dev Tools</a>
+    <div class="nav-dropdown">
+      <a href="../social/youtube-money-calculator.html" class="nav-dropdown-trigger">Social ▾</a>
+      <div class="nav-dropdown-menu nav-dropdown-wide">
+        <div class="nav-dropdown-col">
+          <div class="nav-dropdown-heading">YouTube</div>
+          <a href="../social/youtube-money-calculator.html"><span>💰</span> Money Calculator</a>
+          <a href="../social/youtube-cpm-calculator.html"><span>📊</span> CPM Calculator</a>
+          <a href="../social/youtube-tag-generator.html"><span>🏷️</span> Tag Generator</a>
+          <a href="../social/youtube-title-generator.html"><span>✍️</span> Title Generator</a>
+          <a href="../social/youtube-thumbnail-resizer.html"><span>🖼️</span> Thumbnail Resizer</a>
+          <a href="../social/video-length-optimizer.html"><span>⏱️</span> Video Optimizer</a>
+          <a href="../social/youtube-channel-analyzer.html"><span>🔍</span> Channel Analyzer</a>
+        </div>
+        <div class="nav-dropdown-col">
+          <div class="nav-dropdown-heading">Social Media</div>
+          <a href="../social/instagram-engagement.html"><span>📸</span> Instagram Engagement</a>
+          <a href="../social/tiktok-money-calculator.html"><span>🎵</span> TikTok Earnings</a>
+          <a href="../social/hashtag-generator.html"><span>#️⃣</span> Hashtag Generator</a>
+          <a href="../social/influencer-earnings.html"><span>⭐</span> Influencer Earnings</a>
+          <a href="../social/best-time-to-post.html"><span>🕐</span> Best Time to Post</a>
+          <a href="../social/caption-generator.html"><span>💬</span> Caption Generator</a>
+          <a href="../social/social-media-image-resizer.html"><span>📐</span> Image Resizer</a>
+        </div>
+        <div class="nav-dropdown-col">
+          <div class="nav-dropdown-heading">Viral Tools</div>
+          <a href="../tools/love-calculator.html"><span>❤️</span> Love Calculator</a>
+          <a href="../tools/random-name-picker.html"><span>🎯</span> Name Picker</a>
+          <a href="../tools/random-team-generator.html"><span>👥</span> Team Generator</a>
+          <a href="../tools/dice-roller.html"><span>🎲</span> Dice Roller</a>
+          <a href="../tools/qr-code-generator.html"><span>📱</span> QR Generator</a>
+          <a href="../tools/word-counter.html"><span>📝</span> Word Counter</a>
+          <a href="../tools/password-generator.html"><span>🔐</span> Password Generator</a>
+        </div>
+        <div class="nav-dropdown-col">
+          <div class="nav-dropdown-heading">Quick Calculators</div>
+          <a href="../tools/text-case-converter.html"><span>🔡</span> Case Converter</a>
+          <a href="../tools/character-counter.html"><span>🔢</span> Character Counter</a>
+          <a href="../tools/age-calculator.html"><span>🎂</span> Age Calculator</a>
+          <a href="../tools/bmi-calculator.html"><span>⚖️</span> BMI Calculator</a>
+          <a href="../tools/tip-calculator.html"><span>💵</span> Tip Calculator</a>
+          <a href="../tools/fake-address-generator.html"><span>📍</span> Fake Address</a>
+          <a href="../tools/barcode-generator.html"><span>▌▌</span> Barcode Generator</a>
+        </div>
+      </div>
+    </div>
+    <a href="#">Finance</a>
+    <a href="#">Health</a>
+  </div>
+</nav>
+<div class="breadcrumb"><a href="../index.html">Home</a> <span>›</span> <span>Caption Generator</span></div>
+<main class="tool-page">
+  <div class="tool-header">
+    <div class="tool-icon">💬</div>
+    <h1>Caption Generator</h1>
+    <p>Generate catchy, engaging captions for Instagram, TikTok, YouTube and Facebook posts instantly.</p>
+    <div style="display:flex;gap:8px;margin-top:12px"><span class="badge">Free</span><span class="badge orange">Instant</span><span class="badge purple">No Signup</span></div>
+  </div>
+  <div class="tool-box">
+    <div class="tool-box-header"><h2>Caption Generator</h2></div>
+    <div class="tool-box-body"><div><label class="fl">Describe your post</label>
+  <textarea class="ta" id="capDesc" rows="3" placeholder="e.g. sunset photo at the beach, travel photo from Tokyo, gym workout, food photo of pasta..."></textarea>
+</div>
+<div class="grid2">
+  <div><label class="fl">Platform</label>
+    <select class="tool-select" id="capPlatform">
+      <option value="instagram">Instagram</option>
+      <option value="tiktok">TikTok</option>
+      <option value="twitter">Twitter / X</option>
+      <option value="linkedin">LinkedIn</option>
+      <option value="facebook">Facebook</option>
+    </select>
+  </div>
+  <div><label class="fl">Tone</label>
+    <select class="tool-select" id="capTone">
+      <option value="fun">Fun & Playful</option>
+      <option value="inspirational">Inspirational</option>
+      <option value="professional">Professional</option>
+      <option value="witty">Witty & Humorous</option>
+      <option value="minimal">Short & Minimal</option>
+    </select>
+  </div>
+</div>
+<button class="btn btn-primary btn-block" onclick="genCaptions()" style="font-size:15px">💬 Generate 5 Captions</button>
+<div id="capResult" style="display:none;margin-top:16px">
+  <div style="font-size:13px;font-weight:600;color:var(--text2);margin-bottom:10px">Click any caption to copy it:</div>
+  <div id="capList" style="display:flex;flex-direction:column;gap:8px"></div>
+</div></div>
+  </div>
+  <div class="related-tools"><h2>Related Tools</h2><div class="related-grid"><a href="hashtag-generator.html" class="related-card"><span class="related-card-icon">#️⃣</span><span class="related-card-name">Hashtag Generator</span></a><a href="youtube-title-generator.html" class="related-card"><span class="related-card-icon">✍️</span><span class="related-card-name">YouTube Title Generator</span></a><a href="best-time-to-post.html" class="related-card"><span class="related-card-icon">🕐</span><span class="related-card-name">Best Time to Post</span></a></div></div>
+</main>
+<footer><div style="margin-bottom:16px"><a href="../index.html" class="nav-logo" style="font-size:18px">⚡ CalcNation</a></div><div>© 2024 CalcNation · Free tools · No signup required</div></footer>
+<div class="toast" id="toast"></div>
+<script src="../assets/js/utils.js"></script>
+<script>const templates={
+  fun:{instagram:['Living my best life ✨ {topic} vibes only! Drop a 🔥 if you can relate #blessed','Not all those who wander are lost — some are just looking for better {topic} 🌊 #vibes','POV: You discovered {topic} and now nothing else matters 😅 #obsessed','Okay but can we talk about how amazing {topic} is? No? Just me? 🙃','This is your sign to try {topic} 🙌 Tag a friend who needs to see this!'],
+  tiktok:['POV: {topic} hits different when you least expect it 🎵','Wait for it... {topic} 🤯 #foryou #viral','The {topic} era has officially begun and I am HERE for it ✨','No one talks about the {topic} side of life enough. Let me fix that 💅','Things that just make sense: {topic} ✅ #relatable #fyp'],
+  twitter:['hot take: {topic} is underrated and I will die on this hill','just experienced {topic} and I am not the same person anymore','friendly reminder that {topic} exists and it is incredible','the {topic} agenda is real and I am pushing it','can we normalize talking about {topic} more? asking for a friend'],
+  linkedin:['Excited to share my experience with {topic}. The key insight? Start before you feel ready. What has {topic} taught you?','3 things I learned from {topic} this week: 1. Consistency beats perfection. 2. Small steps compound. 3. Share the journey. What would you add?','{topic} reminded me why I love what I do. Sometimes the best lessons come from unexpected places. Grateful for the journey. 🙏'],
+  facebook:['Had the most amazing experience with {topic} today! Who else can relate? 👇','Sharing this because {topic} genuinely made my day and I hope it makes yours too! ❤️','Real talk: {topic} has been a game changer. Anyone else feel this way?']},
+  inspirational:{instagram:['Every moment with {topic} is a reminder that life is beautiful 🌟','{topic} taught me that the best views come after the hardest climbs 🏔️ #growth','Choose experiences over things. Choose {topic}. Choose yourself. ✨','Not where I want to be, but miles from where I started. {topic} is the journey 💫','Small steps. Big dreams. {topic} is proof that it all adds up. 🔥'],
+  tiktok:['Starting today, I choose {topic} ✨ #motivation #growth','The version of you that tries {topic} is the version that wins 💪','This is your sign. {topic}. Go. Now. 🚀','Progress over perfection. {topic} is the way. 🌱 #fyp','Hard days make the good ones with {topic} sweeter 🌅'],
+  twitter:['reminder: your future self will thank you for starting {topic} today','{topic} is proof that beautiful things take time','the best investment you can make is in {topic} and yourself','progress is progress, no matter how small. keep going with {topic}','your {topic} era is about to begin. trust the process'],
+  linkedin:['Success with {topic} does not happen overnight. It is the result of consistent action, even when you do not feel like it. What is your one action today?','The most powerful words: I will figure it out. Applied to {topic} and every challenge since. What is your growth mindset mantra?'],
+  facebook:['This {topic} journey has taught me more about myself than anything else. Grateful for every step! Share your story below 💙','Sometimes all you need is to try {topic}. The rest follows. 🌟']},
+  professional:{instagram:['{topic} — where craft meets passion. Proud of the work that goes into every detail. #professional','Excellence in {topic} is not an accident. It is the result of consistent dedication. 📊','Behind every great {topic} is a process worth sharing. Here is a glimpse into mine. 🔍','Quality over quantity — especially when it comes to {topic}. 💼','Sharing insights from my {topic} journey. What questions do you have? Drop them below. 👇'],
+  tiktok:['What I learned after 1 year of {topic} 📊 #business #tips','Professional tip about {topic} that nobody tells you 🔑 #career','Behind the scenes: how {topic} actually works 💼 #professional'],
+  twitter:['{topic} insight: the details matter more than most people realize','what i wish i knew about {topic} when i started: everything is learnable','the {topic} playbook nobody shares publicly (thread) 🧵'],
+  linkedin:['After spending years in {topic}, here is what actually moves the needle: relationships, consistency, and never stop learning. What would you add?'],
+  facebook:['Professional insight: {topic} success comes down to three things — preparation, execution, and reflection. What has your experience been?']},
+  witty:{instagram:['Me before {topic}: normal. Me after {topic}: unhinged (in the best way) 😂','Current mood: obsessed with {topic}, send help 🆘 #sendhelp','Plot twist: {topic} was the answer all along 🤷','Not to be dramatic but {topic} might have changed my life. I said what I said. 🎭','Petition to make {topic} a mandatory life experience. Sign below 👇'],
+  tiktok:['Nobody: … Me at 2am: researching {topic} 😭 #relatable','The {topic} to English translation nobody asked for 🤣 #funny','What they said {topic} would be like vs what it actually is 😅'],
+  twitter:['me: i will be normal about {topic}. also me: *is not normal about {topic}*','hot girl summer? no. {topic} summer? yes.','therapist: {topic} cannot hurt you. {topic}: 👀','the villain origin story: discovering {topic} and having opinions about it'],
+  facebook:['Not to be that person but... {topic} has me out here questioning all my life choices 😂 Anyone else or just me?','POV: you told yourself "just 5 minutes" of {topic} and now it is 2am 😅 Tag someone!']},
+  minimal:{instagram:['{topic} ✨','{topic} — all day, every day.','{topic}. enough said.','just {topic} 🌿','{topic} > everything'],
+  tiktok:['{topic} ✨ #minimal','{topic} hits different.','all i need: {topic}'],
+  twitter:['{topic}.','{topic}. that is all.','today: {topic}'],
+  linkedin:['{topic}. Focused. Consistent. Growing.','Short on words today. Long on {topic}.'],
+  facebook:['{topic} 🙌','{topic} — that is all!']}
+};
+
+function genCaptions(){
+  const desc=document.getElementById('capDesc').value.trim()||'my day';
+  const platform=document.getElementById('capPlatform').value;
+  const tone=document.getElementById('capTone').value;
+  const pool=templates[tone]?.[platform]||templates[tone]?.instagram||[];
+  const captions=pool.slice(0,5).map(t=>t.replace(/\{topic\}/g,desc));
+  document.getElementById('capList').innerHTML=captions.map((c,i)=>
+    `<div onclick="navigator.clipboard.writeText(this.getAttribute('data-text')).then(()=>showToast('Caption copied!','success'))"
+      data-text="${c.replace(/"/g,'&quot;')}"
+      style="padding:14px 16px;background:var(--bg2);border:1px solid var(--border);border-radius:10px;cursor:pointer;font-size:14px;color:var(--text);line-height:1.6;transition:all 0.2s"
+      onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='var(--border)'"
+    >${c} <span style="font-size:11px;color:var(--text3);float:right;margin-top:2px">click to copy</span></div>`
+  ).join('');
+  document.getElementById('capResult').style.display='block';
+  showToast('5 captions generated!','success');
+}</script>
+</body>
+</html>

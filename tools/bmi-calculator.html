@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BMI Calculator Online Free — Body Mass Index | CalcNation | CalcNation</title>
+<meta name="description" content="Calculate your Body Mass Index (BMI) online free. Get healthy weight range and BMI category instantly.">
+<link rel="canonical" href="https://calcnation-jade.vercel.app/tools/bmi-calculator.html">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+<link rel="stylesheet" href="../assets/css/main.css">
+<style>
+.tool-input{width:100%;padding:12px 16px;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-size:15px;outline:none;margin-bottom:12px;}
+.tool-input:focus{border-color:var(--accent);}
+.tool-select{width:100%;padding:12px 16px;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-size:15px;outline:none;cursor:pointer;margin-bottom:12px;}
+label.fl{font-size:12px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:6px;}
+.result-box{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:24px;margin-top:16px;}
+.rnum{font-size:42px;font-weight:900;font-family:"Syne",sans-serif;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.rlabel{font-size:13px;color:var(--text3);margin-top:4px;}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+@media(max-width:600px){.grid2{grid-template-columns:1fr;}}
+.tag{display:inline-flex;padding:6px 14px;background:var(--bg3);border:1px solid var(--border);border-radius:20px;font-size:13px;color:var(--text2);cursor:pointer;transition:all 0.15s;margin:3px;}
+.tag:hover{border-color:var(--accent);color:var(--accent);}
+textarea.ta{width:100%;padding:16px;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-size:14px;line-height:1.7;resize:vertical;outline:none;font-family:inherit;}
+textarea.ta:focus{border-color:var(--accent);}
+</style>
+</head>
+<body>
+<nav>
+  <a href="../index.html" class="nav-logo">⚡ CalcNation</a>
+  <div class="nav-links">
+    <a href="../pdf/compress.html">PDF Tools</a>
+    <a href="../dev/json-formatter.html">Dev Tools</a>
+    <div class="nav-dropdown">
+      <a href="../social/youtube-money-calculator.html" class="nav-dropdown-trigger">Social ▾</a>
+      <div class="nav-dropdown-menu nav-dropdown-wide">
+        <div class="nav-dropdown-col">
+          <div class="nav-dropdown-heading">YouTube</div>
+          <a href="../social/youtube-money-calculator.html"><span>💰</span> Money Calculator</a>
+          <a href="../social/youtube-cpm-calculator.html"><span>📊</span> CPM Calculator</a>
+          <a href="../social/youtube-tag-generator.html"><span>🏷️</span> Tag Generator</a>
+          <a href="../social/youtube-title-generator.html"><span>✍️</span> Title Generator</a>
+          <a href="../social/youtube-thumbnail-resizer.html"><span>🖼️</span> Thumbnail Resizer</a>
+          <a href="../social/video-length-optimizer.html"><span>⏱️</span> Video Optimizer</a>
+          <a href="../social/youtube-channel-analyzer.html"><span>🔍</span> Channel Analyzer</a>
+        </div>
+        <div class="nav-dropdown-col">
+          <div class="nav-dropdown-heading">Social Media</div>
+          <a href="../social/instagram-engagement.html"><span>📸</span> Instagram Engagement</a>
+          <a href="../social/tiktok-money-calculator.html"><span>🎵</span> TikTok Earnings</a>
+          <a href="../social/hashtag-generator.html"><span>#️⃣</span> Hashtag Generator</a>
+          <a href="../social/influencer-earnings.html"><span>⭐</span> Influencer Earnings</a>
+          <a href="../social/best-time-to-post.html"><span>🕐</span> Best Time to Post</a>
+          <a href="../social/caption-generator.html"><span>💬</span> Caption Generator</a>
+          <a href="../social/social-media-image-resizer.html"><span>📐</span> Image Resizer</a>
+        </div>
+        <div class="nav-dropdown-col">
+          <div class="nav-dropdown-heading">Viral Tools</div>
+          <a href="../tools/love-calculator.html"><span>❤️</span> Love Calculator</a>
+          <a href="../tools/random-name-picker.html"><span>🎯</span> Name Picker</a>
+          <a href="../tools/random-team-generator.html"><span>👥</span> Team Generator</a>
+          <a href="../tools/dice-roller.html"><span>🎲</span> Dice Roller</a>
+          <a href="../tools/qr-code-generator.html"><span>📱</span> QR Generator</a>
+          <a href="../tools/word-counter.html"><span>📝</span> Word Counter</a>
+          <a href="../tools/password-generator.html"><span>🔐</span> Password Generator</a>
+        </div>
+        <div class="nav-dropdown-col">
+          <div class="nav-dropdown-heading">Quick Calculators</div>
+          <a href="../tools/text-case-converter.html"><span>🔡</span> Case Converter</a>
+          <a href="../tools/character-counter.html"><span>🔢</span> Character Counter</a>
+          <a href="../tools/age-calculator.html"><span>🎂</span> Age Calculator</a>
+          <a href="../tools/bmi-calculator.html"><span>⚖️</span> BMI Calculator</a>
+          <a href="../tools/tip-calculator.html"><span>💵</span> Tip Calculator</a>
+          <a href="../tools/fake-address-generator.html"><span>📍</span> Fake Address</a>
+          <a href="../tools/barcode-generator.html"><span>▌▌</span> Barcode Generator</a>
+        </div>
+      </div>
+    </div>
+    <a href="#">Finance</a>
+    <a href="#">Health</a>
+  </div>
+</nav>
+<div class="breadcrumb"><a href="../index.html">Home</a> <span>›</span> <span>BMI Calculator</span></div>
+<main class="tool-page">
+  <div class="tool-header">
+    <div class="tool-icon">⚖️</div>
+    <h1>BMI Calculator</h1>
+    <p>Calculate your BMI instantly. See your healthy weight range, category and personalized health tips.</p>
+    <div style="display:flex;gap:8px;margin-top:12px"><span class="badge">Free</span><span class="badge orange">Instant</span><span class="badge purple">No Signup</span></div>
+  </div>
+  <div class="tool-box">
+    <div class="tool-box-header"><h2>BMI Calculator</h2></div>
+    <div class="tool-box-body"><div style="display:flex;gap:8px;margin-bottom:16px">
+  <button class="btn btn-primary" id="btnMetric" onclick="setUnit('metric')" style="flex:1">Metric (kg/cm)</button>
+  <button class="btn btn-secondary" id="btnImperial" onclick="setUnit('imperial')" style="flex:1">Imperial (lbs/ft)</button>
+</div>
+<div id="metricFields">
+  <div class="grid2">
+    <div><label class="fl">Weight (kg)</label><input class="tool-input" type="number" id="weightKg" value="70" oninput="calcBMI()"></div>
+    <div><label class="fl">Height (cm)</label><input class="tool-input" type="number" id="heightCm" value="170" oninput="calcBMI()"></div>
+  </div>
+</div>
+<div id="imperialFields" style="display:none">
+  <div class="grid2">
+    <div><label class="fl">Weight (lbs)</label><input class="tool-input" type="number" id="weightLbs" value="154" oninput="calcBMI()"></div>
+    <div style="display:flex;gap:8px">
+      <div style="flex:1"><label class="fl">Feet</label><input class="tool-input" type="number" id="heightFt" value="5" oninput="calcBMI()"></div>
+      <div style="flex:1"><label class="fl">Inches</label><input class="tool-input" type="number" id="heightIn" value="7" oninput="calcBMI()"></div>
+    </div>
+  </div>
+</div>
+<div class="result-box" id="bmiResult" style="display:none">
+  <div style="text-align:center;margin-bottom:20px">
+    <div class="rnum" id="bmiValue"></div>
+    <div class="rlabel">BMI</div>
+    <div id="bmiCategory" style="margin-top:8px;font-size:16px;font-weight:700"></div>
+  </div>
+  <div style="height:12px;border-radius:6px;background:linear-gradient(90deg,#3b82f6 0%,#22c55e 25%,#eab308 50%,#f97316 75%,#ef4444 100%);margin-bottom:8px;position:relative">
+    <div id="bmiMarker" style="position:absolute;top:-4px;width:8px;height:20px;background:#fff;border:2px solid #000;border-radius:2px;transform:translateX(-50%);transition:left 0.5s"></div>
+  </div>
+  <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--text3);margin-bottom:16px"><span>Underweight</span><span>Normal</span><span>Overweight</span><span>Obese</span></div>
+  <div id="bmiRange" style="font-size:13px;color:var(--text2);padding:10px;background:var(--bg3);border-radius:8px"></div>
+</div></div>
+  </div>
+  <div class="related-tools"><h2>Related Tools</h2><div class="related-grid"><a href="age-calculator.html" class="related-card"><span class="related-card-icon">🎂</span><span class="related-card-name">Age Calculator</span></a><a href="tip-calculator.html" class="related-card"><span class="related-card-icon">💵</span><span class="related-card-name">Tip Calculator</span></a></div></div>
+</main>
+<footer><div style="margin-bottom:16px"><a href="../index.html" class="nav-logo" style="font-size:18px">⚡ CalcNation</a></div><div>© 2024 CalcNation · Free tools · No signup required</div></footer>
+<div class="toast" id="toast"></div>
+<script src="../assets/js/utils.js"></script>
+<script>let unit='metric';
+function setUnit(u){unit=u;document.getElementById('metricFields').style.display=u==='metric'?'block':'none';document.getElementById('imperialFields').style.display=u==='imperial'?'block':'none';document.getElementById('btnMetric').className=u==='metric'?'btn btn-primary':'btn btn-secondary';document.getElementById('btnImperial').className=u==='imperial'?'btn btn-primary':'btn btn-secondary';calcBMI();}
+function calcBMI(){
+  let w,h;
+  if(unit==='metric'){w=parseFloat(document.getElementById('weightKg').value)||0;h=parseFloat(document.getElementById('heightCm').value)/100||0;}
+  else{w=(parseFloat(document.getElementById('weightLbs').value)||0)*0.453592;h=((parseFloat(document.getElementById('heightFt').value)||0)*12+(parseFloat(document.getElementById('heightIn').value)||0))*0.0254;}
+  if(!w||!h)return;
+  const bmi=w/(h*h);
+  let cat,color,pct;
+  if(bmi<18.5){cat='Underweight';color='#3b82f6';pct=bmi/40*100*0.25;}
+  else if(bmi<25){cat='Normal Weight ✅';color='#22c55e';pct=25+(bmi-18.5)/6.5*25;}
+  else if(bmi<30){cat='Overweight';color='#eab308';pct=50+(bmi-25)/5*25;}
+  else{cat='Obese';color='#ef4444';pct=Math.min(95,75+(bmi-30)/10*25);}
+  const healthyMin=(18.5*h*h).toFixed(1),healthyMax=(24.9*h*h).toFixed(1);
+  document.getElementById('bmiValue').textContent=bmi.toFixed(1);
+  document.getElementById('bmiCategory').textContent=cat;document.getElementById('bmiCategory').style.color=color;
+  document.getElementById('bmiMarker').style.left=pct+'%';
+  document.getElementById('bmiRange').innerHTML=`Healthy weight for your height: <strong style="color:var(--success)">${healthyMin} kg – ${healthyMax} kg</strong>`;
+  document.getElementById('bmiResult').style.display='block';
+}
+calcBMI();</script>
+</body>
+</html>

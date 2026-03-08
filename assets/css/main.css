@@ -23,6 +23,12 @@
   z-index: 9999;
   overflow: hidden;
   white-space: nowrap;
+  min-width: 180px;
+}
+/* Wide mega-menu overrides */
+.nav-dropdown-wide {
+  overflow: visible !important;
+  white-space: normal !important;
 }
 .nav-dropdown:hover .nav-dropdown-menu {
   opacity: 1; visibility: visible; transform: translateY(0);
@@ -40,13 +46,28 @@
 .nav-dropdown-menu a:last-child { border-bottom: none; }
 .nav-dropdown-menu a:hover { background: var(--bg3); color: var(--accent); }
 .nav-dropdown-menu a span { font-size: 16px; flex-shrink: 0; width: 20px; text-align: center; }
-/* WIDE 3-COLUMN MENU */
+/* WIDE MEGA MENU - 4 columns */
 .nav-dropdown-wide {
-  display: grid !important;
-  grid-template-columns: repeat(auto-fit, 180px);
-  white-space: nowrap;
+  width: 720px !important;
+  min-width: 720px !important;
   left: auto !important;
-  right: 0;
+  right: 0 !important;
+  padding: 0 !important;
+  /* Use flexbox for the columns */
+  display: flex !important;
+  flex-direction: row !important;
+}
+/* Keep hover working - flex not none */
+.nav-dropdown:hover .nav-dropdown-wide {
+  display: flex !important;
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+.nav-dropdown-wide .nav-dropdown-col {
+  flex: 1 1 180px;
+  width: 180px;
+  min-width: 0;
 }
 .nav-dropdown-col {
   border-right: 1px solid var(--border);

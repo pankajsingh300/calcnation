@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tip Calculator Online Free — Split Bill Calculator | CalcNation | CalcNation</title>
+<meta name="description" content="Calculate tip amount and split the bill between people. Fast restaurant tip calculator.">
+<link rel="canonical" href="https://calcnation-jade.vercel.app/tools/tip-calculator.html">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+<link rel="stylesheet" href="../assets/css/main.css">
+<style>
+.tool-input{width:100%;padding:12px 16px;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-size:15px;outline:none;margin-bottom:12px;}
+.tool-input:focus{border-color:var(--accent);}
+.tool-select{width:100%;padding:12px 16px;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-size:15px;outline:none;cursor:pointer;margin-bottom:12px;}
+label.fl{font-size:12px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:6px;}
+.result-box{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:24px;margin-top:16px;}
+.rnum{font-size:42px;font-weight:900;font-family:"Syne",sans-serif;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.rlabel{font-size:13px;color:var(--text3);margin-top:4px;}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+@media(max-width:600px){.grid2{grid-template-columns:1fr;}}
+.tag{display:inline-flex;padding:6px 14px;background:var(--bg3);border:1px solid var(--border);border-radius:20px;font-size:13px;color:var(--text2);cursor:pointer;transition:all 0.15s;margin:3px;}
+.tag:hover{border-color:var(--accent);color:var(--accent);}
+textarea.ta{width:100%;padding:16px;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-size:14px;line-height:1.7;resize:vertical;outline:none;font-family:inherit;}
+textarea.ta:focus{border-color:var(--accent);}
+</style>
+</head>
+<body>
+<nav>
+  <a href="../index.html" class="nav-logo">⚡ CalcNation</a>
+  <div class="nav-links">
+    <a href="../pdf/compress.html">PDF Tools</a>
+    <a href="../dev/json-formatter.html">Dev Tools</a>
+    <div class="nav-dropdown">
+      <a href="../social/youtube-money-calculator.html" class="nav-dropdown-trigger">Social ▾</a>
+      <div class="nav-dropdown-menu nav-dropdown-wide">
+        <div class="nav-dropdown-col">
+          <div class="nav-dropdown-heading">YouTube</div>
+          <a href="../social/youtube-money-calculator.html"><span>💰</span> Money Calculator</a>
+          <a href="../social/youtube-cpm-calculator.html"><span>📊</span> CPM Calculator</a>
+          <a href="../social/youtube-tag-generator.html"><span>🏷️</span> Tag Generator</a>
+          <a href="../social/youtube-title-generator.html"><span>✍️</span> Title Generator</a>
+          <a href="../social/youtube-thumbnail-resizer.html"><span>🖼️</span> Thumbnail Resizer</a>
+          <a href="../social/video-length-optimizer.html"><span>⏱️</span> Video Optimizer</a>
+          <a href="../social/youtube-channel-analyzer.html"><span>🔍</span> Channel Analyzer</a>
+        </div>
+        <div class="nav-dropdown-col">
+          <div class="nav-dropdown-heading">Social Media</div>
+          <a href="../social/instagram-engagement.html"><span>📸</span> Instagram Engagement</a>
+          <a href="../social/tiktok-money-calculator.html"><span>🎵</span> TikTok Earnings</a>
+          <a href="../social/hashtag-generator.html"><span>#️⃣</span> Hashtag Generator</a>
+          <a href="../social/influencer-earnings.html"><span>⭐</span> Influencer Earnings</a>
+          <a href="../social/best-time-to-post.html"><span>🕐</span> Best Time to Post</a>
+          <a href="../social/caption-generator.html"><span>💬</span> Caption Generator</a>
+          <a href="../social/social-media-image-resizer.html"><span>📐</span> Image Resizer</a>
+        </div>
+        <div class="nav-dropdown-col">
+          <div class="nav-dropdown-heading">Viral Tools</div>
+          <a href="../tools/love-calculator.html"><span>❤️</span> Love Calculator</a>
+          <a href="../tools/random-name-picker.html"><span>🎯</span> Name Picker</a>
+          <a href="../tools/random-team-generator.html"><span>👥</span> Team Generator</a>
+          <a href="../tools/dice-roller.html"><span>🎲</span> Dice Roller</a>
+          <a href="../tools/qr-code-generator.html"><span>📱</span> QR Generator</a>
+          <a href="../tools/word-counter.html"><span>📝</span> Word Counter</a>
+          <a href="../tools/password-generator.html"><span>🔐</span> Password Generator</a>
+        </div>
+        <div class="nav-dropdown-col">
+          <div class="nav-dropdown-heading">Quick Calculators</div>
+          <a href="../tools/text-case-converter.html"><span>🔡</span> Case Converter</a>
+          <a href="../tools/character-counter.html"><span>🔢</span> Character Counter</a>
+          <a href="../tools/age-calculator.html"><span>🎂</span> Age Calculator</a>
+          <a href="../tools/bmi-calculator.html"><span>⚖️</span> BMI Calculator</a>
+          <a href="../tools/tip-calculator.html"><span>💵</span> Tip Calculator</a>
+          <a href="../tools/fake-address-generator.html"><span>📍</span> Fake Address</a>
+          <a href="../tools/barcode-generator.html"><span>▌▌</span> Barcode Generator</a>
+        </div>
+      </div>
+    </div>
+    <a href="#">Finance</a>
+    <a href="#">Health</a>
+  </div>
+</nav>
+<div class="breadcrumb"><a href="../index.html">Home</a> <span>›</span> <span>Tip Calculator</span></div>
+<main class="tool-page">
+  <div class="tool-header">
+    <div class="tool-icon">💵</div>
+    <h1>Tip Calculator</h1>
+    <p>Calculate tip and split the bill between any number of people. Works for any currency.</p>
+    <div style="display:flex;gap:8px;margin-top:12px"><span class="badge">Free</span><span class="badge orange">Instant</span><span class="badge purple">No Signup</span></div>
+  </div>
+  <div class="tool-box">
+    <div class="tool-box-header"><h2>Tip Calculator</h2></div>
+    <div class="tool-box-body"><div class="grid2">
+  <div><label class="fl">Bill Amount ($)</label><input class="tool-input" type="number" id="tipBill" value="50" step="0.01" oninput="calcTip()"></div>
+  <div><label class="fl">Number of People</label><input class="tool-input" type="number" id="tipPeople" value="2" min="1" oninput="calcTip()"></div>
+</div>
+<div><label class="fl">Tip Percentage: <span id="tipPctLabel">18%</span></label>
+  <input type="range" id="tipPct" min="0" max="30" value="18" oninput="document.getElementById('tipPctLabel').textContent=this.value+'%';calcTip()" style="width:100%;accent-color:var(--accent);margin-bottom:8px">
+  <div style="display:flex;gap:6px;flex-wrap:wrap">
+    <button class="btn btn-secondary" style="font-size:12px;padding:5px 12px" onclick="setTip(10)">10%</button>
+    <button class="btn btn-secondary" style="font-size:12px;padding:5px 12px" onclick="setTip(15)">15%</button>
+    <button class="btn btn-secondary" style="font-size:12px;padding:5px 12px" onclick="setTip(18)">18%</button>
+    <button class="btn btn-secondary" style="font-size:12px;padding:5px 12px" onclick="setTip(20)">20%</button>
+    <button class="btn btn-secondary" style="font-size:12px;padding:5px 12px" onclick="setTip(25)">25%</button>
+  </div>
+</div>
+<div class="result-box" id="tipResult">
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;text-align:center">
+    <div><div class="rnum" id="tipAmount"></div><div class="rlabel">Tip Amount</div></div>
+    <div><div class="rnum" id="tipTotal"></div><div class="rlabel">Total Bill</div></div>
+    <div><div class="rnum" id="tipPerPerson"></div><div class="rlabel">Per Person</div></div>
+  </div>
+</div></div>
+  </div>
+  <div class="related-tools"><h2>Related Tools</h2><div class="related-grid"><a href="bmi-calculator.html" class="related-card"><span class="related-card-icon">⚖️</span><span class="related-card-name">BMI Calculator</span></a><a href="age-calculator.html" class="related-card"><span class="related-card-icon">🎂</span><span class="related-card-name">Age Calculator</span></a></div></div>
+</main>
+<footer><div style="margin-bottom:16px"><a href="../index.html" class="nav-logo" style="font-size:18px">⚡ CalcNation</a></div><div>© 2024 CalcNation · Free tools · No signup required</div></footer>
+<div class="toast" id="toast"></div>
+<script src="../assets/js/utils.js"></script>
+<script>function setTip(p){document.getElementById('tipPct').value=p;document.getElementById('tipPctLabel').textContent=p+'%';calcTip();}
+function calcTip(){
+  const bill=parseFloat(document.getElementById('tipBill').value)||0;
+  const people=parseFloat(document.getElementById('tipPeople').value)||1;
+  const pct=parseFloat(document.getElementById('tipPct').value)||0;
+  const tip=bill*pct/100;
+  const total=bill+tip;
+  const perPerson=total/people;
+  document.getElementById('tipAmount').textContent='$'+tip.toFixed(2);
+  document.getElementById('tipTotal').textContent='$'+total.toFixed(2);
+  document.getElementById('tipPerPerson').textContent='$'+perPerson.toFixed(2);
+}
+calcTip();</script>
+</body>
+</html>
