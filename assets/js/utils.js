@@ -127,7 +127,8 @@ function convertInputs(prev, cur) {
   document.querySelectorAll('[data-currency-input]').forEach(input => {
     const v = parseFloat(input.value) || 0;
     const newVal = v * (rateCur / ratePrev);
-    input.value = newVal.toFixed( (input.step && input.step.indexOf('.')>-1) ? input.step.split('.')[1].length : 2 );
+    // always keep two decimal places regardless of step
+    input.value = newVal.toFixed(2);
   });
 }
 
@@ -145,11 +146,66 @@ function ensureMobileToggle() {
   }
 }
 
+// build dropdown menus for categories using tools.json data
+function populateDropdowns(tools) {
+  const pdfLinks = tools.filter(t => t.cat === 'PDF Tools');
+  const devLinks = tools.filter(t => t.cat === 'Dev Tools');
+  function buildMenu(wrapper, list) {
+    if (!list.length) return;
+    const menu = document.createElement('div');
+    menu.className = 'nav-dropdown-menu';
+    list.forEach(t => {
+      const a = document.createElement('a');
+      a.href = t.url;
+      a.innerHTML = `<span>${t.icon}</span> ${t.name}`;
+      menu.appendChild(a);
+    });
+    wrapper.appendChild(menu);
+  }
+  document.querySelectorAll('nav .nav-links a').forEach(a => {
+    const text = a.textContent.trim();
+    if (text === 'PDF Tools' || text === 'Dev Tools') {
+      const wrapper = document.createElement('div');
+      wrapper.className = 'nav-dropdown';
+      a.classList.add('nav-dropdown-trigger');
+      a.textContent = text + ' ▾';
+      a.parentNode.insertBefore(wrapper, a);
+      wrapper.appendChild(a);
+      buildMenu(wrapper, text === 'PDF Tools' ? pdfLinks : devLinks);
+    }
+  });
+}
+
+// fetch the tool list for dropdowns as well as search on page load
+if (window.fetch) {
+  fetch('tools.json')
+    .then(r => r.json())
+    .then(data => {
+      allTools = data; // used by index search
+      populateDropdowns(data);
+      // re-run search if needed
+      const input = document.getElementById('searchInput');
+      if (input && input.value.trim()) {
+        input.dispatchEvent(new Event('input'));
+      }
+    })
+    .catch(e => console.error('Failed to load tools.json', e));
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   setupFAQ();
   injectCurrencySelector();
   updateCurrencyUI();
   ensureMobileToggle();
+
+  // make sure inputs match stored currency on load
+  const cur = getCurrentCurrency();
+  if (cur && cur !== 'USD') {
+    convertInputs('USD', cur);
+    document.querySelectorAll('[data-recalc-on-currency]').forEach(fnEl => {
+      try { window[fnEl.dataset.recalcOnCurrency](); } catch(e) {}
+    });
+  }
 
   // mobile nav toggle (index.html used to have inline script)
   const navToggle = document.getElementById('navToggle');
