@@ -1359,11 +1359,6 @@ document.querySelectorAll('.cat-card, .pop-card, .why-card').forEach((el, i) => 
   observer.observe(el);
 });
 
-// Mobile menu
-document.getElementById('navToggle').addEventListener('click', () => {
-  document.getElementById('navLinks').classList.toggle('open');
-});
-
 // Tools menu accordion
 document.querySelectorAll('.category-header').forEach(header => {
   header.addEventListener('click', () => {
