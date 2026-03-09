@@ -118,7 +118,7 @@
   position: absolute; top: calc(100% + 8px); left: 0; right: 0;
   background: var(--card); border: 1px solid var(--border);
   border-radius: 12px; overflow: hidden; display: none;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.5); z-index: 100;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5); z-index: 9999;
 }
 .search-result-item {
   display: flex; align-items: center; gap: 12px;
@@ -1333,7 +1333,7 @@ input.addEventListener('input', () => {
   if (!matches.length) { results.style.display = 'none'; return; }
   results.innerHTML = matches.map(t => `
     <a href="${t.url}" class="search-result-item">
-      <span class="search-result-icon">${t.icon}</span>
+      <span class="search-result-icon" style="font-size:20px;width:28px;text-align:center">${t.icon}</span>
       <div>
         <div class="search-result-name">${t.name}</div>
         <div class="search-result-cat">${t.cat}</div>
