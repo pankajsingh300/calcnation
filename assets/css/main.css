@@ -446,6 +446,7 @@ footer a:hover { color: var(--accent); }
 /* SEARCH */
 .search-wrap {
   position: relative;
+  z-index: 1000;
   max-width: 600px;
   margin: 32px auto 0;
   display: flex;
