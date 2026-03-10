@@ -1,49 +1,443 @@
 [
-  { "name": "Compress PDF", "icon": "🗜️", "cat": "PDF Tools", "url": "pdf/compress.html" },
-  { "name": "Merge PDF", "icon": "📎", "cat": "PDF Tools", "url": "pdf/merge.html" },
-  { "name": "Split PDF", "icon": "✂️", "cat": "PDF Tools", "url": "pdf/split.html" },
-  { "name": "PDF to JPG", "icon": "🖼️", "cat": "PDF Tools", "url": "pdf/pdf-to-jpg.html" },
-  { "name": "JPG to PDF", "icon": "📷", "cat": "PDF Tools", "url": "pdf/jpg-to-pdf.html" },
-  { "name": "PDF to Word", "icon": "📝", "cat": "PDF Tools", "url": "pdf/pdf-to-word.html" },
-  { "name": "Rotate PDF", "icon": "🔄", "cat": "PDF Tools", "url": "pdf/rotate.html" },
-  { "name": "Unlock PDF", "icon": "🔓", "cat": "PDF Tools", "url": "pdf/unlock.html" },
-  { "name": "Watermark PDF", "icon": "💧", "cat": "PDF Tools", "url": "pdf/watermark.html" },
-  { "name": "JSON Formatter", "icon": "{}", "cat": "Developer Tools", "url": "dev/json-formatter.html" },
-  { "name": "Base64 Encoder", "icon": "🔤", "cat": "Developer Tools", "url": "dev/base64.html" },
-  { "name": "Regex Tester", "icon": "〰️", "cat": "Developer Tools", "url": "dev/regex-tester.html" },
-  { "name": "URL Encoder", "icon": "🔗", "cat": "Developer Tools", "url": "dev/url-encoder.html" },
-  { "name": "JWT Decoder", "icon": "🔑", "cat": "Developer Tools", "url": "dev/jwt-decoder.html" },
-  { "name": "UUID Generator", "icon": "🆔", "cat": "Developer Tools", "url": "dev/uuid.html" },
-  { "name": "Hash Generator", "icon": "🔒", "cat": "Developer Tools", "url": "dev/hash-generator.html" },
-  { "name": "Timestamp Converter", "icon": "⏰", "cat": "Developer Tools", "url": "dev/timestamp.html" },
-  { "name": "Color Converter", "icon": "🎨", "cat": "Developer Tools", "url": "dev/color-converter.html" },
-  { "name": "CSS Minifier", "icon": "🎯", "cat": "Developer Tools", "url": "dev/css-minifier.html" },
-  { "name": "JS Minifier", "icon": "⚡", "cat": "Developer Tools", "url": "dev/js-minifier.html" },
-  { "name": "HTML Formatter", "icon": "📄", "cat": "Developer Tools", "url": "dev/html-formatter.html" },
-  { "name": "XML Formatter", "icon": "📋", "cat": "Developer Tools", "url": "dev/xml-formatter.html" },
-  { "name": "SQL Formatter", "icon": "🗃️", "cat": "Developer Tools", "url": "dev/sql-formatter.html" },
-  { "name": "Markdown Preview", "icon": "📝", "cat": "Developer Tools", "url": "dev/markdown.html" },
-  { "name": "Diff Checker", "icon": "🔍", "cat": "Developer Tools", "url": "dev/diff-checker.html" },
-  { "name": "Cron Expression", "icon": "⏰", "cat": "Developer Tools", "url": "dev/cron.html" },
-  { "name": "Lorem Ipsum", "icon": "📖", "cat": "Developer Tools", "url": "dev/lorem-ipsum.html" },
-  { "name": "Mortgage Calculator", "icon": "🏠", "cat": "Finance Tools", "url": "finance/mortgage-calculator.html" },
-  { "name": "EMI Calculator", "icon": "📋", "cat": "Finance Tools", "url": "finance/emi-calculator.html" },
-  { "name": "Compound Interest", "icon": "📈", "cat": "Finance Tools", "url": "finance/compound-interest-calculator.html" },
-  { "name": "Tip Calculator", "icon": "💵", "cat": "Finance Tools", "url": "tools/tip-calculator.html" },
-  { "name": "BMI Calculator", "icon": "⚖️", "cat": "Health Tools", "url": "tools/bmi-calculator.html" },
-  { "name": "Calorie Calculator", "icon": "🔥", "cat": "Health Tools", "url": "health/calorie-calculator.html" },
-  { "name": "Pregnancy Due Date", "icon": "👶", "cat": "Health Tools", "url": "health/pregnancy-due-date.html" },
-  { "name": "Water Intake", "icon": "💧", "cat": "Health Tools", "url": "health/water-calculator.html" },
-  { "name": "Age Calculator", "icon": "🎂", "cat": "Health Tools", "url": "tools/age-calculator.html" },
-  { "name": "QR Code Generator", "icon": "📱", "cat": "Daily Life Tools", "url": "tools/qr-code-generator.html" },
-  { "name": "Password Generator", "icon": "🔐", "cat": "Daily Life Tools", "url": "tools/password-generator.html" },
-  { "name": "Word Counter", "icon": "📝", "cat": "Daily Life Tools", "url": "tools/word-counter.html" },
-  { "name": "Character Counter", "icon": "🔢", "cat": "Daily Life Tools", "url": "tools/character-counter.html" },
-  { "name": "Case Converter", "icon": "🔡", "cat": "Daily Life Tools", "url": "tools/text-case-converter.html" },
-  { "name": "Barcode Generator", "icon": "▌▌", "cat": "Daily Life Tools", "url": "tools/barcode-generator.html" },
-  { "name": "Dice Roller", "icon": "🎲", "cat": "Daily Life Tools", "url": "tools/dice-roller.html" },
-  { "name": "Love Calculator", "icon": "❤️", "cat": "Daily Life Tools", "url": "tools/love-calculator.html" },
-  { "name": "Random Name Picker", "icon": "🎯", "cat": "Daily Life Tools", "url": "tools/random-name-picker.html" },
-  { "name": "Random Team Generator", "icon": "👥", "cat": "Daily Life Tools", "url": "tools/random-team-generator.html" },
-  { "name": "Fake Address Generator", "icon": "📍", "cat": "Daily Life Tools", "url": "tools/fake-address-generator.html" }
+  {
+    "name": "Compress PDF",
+    "icon": "\ud83d\udddc\ufe0f",
+    "cat": "PDF Tools",
+    "url": "pdf/compress.html"
+  },
+  {
+    "name": "Merge PDF",
+    "icon": "\ud83d\udcce",
+    "cat": "PDF Tools",
+    "url": "pdf/merge.html"
+  },
+  {
+    "name": "Split PDF",
+    "icon": "\u2702\ufe0f",
+    "cat": "PDF Tools",
+    "url": "pdf/split.html"
+  },
+  {
+    "name": "PDF to JPG",
+    "icon": "\ud83d\uddbc\ufe0f",
+    "cat": "PDF Tools",
+    "url": "pdf/pdf-to-jpg.html"
+  },
+  {
+    "name": "JPG to PDF",
+    "icon": "\ud83d\udcf7",
+    "cat": "PDF Tools",
+    "url": "pdf/jpg-to-pdf.html"
+  },
+  {
+    "name": "PDF to Word",
+    "icon": "\ud83d\udcdd",
+    "cat": "PDF Tools",
+    "url": "pdf/pdf-to-word.html"
+  },
+  {
+    "name": "Rotate PDF",
+    "icon": "\ud83d\udd04",
+    "cat": "PDF Tools",
+    "url": "pdf/rotate.html"
+  },
+  {
+    "name": "Unlock PDF",
+    "icon": "\ud83d\udd13",
+    "cat": "PDF Tools",
+    "url": "pdf/unlock.html"
+  },
+  {
+    "name": "Watermark PDF",
+    "icon": "\ud83d\udca7",
+    "cat": "PDF Tools",
+    "url": "pdf/watermark.html"
+  },
+  {
+    "name": "JSON Formatter",
+    "icon": "{}",
+    "cat": "Developer Tools",
+    "url": "dev/json-formatter.html"
+  },
+  {
+    "name": "Base64 Encoder",
+    "icon": "\ud83d\udd24",
+    "cat": "Developer Tools",
+    "url": "dev/base64.html"
+  },
+  {
+    "name": "Regex Tester",
+    "icon": "\u3030\ufe0f",
+    "cat": "Developer Tools",
+    "url": "dev/regex-tester.html"
+  },
+  {
+    "name": "URL Encoder",
+    "icon": "\ud83d\udd17",
+    "cat": "Developer Tools",
+    "url": "dev/url-encoder.html"
+  },
+  {
+    "name": "JWT Decoder",
+    "icon": "\ud83d\udd11",
+    "cat": "Developer Tools",
+    "url": "dev/jwt-decoder.html"
+  },
+  {
+    "name": "UUID Generator",
+    "icon": "\ud83c\udd94",
+    "cat": "Developer Tools",
+    "url": "dev/uuid.html"
+  },
+  {
+    "name": "Hash Generator",
+    "icon": "\ud83d\udd12",
+    "cat": "Developer Tools",
+    "url": "dev/hash-generator.html"
+  },
+  {
+    "name": "Timestamp Converter",
+    "icon": "\u23f0",
+    "cat": "Developer Tools",
+    "url": "dev/timestamp.html"
+  },
+  {
+    "name": "Color Converter",
+    "icon": "\ud83c\udfa8",
+    "cat": "Developer Tools",
+    "url": "dev/color-converter.html"
+  },
+  {
+    "name": "CSS Minifier",
+    "icon": "\ud83c\udfaf",
+    "cat": "Developer Tools",
+    "url": "dev/css-minifier.html"
+  },
+  {
+    "name": "JS Minifier",
+    "icon": "\u26a1",
+    "cat": "Developer Tools",
+    "url": "dev/js-minifier.html"
+  },
+  {
+    "name": "HTML Formatter",
+    "icon": "\ud83d\udcc4",
+    "cat": "Developer Tools",
+    "url": "dev/html-formatter.html"
+  },
+  {
+    "name": "XML Formatter",
+    "icon": "\ud83d\udccb",
+    "cat": "Developer Tools",
+    "url": "dev/xml-formatter.html"
+  },
+  {
+    "name": "SQL Formatter",
+    "icon": "\ud83d\uddc3\ufe0f",
+    "cat": "Developer Tools",
+    "url": "dev/sql-formatter.html"
+  },
+  {
+    "name": "Markdown Preview",
+    "icon": "\ud83d\udcdd",
+    "cat": "Developer Tools",
+    "url": "dev/markdown.html"
+  },
+  {
+    "name": "Diff Checker",
+    "icon": "\ud83d\udd0d",
+    "cat": "Developer Tools",
+    "url": "dev/diff-checker.html"
+  },
+  {
+    "name": "Cron Expression",
+    "icon": "\u23f0",
+    "cat": "Developer Tools",
+    "url": "dev/cron.html"
+  },
+  {
+    "name": "Lorem Ipsum",
+    "icon": "\ud83d\udcd6",
+    "cat": "Developer Tools",
+    "url": "dev/lorem-ipsum.html"
+  },
+  {
+    "name": "Mortgage Calculator",
+    "icon": "\ud83c\udfe0",
+    "cat": "Finance Tools",
+    "url": "finance/mortgage-calculator.html"
+  },
+  {
+    "name": "EMI Calculator",
+    "icon": "\ud83d\udccb",
+    "cat": "Finance Tools",
+    "url": "finance/emi-calculator.html"
+  },
+  {
+    "name": "Compound Interest",
+    "icon": "\ud83d\udcc8",
+    "cat": "Finance Tools",
+    "url": "finance/compound-interest-calculator.html"
+  },
+  {
+    "name": "Tip Calculator",
+    "icon": "\ud83d\udcb5",
+    "cat": "Finance Tools",
+    "url": "tools/tip-calculator.html"
+  },
+  {
+    "name": "BMI Calculator",
+    "icon": "\u2696\ufe0f",
+    "cat": "Health Tools",
+    "url": "tools/bmi-calculator.html"
+  },
+  {
+    "name": "Calorie Calculator",
+    "icon": "\ud83d\udd25",
+    "cat": "Health Tools",
+    "url": "health/calorie-calculator.html"
+  },
+  {
+    "name": "Pregnancy Due Date",
+    "icon": "\ud83d\udc76",
+    "cat": "Health Tools",
+    "url": "health/pregnancy-due-date.html"
+  },
+  {
+    "name": "Water Intake",
+    "icon": "\ud83d\udca7",
+    "cat": "Health Tools",
+    "url": "health/water-calculator.html"
+  },
+  {
+    "name": "Age Calculator",
+    "icon": "\ud83c\udf82",
+    "cat": "Health Tools",
+    "url": "tools/age-calculator.html"
+  },
+  {
+    "name": "QR Code Generator",
+    "icon": "\ud83d\udcf1",
+    "cat": "Daily Life Tools",
+    "url": "tools/qr-code-generator.html"
+  },
+  {
+    "name": "Password Generator",
+    "icon": "\ud83d\udd10",
+    "cat": "Daily Life Tools",
+    "url": "tools/password-generator.html"
+  },
+  {
+    "name": "Word Counter",
+    "icon": "\ud83d\udcdd",
+    "cat": "Daily Life Tools",
+    "url": "tools/word-counter.html"
+  },
+  {
+    "name": "Character Counter",
+    "icon": "\ud83d\udd22",
+    "cat": "Daily Life Tools",
+    "url": "tools/character-counter.html"
+  },
+  {
+    "name": "Case Converter",
+    "icon": "\ud83d\udd21",
+    "cat": "Daily Life Tools",
+    "url": "tools/text-case-converter.html"
+  },
+  {
+    "name": "Barcode Generator",
+    "icon": "\u258c\u258c",
+    "cat": "Daily Life Tools",
+    "url": "tools/barcode-generator.html"
+  },
+  {
+    "name": "Dice Roller",
+    "icon": "\ud83c\udfb2",
+    "cat": "Daily Life Tools",
+    "url": "tools/dice-roller.html"
+  },
+  {
+    "name": "Love Calculator",
+    "icon": "\u2764\ufe0f",
+    "cat": "Daily Life Tools",
+    "url": "tools/love-calculator.html"
+  },
+  {
+    "name": "Random Name Picker",
+    "icon": "\ud83c\udfaf",
+    "cat": "Daily Life Tools",
+    "url": "tools/random-name-picker.html"
+  },
+  {
+    "name": "Random Team Generator",
+    "icon": "\ud83d\udc65",
+    "cat": "Daily Life Tools",
+    "url": "tools/random-team-generator.html"
+  },
+  {
+    "name": "Fake Address Generator",
+    "icon": "\ud83d\udccd",
+    "cat": "Daily Life Tools",
+    "url": "tools/fake-address-generator.html"
+  },
+  {
+    "name": "Protect PDF",
+    "icon": "\ud83d\udd10",
+    "category": "PDF Tools",
+    "url": "pdf/protect.html",
+    "tags": [
+      "pdf",
+      "protect",
+      "password",
+      "encrypt",
+      "security"
+    ]
+  },
+  {
+    "name": "Sign PDF",
+    "icon": "\u270d\ufe0f",
+    "category": "PDF Tools",
+    "url": "pdf/sign.html",
+    "tags": [
+      "pdf",
+      "sign",
+      "signature",
+      "electronic"
+    ]
+  },
+  {
+    "name": "Edit PDF",
+    "icon": "\u270f\ufe0f",
+    "category": "PDF Tools",
+    "url": "pdf/edit.html",
+    "tags": [
+      "pdf",
+      "edit",
+      "text",
+      "annotate"
+    ]
+  },
+  {
+    "name": "Organize PDF",
+    "icon": "\ud83d\udccb",
+    "category": "PDF Tools",
+    "url": "pdf/organize.html",
+    "tags": [
+      "pdf",
+      "organize",
+      "reorder",
+      "pages"
+    ]
+  },
+  {
+    "name": "Redact PDF",
+    "icon": "\u2b1b",
+    "category": "PDF Tools",
+    "url": "pdf/redact.html",
+    "tags": [
+      "pdf",
+      "redact",
+      "black out",
+      "sensitive"
+    ]
+  },
+  {
+    "name": "Crop PDF",
+    "icon": "\u2702\ufe0f",
+    "category": "PDF Tools",
+    "url": "pdf/crop.html",
+    "tags": [
+      "pdf",
+      "crop",
+      "margins",
+      "trim"
+    ]
+  },
+  {
+    "name": "Repair PDF",
+    "icon": "\ud83d\udd27",
+    "category": "PDF Tools",
+    "url": "pdf/repair.html",
+    "tags": [
+      "pdf",
+      "repair",
+      "fix",
+      "corrupt",
+      "damaged"
+    ]
+  },
+  {
+    "name": "Scan to PDF",
+    "icon": "\ud83d\udcf8",
+    "category": "PDF Tools",
+    "url": "pdf/scan-to-pdf.html",
+    "tags": [
+      "pdf",
+      "scan",
+      "camera",
+      "photo",
+      "image"
+    ]
+  },
+  {
+    "name": "HTML to PDF",
+    "icon": "\ud83c\udf10",
+    "category": "PDF Tools",
+    "url": "pdf/html-to-pdf.html",
+    "tags": [
+      "pdf",
+      "html",
+      "webpage",
+      "convert"
+    ]
+  },
+  {
+    "name": "Word to PDF",
+    "icon": "\ud83d\udcdd",
+    "category": "PDF Tools",
+    "url": "pdf/word-to-pdf.html",
+    "tags": [
+      "pdf",
+      "word",
+      "docx",
+      "doc",
+      "convert"
+    ]
+  },
+  {
+    "name": "Add Page Numbers",
+    "icon": "\ud83d\udd22",
+    "category": "PDF Tools",
+    "url": "pdf/add-page-numbers.html",
+    "tags": [
+      "pdf",
+      "page numbers",
+      "numbering"
+    ]
+  },
+  {
+    "name": "Remove Pages",
+    "icon": "\ud83d\uddd1\ufe0f",
+    "category": "PDF Tools",
+    "url": "pdf/remove-pages.html",
+    "tags": [
+      "pdf",
+      "remove",
+      "delete",
+      "pages"
+    ]
+  },
+  {
+    "name": "Extract Pages",
+    "icon": "\ud83d\udce4",
+    "category": "PDF Tools",
+    "url": "pdf/extract-pages.html",
+    "tags": [
+      "pdf",
+      "extract",
+      "pages",
+      "save"
+    ]
+  }
 ]
