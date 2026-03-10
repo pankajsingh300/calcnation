@@ -1145,3 +1145,10 @@ input[type="file"] {
   margin-top: 12px;
   cursor: pointer;
 }
+
+/* CRITICAL: file input must be clickable */
+input[type="file"] {
+  pointer-events: all !important;
+  position: relative !important;
+  z-index: 999 !important;
+}
