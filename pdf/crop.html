@@ -32,9 +32,11 @@
   <div class="tool-badges"><span class="badge">🔒 100% Private</span><span class="badge">⚡ Instant</span><span class="badge">✅ No Signup</span></div>
 </div>
 <div class="tool-card">
-  <div class="drop-zone" id="dropZone">
+  <div class="drop-zone" id="dropZone" onclick="if(event.target.tagName!='LABEL')document.getElementById('fileInput').click()">
     <div class="drop-icon">📄</div>
-    <p>Drop your PDF here or <span class="browse-link">browse to upload</span></p>
+    <p>Drop your PDF here or <label for="fileInput" class="browse-link" onclick="event.stopPropagation()">browse to upload</label></p>
+    <p class="drop-hint">Max 100MB · Works in your browser</p>
+  </div><p>Drop your PDF here or <span class="browse-link">browse to upload</span></p>
     <input type="file" id="fileInput" accept=".pdf" style="display:none">
   </div>
   <div id="fileInput" style="display:none" class="file-info"></div>
