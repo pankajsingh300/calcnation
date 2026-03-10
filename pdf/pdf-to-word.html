@@ -76,7 +76,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 <script>
 pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
-const dz=document.getElementById('dropZone'),fi=document.getElementById('fileInput');
+const dz=document.getElementById('dropZone');
 let pdfBytes=null,fileName='';
 dz.addEventListener('dragover',e=>{e.preventDefault();dz.classList.add('drag-over');});
 dz.addEventListener('dragleave',()=>dz.classList.remove('drag-over'));
@@ -84,7 +84,7 @@ dz.addEventListener('drop',e=>{
   e.preventDefault();dz.classList.remove('drag-over');
   handleFile(e.dataTransfer.files[0]);
 });
-fi.addEventListener('change',e=>handleFile(e.target.files[0]));
+document.getElementById('fileInput').addEventListener('change',e=>handleFile(e.target.files[0]));
 async function handleFile(f){
   if(!f||!f.name.endsWith('.pdf'))return alert('Please select a PDF file.');
   fileName=f.name.replace('.pdf','.txt');

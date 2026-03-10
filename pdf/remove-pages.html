@@ -54,12 +54,12 @@
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
 <script>
-const dz=document.getElementById('dropZone'),fi=document.getElementById('fileInput');
+const dz=document.getElementById('dropZone');
 let pdfBytes=null,fileName='',totalPages=0;
 dz.addEventListener('dragover',e=>{e.preventDefault();dz.classList.add('drag-over');});
 dz.addEventListener('dragleave',()=>dz.classList.remove('drag-over'));
 dz.addEventListener('drop',e=>{e.preventDefault();dz.classList.remove('drag-over');handleFile(e.dataTransfer.files[0]);});
-fi.addEventListener('change',e=>handleFile(e.target.files[0]));
+document.getElementById('fileInput').addEventListener('change',e=>handleFile(e.target.files[0]));
 async function handleFile(f){
   if(!f||!f.name.endsWith('.pdf'))return alert('Please select a PDF file.');
   fileName=f.name;pdfBytes=await f.arrayBuffer();
