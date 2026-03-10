@@ -32,7 +32,7 @@
   <div class="tool-badges"><span class="badge">🔒 100% Private</span><span class="badge">⚡ Instant</span><span class="badge">✅ No Signup</span></div>
 </div>
 <div class="tool-card">
-  <div class="drop-zone" id="dropZone">
+  <div class="drop-zone" id="dropZone" onclick="if(event.target.tagName!=='INPUT')document.getElementById('fileInput').click()">
     <div class="drop-icon">📄</div>
     <p>Drop your PDF here or <span class="browse-link">browse to upload</span></p>
     <input type="file" id="fileInput" accept=".pdf" style="display:none">
@@ -88,7 +88,6 @@ dz.addEventListener('dragover',e=>{e.preventDefault();dz.classList.add('drag-ove
 dz.addEventListener('dragleave',()=>dz.classList.remove('drag-over'));
 dz.addEventListener('drop',e=>{e.preventDefault();dz.classList.remove('drag-over');handleFile(e.dataTransfer.files[0]);});
 fi.addEventListener('change',e=>handleFile(e.target.files[0]));
-dz.addEventListener('click',(e)=>{if(e.target.tagName!=='INPUT')fi.click();});
 async function handleFile(f){
   if(!f||!f.name.endsWith('.pdf'))return alert('Please select a PDF file.');
   fileName=f.name;pdfBytes=await f.arrayBuffer();
