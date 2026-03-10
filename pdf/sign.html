@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sign PDF Free Online — CalcNation</title>
+<meta name="description" content="Add your signature to PDF files for free. Draw, type or upload your signature. No signup required.">
+<link rel="canonical" href="https://calcnation-jade.vercel.app/pdf/sign.html">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+<link rel="stylesheet" href="../assets/css/main.css">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="CalcNation">
+<meta property="og:title" content="Sign PDF Free Online — CalcNation">
+<meta property="og:description" content="Add your signature to PDF files for free. Draw, type or upload your signature. No signup required.">
+<meta property="og:image" content="https://calcnation-jade.vercel.app/assets/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PP2M41QH5D"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-PP2M41QH5D');</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8624973090847331" crossorigin="anonymous"></script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"Sign PDF Free Online","url":"https://calcnation-jade.vercel.app/pdf/sign.html","applicationCategory":"PDF Tool","operatingSystem":"Web Browser","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"provider":{"@type":"Organization","name":"CalcNation","url":"https://calcnation-jade.vercel.app"}}
+</script>
+</head>
+<body>
+<script src="../assets/js/nav-loader.js"></script>
+<div class="breadcrumb"><a href="../index.html">Home</a> <span>›</span> <a href="../index.html#pdf">PDF Tools</a> <span>›</span> <span>Sign PDF Free Online</span></div>
+<main class="tool-page">
+<div class="tool-header">
+  <div class="tool-icon">✍️</div>
+  <h1>Sign PDF</h1>
+  <p class="tool-desc">Draw your signature and add it to your PDF. 100% private — everything happens in your browser.</p>
+  <div class="tool-badges"><span class="badge">🔒 100% Private</span><span class="badge">⚡ Instant</span><span class="badge">✅ No Signup</span></div>
+</div>
+<div class="tool-card">
+  <div class="drop-zone" id="dropZone">
+    <div class="drop-icon">📄</div>
+    <p>Drop your PDF here or <label for="fileInput" class="browse-link">browse to upload</label></p>
+    <input type="file" id="fileInput" accept=".pdf" style="display:none">
+  </div>
+  <div id="fileInfo" style="display:none" class="file-info"></div>
+  <div id="sigArea" style="display:none">
+    <div class="form-group">
+      <label>Draw Your Signature</label>
+      <canvas id="sigCanvas" width="500" height="150" style="background:#fff;border:2px solid var(--border);border-radius:8px;cursor:crosshair;width:100%;max-width:500px;touch-action:none"></canvas>
+      <div style="display:flex;gap:8px;margin-top:8px">
+        <button class="btn-secondary" id="clearSig">Clear</button>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Page to Sign</label>
+      <input type="number" id="signPage" class="form-input" value="1" min="1" style="width:100px">
+    </div>
+    <div class="form-group">
+      <label>Position</label>
+      <select id="sigPos" class="form-input">
+        <option value="bottom-right">Bottom Right</option>
+        <option value="bottom-left">Bottom Left</option>
+        <option value="bottom-center">Bottom Center</option>
+      </select>
+    </div>
+    <button class="btn-primary" id="signBtn">✍️ Sign PDF</button>
+  </div>
+  <div id="result" style="display:none" class="result-box">
+    <p>✅ PDF signed successfully!</p>
+    <button class="btn-primary" id="downloadBtn">⬇️ Download Signed PDF</button>
+  </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+<script>
+const dz=document.getElementById('dropZone'),fi=document.getElementById('fileInput');
+let pdfBytes=null,fileName='',drawing=false,totalPages=1;
+dz.addEventListener('dragover',e=>{e.preventDefault();dz.classList.add('drag-over');});
+dz.addEventListener('dragleave',()=>dz.classList.remove('drag-over'));
+dz.addEventListener('drop',e=>{e.preventDefault();dz.classList.remove('drag-over');handleFile(e.dataTransfer.files[0]);});
+fi.addEventListener('change',e=>handleFile(e.target.files[0]));
+dz.addEventListener('click',()=>fi.click());
+async function handleFile(f){
+  if(!f||!f.name.endsWith('.pdf'))return alert('Please select a PDF file.');
+  fileName=f.name;pdfBytes=await f.arrayBuffer();
+  const pdf=await PDFLib.PDFDocument.load(pdfBytes);
+  totalPages=pdf.getPageCount();
+  document.getElementById('signPage').max=totalPages;
+  document.getElementById('fileInfo').style.display='block';
+  document.getElementById('fileInfo').innerHTML=`<span>📄 ${f.name}</span><span>${totalPages} pages</span>`;
+  document.getElementById('sigArea').style.display='block';
+}
+// Signature canvas
+const canvas=document.getElementById('sigCanvas');
+const ctx=canvas.getContext('2d');
+ctx.strokeStyle='#1a1a2e';ctx.lineWidth=2;ctx.lineCap='round';
+function getPos(e){
+  const r=canvas.getBoundingClientRect();
+  const scaleX=canvas.width/r.width;
+  const scaleY=canvas.height/r.height;
+  const src=e.touches?e.touches[0]:e;
+  return{x:(src.clientX-r.left)*scaleX,y:(src.clientY-r.top)*scaleY};
+}
+canvas.addEventListener('mousedown',e=>{drawing=true;ctx.beginPath();const p=getPos(e);ctx.moveTo(p.x,p.y);});
+canvas.addEventListener('mousemove',e=>{if(!drawing)return;const p=getPos(e);ctx.lineTo(p.x,p.y);ctx.stroke();});
+canvas.addEventListener('mouseup',()=>drawing=false);
+canvas.addEventListener('touchstart',e=>{e.preventDefault();drawing=true;ctx.beginPath();const p=getPos(e);ctx.moveTo(p.x,p.y);});
+canvas.addEventListener('touchmove',e=>{e.preventDefault();if(!drawing)return;const p=getPos(e);ctx.lineTo(p.x,p.y);ctx.stroke();});
+canvas.addEventListener('touchend',()=>drawing=false);
+document.getElementById('clearSig').addEventListener('click',()=>{ctx.clearRect(0,0,canvas.width,canvas.height);});
+document.getElementById('signBtn').addEventListener('click',async()=>{
+  if(!pdfBytes)return alert('Please upload a PDF.');
+  const sigData=canvas.toDataURL('image/png');
+  if(sigData===document.createElement('canvas').toDataURL())return alert('Please draw your signature first.');
+  const btn=document.getElementById('signBtn');btn.textContent='🔄 Signing...';btn.disabled=true;
+  try{
+    const pdfDoc=await PDFLib.PDFDocument.load(pdfBytes);
+    const pages=pdfDoc.getPages();
+    const pageIdx=Math.min(parseInt(document.getElementById('signPage').value)-1,pages.length-1);
+    const page=pages[pageIdx];
+    const {width,height}=page.getSize();
+    const sigImg=await pdfDoc.embedPng(sigData);
+    const sigW=150,sigH=60;
+    const pos=document.getElementById('sigPos').value;
+    let x,y;
+    if(pos.includes('right'))x=width-sigW-30;
+    else if(pos.includes('left'))x=30;
+    else x=(width-sigW)/2;
+    y=30;
+    page.drawImage(sigImg,{x,y,width:sigW,height:sigH});
+    const bytes=await pdfDoc.save();
+    const blob=new Blob([bytes],{type:'application/pdf'});
+    document.getElementById('downloadBtn').onclick=()=>{
+      const a=document.createElement('a');a.href=URL.createObjectURL(blob);
+      a.download='signed_'+fileName;a.click();
+    };
+    document.getElementById('result').style.display='block';
+  }catch(e){alert('Error: '+e.message);}
+  btn.textContent='✍️ Sign PDF';btn.disabled=false;
+});
+</script>
+  <div class="related-tools">
+    <h2>Related PDF Tools</h2>
+    <div class="related-grid"><a href="compress.html">🗜️ Compress</a><a href="merge.html">📎 Merge</a><a href="split.html">✂️ Split</a><a href="rotate.html">🔄 Rotate</a><a href="unlock.html">🔓 Unlock</a><a href="watermark.html">💧 Watermark</a></div>
+  </div>
+</main>
+<script src="../assets/js/utils.js"></script>
+</body>
+</html>

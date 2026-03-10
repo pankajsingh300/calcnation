@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Add Page Numbers to PDF — CalcNation</title>
+<meta name="description" content="Add page numbers to PDF files free online. Choose position, font size and style. No signup needed.">
+<link rel="canonical" href="https://calcnation-jade.vercel.app/pdf/add-page-numbers.html">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+<link rel="stylesheet" href="../assets/css/main.css">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="CalcNation">
+<meta property="og:title" content="Add Page Numbers to PDF — CalcNation">
+<meta property="og:description" content="Add page numbers to PDF files free online. Choose position, font size and style. No signup needed.">
+<meta property="og:image" content="https://calcnation-jade.vercel.app/assets/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PP2M41QH5D"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-PP2M41QH5D');</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8624973090847331" crossorigin="anonymous"></script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"Add Page Numbers to PDF","url":"https://calcnation-jade.vercel.app/pdf/add-page-numbers.html","applicationCategory":"PDF Tool","operatingSystem":"Web Browser","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"provider":{"@type":"Organization","name":"CalcNation","url":"https://calcnation-jade.vercel.app"}}
+</script>
+</head>
+<body>
+<script src="../assets/js/nav-loader.js"></script>
+<div class="breadcrumb"><a href="../index.html">Home</a> <span>›</span> <a href="../index.html#pdf">PDF Tools</a> <span>›</span> <span>Add Page Numbers to PDF</span></div>
+<main class="tool-page">
+<div class="tool-header">
+  <div class="tool-icon">🔢</div>
+  <h1>Add Page Numbers to PDF</h1>
+  <p class="tool-desc">Add page numbers to your PDF. Choose position, style and starting number. 100% free, works in your browser.</p>
+  <div class="tool-badges"><span class="badge">🔒 100% Private</span><span class="badge">⚡ Instant</span><span class="badge">✅ No Signup</span></div>
+</div>
+<div class="tool-card">
+  <div class="drop-zone" id="dropZone">
+    <div class="drop-icon">📄</div>
+    <p>Drop your PDF here or <label for="fileInput" class="browse-link">browse to upload</label></p>
+    <input type="file" id="fileInput" accept=".pdf" style="display:none">
+  </div>
+  <div id="fileInfo" style="display:none" class="file-info"></div>
+  <div id="options" style="display:none">
+    <div class="options-grid">
+      <div class="form-group">
+        <label>Position</label>
+        <select id="position" class="form-input">
+          <option value="bottom-center">Bottom Center</option>
+          <option value="bottom-right">Bottom Right</option>
+          <option value="bottom-left">Bottom Left</option>
+          <option value="top-center">Top Center</option>
+          <option value="top-right">Top Right</option>
+          <option value="top-left">Top Left</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Font Size</label>
+        <select id="fontSize" class="form-input">
+          <option value="10">10pt</option>
+          <option value="12" selected>12pt</option>
+          <option value="14">14pt</option>
+          <option value="16">16pt</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Start From Page</label>
+        <input type="number" id="startPage" class="form-input" value="1" min="1">
+      </div>
+      <div class="form-group">
+        <label>Format</label>
+        <select id="format" class="form-input">
+          <option value="1">1, 2, 3...</option>
+          <option value="page_n">Page 1, Page 2...</option>
+          <option value="n_of_total">1 of 10, 2 of 10...</option>
+        </select>
+      </div>
+    </div>
+    <button class="btn-primary" id="addBtn">🔢 Add Page Numbers</button>
+  </div>
+  <div id="result" style="display:none" class="result-box">
+    <p>✅ Page numbers added!</p>
+    <button class="btn-primary" id="downloadBtn">⬇️ Download PDF</button>
+  </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+<script>
+const dz=document.getElementById('dropZone'),fi=document.getElementById('fileInput');
+let pdfBytes=null,fileName='',resultBlob=null;
+dz.addEventListener('dragover',e=>{e.preventDefault();dz.classList.add('drag-over');});
+dz.addEventListener('dragleave',()=>dz.classList.remove('drag-over'));
+dz.addEventListener('drop',e=>{e.preventDefault();dz.classList.remove('drag-over');handleFile(e.dataTransfer.files[0]);});
+fi.addEventListener('change',e=>handleFile(e.target.files[0]));
+dz.addEventListener('click',()=>fi.click());
+async function handleFile(f){
+  if(!f||!f.name.endsWith('.pdf'))return alert('Please select a PDF file.');
+  fileName=f.name;pdfBytes=await f.arrayBuffer();
+  document.getElementById('fileInfo').style.display='block';
+  document.getElementById('fileInfo').innerHTML=`<span>📄 ${f.name}</span><span>${(f.size/1024/1024).toFixed(2)} MB</span>`;
+  document.getElementById('options').style.display='block';
+}
+document.getElementById('addBtn').addEventListener('click',async()=>{
+  if(!pdfBytes)return;
+  const btn=document.getElementById('addBtn');btn.textContent='🔄 Processing...';btn.disabled=true;
+  try{
+    const pdfDoc=await PDFLib.PDFDocument.load(pdfBytes);
+    const pages=pdfDoc.getPages();
+    const total=pages.length;
+    const fontSize=parseInt(document.getElementById('fontSize').value);
+    const pos=document.getElementById('position').value;
+    const fmt=document.getElementById('format').value;
+    const startPage=parseInt(document.getElementById('startPage').value);
+    const font=await pdfDoc.embedFont(PDFLib.StandardFonts.Helvetica);
+    pages.forEach((page,i)=>{
+      const {width,height}=page.getSize();
+      const num=i+startPage;
+      let text=fmt==='1'?`${num}`:fmt==='page_n'?`Page ${num}`:`${num} of ${total}`;
+      const tw=font.widthOfTextAtSize(text,fontSize);
+      let x,y;
+      if(pos.includes('center'))x=(width-tw)/2;
+      else if(pos.includes('right'))x=width-tw-30;
+      else x=30;
+      if(pos.includes('bottom'))y=20;
+      else y=height-30;
+      page.drawText(text,{x,y,size:fontSize,font,color:PDFLib.rgb(0.3,0.3,0.3)});
+    });
+    const bytes=await pdfDoc.save();
+    resultBlob=new Blob([bytes],{type:'application/pdf'});
+    document.getElementById('downloadBtn').onclick=()=>{
+      const a=document.createElement('a');a.href=URL.createObjectURL(resultBlob);
+      a.download='numbered_'+fileName;a.click();
+    };
+    document.getElementById('result').style.display='block';
+  }catch(e){alert('Error: '+e.message);}
+  btn.textContent='🔢 Add Page Numbers';btn.disabled=false;
+});
+</script>
+  <div class="related-tools">
+    <h2>Related PDF Tools</h2>
+    <div class="related-grid"><a href="compress.html">🗜️ Compress</a><a href="merge.html">📎 Merge</a><a href="split.html">✂️ Split</a><a href="rotate.html">🔄 Rotate</a><a href="unlock.html">🔓 Unlock</a><a href="watermark.html">💧 Watermark</a></div>
+  </div>
+</main>
+<script src="../assets/js/utils.js"></script>
+</body>
+</html>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Edit PDF Free Online — CalcNation</title>
+<meta name="description" content="Add text, images and annotations to PDF files for free. Edit PDF online without signup.">
+<link rel="canonical" href="https://calcnation-jade.vercel.app/pdf/edit.html">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+<link rel="stylesheet" href="../assets/css/main.css">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="CalcNation">
+<meta property="og:title" content="Edit PDF Free Online — CalcNation">
+<meta property="og:description" content="Add text, images and annotations to PDF files for free. Edit PDF online without signup.">
+<meta property="og:image" content="https://calcnation-jade.vercel.app/assets/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PP2M41QH5D"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-PP2M41QH5D');</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8624973090847331" crossorigin="anonymous"></script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"Edit PDF Free Online","url":"https://calcnation-jade.vercel.app/pdf/edit.html","applicationCategory":"PDF Tool","operatingSystem":"Web Browser","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"provider":{"@type":"Organization","name":"CalcNation","url":"https://calcnation-jade.vercel.app"}}
+</script>
+</head>
+<body>
+<script src="../assets/js/nav-loader.js"></script>
+<div class="breadcrumb"><a href="../index.html">Home</a> <span>›</span> <a href="../index.html#pdf">PDF Tools</a> <span>›</span> <span>Edit PDF Free Online</span></div>
+<main class="tool-page">
+<div class="tool-header">
+  <div class="tool-icon">✏️</div>
+  <h1>Edit PDF</h1>
+  <p class="tool-desc">Add text, draw rectangles or freehand annotations to your PDF. Works entirely in your browser.</p>
+  <div class="tool-badges"><span class="badge">🔒 100% Private</span><span class="badge">⚡ Instant</span><span class="badge">✅ No Signup</span></div>
+</div>
+<div class="tool-card">
+  <div class="drop-zone" id="dropZone">
+    <div class="drop-icon">📄</div>
+    <p>Drop your PDF here or <label for="fileInput" class="browse-link">browse to upload</label></p>
+    <input type="file" id="fileInput" accept=".pdf" style="display:none">
+  </div>
+  <div id="fileInfo" style="display:none" class="file-info"></div>
+  <div id="editArea" style="display:none">
+    <div class="options-grid">
+      <div class="form-group">
+        <label>Text to Add</label>
+        <input type="text" id="addText" class="form-input" placeholder="Type text to add...">
+      </div>
+      <div class="form-group">
+        <label>Page</label>
+        <input type="number" id="editPage" class="form-input" value="1" min="1" style="width:80px">
+      </div>
+      <div class="form-group">
+        <label>Position X (from left)</label>
+        <input type="number" id="posX" class="form-input" value="50" style="width:100px">
+      </div>
+      <div class="form-group">
+        <label>Position Y (from bottom)</label>
+        <input type="number" id="posY" class="form-input" value="50" style="width:100px">
+      </div>
+      <div class="form-group">
+        <label>Font Size</label>
+        <input type="number" id="editFontSize" class="form-input" value="14" min="8" max="72" style="width:100px">
+      </div>
+      <div class="form-group">
+        <label>Color</label>
+        <input type="color" id="editColor" class="form-input" value="#000000" style="width:80px;height:38px">
+      </div>
+    </div>
+    <button class="btn-primary" id="editBtn">✏️ Add Text & Download</button>
+  </div>
+  <div id="result" style="display:none" class="result-box">
+    <p>✅ Text added to PDF!</p>
+    <button class="btn-primary" id="downloadBtn">⬇️ Download Edited PDF</button>
+  </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+<script>
+const dz=document.getElementById('dropZone'),fi=document.getElementById('fileInput');
+let pdfBytes=null,fileName='',totalPages=1;
+dz.addEventListener('dragover',e=>{e.preventDefault();dz.classList.add('drag-over');});
+dz.addEventListener('dragleave',()=>dz.classList.remove('drag-over'));
+dz.addEventListener('drop',e=>{e.preventDefault();dz.classList.remove('drag-over');handleFile(e.dataTransfer.files[0]);});
+fi.addEventListener('change',e=>handleFile(e.target.files[0]));
+dz.addEventListener('click',()=>fi.click());
+async function handleFile(f){
+  if(!f||!f.name.endsWith('.pdf'))return alert('Please select a PDF file.');
+  fileName=f.name;pdfBytes=await f.arrayBuffer();
+  const pdf=await PDFLib.PDFDocument.load(pdfBytes);
+  totalPages=pdf.getPageCount();
+  document.getElementById('editPage').max=totalPages;
+  document.getElementById('fileInfo').style.display='block';
+  document.getElementById('fileInfo').innerHTML=`<span>📄 ${f.name}</span><span>${totalPages} pages</span>`;
+  document.getElementById('editArea').style.display='block';
+}
+document.getElementById('editBtn').addEventListener('click',async()=>{
+  if(!pdfBytes)return;
+  const text=document.getElementById('addText').value;
+  if(!text)return alert('Please enter text to add.');
+  const btn=document.getElementById('editBtn');btn.textContent='🔄 Processing...';btn.disabled=true;
+  try{
+    const pdfDoc=await PDFLib.PDFDocument.load(pdfBytes);
+    const pages=pdfDoc.getPages();
+    const pageIdx=Math.min(parseInt(document.getElementById('editPage').value)-1,pages.length-1);
+    const page=pages[pageIdx];
+    const font=await pdfDoc.embedFont(PDFLib.StandardFonts.Helvetica);
+    const color=document.getElementById('editColor').value;
+    const r=parseInt(color.substr(1,2),16)/255;
+    const g=parseInt(color.substr(3,2),16)/255;
+    const b=parseInt(color.substr(5,2),16)/255;
+    page.drawText(text,{
+      x:parseInt(document.getElementById('posX').value),
+      y:parseInt(document.getElementById('posY').value),
+      size:parseInt(document.getElementById('editFontSize').value),
+      font,color:PDFLib.rgb(r,g,b)
+    });
+    const bytes=await pdfDoc.save();
+    const blob=new Blob([bytes],{type:'application/pdf'});
+    document.getElementById('downloadBtn').onclick=()=>{
+      const a=document.createElement('a');a.href=URL.createObjectURL(blob);
+      a.download='edited_'+fileName;a.click();
+    };
+    document.getElementById('result').style.display='block';
+  }catch(e){alert('Error: '+e.message);}
+  btn.textContent='✏️ Add Text & Download';btn.disabled=false;
+});
+</script>
+  <div class="related-tools">
+    <h2>Related PDF Tools</h2>
+    <div class="related-grid"><a href="compress.html">🗜️ Compress</a><a href="merge.html">📎 Merge</a><a href="split.html">✂️ Split</a><a href="rotate.html">🔄 Rotate</a><a href="unlock.html">🔓 Unlock</a><a href="watermark.html">💧 Watermark</a></div>
+  </div>
+</main>
+<script src="../assets/js/utils.js"></script>
+</body>
+</html>

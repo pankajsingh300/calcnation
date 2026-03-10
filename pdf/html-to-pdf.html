@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HTML to PDF Free Online — CalcNation</title>
+<meta name="description" content="Convert any webpage or HTML code to PDF for free. Paste a URL or HTML to create a PDF instantly.">
+<link rel="canonical" href="https://calcnation-jade.vercel.app/pdf/html-to-pdf.html">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+<link rel="stylesheet" href="../assets/css/main.css">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="CalcNation">
+<meta property="og:title" content="HTML to PDF Free Online — CalcNation">
+<meta property="og:description" content="Convert any webpage or HTML code to PDF for free. Paste a URL or HTML to create a PDF instantly.">
+<meta property="og:image" content="https://calcnation-jade.vercel.app/assets/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PP2M41QH5D"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-PP2M41QH5D');</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8624973090847331" crossorigin="anonymous"></script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"HTML to PDF Free Online","url":"https://calcnation-jade.vercel.app/pdf/html-to-pdf.html","applicationCategory":"PDF Tool","operatingSystem":"Web Browser","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"provider":{"@type":"Organization","name":"CalcNation","url":"https://calcnation-jade.vercel.app"}}
+</script>
+</head>
+<body>
+<script src="../assets/js/nav-loader.js"></script>
+<div class="breadcrumb"><a href="../index.html">Home</a> <span>›</span> <a href="../index.html#pdf">PDF Tools</a> <span>›</span> <span>HTML to PDF Free Online</span></div>
+<main class="tool-page">
+<div class="tool-header">
+  <div class="tool-icon">🌐</div>
+  <h1>HTML to PDF</h1>
+  <p class="tool-desc">Convert HTML code or web content to PDF. Paste your HTML and download as a clean PDF document.</p>
+  <div class="tool-badges"><span class="badge">🔒 100% Private</span><span class="badge">⚡ Instant</span><span class="badge">✅ No Signup</span></div>
+</div>
+<div class="tool-card">
+  <div class="form-group">
+    <label>Paste HTML Code</label>
+    <textarea id="htmlInput" class="form-input" rows="10" placeholder="Paste your HTML here..." style="font-family:monospace;font-size:13px;resize:vertical"></textarea>
+  </div>
+  <div class="form-group">
+    <label>Page Size</label>
+    <select id="pageSz" class="form-input" style="width:150px">
+      <option value="a4">A4</option>
+      <option value="letter">Letter</option>
+    </select>
+  </div>
+  <button class="btn-primary" id="convertBtn">🌐 Convert to PDF</button>
+  <p style="color:var(--text2);font-size:13px;margin-top:12px">💡 Tip: The browser's print dialog will open — select "Save as PDF" to download.</p>
+</div>
+<script>
+document.getElementById('convertBtn').addEventListener('click',()=>{
+  const html=document.getElementById('htmlInput').value;
+  if(!html.trim())return alert('Please paste HTML content.');
+  const win=window.open('','_blank');
+  win.document.write(`<!DOCTYPE html><html><head><style>body{font-family:Arial,sans-serif;padding:40px;max-width:800px;margin:0 auto}@media print{body{padding:20px}}</style></head><body>${html}</body></html>`);
+  win.document.close();
+  setTimeout(()=>win.print(),500);
+});
+</script>
+  <div class="related-tools">
+    <h2>Related PDF Tools</h2>
+    <div class="related-grid"><a href="compress.html">🗜️ Compress</a><a href="merge.html">📎 Merge</a><a href="split.html">✂️ Split</a><a href="rotate.html">🔄 Rotate</a><a href="unlock.html">🔓 Unlock</a><a href="watermark.html">💧 Watermark</a></div>
+  </div>
+</main>
+<script src="../assets/js/utils.js"></script>
+</body>
+</html>

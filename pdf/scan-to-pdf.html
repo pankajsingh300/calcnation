@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scan to PDF Free Online — CalcNation</title>
+<meta name="description" content="Convert photos and scanned images to PDF. Use your camera or upload photos to create a PDF instantly.">
+<link rel="canonical" href="https://calcnation-jade.vercel.app/pdf/scan-to-pdf.html">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+<link rel="stylesheet" href="../assets/css/main.css">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="CalcNation">
+<meta property="og:title" content="Scan to PDF Free Online — CalcNation">
+<meta property="og:description" content="Convert photos and scanned images to PDF. Use your camera or upload photos to create a PDF instantly.">
+<meta property="og:image" content="https://calcnation-jade.vercel.app/assets/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PP2M41QH5D"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-PP2M41QH5D');</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8624973090847331" crossorigin="anonymous"></script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"Scan to PDF Free Online","url":"https://calcnation-jade.vercel.app/pdf/scan-to-pdf.html","applicationCategory":"PDF Tool","operatingSystem":"Web Browser","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"provider":{"@type":"Organization","name":"CalcNation","url":"https://calcnation-jade.vercel.app"}}
+</script>
+</head>
+<body>
+<script src="../assets/js/nav-loader.js"></script>
+<div class="breadcrumb"><a href="../index.html">Home</a> <span>›</span> <a href="../index.html#pdf">PDF Tools</a> <span>›</span> <span>Scan to PDF Free Online</span></div>
+<main class="tool-page">
+<div class="tool-header">
+  <div class="tool-icon">📸</div>
+  <h1>Scan to PDF</h1>
+  <p class="tool-desc">Convert photos or camera scans into a PDF document. Upload images or take a photo directly from your device camera.</p>
+  <div class="tool-badges"><span class="badge">🔒 100% Private</span><span class="badge">⚡ Instant</span><span class="badge">✅ No Signup</span></div>
+</div>
+<div class="tool-card">
+  <div style="display:flex;gap:12px;margin-bottom:20px;flex-wrap:wrap">
+    <button class="btn-secondary" id="uploadBtn">📁 Upload Images</button>
+    <button class="btn-secondary" id="cameraBtn">📷 Take Photo</button>
+    <input type="file" id="imgInput" accept="image/*" multiple style="display:none">
+    <input type="file" id="cameraInput" accept="image/*" capture="environment" style="display:none">
+  </div>
+  <div id="imgList" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:12px;margin-bottom:16px"></div>
+  <div id="convertArea" style="display:none">
+    <div class="form-group">
+      <label>Page Size</label>
+      <select id="pageSize" class="form-input" style="width:150px">
+        <option value="a4">A4</option>
+        <option value="letter">Letter</option>
+        <option value="fit">Fit to Image</option>
+      </select>
+    </div>
+    <button class="btn-primary" id="convertBtn">📄 Create PDF</button>
+  </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+<script>
+let images=[];
+document.getElementById('uploadBtn').addEventListener('click',()=>document.getElementById('imgInput').click());
+document.getElementById('cameraBtn').addEventListener('click',()=>document.getElementById('cameraInput').click());
+document.getElementById('imgInput').addEventListener('change',e=>addImages(e.target.files));
+document.getElementById('cameraInput').addEventListener('change',e=>addImages(e.target.files));
+function addImages(files){
+  [...files].forEach(f=>{
+    if(!f.type.startsWith('image/'))return;
+    const reader=new FileReader();
+    reader.onload=e=>{
+      images.push({data:e.target.result,name:f.name});
+      renderImages();
+    };
+    reader.readAsDataURL(f);
+  });
+}
+function renderImages(){
+  const list=document.getElementById('imgList');
+  list.innerHTML='';
+  images.forEach((img,i)=>{
+    const div=document.createElement('div');
+    div.style.cssText='background:var(--card);border:1px solid var(--border);border-radius:8px;padding:8px;position:relative;text-align:center';
+    div.innerHTML=`<img src="${img.data}" style="width:100%;height:80px;object-fit:cover;border-radius:4px"><div style="font-size:11px;color:var(--text2);margin-top:4px">Page ${i+1}</div><button onclick="removeImg(${i})" style="position:absolute;top:4px;right:4px;background:var(--accent2);border:none;color:#fff;border-radius:4px;cursor:pointer;font-size:11px;padding:2px 6px">✕</button>`;
+    list.appendChild(div);
+  });
+  document.getElementById('convertArea').style.display=images.length?'block':'none';
+}
+function removeImg(i){images.splice(i,1);renderImages();}
+document.getElementById('convertBtn').addEventListener('click',async()=>{
+  if(!images.length)return;
+  const btn=document.getElementById('convertBtn');btn.textContent='🔄 Creating PDF...';btn.disabled=true;
+  try{
+    const pdfDoc=await PDFLib.PDFDocument.create();
+    const size=document.getElementById('pageSize').value;
+    for(const img of images){
+      let embImg,dims;
+      if(img.data.includes('image/jpeg')||img.data.includes('image/jpg')){
+        const resp=await fetch(img.data);const ab=await resp.arrayBuffer();
+        embImg=await pdfDoc.embedJpg(ab);
+      }else{
+        const resp=await fetch(img.data);const ab=await resp.arrayBuffer();
+        embImg=await pdfDoc.embedPng(ab);
+      }
+      dims=embImg.scale(1);
+      let pw,ph;
+      if(size==='a4'){pw=595;ph=842;}
+      else if(size==='letter'){pw=612;ph=792;}
+      else{pw=dims.width;ph=dims.height;}
+      const page=pdfDoc.addPage([pw,ph]);
+      const scale=Math.min(pw/dims.width,ph/dims.height);
+      const w=dims.width*scale,h=dims.height*scale;
+      page.drawImage(embImg,{x:(pw-w)/2,y:(ph-h)/2,width:w,height:h});
+    }
+    const bytes=await pdfDoc.save();
+    const blob=new Blob([bytes],{type:'application/pdf'});
+    const a=document.createElement('a');a.href=URL.createObjectURL(blob);
+    a.download='scanned-document.pdf';a.click();
+  }catch(e){alert('Error: '+e.message);}
+  btn.textContent='📄 Create PDF';btn.disabled=false;
+});
+</script>
+  <div class="related-tools">
+    <h2>Related PDF Tools</h2>
+    <div class="related-grid"><a href="compress.html">🗜️ Compress</a><a href="merge.html">📎 Merge</a><a href="split.html">✂️ Split</a><a href="rotate.html">🔄 Rotate</a><a href="unlock.html">🔓 Unlock</a><a href="watermark.html">💧 Watermark</a></div>
+  </div>
+</main>
+<script src="../assets/js/utils.js"></script>
+</body>
+</html>
