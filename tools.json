@@ -439,5 +439,58 @@
       "pages",
       "save"
     ]
+  },
+  {
+    "name": "RF Cheat Sheet",
+    "icon": "\ud83e\udd16",
+    "category": "Automation & QA",
+    "url": "automation/robot-framework-cheatsheet.html",
+    "tags": [
+      "robot framework",
+      "rf",
+      "cheatsheet",
+      "qa",
+      "automation",
+      "selenium"
+    ]
+  },
+  {
+    "name": "Playwright Cheat Sheet",
+    "icon": "\ud83c\udfad",
+    "category": "Automation & QA",
+    "url": "automation/playwright-cheatsheet.html",
+    "tags": [
+      "playwright",
+      "cheatsheet",
+      "qa",
+      "automation",
+      "testing"
+    ]
+  },
+  {
+    "name": "RF Interview Questions",
+    "icon": "\ud83c\udfaf",
+    "category": "Automation & QA",
+    "url": "automation/rf-interview-questions.html",
+    "tags": [
+      "robot framework",
+      "interview",
+      "qa",
+      "questions",
+      "answers"
+    ]
+  },
+  {
+    "name": "Playwright Interview Questions",
+    "icon": "\ud83c\udfaf",
+    "category": "Automation & QA",
+    "url": "automation/playwright-interview-questions.html",
+    "tags": [
+      "playwright",
+      "interview",
+      "qa",
+      "questions",
+      "answers"
+    ]
   }
 ]
