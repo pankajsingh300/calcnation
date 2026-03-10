@@ -198,7 +198,7 @@ function genQR(){
   const data=getQRData();
   const size=document.getElementById('qrSize').value;
   const url=`https://api.qrserver.com/v1/create-qr-code/?size=${size}x${size}&data=${encodeURIComponent(data)}&format=png&margin=0`;
-  document.getElementById('qrContainer').innerHTML=`<img src="${url}" width="${size}" height="${size}" id="qrImg" style="display:block;border-radius:4px">`;
+  document.getElementById('qrContainer').innerHTML=`<img loading="lazy" src="${url}" width="${size}" height="${size}" id="qrImg" style="display:block;border-radius:4px">`;
 }
 function downloadQR(){
   const data=getQRData();const size=document.getElementById('qrSize').value;

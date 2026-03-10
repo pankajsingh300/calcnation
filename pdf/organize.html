@@ -73,7 +73,7 @@ async function handleFile(f){
     const div=document.createElement('div');
     div.style.cssText='background:var(--card);border:1px solid var(--border);border-radius:8px;padding:8px;text-align:center;cursor:grab;position:relative';
     div.draggable=true;div.dataset.page=i;
-    div.innerHTML=`<img src="${canvas.toDataURL()}" style="width:100%;border-radius:4px"><div style="font-size:12px;color:var(--text2);margin-top:4px">Page ${i}</div><button onclick="removePage(this,${i})" style="position:absolute;top:4px;right:4px;background:var(--accent2);border:none;border-radius:4px;color:#fff;cursor:pointer;padding:2px 6px;font-size:11px">🗑️</button>`;
+    div.innerHTML=`<img loading="lazy" src="${canvas.toDataURL()}" style="width:100%;border-radius:4px"><div style="font-size:12px;color:var(--text2);margin-top:4px">Page ${i}</div><button onclick="removePage(this,${i})" style="position:absolute;top:4px;right:4px;background:var(--accent2);border:none;border-radius:4px;color:#fff;cursor:pointer;padding:2px 6px;font-size:11px">🗑️</button>`;
     div.addEventListener('dragstart',e=>e.dataTransfer.setData('text/plain',i));
     div.addEventListener('dragover',e=>e.preventDefault());
     div.addEventListener('drop',e=>{

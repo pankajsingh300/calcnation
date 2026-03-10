@@ -237,7 +237,7 @@ function renderGrid() {
 
   grid.innerHTML = images.map((img, i) => `
     <div class="img-thumb" draggable="true" data-index="${i}">
-      <img src="${img.url}" alt="Image ${i+1}">
+      <img loading="lazy" src="${img.url}" alt="Image ${i+1}">
       <div class="img-thumb-info">${img.file.name}</div>
       <button class="img-thumb-remove" onclick="removeImg(${i})">✕</button>
     </div>`).join('');
