@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Playwright Cheat Sheet — Basic to Advanced (Framework Level) | CalcNation</title>
+  <meta name="description" content="Playwright cheat sheet covering core to advanced topics: locators, assertions, fixtures, POM, network mocking, auth, tracing, reporting, CI/CD scaling, flake control, and best practices with examples.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://calcnation-jade.vercel.app/qa/playwright-cheatsheet.html">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+  <link rel="stylesheet" href="../assets/css/main.css">
+  <style>
+    .toc{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin:18px 0}
+    .toc a{background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:10px 12px;color:var(--text2);text-decoration:none}
+    .toc a:hover{border-color:var(--accent);color:var(--accent)}
+    .sec{margin-top:30px}
+    .sec h2{font-family:'Syne',sans-serif;font-size:20px;margin-bottom:10px}
+    .sec p, .sec li{color:var(--text2);line-height:1.8;font-size:14px}
+    pre{background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:12px;overflow:auto}
+    code{font-family:'Fira Code',monospace;font-size:12px}
+    .callout{background:rgba(124,58,237,0.08);border:1px solid rgba(124,58,237,0.25);border-radius:12px;padding:14px;color:var(--text2)}
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="../index.html" class="nav-logo">⚡ CalcNation</a>
+    <button class="nav-toggle" id="navToggle" aria-label="Menu">☰</button>
+    <div class="nav-links" id="navLinks">
+      <a href="../pdf/compress.html">PDF Tools</a>
+      <a href="../dev/json-formatter.html">Dev Tools</a>
+      <a href="../tools/qr-code-generator.html">Tools</a>
+      <a href="index.html" class="active">QA</a>
+    </div>
+  </nav>
+
+  <div class="breadcrumb"><a href="../index.html">Home</a> <span>›</span> <a href="index.html">QA</a> <span>›</span> <span>Playwright Cheat Sheet</span></div>
+
+  <main class="tool-page">
+    <div class="tool-header">
+      <div class="tool-icon">📌</div>
+      <h1>Playwright Cheat Sheet (Basic → Advanced)</h1>
+      <p>Topic-wise reference for building a scalable Playwright test framework: locators, fixtures, CI diagnostics, network, auth, and reliability patterns.</p>
+      <div class="callout">
+        Golden rule: prefer <strong>Locator + web-first expect</strong>, keep selectors stable, isolate data per test, and always capture traces on CI.
+      </div>
+      <div class="toc">
+        <a href="#setup">Setup & config</a>
+        <a href="#locators">Locators</a>
+        <a href="#assertions">Assertions & waits</a>
+        <a href="#fixtures">Fixtures</a>
+        <a href="#pom">POM & flows</a>
+        <a href="#network">Network mocking</a>
+        <a href="#auth">Authentication</a>
+        <a href="#downloads">Downloads/uploads</a>
+        <a href="#artifacts">Tracing/screenshots/video</a>
+        <a href="#parallel">Parallelism & sharding</a>
+        <a href="#ci">CI/CD patterns</a>
+        <a href="#flake">Flake control</a>
+      </div>
+    </div>
+
+    <section class="sec" id="setup">
+      <h2>1) Setup & config</h2>
+      <pre><code>// playwright.config.ts
+import { defineConfig } from '@playwright/test';
+
+export default defineConfig({
+  timeout: 60_000,
+  expect: { timeout: 10_000 },
+  retries: process.env.CI ? 2 : 0,
+  workers: process.env.CI ? 4 : undefined,
+  reporter: [['html'], ['junit', { outputFile: 'results/junit.xml' }]],
+  use: {
+    baseURL: process.env.BASE_URL ?? 'https://example.com',
+    trace: 'on-first-retry',
+    screenshot: 'only-on-failure',
+    video: 'retain-on-failure',
+  },
+});</code></pre>
+      <ul>
+        <li>Pin Playwright version (and browsers) for reproducible CI.</li>
+        <li>Use <code>baseURL</code> + relative navigation in tests.</li>
+      </ul>
+    </section>
+
+    <section class="sec" id="locators">
+      <h2>2) Locators (best practice)</h2>
+      <ul>
+        <li>Prefer <code>getByRole</code> for accessibility and stability.</li>
+        <li>Use <code>data-testid</code> and <code>getByTestId</code> when needed.</li>
+        <li>Avoid brittle CSS/XPath. Avoid text selectors that change often.</li>
+      </ul>
+      <pre><code>await page.getByRole('button', { name: 'Save' }).click();
+await page.getByTestId('email').fill('a@b.com');</code></pre>
+    </section>
+
+    <section class="sec" id="assertions">
+      <h2>3) Assertions & waits</h2>
+      <ul>
+        <li>Prefer web-first assertions (auto-retry) over manual reads.</li>
+        <li>Avoid <code>waitForTimeout</code>. Wait for conditions that represent readiness.</li>
+      </ul>
+      <pre><code>await expect(page.getByTestId('toast')).toContainText('Saved');
+await expect(page).toHaveURL(/dashboard/);</code></pre>
+    </section>
+
+    <section class="sec" id="fixtures">
+      <h2>4) Fixtures (framework architecture)</h2>
+      <pre><code>// fixtures.ts
+import { test as base } from '@playwright/test';
+
+export const test = base.extend({
+  adminPage: async ({ page }, use) => {
+    // login once per test (or per worker using storageState)
+    await use(page);
+  },
+});</code></pre>
+      <p>Use fixtures to inject authenticated pages, API clients, and data builders.</p>
+    </section>
+
+    <section class="sec" id="pom">
+      <h2>5) POM & flows</h2>
+      <ul>
+        <li>Keep page objects thin: actions + key assertions.</li>
+        <li>Move cross-page flows to “flow” helpers (checkout flow, onboarding flow).</li>
+      </ul>
+      <pre><code>class CheckoutPage {
+  constructor(private page) {}
+  payNow = this.page.getByRole('button', { name: 'Pay now' });
+  async submit() { await this.payNow.click(); }
+}</code></pre>
+    </section>
+
+    <section class="sec" id="network">
+      <h2>6) Network mocking</h2>
+      <pre><code>await page.route('**/api/user', async route => {
+  await route.fulfill({
+    status: 200,
+    contentType: 'application/json',
+    body: JSON.stringify({ name: 'Alice' }),
+  });
+});</code></pre>
+      <p>Mock carefully: mock unstable/3rd party dependencies; keep core integrations real in at least one pipeline.</p>
+    </section>
+
+    <section class="sec" id="auth">
+      <h2>7) Authentication</h2>
+      <ul>
+        <li>Prefer <code>storageState</code> for fast auth reuse.</li>
+        <li>Create state in global setup or per-worker fixture.</li>
+      </ul>
+      <pre><code>// global-setup.ts
+// login once and save storageState.json
+// then in config: use: { storageState: 'storageState.json' }</code></pre>
+    </section>
+
+    <section class="sec" id="downloads">
+      <h2>8) Downloads & uploads</h2>
+      <pre><code>const [download] = await Promise.all([
+  page.waitForEvent('download'),
+  page.getByText('Export').click(),
+]);
+await download.saveAs('out.csv');</code></pre>
+    </section>
+
+    <section class="sec" id="artifacts">
+      <h2>9) Tracing, screenshots, video</h2>
+      <ul>
+        <li>Use <code>trace: 'on-first-retry'</code> for fast triage.</li>
+        <li>Keep artifacts for failures; clean for passes.</li>
+      </ul>
+      <pre><code>// config
+use: { trace: 'on-first-retry', screenshot: 'only-on-failure', video: 'retain-on-failure' }</code></pre>
+    </section>
+
+    <section class="sec" id="parallel">
+      <h2>10) Parallelism & sharding</h2>
+      <pre><code># shard across CI nodes
+npx playwright test --shard=1/4</code></pre>
+      <ul>
+        <li>Parallel-safe tests require isolated users/data and no shared files.</li>
+      </ul>
+    </section>
+
+    <section class="sec" id="ci">
+      <h2>11) CI/CD patterns</h2>
+      <ul>
+        <li>Run smoke on PR, full regression nightly.</li>
+        <li>Upload HTML report + traces as artifacts.</li>
+        <li>Pin Playwright docker image or browsers for consistency.</li>
+      </ul>
+    </section>
+
+    <section class="sec" id="flake">
+      <h2>12) Flake control (senior-level)</h2>
+      <ul>
+        <li>Selectors: enforce <code>getByRole/getByTestId</code>.</li>
+        <li>Waits: rely on expect retries; avoid time-based waits.</li>
+        <li>Data: create per test; cleanup idempotently.</li>
+        <li>Diagnostics: always keep trace for failures.</li>
+      </ul>
+      <pre><code>// temporary retries with tracking
+retries: process.env.CI ? 2 : 0</code></pre>
+    </section>
+  </main>
+
+  <footer class="site-footer" style="padding:32px 24px">
+    <div class="footer-brand"><a href="../index.html" class="nav-logo" style="font-size:18px">⚡ CalcNation</a><span class="footer-tagline">QA resources</span></div>
+    <div class="footer-bottom">© 2025 CalcNation · Playwright cheat sheet</div>
+  </footer>
+
+  <script>
+    document.getElementById('navToggle').addEventListener('click', () => {
+      document.getElementById('navLinks').classList.toggle('open');
+    });
+  </script>
+</body>
+</html>

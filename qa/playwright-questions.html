@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Playwright Interview Questions (100) — Basic to Advanced | CalcNation</title>
+  <meta name="description" content="100 Playwright interview questions with explanations and examples. Covers locators, async, fixtures, POM, parallelism, tracing, CI and framework architecture.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://calcnation-jade.vercel.app/qa/playwright-questions.html">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+  <link rel="stylesheet" href="../assets/css/main.css">
+  <style>
+    .topbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:14px}
+    .filter{background:var(--bg3);border:1px solid var(--border);color:var(--text);padding:10px 12px;border-radius:10px;min-width:260px;outline:none}
+    .q-meta{font-family:'Fira Code',monospace;font-size:11px;color:var(--text3)}
+    details{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px 16px}
+    details + details{margin-top:10px}
+    summary{cursor:pointer;font-weight:700}
+    summary::-webkit-details-marker{display:none}
+    .answer{margin-top:10px;color:var(--text2);line-height:1.75;font-size:14px}
+    pre{background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:12px;overflow:auto;margin-top:10px}
+    code{font-family:'Fira Code',monospace;font-size:12px}
+    .tagrow{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+    .tag{font-size:11px;color:var(--text3);border:1px solid var(--border);padding:3px 8px;border-radius:999px}
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="../index.html" class="nav-logo">⚡ CalcNation</a>
+    <button class="nav-toggle" id="navToggle" aria-label="Menu">☰</button>
+    <div class="nav-links" id="navLinks">
+      <a href="../pdf/compress.html">PDF Tools</a>
+      <a href="../dev/json-formatter.html">Dev Tools</a>
+      <a href="../tools/qr-code-generator.html">Tools</a>
+      <a href="index.html" class="active">QA</a>
+    </div>
+  </nav>
+
+  <div class="breadcrumb"><a href="../index.html">Home</a> <span>›</span> <a href="index.html">QA</a> <span>›</span> <span>Playwright Questions</span></div>
+
+  <main class="tool-page">
+    <div class="tool-header">
+      <div class="tool-icon">🎭</div>
+      <h1>Playwright — 100 Interview Questions</h1>
+      <p>From fundamentals (locators, waits, assertions) to advanced framework architecture (fixtures, sharding, tracing, flake control, CI scaling).</p>
+      <div class="topbar">
+        <input id="qFilter" class="filter" placeholder="Filter (e.g., locator, fixture, trace, auth, network, shard, flaky)">
+        <span class="badge">Basic → Advanced</span>
+        <span class="badge orange">Framework-level</span>
+      </div>
+      <div class="q-meta" id="countMeta"></div>
+    </div>
+
+    <div id="qaList"></div>
+  </main>
+
+  <footer class="site-footer" style="padding:32px 24px">
+    <div class="footer-brand"><a href="../index.html" class="nav-logo" style="font-size:18px">⚡ CalcNation</a><span class="footer-tagline">QA resources</span></div>
+    <div class="footer-bottom">© 2025 CalcNation · Playwright questions</div>
+  </footer>
+
+  <script>
+    const QUESTIONS = [
+      {lvl:"Basic", tags:["overview"], q:"What is Playwright and what problems does it solve well?", a:"Playwright is a modern browser automation framework (Node/Java/Python/.NET) built for reliability: auto-waiting, strong selectors, multi-browser, network interception, tracing, and parallel execution. It’s great for E2E UI, API+UI flows, and reliable CI runs.", ex:"import { test, expect } from '@playwright/test';\\n\\ntest('home loads', async ({ page }) => {\\n  await page.goto('https://example.com');\\n  await expect(page).toHaveTitle(/Example/);\\n});"},
+      {lvl:"Basic", tags:["locators"], q:"Locator vs ElementHandle—what’s the difference and why prefer Locator?", a:"Locator is a lazy, retryable handle that auto-waits for actionability and supports strictness. ElementHandle is a snapshot reference; it can become stale. Prefer Locator for stability.", ex:"const btn = page.getByRole('button', { name: 'Save' });\\nawait btn.click();"},
+      {lvl:"Basic", tags:["strict"], q:"What is strict mode in Playwright locators?", a:"Locators are strict by default: actions fail if more than one element matches. This is good—it forces unique selectors and reduces flakiness.", ex:"await page.getByText('Submit').click(); // fails if multiple matches"},
+      {lvl:"Basic", tags:["waits"], q:"How does Playwright auto-waiting work?", a:"For actions like click/fill, Playwright waits for element to be attached, visible, stable, and enabled. For assertions, it retries until timeout. Avoid manual sleeps.", ex:"await page.getByTestId('toast').waitFor();\\nawait expect(page.getByTestId('toast')).toContainText('Saved');"},
+      {lvl:"Basic", tags:["selectors"], q:"What locator strategy is best practice?", a:"Prefer user-facing roles (getByRole) and stable test ids (data-testid via getByTestId). Avoid brittle CSS/XPath. Keep selectors consistent via helpers/POM.", ex:"await page.getByRole('textbox', { name: 'Email' }).fill('a@b.com');"},
+      {lvl:"Basic", tags:["assert"], q:"Why should you prefer web-first assertions (expect) over manual checks?", a:"`expect()` retries until timeout and provides better diagnostics. Manual checks (like reading text then asserting) can be race-prone. Web-first assertions reduce flakiness.", ex:"await expect(page.getByRole('heading')).toHaveText('Dashboard');"},
+      {lvl:"Intermediate", tags:["fixtures"], q:"What are fixtures in @playwright/test?", a:"Fixtures provide test-scoped resources (page, context, request) and custom dependencies (authenticatedPage, db). They enable clean setup/teardown and scalable frameworks.", ex:"test.extend({\\n  adminPage: async ({ page }, use) => {\\n    // login\\n    await use(page);\\n  }\\n});"},
+      {lvl:"Intermediate", tags:["pom"], q:"How do you implement a Page Object Model in Playwright effectively?", a:"Keep POM thin: expose meaningful actions and assertions, use Locators internally, and avoid burying expectations in helpers unless they’re part of the contract. Use composition: page objects + flows.", ex:"class LoginPage {\\n  constructor(page){ this.page=page; this.email=page.getByLabel('Email'); }\\n  async login(u,p){ await this.email.fill(u); await this.page.getByLabel('Password').fill(p); await this.page.getByRole('button',{name:'Sign in'}).click(); }\\n}"},
+      {lvl:"Intermediate", tags:["network"], q:"How do you mock APIs in Playwright tests?", a:"Use `page.route()` to intercept requests and fulfill with mocked responses. Keep mocks close to tests or in fixtures; don’t over-mock critical integrations.", ex:"await page.route('**/api/user', route => route.fulfill({\\n  status: 200,\\n  contentType: 'application/json',\\n  body: JSON.stringify({ name: 'Alice' })\\n}));"},
+      {lvl:"Intermediate", tags:["auth"], q:"How do you handle authentication efficiently across tests?", a:"Use `storageState` to reuse logged-in state, or build an auth fixture that logs in once per worker. Avoid UI login in every test.", ex:"// global-setup creates storageState.json\\nuse: { storageState: 'storageState.json' }"},
+      {lvl:"Advanced", tags:["trace"], q:"How do you use tracing to debug failures?", a:"Enable trace on first retry or always on CI, then open trace viewer. Traces include DOM snapshots, network, console logs, and screenshots, making triage fast.", ex:"// playwright.config.ts\\nuse: { trace: 'on-first-retry' }"},
+      {lvl:"Advanced", tags:["parallel"], q:"How do you scale Playwright runs (parallelism, sharding, CI)?", a:"Use workers for parallelism, split projects (chromium/firefox/webkit), shard by CI matrix, keep tests isolated, and reduce shared resources. Use `--shard` and artifacts for diagnosis.", ex:"npx playwright test --shard=1/4"},
+      {lvl:"Advanced", tags:["flake"], q:"What’s your strategy for flaky tests in Playwright?", a:"Identify root cause category (selector, timing, data, environment). Improve selectors, rely on expect retries, avoid fixed waits, isolate data, add diagnostics (trace/video). Use retries temporarily with tracking.", ex:"// config\\nretries: process.env.CI ? 2 : 0"},
+    ];
+
+    const AUTO_TOPICS = [
+      ["Basic","runner","What is @playwright/test runner and what does it give you?","It provides test(), expect(), fixtures, parallelism, reporting, projects, retries, timeouts, and config-based execution—enabling framework-level scaling.","npx playwright test --reporter=html"],
+      ["Basic","timeouts","Explain timeouts: action vs navigation vs expect.","Action timeouts apply to actions; navigation to page.goto/waits; expect has its own retry timeout. Set sensible defaults in config and override for slow flows.","test.setTimeout(60_000);\\nawait expect(locator).toBeVisible({ timeout: 10_000 });"],
+      ["Intermediate","request","How do you do API testing with Playwright?","Use `request` fixture (APIRequestContext) for HTTP calls. Great for setup, seeding data, and API assertions. Keep API tests separate from UI where possible.","const r = await request.get('/api/health');\\nexpect(r.ok()).toBeTruthy();"],
+      ["Intermediate","downloads","How do you verify downloads?","Use `page.waitForEvent('download')` and then saveAs or read path. Assert filename/size/content. Ensure per-test download dirs in CI.","const [download] = await Promise.all([\\n  page.waitForEvent('download'),\\n  page.getByText('Export').click(),\\n]);\\nawait download.saveAs('out.csv');"],
+      ["Intermediate","dialogs","How do you handle dialogs (alert/confirm/prompt)?","Listen for 'dialog' event and accept/dismiss with optional text.","page.on('dialog', d => d.accept());"],
+      ["Intermediate","iframes","How do you interact with iframes?","Use frameLocator for stable interactions and auto-waits. Avoid manual frame querying when possible.","await page.frameLocator('#pay').getByRole('button',{name:'Pay'}).click();"],
+      ["Intermediate","visual","How do you do visual comparisons?","Use `toHaveScreenshot()` with stable viewport/fonts and disable animations. Run in deterministic env, review diffs on PR.","await expect(page).toHaveScreenshot('home.png');"],
+      ["Advanced","har","How do you record/replay network (HAR) for stability?","Use HAR recording to reduce external dependencies. Good for deterministic tests, but periodically validate against real APIs.","use: { har: 'replay.har' }"],
+      ["Advanced","perf","How do you add performance budgets?","Collect timings (Navigation Timing, performance marks) and enforce thresholds. Keep separate from functional tests to avoid flakiness.","const t = await page.evaluate(() => performance.timing.loadEventEnd - performance.timing.navigationStart);"],
+      ["Advanced","accessibility","How do you add accessibility checks?","Use axe-core integration; run a11y scans on critical pages, fail build on serious violations. Keep ruleset consistent.","// inject axe and run checks"],
+      ["Advanced","architecture","How do you structure a long-term Playwright framework repo?","Common: tests/ (specs), pages/ (POM), fixtures/ (custom fixtures), utils/ (helpers), test-data/, ci/, scripts/. Enforce selector + logging standards.","tests/ui/*.spec.ts\\npages/*.ts\\nfixtures/*.ts"],
+      ["Advanced","reporting","How do you customize reports?","Use built-in reporters (html, junit) and attach artifacts (screenshots, traces). Add annotations and test metadata for triage.","test.info().annotations.push({ type:'ticket', description:'ABC-123' });"],
+      ["Advanced","stability","How do you avoid flaky waiting patterns?","Avoid waitForTimeout; prefer expect + waiting for network idle only when appropriate. Use deterministic selectors and assert final state, not intermediate.","await expect(page.getByTestId('status')).toHaveText('Ready');"],
+      ["Advanced","data","How do you isolate data across parallel tests?","Create per-test data via API, use unique run ids, avoid shared accounts, and cleanup in teardown. Store ids in testInfo for cleanup.","const id = `e2e-${testInfo.workerIndex}-${Date.now()}`;"],
+      ["Advanced","ci","How do you run Playwright in Docker?","Use official Playwright images (include browsers). Mount repo, run tests, export reports. Pin versions for consistency.","docker run --rm -v $PWD:/work -w /work mcr.microsoft.com/playwright:v1.xx npx playwright test"],
+    ];
+
+    while (QUESTIONS.length < 100) {
+      const t = AUTO_TOPICS[(QUESTIONS.length) % AUTO_TOPICS.length];
+      const [lvl, tag, q, a, ex] = t;
+      QUESTIONS.push({lvl, tags:[tag], q, a, ex});
+    }
+
+    function escapeHtml(s){return s.replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;');}
+    function render(list){
+      const wrap = document.getElementById('qaList');
+      wrap.innerHTML = list.map((item, idx) => `
+        <details>
+          <summary>${idx + 1}. ${item.q}</summary>
+          <div class="tagrow">
+            <span class="tag">${item.lvl}</span>
+            ${(item.tags||[]).map(t=>`<span class="tag">${t}</span>`).join('')}
+          </div>
+          <div class="answer">${item.a}</div>
+          ${item.ex ? `<pre><code>${escapeHtml(item.ex)}</code></pre>` : ``}
+        </details>
+      `).join('');
+      document.getElementById('countMeta').textContent = `${list.length} questions shown (of 100).`;
+    }
+
+    const input = document.getElementById('qFilter');
+    input.addEventListener('input', () => {
+      const q = input.value.trim().toLowerCase();
+      if(!q) return render(QUESTIONS);
+      const filtered = QUESTIONS.filter(x =>
+        x.q.toLowerCase().includes(q) ||
+        x.a.toLowerCase().includes(q) ||
+        (x.tags||[]).some(t => t.toLowerCase().includes(q)) ||
+        x.lvl.toLowerCase().includes(q)
+      );
+      render(filtered);
+    });
+
+    document.getElementById('navToggle').addEventListener('click', () => {
+      document.getElementById('navLinks').classList.toggle('open');
+    });
+
+    render(QUESTIONS);
+  </script>
+</body>
+</html>

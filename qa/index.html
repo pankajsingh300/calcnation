@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QA Hub — Interview Questions & Cheat Sheets | CalcNation</title>
+  <meta name="description" content="Robot Framework and Playwright interview questions (basic to advanced) plus topic-wise cheat sheets for QA automation engineers.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://calcnation-jade.vercel.app/qa/index.html">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+  <link rel="stylesheet" href="../assets/css/main.css">
+  <style>
+    .hub-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-top:22px}
+    .hub-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:22px;text-decoration:none;color:var(--text);transition:all .2s}
+    .hub-card:hover{border-color:var(--accent);transform:translateY(-2px)}
+    .hub-icon{font-size:26px;margin-bottom:10px}
+    .hub-title{font-family:'Syne',sans-serif;font-weight:800;margin-bottom:6px}
+    .hub-desc{color:var(--text3);font-size:13px;line-height:1.6}
+    .pill{display:inline-flex;gap:8px;align-items:center;background:rgba(0,229,255,0.08);border:1px solid rgba(0,229,255,0.2);color:var(--accent);padding:6px 12px;border-radius:999px;font-size:12px;font-weight:700;margin-top:10px}
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="../index.html" class="nav-logo">⚡ CalcNation</a>
+    <button class="nav-toggle" id="navToggle" aria-label="Menu">☰</button>
+    <div class="nav-links" id="navLinks">
+      <a href="../pdf/compress.html">PDF Tools</a>
+      <a href="../dev/json-formatter.html">Dev Tools</a>
+      <a href="../tools/qr-code-generator.html">Tools</a>
+      <a href="../social/youtube-money-calculator.html">Social</a>
+      <a href="index.html" class="active">QA</a>
+      <div class="nav-dropdown">
+        <a href="../finance/mortgage-calculator.html" class="nav-dropdown-trigger">Finance ▾</a>
+        <div class="nav-dropdown-menu">
+          <a href="../finance/mortgage-calculator.html"><span>🏠</span> Mortgage Calculator</a>
+          <a href="../finance/emi-calculator.html"><span>📋</span> EMI Calculator</a>
+          <a href="../finance/compound-interest-calculator.html"><span>📈</span> Compound Interest</a>
+        </div>
+      </div>
+      <div class="nav-dropdown">
+        <a href="../health/calorie-calculator.html" class="nav-dropdown-trigger">Health ▾</a>
+        <div class="nav-dropdown-menu">
+          <a href="../tools/bmi-calculator.html"><span>⚖️</span> BMI Calculator</a>
+          <a href="../health/calorie-calculator.html"><span>🔥</span> Calorie Calculator</a>
+          <a href="../health/pregnancy-due-date.html"><span>👶</span> Pregnancy Due Date</a>
+          <a href="../health/water-calculator.html"><span>💧</span> Water Intake</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="breadcrumb"><a href="../index.html">Home</a> <span>›</span> <span>QA</span></div>
+
+  <main class="tool-page">
+    <div class="tool-header">
+      <div class="tool-icon">🧪</div>
+      <h1>QA Hub</h1>
+      <p>Interview-ready question banks and deep cheat sheets for Robot Framework and Playwright — from fundamentals to advanced framework architecture.</p>
+      <div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap">
+        <span class="badge">Free</span>
+        <span class="badge orange">Basic → Advanced</span>
+        <span class="badge purple">Framework-level</span>
+      </div>
+      <div class="pill">Tip: Use the search (Ctrl/⌘+F) inside pages</div>
+    </div>
+
+    <div class="hub-grid">
+      <a class="hub-card" href="robot-framework-questions.html">
+        <div class="hub-icon">🤖</div>
+        <div class="hub-title">Robot Framework — 100 Questions</div>
+        <div class="hub-desc">Syntax, keywords, variables, libraries, Pabot, reporting, CI, design patterns, and common pitfalls.</div>
+      </a>
+      <a class="hub-card" href="playwright-questions.html">
+        <div class="hub-icon">🎭</div>
+        <div class="hub-title">Playwright — 100 Questions</div>
+        <div class="hub-desc">Locators, async, fixtures, POM, parallelism, tracing, test architecture, CI, flake control, performance.</div>
+      </a>
+      <a class="hub-card" href="robot-framework-cheatsheet.html">
+        <div class="hub-icon">📌</div>
+        <div class="hub-title">Robot Framework — Cheat Sheet</div>
+        <div class="hub-desc">Topic-wise reference covering core + advanced concepts with examples and best practices.</div>
+      </a>
+      <a class="hub-card" href="playwright-cheatsheet.html">
+        <div class="hub-icon">📌</div>
+        <div class="hub-title">Playwright — Cheat Sheet</div>
+        <div class="hub-desc">Topic-wise reference: locators, assertions, fixtures, network, auth, storage, reporting, CI, scaling.</div>
+      </a>
+    </div>
+  </main>
+
+  <footer class="site-footer" style="padding:32px 24px">
+    <div class="footer-brand"><a href="../index.html" class="nav-logo" style="font-size:18px">⚡ CalcNation</a><span class="footer-tagline">Learn · Build · Automate</span></div>
+    <div class="footer-bottom">© 2025 CalcNation · QA resources · No signup</div>
+  </footer>
+
+  <script>
+    document.getElementById('navToggle').addEventListener('click', () => {
+      document.getElementById('navLinks').classList.toggle('open');
+    });
+  </script>
+</body>
+</html>

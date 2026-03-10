@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Robot Framework Cheat Sheet — Basic to Advanced (Framework Level) | CalcNation</title>
+  <meta name="description" content="Robot Framework cheat sheet covering core to advanced topics: project structure, keywords, variables, libraries, Pabot, listeners, reporting, CI/CD, patterns, and best practices with examples.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://calcnation-jade.vercel.app/qa/robot-framework-cheatsheet.html">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+  <link rel="stylesheet" href="../assets/css/main.css">
+  <style>
+    .toc{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin:18px 0}
+    .toc a{background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:10px 12px;color:var(--text2);text-decoration:none}
+    .toc a:hover{border-color:var(--accent);color:var(--accent)}
+    .sec{margin-top:30px}
+    .sec h2{font-family:'Syne',sans-serif;font-size:20px;margin-bottom:10px}
+    .sec p, .sec li{color:var(--text2);line-height:1.8;font-size:14px}
+    pre{background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:12px;overflow:auto}
+    code{font-family:'Fira Code',monospace;font-size:12px}
+    .callout{background:rgba(0,229,255,0.06);border:1px solid rgba(0,229,255,0.2);border-radius:12px;padding:14px;color:var(--text2)}
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="../index.html" class="nav-logo">⚡ CalcNation</a>
+    <button class="nav-toggle" id="navToggle" aria-label="Menu">☰</button>
+    <div class="nav-links" id="navLinks">
+      <a href="../pdf/compress.html">PDF Tools</a>
+      <a href="../dev/json-formatter.html">Dev Tools</a>
+      <a href="../tools/qr-code-generator.html">Tools</a>
+      <a href="index.html" class="active">QA</a>
+    </div>
+  </nav>
+
+  <div class="breadcrumb"><a href="../index.html">Home</a> <span>›</span> <a href="index.html">QA</a> <span>›</span> <span>Robot Framework Cheat Sheet</span></div>
+
+  <main class="tool-page">
+    <div class="tool-header">
+      <div class="tool-icon">📌</div>
+      <h1>Robot Framework Cheat Sheet (Basic → Advanced)</h1>
+      <p>Topic-wise reference for building production-grade Robot Framework automation frameworks: structure, design, scaling, CI, and reliability.</p>
+      <div class="callout">
+        Use this as a framework checklist: keep tests readable, keep keywords layered, keep execution stable, and keep CI diagnostics rich.
+      </div>
+      <div class="toc">
+        <a href="#structure">Project structure</a>
+        <a href="#files">File sections & settings</a>
+        <a href="#keywords">Keyword design patterns</a>
+        <a href="#variables">Variables & scoping</a>
+        <a href="#control">IF/FOR & control flow</a>
+        <a href="#ui">UI automation (selectors & waits)</a>
+        <a href="#api">API automation</a>
+        <a href="#data">Test data strategy</a>
+        <a href="#parallel">Parallel execution (Pabot)</a>
+        <a href="#listeners">Listeners & artifacts</a>
+        <a href="#reporting">Reporting & CI integration</a>
+        <a href="#quality">Quality gates (Robocop)</a>
+      </div>
+    </div>
+
+    <section class="sec" id="structure">
+      <h2>1) Project structure (framework-level)</h2>
+      <p>Recommended layout for large teams:</p>
+      <pre><code>tests/
+  ui/
+  api/
+resources/
+  pages/       # page-level keywords + locators
+  flows/       # business flows (domain language)
+  common/      # reusable primitives (waits, utils)
+libs/          # python libraries (API clients, parsers)
+variables/     # env configs (NO secrets in git)
+ci/            # pipelines/scripts
+</code></pre>
+      <ul>
+        <li><strong>Tests call flows</strong> (business intent), flows call pages/services, pages call library keywords.</li>
+        <li><strong>One responsibility per keyword</strong> (actions vs assertions vs data).</li>
+      </ul>
+    </section>
+
+    <section class="sec" id="files">
+      <h2>2) File sections & key settings</h2>
+      <pre><code>*** Settings ***
+Library    SeleniumLibrary    timeout=10
+Resource   ../resources/flows/Auth.resource
+Suite Setup    Prepare Suite
+Test Setup     Prepare Test
+Test Teardown  Cleanup Test
+
+*** Variables ***
+${BASE_URL}    https://example.com
+
+*** Test Cases ***
+Login
+    Login As    alice    secret
+    Dashboard Should Be Visible
+
+*** Keywords ***
+Prepare Suite
+    Log    Suite start</code></pre>
+      <ul>
+        <li><strong>Suite Setup</strong>: expensive shared init (containers, seeded data).</li>
+        <li><strong>Test Setup</strong>: per-test isolation (fresh user/session).</li>
+      </ul>
+    </section>
+
+    <section class="sec" id="keywords">
+      <h2>3) Keyword design patterns</h2>
+      <ul>
+        <li><strong>Layering</strong>: UI primitives → Page keywords → Flow keywords → Tests.</li>
+        <li><strong>Pure vs impure keywords</strong>: keep data builders pure; UI/API actions impure.</li>
+        <li><strong>Assert where it matters</strong>: after state-changing actions, assert stable outcomes.</li>
+      </ul>
+      <pre><code>*** Keywords ***
+Login As
+    [Arguments]  ${user}  ${pass}
+    Input Text    ${LOGIN_USER}    ${user}
+    Input Password ${LOGIN_PASS}   ${pass}
+    Click Button   ${LOGIN_SUBMIT}
+    Wait Until Page Contains    Dashboard</code></pre>
+    </section>
+
+    <section class="sec" id="variables">
+      <h2>4) Variables & scope</h2>
+      <ul>
+        <li><strong>Prefer test/suite variables</strong> over global to stay parallel-safe.</li>
+        <li>Use dicts for structured test data.</li>
+      </ul>
+      <pre><code>Set Test Variable     ${ORDER_ID}    ${id}
+Set Suite Variable    ${TOKEN}       ${token}</code></pre>
+    </section>
+
+    <section class="sec" id="control">
+      <h2>5) Control flow (RF 4+)</h2>
+      <pre><code>IF    ${status} == 200
+    Log    OK
+ELSE
+    Fail   Unexpected status
+END
+
+FOR    ${item}    IN    @{ITEMS}
+    Log    ${item}
+END</code></pre>
+      <p>Use <strong>Wait Until Keyword Succeeds</strong> only for eventual consistency, not as a flake bandaid.</p>
+    </section>
+
+    <section class="sec" id="ui">
+      <h2>6) UI automation (stability checklist)</h2>
+      <ul>
+        <li><strong>Selectors</strong>: prefer <code>data-testid</code>, avoid brittle XPath.</li>
+        <li><strong>Waits</strong>: wait for readiness conditions; avoid Sleep.</li>
+        <li><strong>Isolation</strong>: each test owns its user/data.</li>
+      </ul>
+      <pre><code>Wait Until Element Is Visible    css=[data-testid="ready"]    10s
+Click Element                    css=[data-testid="submit"]</code></pre>
+    </section>
+
+    <section class="sec" id="api">
+      <h2>7) API automation (RequestsLibrary)</h2>
+      <pre><code>*** Settings ***
+Library    RequestsLibrary
+
+*** Test Cases ***
+Health
+    Create Session    api    https://example.com
+    ${r}=    Get On Session    api    /health
+    Should Be Equal As Integers    ${r.status_code}    200</code></pre>
+      <ul>
+        <li>Keep auth/session in setup; assert status + schema + key fields.</li>
+      </ul>
+    </section>
+
+    <section class="sec" id="data">
+      <h2>8) Test data strategy</h2>
+      <ul>
+        <li>Create data via API per test; tag with run id.</li>
+        <li>Cleanup in teardown (idempotent cleanup).</li>
+        <li>For shared pools (rare), lock allocation only.</li>
+      </ul>
+      <pre><code>[Teardown]    Delete Order Via Api    ${ORDER_ID}</code></pre>
+    </section>
+
+    <section class="sec" id="parallel">
+      <h2>9) Parallel execution (Pabot)</h2>
+      <ul>
+        <li>No global shared state, no shared download dirs, no shared users.</li>
+        <li>Separate outputs per run/shard.</li>
+      </ul>
+      <pre><code>pabot --processes 4 --outputdir results-parallel tests/</code></pre>
+    </section>
+
+    <section class="sec" id="listeners">
+      <h2>10) Listeners & artifacts</h2>
+      <p>Use listeners to attach screenshots, logs, and extra metadata for fast triage.</p>
+      <pre><code>class Listener:
+    ROBOT_LISTENER_API_VERSION = 3
+    def end_test(self, data, result):
+        if not result.passed:
+            # take screenshot / collect logs
+            pass</code></pre>
+    </section>
+
+    <section class="sec" id="reporting">
+      <h2>11) Reporting & CI</h2>
+      <ul>
+        <li>Always upload <code>log.html</code>, <code>report.html</code>, <code>output.xml</code> as CI artifacts.</li>
+        <li>Generate JUnit for CI test dashboards.</li>
+      </ul>
+      <pre><code>rebot --xunit junit.xml --outputdir results output.xml</code></pre>
+    </section>
+
+    <section class="sec" id="quality">
+      <h2>12) Quality gates (Robocop + conventions)</h2>
+      <ul>
+        <li>Enforce naming, line lengths, complexity, duplication checks.</li>
+        <li>Use code reviews + templates.</li>
+      </ul>
+      <pre><code>robocop --reports all tests/</code></pre>
+    </section>
+  </main>
+
+  <footer class="site-footer" style="padding:32px 24px">
+    <div class="footer-brand"><a href="../index.html" class="nav-logo" style="font-size:18px">⚡ CalcNation</a><span class="footer-tagline">QA resources</span></div>
+    <div class="footer-bottom">© 2025 CalcNation · Robot Framework cheat sheet</div>
+  </footer>
+
+  <script>
+    document.getElementById('navToggle').addEventListener('click', () => {
+      document.getElementById('navLinks').classList.toggle('open');
+    });
+  </script>
+</body>
+</html>
