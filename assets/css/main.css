@@ -1152,3 +1152,20 @@ input[type="file"] {
   position: relative !important;
   z-index: 999 !important;
 }
+
+/* Fix: pseudo-elements must not block clicks on file inputs */
+.tool-card::before, .tool-card::after {
+  pointer-events: none !important;
+}
+.drop-zone {
+  pointer-events: all !important;
+  position: relative !important;
+  z-index: 1 !important;
+}
+.drop-zone input[type="file"] {
+  pointer-events: all !important;
+  position: relative !important;
+  z-index: 100 !important;
+  display: block !important;
+  margin: 12px auto 0 !important;
+}
