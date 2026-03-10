@@ -43,11 +43,14 @@
   <div class="tool-box"><div class="tool-box-header"><h2>Watermark Settings</h2></div>
   <div class="tool-box-body">
     <div id="uploadSection">
-      <div class="upload-zone" id="uploadZone" onclick="document.getElementById('pdfInput').click()">
-        <input type="file" id="pdfInput" accept=".pdf" style="display:none" onchange="loadPDF(this)">
-        <div class="upload-icon">💧</div><h3>Click to upload PDF</h3><p>PDF to add watermark to</p>
-      </div>
-    </div>
+      <div class="drop-zone" id="dropZone">
+    <input type="file" id="pdfInput" accept=".pdf" style="display:none">
+    <div class="drop-icon">📄</div>
+    <p>Drop your PDF here or</p>
+    <button type="button" class="btn-secondary" style="margin-top:8px" onclick="document.getElementById('pdfInput').click()">📂 Browse to Upload</button>
+    <p style="color:var(--text2);font-size:12px;margin-top:8px">Max 100MB · 100% Private</p>
+  </div>
+  </div>
     <div id="watermarkSection" style="display:none">
       <div style="margin-bottom:20px;padding:14px;background:var(--bg2);border-radius:10px;display:flex;justify-content:space-between;align-items:center">
         <div><div id="fileName" style="font-weight:600"></div><div id="pageCount" style="font-size:13px;color:var(--text3)"></div></div>
