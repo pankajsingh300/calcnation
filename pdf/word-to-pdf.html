@@ -56,7 +56,7 @@ dz.addEventListener('dragover',e=>{e.preventDefault();dz.classList.add('drag-ove
 dz.addEventListener('dragleave',()=>dz.classList.remove('drag-over'));
 dz.addEventListener('drop',e=>{e.preventDefault();dz.classList.remove('drag-over');handleFile(e.dataTransfer.files[0]);});
 fi.addEventListener('change',e=>handleFile(e.target.files[0]));
-dz.addEventListener('click',()=>fi.click());
+dz.addEventListener('click',(e)=>{if(e.target.tagName!=='LABEL'&&e.target.tagName!=='INPUT')fi.click();});
 function handleFile(f){
   if(!f)return;
   const ext=f.name.split('.').pop().toLowerCase();
