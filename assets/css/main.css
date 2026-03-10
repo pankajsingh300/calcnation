@@ -1119,3 +1119,29 @@ textarea.form-input { resize: vertical; min-height: 120px; }
   font-family: inherit;
 }
 .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+
+/* Force drop zone full width */
+.drop-zone, .upload-zone {
+  width: 100% !important;
+  box-sizing: border-box !important;
+  display: block !important;
+}
+/* Visible file input styled as button */
+input[type="file"]::file-selector-button {
+  background: var(--accent);
+  color: #000;
+  border: none;
+  padding: 8px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+  font-family: inherit;
+  margin-right: 12px;
+}
+input[type="file"] {
+  color: var(--text2);
+  font-size: 13px;
+  margin-top: 12px;
+  cursor: pointer;
+}
