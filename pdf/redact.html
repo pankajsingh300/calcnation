@@ -3,112 +3,109 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Redact PDF Free Online — CalcNation</title>
-<meta name="description" content="Redact sensitive text and images from PDF files. Permanently black out confidential information. Free, no signup.">
+<title>Redact PDF — CalcNation</title>
+<meta name="description" content="Black out sensitive information in PDF files. Define areas to redact by page and coordinates. Free, no signup.">
 <link rel="canonical" href="https://calcnation-jade.vercel.app/pdf/redact.html">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
 <link rel="stylesheet" href="../assets/css/main.css">
-<meta property="og:type" content="website">
-<meta property="og:site_name" content="CalcNation">
-<meta property="og:title" content="Redact PDF Free Online — CalcNation">
-<meta property="og:description" content="Redact sensitive text and images from PDF files. Permanently black out confidential information. Free, no signup.">
-<meta property="og:image" content="https://calcnation-jade.vercel.app/assets/og-image.png">
-<meta name="twitter:card" content="summary_large_image">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-PP2M41QH5D"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-PP2M41QH5D');</script>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8624973090847331" crossorigin="anonymous"></script>
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebApplication","name":"Redact PDF Free Online","url":"https://calcnation-jade.vercel.app/pdf/redact.html","applicationCategory":"PDF Tool","operatingSystem":"Web Browser","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"provider":{"@type":"Organization","name":"CalcNation","url":"https://calcnation-jade.vercel.app"}}
-</script>
 </head>
 <body>
 <script src="../assets/js/nav-loader.js"></script>
-<div class="breadcrumb"><a href="../index.html">Home</a> <span>›</span> <a href="../index.html#pdf">PDF Tools</a> <span>›</span> <span>Redact PDF Free Online</span></div>
+<div class="breadcrumb"><a href="../index.html">Home</a> <span>›</span> <a href="../index.html#pdf">PDF Tools</a> <span>›</span> <span>Redact PDF</span></div>
 <main class="tool-page">
 <div class="tool-header">
   <div class="tool-icon">⬛</div>
   <h1>Redact PDF</h1>
-  <p class="tool-desc">Permanently black out sensitive information in your PDF. Define areas to redact by page and coordinates.</p>
+  <p class="tool-desc">Black out sensitive information in PDF files. Define areas to redact by page and coordinates. Free, no signup.</p>
   <div class="tool-badges"><span class="badge">🔒 100% Private</span><span class="badge">⚡ Instant</span><span class="badge">✅ No Signup</span></div>
 </div>
 <div class="tool-card">
-  <div class="drop-zone" id="dropZone" onclick="if(event.target.tagName!='LABEL')document.getElementById('fileInput').click()">
-    <div class="drop-icon">📄</div>
-    <p>Drop your PDF here or <label for="fileInput" class="browse-link" onclick="event.stopPropagation()">browse to upload</label></p>
-    <p class="drop-hint">Max 100MB · Works in your browser</p>
-  </div><p>Drop your PDF here or <span class="browse-link">browse to upload</span></p>
-    <input type="file" id="fileInput" accept=".pdf" style="display:none">
+  <div class="drop-zone" id="dropZone">
+    <div class="drop-icon">⬛</div>
+    <p>Drop your file here</p>
+    <input type="file" id="fileInput" accept=".pdf" style="margin-top:12px">
+    <p style="color:var(--text2);font-size:12px;margin-top:8px">Max 100MB · Works in your browser · 100% Private</p>
   </div>
-  <div id="fileInput" style="display:none" class="file-info"></div>
-  <div id="redactArea" style="display:none">
-    <p style="color:var(--text2);margin-bottom:16px">Define areas to black out. Add multiple redaction areas then apply.</p>
+  <div id="fileInfo" style="display:none" class="file-info"></div>
+  <div id="options" style="display:none">
+
+    <p style="color:var(--text2);font-size:13px;margin-bottom:12px">Define areas to black out (coordinates in PDF points from bottom-left corner)</p>
     <div id="redactions"></div>
     <button class="btn-secondary" id="addRedact" style="margin-bottom:16px">+ Add Redaction Area</button>
-    <button class="btn-primary" id="redactBtn">⬛ Apply Redactions & Download</button>
+    <button class="btn-primary" id="actionBtn">⬛ Apply & Download</button>
+  </div>
+  <div id="result" style="display:none" class="result-box">
+    <p id="resultMsg">✅ Done!</p>
+    <button class="btn-primary" id="downloadBtn">⬇️ Download</button>
   </div>
 </div>
+<div class="related-tools"><h2>Related PDF Tools</h2><div class="related-grid">
+  <a href="compress.html" class="related-card"><span class="related-card-icon">🗜️</span><span class="related-card-name">Compress</span></a>
+  <a href="merge.html" class="related-card"><span class="related-card-icon">📎</span><span class="related-card-name">Merge</span></a>
+  <a href="split.html" class="related-card"><span class="related-card-icon">✂️</span><span class="related-card-name">Split</span></a>
+  <a href="protect.html" class="related-card"><span class="related-card-icon">🔐</span><span class="related-card-name">Protect</span></a>
+</div></div>
+</main>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
 <script>
-const dz=document.getElementById('dropZone');
-let pdfBytes=null,fileName='',totalPages=1,redactionCount=0;
-dz.addEventListener('dragover',e=>{e.preventDefault();dz.classList.add('drag-over');});
-dz.addEventListener('dragleave',()=>dz.classList.remove('drag-over'));
-dz.addEventListener('drop',e=>{e.preventDefault();dz.classList.remove('drag-over');handleFile(e.dataTransfer.files[0]);});
-document.getElementById('fileInput').addEventListener('change',e=>handleFile(e.target.files[0]));
-async function handleFile(f){
-  if(!f||!f.name.endsWith('.pdf'))return alert('Please select a PDF file.');
-  fileName=f.name;pdfBytes=await f.arrayBuffer();
-  const pdf=await PDFLib.PDFDocument.load(pdfBytes);
-  totalPages=pdf.getPageCount();
-  document.getElementById('fileInfo').style.display='block';
-  document.getElementById('fileInfo').innerHTML=`<span>📄 ${f.name}</span><span>${totalPages} pages</span>`;
-  document.getElementById('redactArea').style.display='block';
-  addRedactionRow();
+const fi = document.getElementById('fileInput');
+const dz = document.getElementById('dropZone');
+let pdfBytes = null, fileName = '';
+fi.addEventListener('change', e => handleFile(e.target.files[0]));
+dz.addEventListener('dragover', e => { e.preventDefault(); dz.style.borderColor='var(--accent)'; });
+dz.addEventListener('dragleave', () => { dz.style.borderColor=''; });
+dz.addEventListener('drop', e => { e.preventDefault(); dz.style.borderColor=''; handleFile(e.dataTransfer.files[0]); });
+function handleFile(f) {
+  if (!f) return;
+  fileName = f.name;
+  f.arrayBuffer().then(buf => {
+    pdfBytes = buf;
+    document.getElementById('fileInfo').style.display = 'flex';
+    document.getElementById('fileInfo').innerHTML = '<span>📄 '+f.name+'</span><span>'+(f.size/1024/1024).toFixed(2)+' MB</span>';
+    document.getElementById('options').style.display = 'block';
+  });
 }
-function addRedactionRow(){
-  redactionCount++;
-  const div=document.createElement('div');
-  div.id=`r${redactionCount}`;
-  div.style.cssText='background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:12px;margin-bottom:8px;display:grid;grid-template-columns:80px repeat(4,1fr) auto;gap:8px;align-items:center';
-  div.innerHTML=`<div style="font-size:13px;color:var(--text2)">Page</div><div style="font-size:13px;color:var(--text2)">X</div><div style="font-size:13px;color:var(--text2)">Y</div><div style="font-size:13px;color:var(--text2)">Width</div><div style="font-size:13px;color:var(--text2)">Height</div><div></div>
-  <input type="number" class="form-input rpage" value="1" min="1" max="${totalPages}" style="padding:6px">
-  <input type="number" class="form-input rx" value="50" style="padding:6px">
-  <input type="number" class="form-input ry" value="50" style="padding:6px">
-  <input type="number" class="form-input rw" value="200" style="padding:6px">
-  <input type="number" class="form-input rh" value="30" style="padding:6px">
-  <button onclick="this.closest('div').remove()" style="background:var(--accent2);border:none;color:#fff;padding:6px 10px;border-radius:6px;cursor:pointer">✕</button>`;
-  document.getElementById('redactions').appendChild(div);
+
+let redCount=0;
+function addRow(){
+  redCount++;
+  const d=document.createElement('div');
+  d.style.cssText='display:grid;grid-template-columns:repeat(5,1fr) auto;gap:8px;margin-bottom:8px;align-items:end';
+  d.innerHTML='<div><label style="font-size:11px;color:var(--text2)">Page</label><input type="number" class="form-input rp" value="1" min="1" style="padding:6px"></div>'
+    +'<div><label style="font-size:11px;color:var(--text2)">X</label><input type="number" class="form-input rx" value="50" style="padding:6px"></div>'
+    +'<div><label style="font-size:11px;color:var(--text2)">Y</label><input type="number" class="form-input ry" value="700" style="padding:6px"></div>'
+    +'<div><label style="font-size:11px;color:var(--text2)">Width</label><input type="number" class="form-input rw" value="200" style="padding:6px"></div>'
+    +'<div><label style="font-size:11px;color:var(--text2)">Height</label><input type="number" class="form-input rh" value="20" style="padding:6px"></div>'
+    +'<button onclick="this.parentElement.remove()" style="background:var(--accent2);border:none;color:#fff;padding:8px;border-radius:6px;cursor:pointer;margin-bottom:0">✕</button>';
+  document.getElementById('redactions').appendChild(d);
 }
-document.getElementById('addRedact').addEventListener('click',addRedactionRow);
-document.getElementById('redactBtn').addEventListener('click',async()=>{
-  if(!pdfBytes)return;
-  const btn=document.getElementById('redactBtn');btn.textContent='🔄 Processing...';btn.disabled=true;
+document.getElementById('addRedact').addEventListener('click',addRow);
+document.getElementById('actionBtn').addEventListener('click',async()=>{
+  if(!pdfBytes)return alert('Select a PDF first.');
+  const btn=document.getElementById('actionBtn');btn.textContent='🔄 Processing...';btn.disabled=true;
   try{
-    const pdfDoc=await PDFLib.PDFDocument.load(pdfBytes);
-    const pages=pdfDoc.getPages();
+    const doc=await PDFLib.PDFDocument.load(pdfBytes);
+    const pages=doc.getPages();
     document.querySelectorAll('#redactions > div').forEach(row=>{
-      const pageIdx=parseInt(row.querySelector('.rpage').value)-1;
-      const x=parseInt(row.querySelector('.rx').value);
-      const y=parseInt(row.querySelector('.ry').value);
-      const w=parseInt(row.querySelector('.rw').value);
-      const h=parseInt(row.querySelector('.rh').value);
-      if(pageIdx>=0&&pageIdx<pages.length){
-        pages[pageIdx].drawRectangle({x,y,width:w,height:h,color:PDFLib.rgb(0,0,0)});
+      const pi=parseInt(row.querySelector('.rp').value)-1;
+      if(pi>=0&&pi<pages.length){
+        pages[pi].drawRectangle({x:parseInt(row.querySelector('.rx').value),y:parseInt(row.querySelector('.ry').value),width:parseInt(row.querySelector('.rw').value),height:parseInt(row.querySelector('.rh').value),color:PDFLib.rgb(0,0,0)});
       }
     });
-    const bytes=await pdfDoc.save();
+    const bytes=await doc.save();
     const blob=new Blob([bytes],{type:'application/pdf'});
-    const a=document.createElement('a');a.href=URL.createObjectURL(blob);
-    a.download='redacted_'+fileName;a.click();
+    const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='redacted_'+fileName;a.click();
+    document.getElementById('resultMsg').textContent='✅ Redactions applied!';
+    document.getElementById('result').style.display='block';
+    document.getElementById('downloadBtn').style.display='none';
   }catch(e){alert('Error: '+e.message);}
-  btn.textContent='⬛ Apply Redactions & Download';btn.disabled=false;
+  btn.textContent='⬛ Apply & Download';btn.disabled=false;
 });
+addRow();
 </script>
-  <div class="related-tools">
-    <h2>Related PDF Tools</h2>
-    <div class="related-grid"><a href="compress.html">🗜️ Compress</a><a href="merge.html">📎 Merge</a><a href="split.html">✂️ Split</a><a href="rotate.html">🔄 Rotate</a><a href="unlock.html">🔓 Unlock</a><a href="watermark.html">💧 Watermark</a></div>
-  </div>
-</main>
 <script src="../assets/js/utils.js"></script>
 </body>
 </html>

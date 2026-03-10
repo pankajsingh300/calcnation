@@ -8,18 +8,9 @@
 <link rel="canonical" href="https://calcnation-jade.vercel.app/pdf/protect.html">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
 <link rel="stylesheet" href="../assets/css/main.css">
-<meta property="og:type" content="website">
-<meta property="og:site_name" content="CalcNation">
-<meta property="og:title" content="Protect PDF — CalcNation">
-<meta property="og:description" content="Password protect your PDF files for free. Add encryption to prevent unauthorized access. No signup required.">
-<meta property="og:image" content="https://calcnation-jade.vercel.app/assets/og-image.png">
-<meta name="twitter:card" content="summary_large_image">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-PP2M41QH5D"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-PP2M41QH5D');</script>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8624973090847331" crossorigin="anonymous"></script>
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebApplication","name":"Protect PDF","url":"https://calcnation-jade.vercel.app/pdf/protect.html","applicationCategory":"PDF Tool","operatingSystem":"Web Browser","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"provider":{"@type":"Organization","name":"CalcNation","url":"https://calcnation-jade.vercel.app"}}
-</script>
 </head>
 <body>
 <script src="../assets/js/nav-loader.js"></script>
@@ -33,70 +24,69 @@
 </div>
 <div class="tool-card">
   <div class="drop-zone" id="dropZone">
-    <input type="file" id="fileInput" accept=".pdf" style="display:none">
     <div class="drop-icon">📄</div>
-    <p>Drop your PDF here or</p>
-    <button type="button" class="btn-secondary" style="margin-top:8px" onclick="document.getElementById('fileInput').click()">📂 Browse to Upload</button>
-    <p style="color:var(--text2);font-size:12px;margin-top:8px">Max 100MB · 100% Private</p>
+    <p>Drop your PDF here</p>
+    <input type="file" id="fileInput" accept=".pdf" style="margin-top:12px">
+    <p style="color:var(--text2);font-size:12px;margin-top:8px">Max 100MB · Works in your browser</p>
   </div>
+  <div id="fileInfo" style="display:none" class="file-info"></div>
   <div id="options" style="display:none">
-    <div class="form-group">
-      <label>Password</label>
-      <input type="password" id="password" class="form-input" placeholder="Enter password" autocomplete="new-password">
-    </div>
-    <div class="form-group">
-      <label>Confirm Password</label>
-      <input type="password" id="password2" class="form-input" placeholder="Confirm password" autocomplete="new-password">
-    </div>
-    <button class="btn-primary" id="protectBtn">🔐 Protect PDF</button>
+    <div class="form-group"><label>Password</label><input type="password" id="password" class="form-input" placeholder="Enter password"></div>
+    <div class="form-group"><label>Confirm Password</label><input type="password" id="password2" class="form-input" placeholder="Confirm password"></div>
+    <button class="btn-primary" id="actionBtn">🔐 Protect PDF</button>
   </div>
   <div id="result" style="display:none" class="result-box">
-    <p>✅ PDF protected successfully!</p>
+    <p id="resultMsg">✅ PDF protected!</p>
     <button class="btn-primary" id="downloadBtn">⬇️ Download Protected PDF</button>
   </div>
 </div>
+<div class="related-tools"><h2>Related PDF Tools</h2><div class="related-grid">
+  <a href="compress.html" class="related-card"><span class="related-card-icon">🗜️</span><span class="related-card-name">Compress</span></a>
+  <a href="merge.html" class="related-card"><span class="related-card-icon">📎</span><span class="related-card-name">Merge</span></a>
+  <a href="unlock.html" class="related-card"><span class="related-card-icon">🔓</span><span class="related-card-name">Unlock</span></a>
+  <a href="sign.html" class="related-card"><span class="related-card-icon">✍️</span><span class="related-card-name">Sign</span></a>
+</div></div>
+</main>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
 <script>
-const dz=document.getElementById('dropZone');
-let pdfBytes=null,fileName='';
-dz.addEventListener('dragover',e=>{e.preventDefault();dz.classList.add('drag-over');});
-dz.addEventListener('dragleave',()=>dz.classList.remove('drag-over'));
-dz.addEventListener('drop',e=>{e.preventDefault();dz.classList.remove('drag-over');handleFile(e.dataTransfer.files[0]);});
-document.getElementById('fileInput').addEventListener('change',e=>handleFile(e.target.files[0]));
-async function handleFile(f){
-  if(!f||!f.name.endsWith('.pdf'))return alert('Please select a PDF file.');
-  fileName=f.name;
-  pdfBytes=await f.arrayBuffer();
-  document.getElementById('fileInfo').style.display='block';
-  document.getElementById('fileInfo').innerHTML=`<span>📄 ${f.name}</span><span>${(f.size/1024/1024).toFixed(2)} MB</span>`;
-  document.getElementById('options').style.display='block';
+const fi = document.getElementById('fileInput');
+const dz = document.getElementById('dropZone');
+let pdfBytes = null, fileName = '';
+
+fi.addEventListener('change', e => handleFile(e.target.files[0]));
+dz.addEventListener('dragover', e => { e.preventDefault(); dz.style.borderColor='var(--accent)'; });
+dz.addEventListener('dragleave', () => { dz.style.borderColor=''; });
+dz.addEventListener('drop', e => { e.preventDefault(); dz.style.borderColor=''; handleFile(e.dataTransfer.files[0]); });
+
+function handleFile(f) {
+  if (!f || !f.name.endsWith('.pdf')) return alert('Please select a PDF file.');
+  fileName = f.name;
+  f.arrayBuffer().then(buf => {
+    pdfBytes = buf;
+    document.getElementById('fileInfo').style.display = 'flex';
+    document.getElementById('fileInfo').innerHTML = '<span>📄 ' + f.name + '</span><span>' + (f.size/1024/1024).toFixed(2) + ' MB</span>';
+    document.getElementById('options').style.display = 'block';
+  });
 }
-document.getElementById('protectBtn').addEventListener('click',async()=>{
-  const p=document.getElementById('password').value;
-  const p2=document.getElementById('password2').value;
-  if(!p)return alert('Please enter a password.');
-  if(p!==p2)return alert('Passwords do not match.');
-  if(!pdfBytes)return alert('Please select a PDF first.');
-  try{
-    const btn=document.getElementById('protectBtn');
-    btn.textContent='🔄 Protecting...';btn.disabled=true;
-    const pdfDoc=await PDFLib.PDFDocument.load(pdfBytes);
-    const protected_bytes=await pdfDoc.save({userPassword:p,ownerPassword:p+'_owner',permissions:{printing:'highResolution',modifying:false,copying:false}});
-    const blob=new Blob([protected_bytes],{type:'application/pdf'});
-    document.getElementById('downloadBtn').onclick=()=>{
-      const a=document.createElement('a');a.href=URL.createObjectURL(blob);
-      a.download='protected_'+fileName;a.click();
-    };
-    document.getElementById('result').style.display='block';
-    btn.textContent='🔐 Protect PDF';btn.disabled=false;
-  }catch(e){alert('Error: '+e.message);}
+
+document.getElementById('actionBtn').addEventListener('click', async () => {
+  const p = document.getElementById('password').value;
+  const p2 = document.getElementById('password2').value;
+  if (!p) return alert('Enter a password.');
+  if (p !== p2) return alert('Passwords do not match.');
+  if (!pdfBytes) return alert('Select a PDF first.');
+  const btn = document.getElementById('actionBtn');
+  btn.textContent = '🔄 Processing...'; btn.disabled = true;
+  try {
+    const doc = await PDFLib.PDFDocument.load(pdfBytes);
+    const bytes = await doc.save({ userPassword: p, ownerPassword: p + '_owner', permissions: { printing: 'highResolution', modifying: false, copying: false } });
+    const blob = new Blob([bytes], { type: 'application/pdf' });
+    document.getElementById('downloadBtn').onclick = () => { const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'protected_' + fileName; a.click(); };
+    document.getElementById('result').style.display = 'block';
+  } catch(e) { alert('Error: ' + e.message); }
+  btn.textContent = '🔐 Protect PDF'; btn.disabled = false;
 });
 </script>
-  <div class="related-tools">
-    <h2>Related PDF Tools</h2>
-    <div class="related-grid"><a href="compress.html">🗜️ Compress</a><a href="merge.html">📎 Merge</a><a href="split.html">✂️ Split</a><a href="rotate.html">🔄 Rotate</a><a href="unlock.html">🔓 Unlock</a><a href="watermark.html">💧 Watermark</a></div>
-  </div>
-</main>
 <script src="../assets/js/utils.js"></script>
 </body>
 </html>

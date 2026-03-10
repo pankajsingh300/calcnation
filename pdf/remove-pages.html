@@ -4,22 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Remove Pages from PDF — CalcNation</title>
-<meta name="description" content="Remove specific pages from PDF free online. Delete unwanted pages instantly. No signup required.">
+<meta name="description" content="Delete specific pages from PDF files online for free. Enter page numbers or ranges to remove instantly.">
 <link rel="canonical" href="https://calcnation-jade.vercel.app/pdf/remove-pages.html">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
 <link rel="stylesheet" href="../assets/css/main.css">
-<meta property="og:type" content="website">
-<meta property="og:site_name" content="CalcNation">
-<meta property="og:title" content="Remove Pages from PDF — CalcNation">
-<meta property="og:description" content="Remove specific pages from PDF free online. Delete unwanted pages instantly. No signup required.">
-<meta property="og:image" content="https://calcnation-jade.vercel.app/assets/og-image.png">
-<meta name="twitter:card" content="summary_large_image">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-PP2M41QH5D"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-PP2M41QH5D');</script>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8624973090847331" crossorigin="anonymous"></script>
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebApplication","name":"Remove Pages from PDF","url":"https://calcnation-jade.vercel.app/pdf/remove-pages.html","applicationCategory":"PDF Tool","operatingSystem":"Web Browser","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"provider":{"@type":"Organization","name":"CalcNation","url":"https://calcnation-jade.vercel.app"}}
-</script>
 </head>
 <body>
 <script src="../assets/js/nav-loader.js"></script>
@@ -28,92 +19,92 @@
 <div class="tool-header">
   <div class="tool-icon">🗑️</div>
   <h1>Remove Pages from PDF</h1>
-  <p class="tool-desc">Delete specific pages from your PDF file. Enter page numbers to remove and download instantly.</p>
+  <p class="tool-desc">Delete specific pages from PDF files online for free. Enter page numbers or ranges to remove instantly.</p>
   <div class="tool-badges"><span class="badge">🔒 100% Private</span><span class="badge">⚡ Instant</span><span class="badge">✅ No Signup</span></div>
 </div>
 <div class="tool-card">
   <div class="drop-zone" id="dropZone">
-    <input type="file" id="fileInput" accept=".pdf" style="display:none">
-    <div class="drop-icon">📄</div>
-    <p>Drop your PDF here or</p>
-    <button type="button" class="btn-secondary" style="margin-top:8px" onclick="document.getElementById('fileInput').click()">📂 Browse to Upload</button>
-    <p style="color:var(--text2);font-size:12px;margin-top:8px">Max 100MB · 100% Private</p>
+    <div class="drop-icon">🗑️</div>
+    <p>Drop your file here</p>
+    <input type="file" id="fileInput" accept=".pdf" style="margin-top:12px">
+    <p style="color:var(--text2);font-size:12px;margin-top:8px">Max 100MB · Works in your browser · 100% Private</p>
   </div>
+  <div id="fileInfo" style="display:none" class="file-info"></div>
   <div id="options" style="display:none">
+
     <div class="form-group">
-      <label id="pageCountLabel">Pages to Remove <span style="color:var(--text2)">(e.g. 1,3,5-8)</span></label>
+      <label id="pageLabel">Pages to Remove <span style="color:var(--text2)">(e.g. 1,3,5-8)</span></label>
       <input type="text" id="pagesToRemove" class="form-input" placeholder="e.g. 1,3,5-8">
     </div>
-    <button class="btn-primary" id="removeBtn">🗑️ Remove Pages</button>
+    <button class="btn-primary" id="actionBtn">🗑️ Remove Pages</button>
   </div>
   <div id="result" style="display:none" class="result-box">
-    <p id="resultMsg"></p>
-    <button class="btn-primary" id="downloadBtn">⬇️ Download PDF</button>
+    <p id="resultMsg">✅ Done!</p>
+    <button class="btn-primary" id="downloadBtn">⬇️ Download</button>
   </div>
 </div>
+<div class="related-tools"><h2>Related PDF Tools</h2><div class="related-grid">
+  <a href="compress.html" class="related-card"><span class="related-card-icon">🗜️</span><span class="related-card-name">Compress</span></a>
+  <a href="merge.html" class="related-card"><span class="related-card-icon">📎</span><span class="related-card-name">Merge</span></a>
+  <a href="split.html" class="related-card"><span class="related-card-icon">✂️</span><span class="related-card-name">Split</span></a>
+  <a href="protect.html" class="related-card"><span class="related-card-icon">🔐</span><span class="related-card-name">Protect</span></a>
+</div></div>
+</main>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
 <script>
-const dz=document.getElementById('dropZone');
-let pdfBytes=null,fileName='',totalPages=0;
-dz.addEventListener('dragover',e=>{e.preventDefault();dz.classList.add('drag-over');});
-dz.addEventListener('dragleave',()=>dz.classList.remove('drag-over'));
-dz.addEventListener('drop',e=>{e.preventDefault();dz.classList.remove('drag-over');handleFile(e.dataTransfer.files[0]);});
-document.getElementById('fileInput').addEventListener('change',e=>handleFile(e.target.files[0]));
-async function handleFile(f){
+const fi = document.getElementById('fileInput');
+const dz = document.getElementById('dropZone');
+let pdfBytes = null, fileName = '';
+fi.addEventListener('change', e => handleFile(e.target.files[0]));
+dz.addEventListener('dragover', e => { e.preventDefault(); dz.style.borderColor='var(--accent)'; });
+dz.addEventListener('dragleave', () => { dz.style.borderColor=''; });
+dz.addEventListener('drop', e => { e.preventDefault(); dz.style.borderColor=''; handleFile(e.dataTransfer.files[0]); });
+function handleFile(f) {
+  if (!f) return;
+  fileName = f.name;
+  f.arrayBuffer().then(buf => {
+    pdfBytes = buf;
+    document.getElementById('fileInfo').style.display = 'flex';
+    document.getElementById('fileInfo').innerHTML = '<span>📄 '+f.name+'</span><span>'+(f.size/1024/1024).toFixed(2)+' MB</span>';
+    document.getElementById('options').style.display = 'block';
+  });
+}
+
+let totalPages=0;
+const origFI=document.getElementById('fileInput');
+origFI.removeEventListener('change',origFI._handler);
+origFI.addEventListener('change',e=>handleFile2(e.target.files[0]));
+document.getElementById('dropZone').addEventListener('drop',e=>{e.preventDefault();handleFile2(e.dataTransfer.files[0]);});
+async function handleFile2(f){
   if(!f||!f.name.endsWith('.pdf'))return alert('Please select a PDF file.');
-  fileName=f.name;pdfBytes=await f.arrayBuffer();
-  const pdf=await PDFLib.PDFDocument.load(pdfBytes);
-  totalPages=pdf.getPageCount();
-  document.getElementById('fileInfo').style.display='block';
-  document.getElementById('fileInfo').innerHTML=`<span>📄 ${f.name}</span><span>${totalPages} pages · ${(f.size/1024/1024).toFixed(2)} MB</span>`;
-  document.getElementById('pageCountLabel').innerHTML=`Pages to Remove <span style="color:var(--text2)">(1–${totalPages}, e.g. 1,3,5-8)</span>`;
+  fileName=f.name;
+  const buf=await f.arrayBuffer();pdfBytes=buf;
+  const doc=await PDFLib.PDFDocument.load(buf);totalPages=doc.getPageCount();
+  document.getElementById('pageLabel').innerHTML='Pages to Remove <span style="color:var(--text2)">(1–'+totalPages+', e.g. 1,3,5-8)</span>';
+  document.getElementById('fileInfo').style.display='flex';
+  document.getElementById('fileInfo').innerHTML='<span>📄 '+f.name+'</span><span>'+totalPages+' pages · '+(f.size/1024/1024).toFixed(2)+' MB</span>';
   document.getElementById('options').style.display='block';
 }
-function parsePages(str,total){
-  const pages=new Set();
-  str.split(',').forEach(part=>{
-    part=part.trim();
-    if(part.includes('-')){
-      const [a,b]=part.split('-').map(Number);
-      for(let i=a;i<=b&&i<=total;i++)pages.add(i);
-    }else if(!isNaN(part)&&Number(part)>=1&&Number(part)<=total){
-      pages.add(Number(part));
-    }
-  });
-  return pages;
-}
-document.getElementById('removeBtn').addEventListener('click',async()=>{
-  if(!pdfBytes)return;
-  const btn=document.getElementById('removeBtn');btn.textContent='🔄 Processing...';btn.disabled=true;
+function parseP(str,total){const s=new Set();str.split(',').forEach(p=>{p=p.trim();if(p.includes('-')){const[a,b]=p.split('-').map(Number);for(let i=a;i<=b&&i<=total;i++)s.add(i);}else if(!isNaN(p)&&+p>=1&&+p<=total)s.add(+p);});return s;}
+document.getElementById('actionBtn').addEventListener('click',async()=>{
+  if(!pdfBytes)return alert('Select a PDF first.');
+  const toRm=parseP(document.getElementById('pagesToRemove').value,totalPages);
+  if(!toRm.size)return alert('Enter valid page numbers.');
+  if(toRm.size>=totalPages)return alert('Cannot remove all pages.');
+  const btn=document.getElementById('actionBtn');btn.textContent='🔄 Processing...';btn.disabled=true;
   try{
-    const toRemove=parsePages(document.getElementById('pagesToRemove').value,totalPages);
-    if(toRemove.size===0)return alert('No valid pages entered.');
-    if(toRemove.size>=totalPages)return alert('Cannot remove all pages.');
-    const pdfDoc=await PDFLib.PDFDocument.load(pdfBytes);
+    const src=await PDFLib.PDFDocument.load(pdfBytes);
     const newDoc=await PDFLib.PDFDocument.create();
-    for(let i=1;i<=totalPages;i++){
-      if(!toRemove.has(i)){
-        const [copied]=await newDoc.copyPages(pdfDoc,[i-1]);
-        newDoc.addPage(copied);
-      }
-    }
+    for(let i=1;i<=totalPages;i++){if(!toRm.has(i)){const[c]=await newDoc.copyPages(src,[i-1]);newDoc.addPage(c);}}
     const bytes=await newDoc.save();
     const blob=new Blob([bytes],{type:'application/pdf'});
-    document.getElementById('downloadBtn').onclick=()=>{
-      const a=document.createElement('a');a.href=URL.createObjectURL(blob);
-      a.download='removed-pages_'+fileName;a.click();
-    };
-    document.getElementById('resultMsg').textContent=`✅ Removed ${toRemove.size} page(s). ${totalPages-toRemove.size} pages remaining.`;
+    document.getElementById('downloadBtn').onclick=()=>{const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='removed-pages_'+fileName;a.click();};
+    document.getElementById('resultMsg').textContent='✅ Removed '+toRm.size+' page(s)!';
     document.getElementById('result').style.display='block';
   }catch(e){alert('Error: '+e.message);}
   btn.textContent='🗑️ Remove Pages';btn.disabled=false;
 });
 </script>
-  <div class="related-tools">
-    <h2>Related PDF Tools</h2>
-    <div class="related-grid"><a href="compress.html">🗜️ Compress</a><a href="merge.html">📎 Merge</a><a href="split.html">✂️ Split</a><a href="rotate.html">🔄 Rotate</a><a href="unlock.html">🔓 Unlock</a><a href="watermark.html">💧 Watermark</a></div>
-  </div>
-</main>
 <script src="../assets/js/utils.js"></script>
 </body>
 </html>

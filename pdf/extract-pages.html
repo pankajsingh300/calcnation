@@ -3,105 +3,106 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Extract Pages from PDF Free — CalcNation</title>
-<meta name="description" content="Extract specific pages from PDF and save as a new PDF. Free online tool, no signup needed.">
+<title>Extract Pages from PDF — CalcNation</title>
+<meta name="description" content="Extract specific pages from PDF and save as a new PDF document. Free online tool, no signup needed.">
 <link rel="canonical" href="https://calcnation-jade.vercel.app/pdf/extract-pages.html">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
 <link rel="stylesheet" href="../assets/css/main.css">
-<meta property="og:type" content="website">
-<meta property="og:site_name" content="CalcNation">
-<meta property="og:title" content="Extract Pages from PDF Free — CalcNation">
-<meta property="og:description" content="Extract specific pages from PDF and save as a new PDF. Free online tool, no signup needed.">
-<meta property="og:image" content="https://calcnation-jade.vercel.app/assets/og-image.png">
-<meta name="twitter:card" content="summary_large_image">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-PP2M41QH5D"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-PP2M41QH5D');</script>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8624973090847331" crossorigin="anonymous"></script>
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebApplication","name":"Extract Pages from PDF Free","url":"https://calcnation-jade.vercel.app/pdf/extract-pages.html","applicationCategory":"PDF Tool","operatingSystem":"Web Browser","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"provider":{"@type":"Organization","name":"CalcNation","url":"https://calcnation-jade.vercel.app"}}
-</script>
 </head>
 <body>
 <script src="../assets/js/nav-loader.js"></script>
-<div class="breadcrumb"><a href="../index.html">Home</a> <span>›</span> <a href="../index.html#pdf">PDF Tools</a> <span>›</span> <span>Extract Pages from PDF Free</span></div>
+<div class="breadcrumb"><a href="../index.html">Home</a> <span>›</span> <a href="../index.html#pdf">PDF Tools</a> <span>›</span> <span>Extract Pages from PDF</span></div>
 <main class="tool-page">
 <div class="tool-header">
   <div class="tool-icon">📤</div>
   <h1>Extract Pages from PDF</h1>
-  <p class="tool-desc">Extract specific pages from your PDF and save them as a new PDF document. 100% free and private.</p>
+  <p class="tool-desc">Extract specific pages from PDF and save as a new PDF document. Free online tool, no signup needed.</p>
   <div class="tool-badges"><span class="badge">🔒 100% Private</span><span class="badge">⚡ Instant</span><span class="badge">✅ No Signup</span></div>
 </div>
 <div class="tool-card">
   <div class="drop-zone" id="dropZone">
-    <input type="file" id="fileInput" accept=".pdf" style="display:none">
-    <div class="drop-icon">📄</div>
-    <p>Drop your PDF here or</p>
-    <button type="button" class="btn-secondary" style="margin-top:8px" onclick="document.getElementById('fileInput').click()">📂 Browse to Upload</button>
-    <p style="color:var(--text2);font-size:12px;margin-top:8px">Max 100MB · 100% Private</p>
+    <div class="drop-icon">📤</div>
+    <p>Drop your file here</p>
+    <input type="file" id="fileInput" accept=".pdf" style="margin-top:12px">
+    <p style="color:var(--text2);font-size:12px;margin-top:8px">Max 100MB · Works in your browser · 100% Private</p>
   </div>
+  <div id="fileInfo" style="display:none" class="file-info"></div>
   <div id="options" style="display:none">
+
     <div class="form-group">
-      <label id="pageLabel">Pages to Extract</label>
+      <label id="pageLabel">Pages to Extract <span style="color:var(--text2)">(e.g. 1,3,5-8)</span></label>
       <input type="text" id="pagesToExtract" class="form-input" placeholder="e.g. 1,3,5-8">
-      <p style="color:var(--text2);font-size:13px;margin-top:4px">Enter page numbers or ranges separated by commas</p>
     </div>
-    <button class="btn-primary" id="extractBtn">📤 Extract Pages</button>
+    <button class="btn-primary" id="actionBtn">📤 Extract Pages</button>
   </div>
   <div id="result" style="display:none" class="result-box">
-    <p id="resultMsg"></p>
-    <button class="btn-primary" id="downloadBtn">⬇️ Download PDF</button>
+    <p id="resultMsg">✅ Done!</p>
+    <button class="btn-primary" id="downloadBtn">⬇️ Download</button>
   </div>
 </div>
+<div class="related-tools"><h2>Related PDF Tools</h2><div class="related-grid">
+  <a href="compress.html" class="related-card"><span class="related-card-icon">🗜️</span><span class="related-card-name">Compress</span></a>
+  <a href="merge.html" class="related-card"><span class="related-card-icon">📎</span><span class="related-card-name">Merge</span></a>
+  <a href="split.html" class="related-card"><span class="related-card-icon">✂️</span><span class="related-card-name">Split</span></a>
+  <a href="protect.html" class="related-card"><span class="related-card-icon">🔐</span><span class="related-card-name">Protect</span></a>
+</div></div>
+</main>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
 <script>
-const dz=document.getElementById('dropZone');
-let pdfBytes=null,fileName='',totalPages=0;
-dz.addEventListener('dragover',e=>{e.preventDefault();dz.classList.add('drag-over');});
-dz.addEventListener('dragleave',()=>dz.classList.remove('drag-over'));
-dz.addEventListener('drop',e=>{e.preventDefault();dz.classList.remove('drag-over');handleFile(e.dataTransfer.files[0]);});
-document.getElementById('fileInput').addEventListener('change',e=>handleFile(e.target.files[0]));
-async function handleFile(f){
+const fi = document.getElementById('fileInput');
+const dz = document.getElementById('dropZone');
+let pdfBytes = null, fileName = '';
+fi.addEventListener('change', e => handleFile(e.target.files[0]));
+dz.addEventListener('dragover', e => { e.preventDefault(); dz.style.borderColor='var(--accent)'; });
+dz.addEventListener('dragleave', () => { dz.style.borderColor=''; });
+dz.addEventListener('drop', e => { e.preventDefault(); dz.style.borderColor=''; handleFile(e.dataTransfer.files[0]); });
+function handleFile(f) {
+  if (!f) return;
+  fileName = f.name;
+  f.arrayBuffer().then(buf => {
+    pdfBytes = buf;
+    document.getElementById('fileInfo').style.display = 'flex';
+    document.getElementById('fileInfo').innerHTML = '<span>📄 '+f.name+'</span><span>'+(f.size/1024/1024).toFixed(2)+' MB</span>';
+    document.getElementById('options').style.display = 'block';
+  });
+}
+
+let totalPages=0;
+const origFI=document.getElementById('fileInput');
+origFI.addEventListener('change',e=>handleFile2(e.target.files[0]));
+document.getElementById('dropZone').addEventListener('drop',e=>{e.preventDefault();handleFile2(e.dataTransfer.files[0]);});
+async function handleFile2(f){
   if(!f||!f.name.endsWith('.pdf'))return alert('Please select a PDF file.');
-  fileName=f.name;pdfBytes=await f.arrayBuffer();
-  const pdf=await PDFLib.PDFDocument.load(pdfBytes);
-  totalPages=pdf.getPageCount();
-  document.getElementById('fileInfo').style.display='block';
-  document.getElementById('fileInfo').innerHTML=`<span>📄 ${f.name}</span><span>${totalPages} pages</span>`;
-  document.getElementById('pageLabel').innerHTML=`Pages to Extract <span style="color:var(--text2)">(1–${totalPages})</span>`;
+  fileName=f.name;
+  const buf=await f.arrayBuffer();pdfBytes=buf;
+  const doc=await PDFLib.PDFDocument.load(buf);totalPages=doc.getPageCount();
+  document.getElementById('pageLabel').innerHTML='Pages to Extract <span style="color:var(--text2)">(1–'+totalPages+')</span>';
+  document.getElementById('fileInfo').style.display='flex';
+  document.getElementById('fileInfo').innerHTML='<span>📄 '+f.name+'</span><span>'+totalPages+' pages · '+(f.size/1024/1024).toFixed(2)+' MB</span>';
   document.getElementById('options').style.display='block';
 }
-function parsePages(str,total){
-  const pages=new Set();
-  str.split(',').forEach(part=>{
-    part=part.trim();
-    if(part.includes('-')){const[a,b]=part.split('-').map(Number);for(let i=a;i<=b&&i<=total;i++)pages.add(i);}
-    else if(!isNaN(part)&&Number(part)>=1&&Number(part)<=total)pages.add(Number(part));
-  });
-  return [...pages].sort((a,b)=>a-b);
-}
-document.getElementById('extractBtn').addEventListener('click',async()=>{
-  if(!pdfBytes)return;
-  const btn=document.getElementById('extractBtn');btn.textContent='🔄 Extracting...';btn.disabled=true;
+function parseP(str,total){const s=new Set();str.split(',').forEach(p=>{p=p.trim();if(p.includes('-')){const[a,b]=p.split('-').map(Number);for(let i=a;i<=b&&i<=total;i++)s.add(i);}else if(!isNaN(p)&&+p>=1&&+p<=total)s.add(+p);});return[...s].sort((a,b)=>a-b);}
+document.getElementById('actionBtn').addEventListener('click',async()=>{
+  if(!pdfBytes)return alert('Select a PDF first.');
+  const pages=parseP(document.getElementById('pagesToExtract').value,totalPages);
+  if(!pages.length)return alert('Enter valid page numbers.');
+  const btn=document.getElementById('actionBtn');btn.textContent='🔄 Extracting...';btn.disabled=true;
   try{
-    const pages=parsePages(document.getElementById('pagesToExtract').value,totalPages);
-    if(!pages.length)return alert('Please enter valid page numbers.');
-    const srcDoc=await PDFLib.PDFDocument.load(pdfBytes);
+    const src=await PDFLib.PDFDocument.load(pdfBytes);
     const newDoc=await PDFLib.PDFDocument.create();
-    for(const p of pages){const[c]=await newDoc.copyPages(srcDoc,[p-1]);newDoc.addPage(c);}
+    for(const p of pages){const[c]=await newDoc.copyPages(src,[p-1]);newDoc.addPage(c);}
     const bytes=await newDoc.save();
     const blob=new Blob([bytes],{type:'application/pdf'});
     document.getElementById('downloadBtn').onclick=()=>{const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='extracted_'+fileName;a.click();};
-    document.getElementById('resultMsg').textContent=`✅ Extracted ${pages.length} pages successfully!`;
+    document.getElementById('resultMsg').textContent='✅ Extracted '+pages.length+' pages!';
     document.getElementById('result').style.display='block';
   }catch(e){alert('Error: '+e.message);}
   btn.textContent='📤 Extract Pages';btn.disabled=false;
 });
 </script>
-  <div class="related-tools">
-    <h2>Related PDF Tools</h2>
-    <div class="related-grid"><a href="compress.html">🗜️ Compress</a><a href="merge.html">📎 Merge</a><a href="split.html">✂️ Split</a><a href="rotate.html">🔄 Rotate</a><a href="unlock.html">🔓 Unlock</a><a href="watermark.html">💧 Watermark</a></div>
-  </div>
-</main>
 <script src="../assets/js/utils.js"></script>
 </body>
 </html>

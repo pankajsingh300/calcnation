@@ -3,94 +3,92 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Repair PDF Free Online — CalcNation</title>
-<meta name="description" content="Repair damaged or corrupted PDF files for free online. Fix PDF errors and recover content. No signup needed.">
+<title>Repair PDF — CalcNation</title>
+<meta name="description" content="Repair corrupted or damaged PDF files. Re-processes PDF structure to fix common errors. Free, no signup.">
 <link rel="canonical" href="https://calcnation-jade.vercel.app/pdf/repair.html">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
 <link rel="stylesheet" href="../assets/css/main.css">
-<meta property="og:type" content="website">
-<meta property="og:site_name" content="CalcNation">
-<meta property="og:title" content="Repair PDF Free Online — CalcNation">
-<meta property="og:description" content="Repair damaged or corrupted PDF files for free online. Fix PDF errors and recover content. No signup needed.">
-<meta property="og:image" content="https://calcnation-jade.vercel.app/assets/og-image.png">
-<meta name="twitter:card" content="summary_large_image">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-PP2M41QH5D"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-PP2M41QH5D');</script>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8624973090847331" crossorigin="anonymous"></script>
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebApplication","name":"Repair PDF Free Online","url":"https://calcnation-jade.vercel.app/pdf/repair.html","applicationCategory":"PDF Tool","operatingSystem":"Web Browser","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"provider":{"@type":"Organization","name":"CalcNation","url":"https://calcnation-jade.vercel.app"}}
-</script>
 </head>
 <body>
 <script src="../assets/js/nav-loader.js"></script>
-<div class="breadcrumb"><a href="../index.html">Home</a> <span>›</span> <a href="../index.html#pdf">PDF Tools</a> <span>›</span> <span>Repair PDF Free Online</span></div>
+<div class="breadcrumb"><a href="../index.html">Home</a> <span>›</span> <a href="../index.html#pdf">PDF Tools</a> <span>›</span> <span>Repair PDF</span></div>
 <main class="tool-page">
 <div class="tool-header">
   <div class="tool-icon">🔧</div>
   <h1>Repair PDF</h1>
-  <p class="tool-desc">Attempt to repair a corrupted or damaged PDF file. Re-processes the PDF structure to fix common errors.</p>
+  <p class="tool-desc">Repair corrupted or damaged PDF files. Re-processes PDF structure to fix common errors. Free, no signup.</p>
   <div class="tool-badges"><span class="badge">🔒 100% Private</span><span class="badge">⚡ Instant</span><span class="badge">✅ No Signup</span></div>
 </div>
 <div class="tool-card">
   <div class="drop-zone" id="dropZone">
-    <input type="file" id="fileInput" accept=".pdf" style="display:none">
-    <div class="drop-icon">📄</div>
-    <p>Drop your PDF here or</p>
-    <button type="button" class="btn-secondary" style="margin-top:8px" onclick="document.getElementById('fileInput').click()">📂 Browse to Upload</button>
-    <p style="color:var(--text2);font-size:12px;margin-top:8px">Max 100MB · 100% Private</p>
+    <div class="drop-icon">🔧</div>
+    <p>Drop your file here</p>
+    <input type="file" id="fileInput" accept=".pdf" style="margin-top:12px">
+    <p style="color:var(--text2);font-size:12px;margin-top:8px">Max 100MB · Works in your browser · 100% Private</p>
   </div>
+  <div id="fileInfo" style="display:none" class="file-info"></div>
   <div id="options" style="display:none">
+
     <div style="background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:16px;margin-bottom:16px">
-      <p style="color:var(--text2);font-size:14px">⚠️ This tool can fix PDFs with minor corruption, incorrect structure, or version issues. Severely corrupted files may not be fully recoverable.</p>
+      <p style="color:var(--text2);font-size:14px">⚠️ This tool re-processes your PDF structure to fix common errors. Severely corrupted files may not be fully recoverable.</p>
     </div>
-    <button class="btn-primary" id="repairBtn">🔧 Repair PDF</button>
+    <button class="btn-primary" id="actionBtn">🔧 Repair PDF</button>
   </div>
   <div id="result" style="display:none" class="result-box">
-    <p id="resultMsg"></p>
-    <button class="btn-primary" id="downloadBtn">⬇️ Download Repaired PDF</button>
+    <p id="resultMsg">✅ Done!</p>
+    <button class="btn-primary" id="downloadBtn">⬇️ Download</button>
   </div>
 </div>
+<div class="related-tools"><h2>Related PDF Tools</h2><div class="related-grid">
+  <a href="compress.html" class="related-card"><span class="related-card-icon">🗜️</span><span class="related-card-name">Compress</span></a>
+  <a href="merge.html" class="related-card"><span class="related-card-icon">📎</span><span class="related-card-name">Merge</span></a>
+  <a href="split.html" class="related-card"><span class="related-card-icon">✂️</span><span class="related-card-name">Split</span></a>
+  <a href="protect.html" class="related-card"><span class="related-card-icon">🔐</span><span class="related-card-name">Protect</span></a>
+</div></div>
+</main>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
 <script>
-const dz=document.getElementById('dropZone');
-let pdfBytes=null,fileName='';
-dz.addEventListener('dragover',e=>{e.preventDefault();dz.classList.add('drag-over');});
-dz.addEventListener('dragleave',()=>dz.classList.remove('drag-over'));
-dz.addEventListener('drop',e=>{e.preventDefault();dz.classList.remove('drag-over');handleFile(e.dataTransfer.files[0]);});
-document.getElementById('fileInput').addEventListener('change',e=>handleFile(e.target.files[0]));
-async function handleFile(f){
-  if(!f||!f.name.endsWith('.pdf'))return alert('Please select a PDF file.');
-  fileName=f.name;pdfBytes=await f.arrayBuffer();
-  document.getElementById('fileInfo').style.display='block';
-  document.getElementById('fileInfo').innerHTML=`<span>📄 ${f.name}</span><span>${(f.size/1024/1024).toFixed(2)} MB</span>`;
-  document.getElementById('options').style.display='block';
+const fi = document.getElementById('fileInput');
+const dz = document.getElementById('dropZone');
+let pdfBytes = null, fileName = '';
+fi.addEventListener('change', e => handleFile(e.target.files[0]));
+dz.addEventListener('dragover', e => { e.preventDefault(); dz.style.borderColor='var(--accent)'; });
+dz.addEventListener('dragleave', () => { dz.style.borderColor=''; });
+dz.addEventListener('drop', e => { e.preventDefault(); dz.style.borderColor=''; handleFile(e.dataTransfer.files[0]); });
+function handleFile(f) {
+  if (!f) return;
+  fileName = f.name;
+  f.arrayBuffer().then(buf => {
+    pdfBytes = buf;
+    document.getElementById('fileInfo').style.display = 'flex';
+    document.getElementById('fileInfo').innerHTML = '<span>📄 '+f.name+'</span><span>'+(f.size/1024/1024).toFixed(2)+' MB</span>';
+    document.getElementById('options').style.display = 'block';
+  });
 }
-document.getElementById('repairBtn').addEventListener('click',async()=>{
-  if(!pdfBytes)return;
-  const btn=document.getElementById('repairBtn');btn.textContent='🔄 Repairing...';btn.disabled=true;
+
+document.getElementById('actionBtn').addEventListener('click',async()=>{
+  if(!pdfBytes)return alert('Select a PDF first.');
+  const btn=document.getElementById('actionBtn');btn.textContent='🔄 Repairing...';btn.disabled=true;
   try{
-    const pdfDoc=await PDFLib.PDFDocument.load(pdfBytes,{ignoreEncryption:true,throwOnInvalidObject:false,updateMetadata:false});
-    const pages=pdfDoc.getPageCount();
-    const bytes=await pdfDoc.save();
+    const doc=await PDFLib.PDFDocument.load(pdfBytes,{ignoreEncryption:true,throwOnInvalidObject:false});
+    const pages=doc.getPageCount();
+    const bytes=await doc.save();
     const blob=new Blob([bytes],{type:'application/pdf'});
-    document.getElementById('downloadBtn').onclick=()=>{
-      const a=document.createElement('a');a.href=URL.createObjectURL(blob);
-      a.download='repaired_'+fileName;a.click();
-    };
-    document.getElementById('resultMsg').textContent=`✅ PDF repaired! ${pages} pages recovered.`;
+    document.getElementById('downloadBtn').onclick=()=>{const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='repaired_'+fileName;a.click();};
+    document.getElementById('resultMsg').textContent='✅ Repaired! '+pages+' pages recovered.';
     document.getElementById('result').style.display='block';
   }catch(e){
-    document.getElementById('resultMsg').textContent='❌ Could not repair this PDF. The file may be too severely corrupted.';
+    document.getElementById('resultMsg').textContent='❌ Could not repair — file may be too corrupted.';
+    document.getElementById('resultMsg').style.color='var(--accent2)';
     document.getElementById('result').style.display='block';
+    document.getElementById('downloadBtn').style.display='none';
   }
   btn.textContent='🔧 Repair PDF';btn.disabled=false;
 });
 </script>
-  <div class="related-tools">
-    <h2>Related PDF Tools</h2>
-    <div class="related-grid"><a href="compress.html">🗜️ Compress</a><a href="merge.html">📎 Merge</a><a href="split.html">✂️ Split</a><a href="rotate.html">🔄 Rotate</a><a href="unlock.html">🔓 Unlock</a><a href="watermark.html">💧 Watermark</a></div>
-  </div>
-</main>
 <script src="../assets/js/utils.js"></script>
 </body>
 </html>
