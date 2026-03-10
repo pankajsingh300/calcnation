@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Playwright Interview Questions — CalcNation</title>
+<meta name="description" content="Top 15 Playwright interview questions with detailed answers. For freshers to senior QA engineers.">
+<link rel="canonical" href="https://calcnation-jade.vercel.app/automation/playwright-interview-questions.html">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+<link rel="stylesheet" href="../assets/css/main.css">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PP2M41QH5D"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-PP2M41QH5D');</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8624973090847331" crossorigin="anonymous"></script>
+<style>
+.qa-item { border: 1px solid var(--border); border-radius: 10px; margin-bottom: 10px; overflow: hidden; transition: border-color 0.2s; }
+.qa-item:hover { border-color: var(--accent); }
+.qa-question { display: flex; align-items: center; gap: 12px; padding: 16px 20px; cursor: pointer; background: var(--card); }
+.qa-num { background: var(--accent); color: #000; font-weight: 700; font-size: 12px; padding: 2px 8px; border-radius: 4px; white-space: nowrap; }
+.qa-question span:nth-child(2) { flex: 1; font-weight: 600; font-size: 15px; }
+.qa-toggle { color: var(--accent); font-size: 20px; font-weight: 300; transition: transform 0.2s; }
+.qa-answer { display: none; padding: 16px 20px; border-top: 1px solid var(--border); color: var(--text2); font-size: 14px; line-height: 1.7; background: var(--bg2); }
+.qa-item.open .qa-answer { display: block; }
+.qa-item.open .qa-toggle { transform: rotate(45deg); }
+.filter-bar { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
+.filter-btn { padding: 6px 16px; border-radius: 20px; border: 1px solid var(--border); background: var(--bg2); color: var(--text2); cursor: pointer; font-size: 13px; transition: all 0.2s; }
+.filter-btn.active, .filter-btn:hover { background: var(--accent); color: #000; border-color: var(--accent); font-weight: 600; }
+.search-input { width: 100%; background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; padding: 10px 14px; color: var(--text); font-size: 14px; margin-bottom: 16px; }
+.search-input:focus { outline: none; border-color: var(--accent); }
+</style>
+</head>
+<body>
+<script src="../assets/js/nav-loader.js"></script>
+<div class="breadcrumb"><a href="../index.html">Home</a> <span>›</span> <span>Automation</span> <span>›</span> <span>Playwright Interview Questions</span></div>
+<main style="max-width:900px;margin:0 auto;padding:24px 16px">
+<div style="text-align:center;padding:32px 0 24px">
+  <div style="font-size:48px;margin-bottom:12px">🎭</div>
+  <h1 style="font-size:32px;margin-bottom:8px">Playwright Interview Questions</h1>
+  <p style="color:var(--text2);font-size:16px">Top 15 Playwright interview questions with detailed answers. For freshers to senior QA engineers.</p>
+  <div style="display:flex;gap:8px;justify-content:center;margin-top:12px;flex-wrap:wrap">
+    <span style="background:var(--bg2);border:1px solid var(--border);border-radius:4px;padding:2px 8px;font-size:11px;color:var(--accent)">15 Questions</span>
+    <span style="background:var(--bg2);border:1px solid var(--border);border-radius:4px;padding:2px 8px;font-size:11px;color:var(--accent)">Freshers to Advanced</span>
+    <span style="background:var(--bg2);border:1px solid var(--border);border-radius:4px;padding:2px 8px;font-size:11px;color:var(--accent)">Free</span>
+  </div>
+</div>
+<input type="text" class="search-input" id="searchInput" placeholder="🔍 Search questions...">
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+  <p style="color:var(--text2);font-size:14px">15 interview questions — click to expand answers</p>
+  <button onclick="expandAll()" style="background:var(--bg2);border:1px solid var(--border);border-radius:6px;color:var(--text2);padding:6px 14px;cursor:pointer;font-size:13px">Expand All</button>
+</div>
+<div id="qaList">
+    <div class="qa-item" onclick="toggleAnswer(this)">
+      <div class="qa-question">
+        <span class="qa-num">Q1</span>
+        <span>What is Playwright and how does it differ from Selenium?</span>
+        <span class="qa-toggle">+</span>
+      </div>
+      <div class="qa-answer">Playwright is a modern browser automation framework by Microsoft. Key differences: Playwright has auto-waiting built-in (no explicit waits needed for most cases), supports Chromium/Firefox/WebKit natively, runs tests in parallel by default, has better network interception, and supports modern web features like shadow DOM, iframes, and multiple tabs/windows better than Selenium.</div>
+    </div>
+    <div class="qa-item" onclick="toggleAnswer(this)">
+      <div class="qa-question">
+        <span class="qa-num">Q2</span>
+        <span>What is a Locator in Playwright?</span>
+        <span class="qa-toggle">+</span>
+      </div>
+      <div class="qa-answer">A Locator represents a way to find elements on the page. Unlike Selenium's WebElement, Locators are lazy — they don't search for elements immediately. Playwright retries finding the element before each action. Best practice: use getByRole, getByLabel, getByTestId over CSS/XPath selectors.</div>
+    </div>
+    <div class="qa-item" onclick="toggleAnswer(this)">
+      <div class="qa-question">
+        <span class="qa-num">Q3</span>
+        <span>What is auto-waiting in Playwright?</span>
+        <span class="qa-toggle">+</span>
+      </div>
+      <div class="qa-answer">Playwright automatically waits for elements to be actionable before performing actions. For click(), it waits for the element to be visible, stable, enabled, and not obscured. For fill(), it waits for the element to be visible and enabled. This eliminates most explicit waits needed in Selenium.</div>
+    </div>
+    <div class="qa-item" onclick="toggleAnswer(this)">
+      <div class="qa-question">
+        <span class="qa-num">Q4</span>
+        <span>How do you handle authentication in Playwright?</span>
+        <span class="qa-toggle">+</span>
+      </div>
+      <div class="qa-answer">Use storageState to save and reuse authentication: await page.context().storageState({path: 'auth.json'}). In playwright.config.ts, set storageState: 'auth.json' to reuse across tests. Or use HTTP credentials: browser.newContext({httpCredentials: {username, password}})</div>
+    </div>
+    <div class="qa-item" onclick="toggleAnswer(this)">
+      <div class="qa-question">
+        <span class="qa-num">Q5</span>
+        <span>What is the difference between page.click() and locator.click()?</span>
+        <span class="qa-toggle">+</span>
+      </div>
+      <div class="qa-answer">page.click('#btn') is a shorthand that finds and clicks in one step. locator.click() uses a Locator object which is more resilient — it retries finding the element. Prefer locator-based approach: await page.locator('#btn').click() or await page.getByRole('button').click()</div>
+    </div>
+    <div class="qa-item" onclick="toggleAnswer(this)">
+      <div class="qa-question">
+        <span class="qa-num">Q6</span>
+        <span>How do you run tests in parallel in Playwright?</span>
+        <span class="qa-toggle">+</span>
+      </div>
+      <div class="qa-answer">Playwright runs test files in parallel by default. Configure workers in playwright.config.ts: workers: 4. For tests within a file, use test.describe.parallel(). For serial execution: test.describe.serial(). Each worker gets its own browser context.</div>
+    </div>
+    <div class="qa-item" onclick="toggleAnswer(this)">
+      <div class="qa-question">
+        <span class="qa-num">Q7</span>
+        <span>What are Playwright Fixtures?</span>
+        <span class="qa-toggle">+</span>
+      </div>
+      <div class="qa-answer">Fixtures are reusable setup/teardown code. Built-in fixtures: page, browser, context, request. Custom fixtures: extend the test object. Example: const test = base.test.extend({loggedInPage: async ({page}, use) => { await loginAs(page); await use(page); }})</div>
+    </div>
+    <div class="qa-item" onclick="toggleAnswer(this)">
+      <div class="qa-question">
+        <span class="qa-num">Q8</span>
+        <span>How do you intercept and mock API calls?</span>
+        <span class="qa-toggle">+</span>
+      </div>
+      <div class="qa-answer">Use page.route(): await page.route('**/api/users', route => route.fulfill({status: 200, body: JSON.stringify(mockData)})); To abort requests: route.abort(). To modify: route.continue({headers: {...}}). Use page.waitForResponse() to wait for specific API calls.</div>
+    </div>
+    <div class="qa-item" onclick="toggleAnswer(this)">
+      <div class="qa-question">
+        <span class="qa-num">Q9</span>
+        <span>What is Playwright Trace Viewer?</span>
+        <span class="qa-toggle">+</span>
+      </div>
+      <div class="qa-answer">Trace Viewer is a debugging tool that records test execution including screenshots, DOM snapshots, network logs, and console messages. Enable with trace: 'on-first-retry' in config. View with: npx playwright show-trace trace.zip. Essential for debugging CI failures.</div>
+    </div>
+    <div class="qa-item" onclick="toggleAnswer(this)">
+      <div class="qa-question">
+        <span class="qa-num">Q10</span>
+        <span>How do you handle multiple tabs/windows?</span>
+        <span class="qa-toggle">+</span>
+      </div>
+      <div class="qa-answer">Use page events: const [newPage] = await Promise.all([context.waitForEvent('page'), page.click('#openNewTab')]); Then work with newPage as normal. Use context.pages() to get all open pages. BrowserContext manages multiple pages.</div>
+    </div>
+    <div class="qa-item" onclick="toggleAnswer(this)">
+      <div class="qa-question">
+        <span class="qa-num">Q11</span>
+        <span>What is the difference between expect() soft assertions?</span>
+        <span class="qa-toggle">+</span>
+      </div>
+      <div class="qa-answer">Regular expect(): test stops at first failure. Soft assertions: await expect.soft(locator).toBeVisible() — test continues even if assertion fails, collecting all failures. Use expect.soft() when you want to check multiple things and see all failures at once.</div>
+    </div>
+    <div class="qa-item" onclick="toggleAnswer(this)">
+      <div class="qa-question">
+        <span class="qa-num">Q12</span>
+        <span>How do you handle file uploads and downloads?</span>
+        <span class="qa-toggle">+</span>
+      </div>
+      <div class="qa-answer">Upload: await page.setInputFiles('#fileInput', '/path/to/file.pdf'). Multiple files: setInputFiles('#input', ['file1.pdf', 'file2.pdf']). Downloads: const [download] = await Promise.all([page.waitForEvent('download'), page.click('#downloadBtn')]); await download.saveAs('/path/to/save');</div>
+    </div>
+    <div class="qa-item" onclick="toggleAnswer(this)">
+      <div class="qa-question">
+        <span class="qa-num">Q13</span>
+        <span>What is Page Object Model in Playwright?</span>
+        <span class="qa-toggle">+</span>
+      </div>
+      <div class="qa-answer">POM is a design pattern where each page has a class with locators and methods. Example: class LoginPage { constructor(page) { this.page = page; this.username = page.getByLabel('Username'); } async login(user, pwd) { await this.username.fill(user); }}. Makes tests maintainable.</div>
+    </div>
+    <div class="qa-item" onclick="toggleAnswer(this)">
+      <div class="qa-question">
+        <span class="qa-num">Q14</span>
+        <span>How do you test responsive design with Playwright?</span>
+        <span class="qa-toggle">+</span>
+      </div>
+      <div class="qa-answer">Use devices from playwright/test: import { devices } from '@playwright/test'. Configure in playwright.config.ts: projects: [{ name: 'mobile', use: {...devices['iPhone 12']} }]. Or set viewport: await page.setViewportSize({width: 375, height: 812});</div>
+    </div>
+    <div class="qa-item" onclick="toggleAnswer(this)">
+      <div class="qa-question">
+        <span class="qa-num">Q15</span>
+        <span>What is the Playwright UI Mode?</span>
+        <span class="qa-toggle">+</span>
+      </div>
+      <div class="qa-answer">UI Mode (npx playwright test --ui) is an interactive test runner with time-travel debugging, live test execution, filtering, and watch mode. It shows all tests, allows picking individual tests to run, and shows traces inline. Best for local development.</div>
+    </div></div>
+<div style="text-align:center;margin:32px 0;padding:24px;background:var(--bg2);border:1px solid var(--border);border-radius:12px">
+  <h2 style="margin-bottom:16px">More QA Resources</h2>
+  <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+    <a href="playwright-cheatsheet.html" class="btn-primary" style="text-decoration:none">🎭 Playwright Cheat Sheet</a>
+    <a href="rf-interview-questions.html" class="btn-secondary" style="text-decoration:none">🤖 RF Interview Q&A</a>
+    <a href="robot-framework-cheatsheet.html" class="btn-secondary" style="text-decoration:none">🤖 RF Cheat Sheet</a>
+  </div>
+</div>
+</main>
+<script>
+function toggleAnswer(el) { el.classList.toggle('open'); }
+function expandAll() {
+  const items = document.querySelectorAll('.qa-item');
+  const allOpen = [...items].every(i => i.classList.contains('open'));
+  items.forEach(i => allOpen ? i.classList.remove('open') : i.classList.add('open'));
+}
+document.getElementById('searchInput').addEventListener('input', function() {
+  const q = this.value.toLowerCase();
+  document.querySelectorAll('.qa-item').forEach(item => {
+    item.style.display = item.innerText.toLowerCase().includes(q) ? 'block' : 'none';
+  });
+});
+</script>
+<script src="../assets/js/utils.js"></script>
+</body>
+</html>

@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Playwright Cheat Sheet 2025 — CalcNation</title>
+<meta name="description" content="Complete Playwright cheat sheet with locators, actions, assertions, API testing and best practices. Free Playwright reference for QA engineers.">
+<link rel="canonical" href="https://calcnation-jade.vercel.app/automation/playwright-cheatsheet.html">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+<link rel="stylesheet" href="../assets/css/main.css">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PP2M41QH5D"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-PP2M41QH5D');</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8624973090847331" crossorigin="anonymous"></script>
+<style>
+.cheat-section { margin-bottom: 40px; }
+.cheat-section h2 { font-size: 22px; color: var(--accent); margin-bottom: 16px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+.cheat-section h3 { font-size: 16px; color: var(--text); margin: 16px 0 8px; }
+.code-block { background: #0d1117; border: 1px solid var(--border); border-radius: 8px; padding: 16px; margin: 8px 0; font-family: 'Courier New', monospace; font-size: 13px; line-height: 1.6; overflow-x: auto; position: relative; }
+.code-block pre { margin: 0; color: #e6edf3; }
+.kw { color: #79c0ff; }
+.str { color: #a5d6ff; }
+.fn { color: #d2a8ff; }
+.comment { color: #8b949e; }
+.copy-btn { position: absolute; top: 8px; right: 8px; background: var(--bg2); border: 1px solid var(--border); color: var(--text2); padding: 4px 10px; border-radius: 6px; font-size: 11px; cursor: pointer; }
+.copy-btn:hover { border-color: var(--accent); color: var(--accent); }
+.keyword-table { width: 100%; border-collapse: collapse; margin: 8px 0; }
+.keyword-table th { background: var(--bg2); color: var(--accent); padding: 10px 12px; text-align: left; font-size: 13px; border-bottom: 1px solid var(--border); }
+.keyword-table td { padding: 8px 12px; border-bottom: 1px solid var(--border); font-size: 13px; color: var(--text2); vertical-align: top; }
+.keyword-table td:first-child { color: var(--text); font-family: monospace; font-size: 12px; }
+.keyword-table tr:hover td { background: var(--bg2); }
+.tag { display: inline-block; background: var(--bg2); border: 1px solid var(--border); border-radius: 4px; padding: 2px 8px; font-size: 11px; color: var(--accent); margin: 2px; }
+.toc { background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; padding: 20px 24px; margin-bottom: 32px; }
+.toc a { color: var(--text2); text-decoration: none; font-size: 14px; display: inline-block; margin: 3px 12px 3px 0; }
+.toc a:hover { color: var(--accent); }
+.search-filter { width: 100%; background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; padding: 10px 14px; color: var(--text); font-size: 14px; margin-bottom: 24px; }
+.search-filter:focus { outline: none; border-color: var(--accent); }
+.lang-tabs { display: flex; gap: 8px; margin-bottom: 8px; }
+.lang-tab { padding: 4px 12px; border-radius: 6px; border: 1px solid var(--border); cursor: pointer; font-size: 12px; background: var(--bg2); color: var(--text2); }
+.lang-tab.active { background: var(--accent); color: #000; border-color: var(--accent); font-weight: 600; }
+</style>
+</head>
+<body>
+<script src="../assets/js/nav-loader.js"></script>
+<div class="breadcrumb"><a href="../index.html">Home</a> <span>›</span> <span>Automation</span> <span>›</span> <span>Playwright Cheat Sheet</span></div>
+<main style="max-width:900px;margin:0 auto;padding:24px 16px">
+
+<div style="text-align:center;padding:32px 0 24px">
+  <div style="font-size:48px;margin-bottom:12px">🎭</div>
+  <h1 style="font-size:32px;margin-bottom:8px">Playwright Cheat Sheet</h1>
+  <p style="color:var(--text2);font-size:16px">Complete reference for Playwright locators, actions, assertions and API testing</p>
+  <div style="display:flex;gap:8px;justify-content:center;margin-top:12px;flex-wrap:wrap">
+    <span class="tag">Playwright 1.4x</span><span class="tag">TypeScript</span><span class="tag">Python</span><span class="tag">JavaScript</span>
+  </div>
+</div>
+
+<input type="text" class="search-filter" id="searchFilter" placeholder="🔍 Search locators, actions, assertions...">
+
+<div class="toc">
+  <h3>📋 Quick Navigation</h3>
+  <a href="#setup">Setup</a>
+  <a href="#locators">Locators</a>
+  <a href="#actions">Actions</a>
+  <a href="#assertions">Assertions</a>
+  <a href="#waits">Waits</a>
+  <a href="#api">API Testing</a>
+  <a href="#network">Network</a>
+  <a href="#screenshots">Screenshots</a>
+  <a href="#config">Config</a>
+  <a href="#cli">CLI</a>
+  <a href="#tips">Pro Tips</a>
+</div>
+
+<div class="cheat-section" id="setup">
+  <h2>⚙️ Setup & Installation</h2>
+  <div class="code-block">
+    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+    <pre><span class="comment"># Install Playwright</span>
+npm init playwright@latest
+<span class="comment"># or</span>
+pip install playwright
+playwright install
+
+<span class="comment"># Install specific browsers</span>
+npx playwright install chromium
+npx playwright install firefox webkit
+
+<span class="comment"># Basic test structure (TypeScript)</span>
+<span class="kw">import</span> { test, expect } <span class="kw">from</span> <span class="str">'@playwright/test'</span>;
+
+<span class="fn">test</span>(<span class="str">'Login test'</span>, <span class="kw">async</span> ({ page }) => {
+  <span class="kw">await</span> page.<span class="fn">goto</span>(<span class="str">'https://example.com'</span>);
+  <span class="kw">await</span> page.<span class="fn">fill</span>(<span class="str">'#username'</span>, <span class="str">'admin'</span>);
+  <span class="kw">await</span> page.<span class="fn">fill</span>(<span class="str">'#password'</span>, <span class="str">'secret'</span>);
+  <span class="kw">await</span> page.<span class="fn">click</span>(<span class="str">'button[type=submit]'</span>);
+  <span class="kw">await</span> <span class="fn">expect</span>(page).<span class="fn">toHaveURL</span>(<span class="str">/dashboard/</span>);
+});</pre>
+  </div>
+</div>
+
+<div class="cheat-section" id="locators">
+  <h2>🎯 Locators</h2>
+  <h3>Recommended (Playwright preferred order)</h3>
+  <table class="keyword-table">
+    <tr><th>Locator</th><th>Example</th><th>Notes</th></tr>
+    <tr><td>getByRole</td><td>page.getByRole('button', {name: 'Submit'})</td><td>Most resilient ✅</td></tr>
+    <tr><td>getByLabel</td><td>page.getByLabel('Username')</td><td>Form inputs ✅</td></tr>
+    <tr><td>getByPlaceholder</td><td>page.getByPlaceholder('Enter email')</td><td>Input fields ✅</td></tr>
+    <tr><td>getByText</td><td>page.getByText('Click here')</td><td>Text content ✅</td></tr>
+    <tr><td>getByAltText</td><td>page.getByAltText('Logo')</td><td>Images ✅</td></tr>
+    <tr><td>getByTitle</td><td>page.getByTitle('Close')</td><td>Title attribute ✅</td></tr>
+    <tr><td>getByTestId</td><td>page.getByTestId('submit-btn')</td><td>data-testid ✅</td></tr>
+  </table>
+  <h3>CSS & XPath</h3>
+  <div class="code-block">
+    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+    <pre><span class="comment">// CSS selectors</span>
+page.<span class="fn">locator</span>(<span class="str">'#id'</span>)
+page.<span class="fn">locator</span>(<span class="str">'.class'</span>)
+page.<span class="fn">locator</span>(<span class="str">'button[type=submit]'</span>)
+page.<span class="fn">locator</span>(<span class="str">'div.card > h2'</span>)
+page.<span class="fn">locator</span>(<span class="str">'input[name=email]'</span>)
+
+<span class="comment">// XPath</span>
+page.<span class="fn">locator</span>(<span class="str">'xpath=//button[@id="submit"]'</span>)
+page.<span class="fn">locator</span>(<span class="str">'xpath=//div[contains(@class,"modal")]'</span>)
+
+<span class="comment">// Filter & chain locators</span>
+page.<span class="fn">getByRole</span>(<span class="str">'listitem'</span>).<span class="fn">filter</span>({ hasText: <span class="str">'Product'</span> })
+page.<span class="fn">locator</span>(<span class="str">'.row'</span>).<span class="fn">nth</span>(2)
+page.<span class="fn">locator</span>(<span class="str">'.item'</span>).<span class="fn">first</span>()
+page.<span class="fn">locator</span>(<span class="str">'.item'</span>).<span class="fn">last</span>()</pre>
+  </div>
+</div>
+
+<div class="cheat-section" id="actions">
+  <h2>🖱️ Actions</h2>
+  <table class="keyword-table">
+    <tr><th>Action</th><th>Example</th></tr>
+    <tr><td>click()</td><td>await page.click('#btn')</td></tr>
+    <tr><td>dblclick()</td><td>await page.dblclick('#item')</td></tr>
+    <tr><td>fill()</td><td>await page.fill('#input', 'text')</td></tr>
+    <tr><td>type()</td><td>await page.type('#input', 'text') // types char by char</td></tr>
+    <tr><td>clear()</td><td>await page.locator('#input').clear()</td></tr>
+    <tr><td>check()</td><td>await page.check('#checkbox')</td></tr>
+    <tr><td>uncheck()</td><td>await page.uncheck('#checkbox')</td></tr>
+    <tr><td>selectOption()</td><td>await page.selectOption('select', 'value')</td></tr>
+    <tr><td>hover()</td><td>await page.hover('#menu')</td></tr>
+    <tr><td>focus()</td><td>await page.focus('#input')</td></tr>
+    <tr><td>press()</td><td>await page.press('#input', 'Enter')</td></tr>
+    <tr><td>tap()</td><td>await page.tap('#btn') // mobile</td></tr>
+    <tr><td>dragTo()</td><td>await page.locator('#src').dragTo(page.locator('#dst'))</td></tr>
+    <tr><td>setInputFiles()</td><td>await page.setInputFiles('#file', '/path/file.pdf')</td></tr>
+    <tr><td>keyboard.press()</td><td>await page.keyboard.press('Control+A')</td></tr>
+    <tr><td>evaluate()</td><td>await page.evaluate(() => window.scrollTo(0, 500))</td></tr>
+  </table>
+</div>
+
+<div class="cheat-section" id="assertions">
+  <h2>✅ Assertions (expect)</h2>
+  <table class="keyword-table">
+    <tr><th>Assertion</th><th>Example</th></tr>
+    <tr><td>toHaveURL</td><td>await expect(page).toHaveURL(/dashboard/)</td></tr>
+    <tr><td>toHaveTitle</td><td>await expect(page).toHaveTitle('Home')</td></tr>
+    <tr><td>toBeVisible</td><td>await expect(locator).toBeVisible()</td></tr>
+    <tr><td>toBeHidden</td><td>await expect(locator).toBeHidden()</td></tr>
+    <tr><td>toBeEnabled</td><td>await expect(locator).toBeEnabled()</td></tr>
+    <tr><td>toBeDisabled</td><td>await expect(locator).toBeDisabled()</td></tr>
+    <tr><td>toBeChecked</td><td>await expect(locator).toBeChecked()</td></tr>
+    <tr><td>toHaveText</td><td>await expect(locator).toHaveText('Hello')</td></tr>
+    <tr><td>toContainText</td><td>await expect(locator).toContainText('World')</td></tr>
+    <tr><td>toHaveValue</td><td>await expect(locator).toHaveValue('admin')</td></tr>
+    <tr><td>toHaveCount</td><td>await expect(locator).toHaveCount(5)</td></tr>
+    <tr><td>toHaveAttribute</td><td>await expect(locator).toHaveAttribute('href', '/home')</td></tr>
+    <tr><td>toHaveClass</td><td>await expect(locator).toHaveClass(/active/)</td></tr>
+    <tr><td>toHaveCSS</td><td>await expect(locator).toHaveCSS('color', 'red')</td></tr>
+    <tr><td>not</td><td>await expect(locator).not.toBeVisible()</td></tr>
+  </table>
+</div>
+
+<div class="cheat-section" id="waits">
+  <h2>⏱️ Waits</h2>
+  <div class="code-block">
+    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+    <pre><span class="comment">// Auto-waiting — Playwright waits automatically for most actions
+// But when you need explicit waits:</span>
+
+<span class="comment">// Wait for element</span>
+<span class="kw">await</span> page.<span class="fn">waitForSelector</span>(<span class="str">'.modal'</span>);
+<span class="kw">await</span> page.<span class="fn">waitForSelector</span>(<span class="str">'.modal'</span>, { state: <span class="str">'visible'</span> });
+<span class="kw">await</span> page.<span class="fn">waitForSelector</span>(<span class="str">'.loader'</span>, { state: <span class="str">'hidden'</span> });
+
+<span class="comment">// Wait for navigation</span>
+<span class="kw">await</span> page.<span class="fn">waitForURL</span>(<span class="str">'**/dashboard'</span>);
+<span class="kw">await</span> page.<span class="fn">waitForLoadState</span>(<span class="str">'networkidle'</span>);
+<span class="kw">await</span> page.<span class="fn">waitForLoadState</span>(<span class="str">'domcontentloaded'</span>);
+
+<span class="comment">// Wait for response</span>
+<span class="kw">const</span> [response] = <span class="kw">await</span> Promise.<span class="fn">all</span>([
+  page.<span class="fn">waitForResponse</span>(<span class="str">'**/api/users'</span>),
+  page.<span class="fn">click</span>(<span class="str">'#loadBtn'</span>)
+]);
+
+<span class="comment">// Wait for function</span>
+<span class="kw">await</span> page.<span class="fn">waitForFunction</span>(() => document.querySelectorAll(<span class="str">'.item'</span>).length > 5);
+
+<span class="comment">// Custom timeout</span>
+<span class="kw">await</span> page.<span class="fn">click</span>(<span class="str">'#btn'</span>, { timeout: 10000 });</pre>
+  </div>
+</div>
+
+<div class="cheat-section" id="api">
+  <h2>🌍 API Testing</h2>
+  <div class="code-block">
+    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+    <pre><span class="kw">import</span> { test, expect } <span class="kw">from</span> <span class="str">'@playwright/test'</span>;
+
+<span class="comment">// GET request</span>
+<span class="fn">test</span>(<span class="str">'GET users'</span>, <span class="kw">async</span> ({ request }) => {
+  <span class="kw">const</span> response = <span class="kw">await</span> request.<span class="fn">get</span>(<span class="str">'https://api.example.com/users'</span>);
+  <span class="fn">expect</span>(response.status()).<span class="fn">toBe</span>(200);
+  <span class="kw">const</span> body = <span class="kw">await</span> response.<span class="fn">json</span>();
+  <span class="fn">expect</span>(body.length).<span class="fn">toBeGreaterThan</span>(0);
+});
+
+<span class="comment">// POST request</span>
+<span class="fn">test</span>(<span class="str">'Create user'</span>, <span class="kw">async</span> ({ request }) => {
+  <span class="kw">const</span> response = <span class="kw">await</span> request.<span class="fn">post</span>(<span class="str">'https://api.example.com/users'</span>, {
+    data: { name: <span class="str">'John'</span>, email: <span class="str">'john@test.com'</span> },
+    headers: { <span class="str">'Authorization'</span>: <span class="str">'Bearer token123'</span> }
+  });
+  <span class="fn">expect</span>(response.status()).<span class="fn">toBe</span>(201);
+});
+
+<span class="comment">// API context with base URL</span>
+<span class="kw">const</span> apiContext = <span class="kw">await</span> playwright.request.<span class="fn">newContext</span>({
+  baseURL: <span class="str">'https://api.example.com'</span>,
+  extraHTTPHeaders: { <span class="str">'Authorization'</span>: <span class="str">`Bearer ${token}`</span> }
+});</pre>
+  </div>
+</div>
+
+<div class="cheat-section" id="network">
+  <h2>🌐 Network Interception</h2>
+  <div class="code-block">
+    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+    <pre><span class="comment">// Mock API response</span>
+<span class="kw">await</span> page.<span class="fn">route</span>(<span class="str">'**/api/users'</span>, route => route.<span class="fn">fulfill</span>({
+  status: 200,
+  body: JSON.<span class="fn">stringify</span>([{ id: 1, name: <span class="str">'Mock User'</span> }])
+}));
+
+<span class="comment">// Abort requests</span>
+<span class="kw">await</span> page.<span class="fn">route</span>(<span class="str">'**/*.png'</span>, route => route.<span class="fn">abort</span>());
+
+<span class="comment">// Modify request</span>
+<span class="kw">await</span> page.<span class="fn">route</span>(<span class="str">'**/api/**'</span>, route => route.<span class="fn">continue</span>({
+  headers: { ...(route.request().headers()), <span class="str">'X-Custom-Header'</span>: <span class="str">'test'</span> }
+}));
+
+<span class="comment">// Listen to responses</span>
+page.<span class="fn">on</span>(<span class="str">'response'</span>, response => {
+  <span class="kw">if</span> (response.url().includes(<span class="str">'/api'</span>)) console.<span class="fn">log</span>(response.status());
+});</pre>
+  </div>
+</div>
+
+<div class="cheat-section" id="config">
+  <h2>⚙️ playwright.config.ts</h2>
+  <div class="code-block">
+    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+    <pre><span class="kw">import</span> { defineConfig, devices } <span class="kw">from</span> <span class="str">'@playwright/test'</span>;
+
+<span class="kw">export default</span> <span class="fn">defineConfig</span>({
+  testDir: <span class="str">'./tests'</span>,
+  timeout: 30000,
+  retries: 2,
+  workers: 4,
+  reporter: [[<span class="str">'html'</span>], [<span class="str">'junit'</span>, { outputFile: <span class="str">'results.xml'</span> }]],
+  use: {
+    baseURL: <span class="str">'https://example.com'</span>,
+    headless: true,
+    screenshot: <span class="str">'only-on-failure'</span>,
+    video: <span class="str">'retain-on-failure'</span>,
+    trace: <span class="str">'on-first-retry'</span>,
+    actionTimeout: 10000,
+  },
+  projects: [
+    { name: <span class="str">'chromium'</span>, use: { ...devices[<span class="str">'Desktop Chrome'</span>] } },
+    { name: <span class="str">'firefox'</span>, use: { ...devices[<span class="str">'Desktop Firefox'</span>] } },
+    { name: <span class="str">'mobile'</span>, use: { ...devices[<span class="str">'iPhone 12'</span>] } },
+  ],
+});</pre>
+  </div>
+</div>
+
+<div class="cheat-section" id="cli">
+  <h2>💻 CLI Commands</h2>
+  <table class="keyword-table">
+    <tr><th>Command</th><th>Description</th></tr>
+    <tr><td>npx playwright test</td><td>Run all tests</td></tr>
+    <tr><td>npx playwright test login.spec.ts</td><td>Run specific file</td></tr>
+    <tr><td>npx playwright test --headed</td><td>Run with browser visible</td></tr>
+    <tr><td>npx playwright test --project=chromium</td><td>Run on specific browser</td></tr>
+    <tr><td>npx playwright test --grep "login"</td><td>Run tests matching pattern</td></tr>
+    <tr><td>npx playwright test --debug</td><td>Run in debug mode</td></tr>
+    <tr><td>npx playwright codegen example.com</td><td>Record tests</td></tr>
+    <tr><td>npx playwright show-report</td><td>Open HTML report</td></tr>
+    <tr><td>npx playwright show-trace trace.zip</td><td>Open trace viewer</td></tr>
+    <tr><td>npx playwright test --ui</td><td>Open UI mode</td></tr>
+    <tr><td>npx playwright test --workers=4</td><td>Parallel workers</td></tr>
+    <tr><td>npx playwright test --retries=2</td><td>Auto-retry failed tests</td></tr>
+  </table>
+</div>
+
+<div class="cheat-section" id="tips">
+  <h2>💡 Pro Tips</h2>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px">
+    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:16px">
+      <h3 style="color:var(--accent);margin:0 0 8px">🎯 Use getByRole First</h3>
+      <p style="color:var(--text2);font-size:13px">Always prefer getByRole, getByLabel, getByTestId over CSS/XPath. They are more resilient to UI changes.</p>
+    </div>
+    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:16px">
+      <h3 style="color:var(--accent);margin:0 0 8px">🔁 Use Fixtures</h3>
+      <p style="color:var(--text2);font-size:13px">Create custom fixtures for logged-in state, API context, and common setups. Avoids repeating login in every test.</p>
+    </div>
+    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:16px">
+      <h3 style="color:var(--accent);margin:0 0 8px">📹 Record Traces</h3>
+      <p style="color:var(--text2);font-size:13px">Enable trace:'on-first-retry' in config. Traces capture screenshots, DOM snapshots and network logs for debugging.</p>
+    </div>
+    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:16px">
+      <h3 style="color:var(--accent);margin:0 0 8px">🚀 Page Object Model</h3>
+      <p style="color:var(--text2);font-size:13px">Create a class for each page with locators and methods. Makes tests readable and easy to maintain when UI changes.</p>
+    </div>
+    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:16px">
+      <h3 style="color:var(--accent);margin:0 0 8px">⚡ Parallel by Default</h3>
+      <p style="color:var(--text2);font-size:13px">Playwright runs tests in parallel. Make tests independent — no shared state. Use test.describe.serial() only when needed.</p>
+    </div>
+    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:16px">
+      <h3 style="color:var(--accent);margin:0 0 8px">🎭 Use codegen</h3>
+      <p style="color:var(--text2);font-size:13px">Run npx playwright codegen to record tests. Great for getting initial locators. Always clean up generated code after.</p>
+    </div>
+  </div>
+</div>
+
+<div style="text-align:center;margin:32px 0;padding:24px;background:var(--bg2);border:1px solid var(--border);border-radius:12px">
+  <h2 style="margin-bottom:8px">More QA Resources</h2>
+  <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:16px">
+    <a href="robot-framework-cheatsheet.html" class="btn-primary" style="text-decoration:none">🤖 RF Cheat Sheet</a>
+    <a href="playwright-interview-questions.html" class="btn-secondary" style="text-decoration:none">🎯 Playwright Interview Q&A</a>
+    <a href="rf-interview-questions.html" class="btn-secondary" style="text-decoration:none">🎯 RF Interview Q&A</a>
+  </div>
+</div>
+</main>
+<script>
+function copyCode(btn) {
+  const pre = btn.nextElementSibling;
+  navigator.clipboard.writeText(pre.innerText).then(() => {
+    btn.textContent = '✅ Copied!';
+    setTimeout(() => btn.textContent = 'Copy', 2000);
+  });
+}
+document.getElementById('searchFilter').addEventListener('input', function() {
+  const q = this.value.toLowerCase();
+  document.querySelectorAll('.cheat-section').forEach(sec => {
+    sec.style.display = sec.innerText.toLowerCase().includes(q) ? 'block' : 'none';
+  });
+});
+</script>
+<script src="../assets/js/utils.js"></script>
+</body>
+</html>

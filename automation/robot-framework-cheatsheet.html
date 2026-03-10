@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Robot Framework Cheat Sheet 2025 — CalcNation</title>
+<meta name="description" content="Complete Robot Framework cheat sheet with keywords, syntax, libraries, variables and examples. Free RF reference guide for QA engineers.">
+<link rel="canonical" href="https://calcnation-jade.vercel.app/automation/robot-framework-cheatsheet.html">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+<link rel="stylesheet" href="../assets/css/main.css">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PP2M41QH5D"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-PP2M41QH5D');</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8624973090847331" crossorigin="anonymous"></script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Article","headline":"Robot Framework Cheat Sheet 2025","description":"Complete Robot Framework cheat sheet with keywords, syntax, libraries and examples","author":{"@type":"Organization","name":"CalcNation"},"publisher":{"@type":"Organization","name":"CalcNation","url":"https://calcnation-jade.vercel.app"}}
+</script>
+<style>
+.cheat-section { margin-bottom: 40px; }
+.cheat-section h2 { font-size: 22px; color: var(--accent); margin-bottom: 16px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+.cheat-section h3 { font-size: 16px; color: var(--text); margin: 16px 0 8px; }
+.code-block { background: #0d1117; border: 1px solid var(--border); border-radius: 8px; padding: 16px; margin: 8px 0; font-family: 'Courier New', monospace; font-size: 13px; line-height: 1.6; overflow-x: auto; position: relative; }
+.code-block pre { margin: 0; color: #e6edf3; }
+.kw { color: #79c0ff; }
+.str { color: #a5d6ff; }
+.var { color: #ffa657; }
+.comment { color: #8b949e; }
+.lib { color: #7ee787; }
+.copy-btn { position: absolute; top: 8px; right: 8px; background: var(--bg2); border: 1px solid var(--border); color: var(--text2); padding: 4px 10px; border-radius: 6px; font-size: 11px; cursor: pointer; }
+.copy-btn:hover { border-color: var(--accent); color: var(--accent); }
+.keyword-table { width: 100%; border-collapse: collapse; margin: 8px 0; }
+.keyword-table th { background: var(--bg2); color: var(--accent); padding: 10px 12px; text-align: left; font-size: 13px; border-bottom: 1px solid var(--border); }
+.keyword-table td { padding: 8px 12px; border-bottom: 1px solid var(--border); font-size: 13px; color: var(--text2); vertical-align: top; }
+.keyword-table td:first-child { color: var(--text); font-family: monospace; font-size: 12px; }
+.keyword-table tr:hover td { background: var(--bg2); }
+.tag { display: inline-block; background: var(--bg2); border: 1px solid var(--border); border-radius: 4px; padding: 2px 8px; font-size: 11px; color: var(--accent); margin: 2px; }
+.toc { background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; padding: 20px 24px; margin-bottom: 32px; }
+.toc h3 { color: var(--text); margin-bottom: 12px; font-size: 16px; }
+.toc a { color: var(--text2); text-decoration: none; font-size: 14px; display: inline-block; margin: 3px 12px 3px 0; }
+.toc a:hover { color: var(--accent); }
+.search-filter { width: 100%; background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; padding: 10px 14px; color: var(--text); font-size: 14px; margin-bottom: 24px; }
+.search-filter:focus { outline: none; border-color: var(--accent); }
+</style>
+</head>
+<body>
+<script src="../assets/js/nav-loader.js"></script>
+<div class="breadcrumb"><a href="../index.html">Home</a> <span>›</span> <span>Automation</span> <span>›</span> <span>Robot Framework Cheat Sheet</span></div>
+<main style="max-width:900px;margin:0 auto;padding:24px 16px">
+
+<div style="text-align:center;padding:32px 0 24px">
+  <div style="font-size:48px;margin-bottom:12px">🤖</div>
+  <h1 style="font-size:32px;margin-bottom:8px">Robot Framework Cheat Sheet</h1>
+  <p style="color:var(--text2);font-size:16px">Complete reference for RF syntax, keywords, libraries and best practices</p>
+  <div style="display:flex;gap:8px;justify-content:center;margin-top:12px;flex-wrap:wrap">
+    <span class="tag">RF 6.x</span><span class="tag">SeleniumLibrary</span><span class="tag">Browser Library</span><span class="tag">RequestsLibrary</span>
+  </div>
+</div>
+
+<input type="text" class="search-filter" id="searchFilter" placeholder="🔍 Search keywords, libraries, examples...">
+
+<div class="toc">
+  <h3>📋 Quick Navigation</h3>
+  <a href="#structure">File Structure</a>
+  <a href="#variables">Variables</a>
+  <a href="#builtin">BuiltIn Keywords</a>
+  <a href="#selenium">SeleniumLibrary</a>
+  <a href="#browser">Browser Library</a>
+  <a href="#requests">RequestsLibrary</a>
+  <a href="#collections">Collections</a>
+  <a href="#string">String</a>
+  <a href="#control">Control Flow</a>
+  <a href="#custom">Custom Keywords</a>
+  <a href="#cli">CLI Commands</a>
+  <a href="#tips">Pro Tips</a>
+</div>
+
+<div class="cheat-section" id="structure">
+  <h2>📁 File Structure</h2>
+  <div class="code-block">
+    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+    <pre><span class="comment">*** Settings ***</span>
+<span class="kw">Library</span>           SeleniumLibrary
+<span class="kw">Library</span>           RequestsLibrary
+<span class="kw">Library</span>           Collections
+<span class="kw">Resource</span>          ../resources/common.robot
+<span class="kw">Suite Setup</span>       Open Browser    <span class="str">https://example.com</span>    chrome
+<span class="kw">Suite Teardown</span>    Close Browser
+<span class="kw">Test Setup</span>        Go To    <span class="str">https://example.com</span>
+<span class="kw">Test Teardown</span>     Run Keyword If Test Failed    Take Screenshot
+
+<span class="comment">*** Variables ***</span>
+<span class="var">${URL}</span>            <span class="str">https://example.com</span>
+<span class="var">${BROWSER}</span>        chrome
+<span class="var">@{ITEMS}</span>          item1    item2    item3
+<span class="var">&amp;{CONFIG}</span>         env=dev    timeout=30
+
+<span class="comment">*** Test Cases ***</span>
+Login Test
+    [Documentation]    Verify user can login
+    [Tags]    smoke    login
+    Input Text    id=username    <span class="str">admin</span>
+    Input Password    id=password    <span class="str">secret</span>
+    Click Button    id=loginBtn
+    Page Should Contain    <span class="str">Welcome</span>
+
+<span class="comment">*** Keywords ***</span>
+Login As User
+    [Arguments]    <span class="var">${username}</span>    <span class="var">${password}</span>
+    Input Text    id=username    <span class="var">${username}</span>
+    Input Password    id=password    <span class="var">${password}</span>
+    Click Button    id=loginBtn</pre>
+  </div>
+</div>
+
+<div class="cheat-section" id="variables">
+  <h2>📦 Variables</h2>
+  <table class="keyword-table">
+    <tr><th>Type</th><th>Syntax</th><th>Example</th></tr>
+    <tr><td>Scalar</td><td>${variable}</td><td>${name}    John</td></tr>
+    <tr><td>List</td><td>@{variable}</td><td>@{colors}    red    green    blue</td></tr>
+    <tr><td>Dictionary</td><td>&{variable}</td><td>&{user}    name=John    age=30</td></tr>
+    <tr><td>Environment</td><td>%{variable}</td><td>%{HOME}</td></tr>
+    <tr><td>Global</td><td>Set Global Variable</td><td>Set Global Variable    ${VAR}    value</td></tr>
+    <tr><td>Suite</td><td>Set Suite Variable</td><td>Set Suite Variable    ${VAR}    value</td></tr>
+    <tr><td>Test</td><td>Set Test Variable</td><td>Set Test Variable    ${VAR}    value</td></tr>
+  </table>
+  <div class="code-block">
+    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+    <pre><span class="comment"># Variable operations</span>
+<span class="var">${result}</span>    Evaluate    <span class="str">2 + 2</span>
+<span class="var">${upper}</span>     Convert To Upper Case    <span class="var">${text}</span>
+<span class="var">${length}</span>    Get Length    <span class="var">${list}</span>
+<span class="var">${item}</span>      Get From List    <span class="var">${list}</span>    0
+<span class="var">${value}</span>     Get From Dictionary    <span class="var">${dict}</span>    key</pre>
+  </div>
+</div>
+
+<div class="cheat-section" id="builtin">
+  <h2>⚙️ BuiltIn Keywords</h2>
+  <table class="keyword-table">
+    <tr><th>Keyword</th><th>Description</th><th>Example</th></tr>
+    <tr><td>Log</td><td>Log message to console</td><td>Log    Hello World</td></tr>
+    <tr><td>Log To Console</td><td>Print to console</td><td>Log To Console    ${var}</td></tr>
+    <tr><td>Should Be Equal</td><td>Assert equality</td><td>Should Be Equal    ${a}    ${b}</td></tr>
+    <tr><td>Should Contain</td><td>Assert contains</td><td>Should Contain    ${text}    hello</td></tr>
+    <tr><td>Should Be True</td><td>Assert expression</td><td>Should Be True    ${x} > 0</td></tr>
+    <tr><td>Run Keyword If</td><td>Conditional execution</td><td>Run Keyword If    '${env}'=='dev'    Log    Dev mode</td></tr>
+    <tr><td>Run Keyword And Return Status</td><td>Returns PASS/FAIL</td><td>${status}    Run Keyword And Return Status    Should Be Equal    a    a</td></tr>
+    <tr><td>Sleep</td><td>Wait n seconds</td><td>Sleep    2s</td></tr>
+    <tr><td>Fail</td><td>Fail test with message</td><td>Fail    Test failed!</td></tr>
+    <tr><td>Pass Execution</td><td>Pass test early</td><td>Pass Execution    Skipping</td></tr>
+    <tr><td>Skip</td><td>Skip test</td><td>Skip    Not ready yet</td></tr>
+    <tr><td>Set Variable</td><td>Assign variable</td><td>${var}    Set Variable    hello</td></tr>
+    <tr><td>Evaluate</td><td>Evaluate Python expression</td><td>${result}    Evaluate    len('hello')</td></tr>
+    <tr><td>Import Library</td><td>Dynamic import</td><td>Import Library    MyLibrary</td></tr>
+    <tr><td>Get Time</td><td>Get current time</td><td>${time}    Get Time</td></tr>
+  </table>
+</div>
+
+<div class="cheat-section" id="selenium">
+  <h2>🌐 SeleniumLibrary</h2>
+  <h3>Browser Control</h3>
+  <table class="keyword-table">
+    <tr><th>Keyword</th><th>Example</th></tr>
+    <tr><td>Open Browser</td><td>Open Browser    https://example.com    chrome</td></tr>
+    <tr><td>Close Browser</td><td>Close Browser</td></tr>
+    <tr><td>Go To</td><td>Go To    https://example.com/page</td></tr>
+    <tr><td>Reload Page</td><td>Reload Page</td></tr>
+    <tr><td>Get Title</td><td>${title}    Get Title</td></tr>
+    <tr><td>Get Location</td><td>${url}    Get Location</td></tr>
+    <tr><td>Maximize Browser Window</td><td>Maximize Browser Window</td></tr>
+    <tr><td>Set Window Size</td><td>Set Window Size    1920    1080</td></tr>
+  </table>
+  <h3>Element Interaction</h3>
+  <table class="keyword-table">
+    <tr><th>Keyword</th><th>Example</th></tr>
+    <tr><td>Click Element</td><td>Click Element    id=submitBtn</td></tr>
+    <tr><td>Click Button</td><td>Click Button    Login</td></tr>
+    <tr><td>Click Link</td><td>Click Link    Home</td></tr>
+    <tr><td>Input Text</td><td>Input Text    id=username    admin</td></tr>
+    <tr><td>Input Password</td><td>Input Password    id=pwd    secret</td></tr>
+    <tr><td>Clear Element Text</td><td>Clear Element Text    id=username</td></tr>
+    <tr><td>Select From List By Value</td><td>Select From List By Value    id=dropdown    option1</td></tr>
+    <tr><td>Select Checkbox</td><td>Select Checkbox    id=checkbox</td></tr>
+    <tr><td>Mouse Over</td><td>Mouse Over    id=menu</td></tr>
+    <tr><td>Double Click Element</td><td>Double Click Element    id=item</td></tr>
+    <tr><td>Drag And Drop</td><td>Drag And Drop    id=source    id=target</td></tr>
+    <tr><td>Press Keys</td><td>Press Keys    id=input    ENTER</td></tr>
+    <tr><td>Upload File</td><td>Choose File    id=fileInput    /path/to/file.pdf</td></tr>
+  </table>
+  <h3>Assertions</h3>
+  <table class="keyword-table">
+    <tr><th>Keyword</th><th>Example</th></tr>
+    <tr><td>Page Should Contain</td><td>Page Should Contain    Welcome</td></tr>
+    <tr><td>Page Should Not Contain</td><td>Page Should Not Contain    Error</td></tr>
+    <tr><td>Element Should Be Visible</td><td>Element Should Be Visible    id=modal</td></tr>
+    <tr><td>Element Should Not Be Visible</td><td>Element Should Not Be Visible    id=loader</td></tr>
+    <tr><td>Element Should Be Enabled</td><td>Element Should Be Enabled    id=submitBtn</td></tr>
+    <tr><td>Title Should Be</td><td>Title Should Be    Home Page</td></tr>
+    <tr><td>Location Should Be</td><td>Location Should Be    https://example.com/home</td></tr>
+    <tr><td>Checkbox Should Be Selected</td><td>Checkbox Should Be Selected    id=agree</td></tr>
+  </table>
+  <h3>Waits</h3>
+  <table class="keyword-table">
+    <tr><th>Keyword</th><th>Example</th></tr>
+    <tr><td>Wait Until Element Is Visible</td><td>Wait Until Element Is Visible    id=modal    10s</td></tr>
+    <tr><td>Wait Until Element Is Not Visible</td><td>Wait Until Element Is Not Visible    id=loader    30s</td></tr>
+    <tr><td>Wait Until Page Contains</td><td>Wait Until Page Contains    Success    10s</td></tr>
+    <tr><td>Wait Until Element Contains</td><td>Wait Until Element Contains    id=msg    Done    5s</td></tr>
+    <tr><td>Wait For Condition</td><td>Wait For Condition    return document.readyState=='complete'    10s</td></tr>
+  </table>
+</div>
+
+<div class="cheat-section" id="browser">
+  <h2>🎭 Browser Library (Playwright)</h2>
+  <div class="code-block">
+    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+    <pre><span class="comment">*** Settings ***</span>
+<span class="kw">Library</span>    Browser
+
+<span class="comment">*** Test Cases ***</span>
+Browser Library Example
+    <span class="kw">New Browser</span>    chromium    headless=False
+    <span class="kw">New Page</span>    <span class="str">https://example.com</span>
+    <span class="kw">Click</span>    <span class="str">text=Login</span>
+    <span class="kw">Fill Text</span>    <span class="str">#username</span>    <span class="str">admin</span>
+    <span class="kw">Fill Text</span>    <span class="str">#password</span>    <span class="str">secret</span>
+    <span class="kw">Click</span>    <span class="str">button[type=submit]</span>
+    <span class="kw">Wait For Elements State</span>    <span class="str">.dashboard</span>    visible    10
+    <span class="kw">Take Screenshot</span>
+    <span class="kw">Close Browser</span></pre>
+  </div>
+  <table class="keyword-table">
+    <tr><th>Keyword</th><th>Example</th></tr>
+    <tr><td>New Browser</td><td>New Browser    chromium    headless=False</td></tr>
+    <tr><td>New Page</td><td>New Page    https://example.com</td></tr>
+    <tr><td>Click</td><td>Click    text=Submit</td></tr>
+    <tr><td>Fill Text</td><td>Fill Text    #username    admin</td></tr>
+    <tr><td>Get Text</td><td>${text}    Get Text    h1</td></tr>
+    <tr><td>Wait For Elements State</td><td>Wait For Elements State    .modal    visible    10</td></tr>
+    <tr><td>Take Screenshot</td><td>Take Screenshot    filename=test.png</td></tr>
+    <tr><td>Evaluate JavaScript</td><td>Evaluate JavaScript    window.scrollTo(0,500)</td></tr>
+  </table>
+</div>
+
+<div class="cheat-section" id="requests">
+  <h2>🌍 RequestsLibrary (API Testing)</h2>
+  <div class="code-block">
+    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+    <pre><span class="comment">*** Settings ***</span>
+<span class="kw">Library</span>    RequestsLibrary
+<span class="kw">Library</span>    Collections
+
+<span class="comment">*** Test Cases ***</span>
+GET API Test
+    <span class="kw">Create Session</span>    myapi    <span class="str">https://api.example.com</span>
+    <span class="var">${response}</span>    <span class="kw">GET On Session</span>    myapi    <span class="str">/users</span>
+    Should Be Equal As Numbers    <span class="var">${response.status_code}</span>    200
+    <span class="var">${json}</span>    Set Variable    <span class="var">${response.json()}</span>
+    Log    <span class="var">${json}</span>
+
+POST API Test
+    <span class="var">&amp;{headers}</span>    Create Dictionary    Content-Type=application/json
+    <span class="var">&amp;{body}</span>       Create Dictionary    name=John    email=john@test.com
+    <span class="kw">Create Session</span>    myapi    <span class="str">https://api.example.com</span>    headers=<span class="var">&amp;{headers}</span>
+    <span class="var">${response}</span>    <span class="kw">POST On Session</span>    myapi    <span class="str">/users</span>    json=<span class="var">&amp;{body}</span>
+    Should Be Equal As Numbers    <span class="var">${response.status_code}</span>    201</pre>
+  </div>
+</div>
+
+<div class="cheat-section" id="control">
+  <h2>🔄 Control Flow</h2>
+  <div class="code-block">
+    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+    <pre><span class="comment"># IF / ELSE IF / ELSE</span>
+<span class="kw">IF</span>    <span class="str">'${env}' == 'prod'</span>
+    Log    Production environment
+<span class="kw">ELSE IF</span>    <span class="str">'${env}' == 'staging'</span>
+    Log    Staging environment
+<span class="kw">ELSE</span>
+    Log    Dev environment
+<span class="kw">END</span>
+
+<span class="comment"># FOR loop</span>
+<span class="kw">FOR</span>    <span class="var">${item}</span>    <span class="kw">IN</span>    <span class="var">@{ITEMS}</span>
+    Log    <span class="var">${item}</span>
+<span class="kw">END</span>
+
+<span class="comment"># FOR with range</span>
+<span class="kw">FOR</span>    <span class="var">${i}</span>    <span class="kw">IN RANGE</span>    1    10
+    Log    Iteration <span class="var">${i}</span>
+<span class="kw">END</span>
+
+<span class="comment"># WHILE loop (RF 5+)</span>
+<span class="kw">WHILE</span>    <span class="var">${count}</span> < 10
+    <span class="var">${count}</span>    Evaluate    <span class="var">${count}</span> + 1
+<span class="kw">END</span>
+
+<span class="comment"># TRY / EXCEPT</span>
+<span class="kw">TRY</span>
+    Click Element    id=mayNotExist
+<span class="kw">EXCEPT</span>    ElementNotFound*    type=GLOB
+    Log    Element not found, continuing
+<span class="kw">END</span></pre>
+  </div>
+</div>
+
+<div class="cheat-section" id="custom">
+  <h2>🔧 Custom Keywords</h2>
+  <div class="code-block">
+    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+    <pre><span class="comment">*** Keywords ***</span>
+<span class="comment"># Basic keyword</span>
+Login As Admin
+    Input Text    id=username    admin
+    Input Password    id=password    admin123
+    Click Button    Login
+
+<span class="comment"># Keyword with arguments</span>
+Login As User
+    [Arguments]    <span class="var">${username}</span>    <span class="var">${password}</span>=defaultpass
+    Input Text    id=username    <span class="var">${username}</span>
+    Input Password    id=password    <span class="var">${password}</span>
+    Click Button    Login
+
+<span class="comment"># Keyword that returns value</span>
+Get User Count
+    <span class="var">${elements}</span>    Get WebElements    css=.user-row
+    <span class="var">${count}</span>    Get Length    <span class="var">${elements}</span>
+    [Return]    <span class="var">${count}</span>
+
+<span class="comment"># Keyword with tags and documentation</span>
+Verify Dashboard Loaded
+    [Documentation]    Checks all dashboard elements are visible
+    [Tags]    ui    dashboard
+    Element Should Be Visible    id=header
+    Element Should Be Visible    id=sidebar
+    Element Should Be Visible    id=content</pre>
+  </div>
+</div>
+
+<div class="cheat-section" id="cli">
+  <h2>💻 CLI Commands</h2>
+  <table class="keyword-table">
+    <tr><th>Command</th><th>Description</th></tr>
+    <tr><td>robot test.robot</td><td>Run single file</td></tr>
+    <tr><td>robot tests/</td><td>Run all tests in folder</td></tr>
+    <tr><td>robot --include smoke tests/</td><td>Run tests tagged with 'smoke'</td></tr>
+    <tr><td>robot --exclude slow tests/</td><td>Exclude 'slow' tagged tests</td></tr>
+    <tr><td>robot --outputdir results/ tests/</td><td>Set output directory</td></tr>
+    <tr><td>robot --variable URL:https://dev.com tests/</td><td>Override variable</td></tr>
+    <tr><td>robot --dryrun tests/</td><td>Dry run (no execution)</td></tr>
+    <tr><td>robot --loglevel DEBUG tests/</td><td>Set log level</td></tr>
+    <tr><td>robot --test "Login Test" tests/</td><td>Run specific test by name</td></tr>
+    <tr><td>rebot --merge output1.xml output2.xml</td><td>Merge reports</td></tr>
+    <tr><td>python -m robot tests/</td><td>Run via Python module</td></tr>
+  </table>
+</div>
+
+<div class="cheat-section" id="tips">
+  <h2>💡 Pro Tips</h2>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px">
+    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:16px">
+      <h3 style="color:var(--accent);margin:0 0 8px">🎯 Use Page Object Model</h3>
+      <p style="color:var(--text2);font-size:13px">Create separate .robot resource files for each page with its own keywords. Keeps tests clean and maintainable.</p>
+    </div>
+    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:16px">
+      <h3 style="color:var(--accent);margin:0 0 8px">⏱️ Avoid Hard Sleeps</h3>
+      <p style="color:var(--text2);font-size:13px">Never use Sleep. Always use Wait Until Element Is Visible or Wait Until Page Contains for dynamic content.</p>
+    </div>
+    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:16px">
+      <h3 style="color:var(--accent);margin:0 0 8px">🏷️ Tag Everything</h3>
+      <p style="color:var(--text2);font-size:13px">Use tags like smoke, regression, sanity, login to run subsets of tests. Makes CI/CD pipeline management easy.</p>
+    </div>
+    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:16px">
+      <h3 style="color:var(--accent);margin:0 0 8px">📸 Screenshots on Failure</h3>
+      <p style="color:var(--text2);font-size:13px">Add "Run Keyword If Test Failed    Take Screenshot" in Test Teardown. Saves hours of debugging.</p>
+    </div>
+    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:16px">
+      <h3 style="color:var(--accent);margin:0 0 8px">🔑 Externalize Test Data</h3>
+      <p style="color:var(--text2);font-size:13px">Keep test data in CSV or Excel files. Use DataDriver library for data-driven tests. Never hardcode credentials.</p>
+    </div>
+    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:16px">
+      <h3 style="color:var(--accent);margin:0 0 8px">🚀 Parallel Execution</h3>
+      <p style="color:var(--text2);font-size:13px">Use pabot (Parallel Robot) for parallel test execution: pip install robotframework-pabot then pabot tests/</p>
+    </div>
+  </div>
+</div>
+
+<div style="text-align:center;margin:32px 0;padding:24px;background:var(--bg2);border:1px solid var(--border);border-radius:12px">
+  <h2 style="margin-bottom:8px">More QA Resources</h2>
+  <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:16px">
+    <a href="playwright-cheatsheet.html" class="btn-primary" style="text-decoration:none">🎭 Playwright Cheat Sheet</a>
+    <a href="rf-interview-questions.html" class="btn-secondary" style="text-decoration:none">🎯 RF Interview Questions</a>
+    <a href="playwright-interview-questions.html" class="btn-secondary" style="text-decoration:none">🎯 Playwright Interview Q&A</a>
+  </div>
+</div>
+
+</main>
+<script>
+function copyCode(btn) {
+  const pre = btn.nextElementSibling;
+  navigator.clipboard.writeText(pre.innerText).then(() => {
+    btn.textContent = '✅ Copied!';
+    setTimeout(() => btn.textContent = 'Copy', 2000);
+  });
+}
+document.getElementById('searchFilter').addEventListener('input', function() {
+  const q = this.value.toLowerCase();
+  document.querySelectorAll('.cheat-section').forEach(sec => {
+    sec.style.display = sec.innerText.toLowerCase().includes(q) ? 'block' : 'none';
+  });
+});
+</script>
+<script src="../assets/js/utils.js"></script>
+</body>
+</html>
