@@ -40,10 +40,10 @@
   <div class="tool-box"><div class="tool-box-header"><h2>Rotate PDF Pages</h2></div>
   <div class="tool-box-body">
     <div id="uploadSection">
-      <label for="pdfInput" class="upload-zone" id="uploadZone" style="cursor:pointer;display:block">
-        <input type="file" id="pdfInput" accept=".pdf" style="position:absolute;opacity:0;width:0;height:0;" onchange="loadPDF(this)">
+      <div class="upload-zone" id="uploadZone" onclick="document.getElementById('pdfInput').click()">
+        <input type="file" id="pdfInput" accept=".pdf" style="display:none" onchange="loadPDF(this)">
         <div class="upload-icon">🔄</div><h3>Click or drag a PDF here</h3><p>Select the PDF you want to rotate</p>
-      </label>
+      </div>
     </div>
     <div id="rotateSection" style="display:none">
       <div style="margin-bottom:20px;padding:14px;background:var(--bg2);border-radius:10px;display:flex;justify-content:space-between;align-items:center">

@@ -32,13 +32,13 @@
   <div class="tool-badges"><span class="badge">🔒 100% Private</span><span class="badge">⚡ Instant</span><span class="badge">✅ No Signup</span></div>
 </div>
 <div class="tool-card">
-  <label for="fileInput" class="drop-zone" id="dropZone" style="cursor:pointer;display:block">
+  <div class="drop-zone" id="dropZone">
     <div class="drop-icon">📝</div>
     <p>Drop your Word file here or <span class="browse-link">browse to upload</span></p>
-    <input type="file" id="fileInput" accept=".doc,.docx" style="position:absolute;opacity:0;width:0;height:0;">
+    <input type="file" id="fileInput" accept=".doc,.docx" style="display:none">
     <p class="drop-hint">Supports .doc and .docx files</p>
-  </label>
-  <div id="fileInfo" style="display:none" class="file-info"></div>
+  </div>
+  <div id="fileInput" style="display:none" class="file-info"></div>
   <div id="options" style="display:none">
     <button class="btn-primary" id="convertBtn">📄 Convert to PDF</button>
   </div>

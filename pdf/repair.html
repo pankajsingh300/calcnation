@@ -32,12 +32,12 @@
   <div class="tool-badges"><span class="badge">🔒 100% Private</span><span class="badge">⚡ Instant</span><span class="badge">✅ No Signup</span></div>
 </div>
 <div class="tool-card">
-  <label for="fileInput" class="drop-zone" id="dropZone" style="cursor:pointer;display:block">
+  <div class="drop-zone" id="dropZone">
     <div class="drop-icon">📄</div>
     <p>Drop your damaged PDF here or <span class="browse-link">browse to upload</span></p>
-    <input type="file" id="fileInput" accept=".pdf" style="position:absolute;opacity:0;width:0;height:0;">
-  </label>
-  <div id="fileInfo" style="display:none" class="file-info"></div>
+    <input type="file" id="fileInput" accept=".pdf" style="display:none">
+  </div>
+  <div id="fileInput" style="display:none" class="file-info"></div>
   <div id="options" style="display:none">
     <div style="background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:16px;margin-bottom:16px">
       <p style="color:var(--text2);font-size:14px">⚠️ This tool can fix PDFs with minor corruption, incorrect structure, or version issues. Severely corrupted files may not be fully recoverable.</p>
