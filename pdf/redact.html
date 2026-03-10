@@ -32,11 +32,11 @@
   <div class="tool-badges"><span class="badge">🔒 100% Private</span><span class="badge">⚡ Instant</span><span class="badge">✅ No Signup</span></div>
 </div>
 <div class="tool-card">
-  <div class="drop-zone" id="dropZone" onclick="if(event.target.tagName!=='INPUT')document.getElementById('fileInput').click()">
+  <label for="fileInput" class="drop-zone" id="dropZone" style="cursor:pointer;display:block">
     <div class="drop-icon">📄</div>
     <p>Drop your PDF here or <span class="browse-link">browse to upload</span></p>
     <input type="file" id="fileInput" accept=".pdf" style="display:none">
-  </div>
+  </label>
   <div id="fileInfo" style="display:none" class="file-info"></div>
   <div id="redactArea" style="display:none">
     <p style="color:var(--text2);margin-bottom:16px">Define areas to black out. Add multiple redaction areas then apply.</p>
